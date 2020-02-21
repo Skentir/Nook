@@ -1,0 +1,26 @@
+.container {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box {
+    padding:1em;
+    box-sizing: border-box;
+    display: block;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-content: center;
+}
+
+.rightbox {
+    max-width: 500px;
+}
+
+.leftbox {
+    max-width: 500px;
+}
