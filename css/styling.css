@@ -1,7 +1,14 @@
+
+body{
+    background-image: url('../assets/watercolour.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #f9f2ff;
+}
 .topnav {
     width: 100%;
     height: 60px;
-    z-index: 9999;
     box-sizing: border-box; 
 }
 
@@ -33,16 +40,33 @@
     justify-content: center;
     align-content: center;
 }
+.modal-dialog {
+    width: 75%;
+}
+.modal-box {
+    height: auto;
+    background-color: white;
+    border-radius: 27px;
+}
 .inner-box {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+.modal-right {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    padding: 10px;
+    color: #3a3a3a;
+    align-content: center;
     justify-content: center;
 }
 
 .right-box {
     display: flex;
     flex-wrap: wrap;
-    width: 400px;
+    width: 450px;
     padding: 10px;
     text-align: left;
     color: #3a3a3a;
@@ -68,11 +92,20 @@ h1 {
     line-height: 0.7;
 }
 
+h5 {
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
 #landing-pic {
     width: 600px;
     height: auto;
 }
-
+.modal-pic {
+    width:400px;
+    height: auto;
+}
 .custombtn {
     color: white;
     background: #3a3a3a;
@@ -83,5 +116,44 @@ h1 {
     padding: 15px 50px;
     letter-spacing: 0;
     border-radius: 2px;
- 
+    font-weight: 700;
+}
+.close {
+    width: 100%;
+    margin-left: 95%;
+}
+
+#sign-in-btn, #register-btn {
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 35.5px;
+}
+#sign-in-modal input {
+    margin-left: 14%;
+    margin-right: 14%;
+    width: 72%;
+}
+
+input, select, .custom-file {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+input {
+    font-family: FontAwesome, Roboto;
+}
+
+.mod-header {
+    display: inline-block;
+}
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 700px;
+    }
+}
+@media (min-width: 992px) {
+    .modal-lg, .modal-xl {
+        max-width: 900px;
+    }
 }

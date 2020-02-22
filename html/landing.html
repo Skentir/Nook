@@ -5,16 +5,19 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/styling.css">
     <!-- Scripts -->
-    <script src="../scripts/landing.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- <script src="../scripts/landing.js"></script> -->
     <title>Nook</title>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="topnav navbar mb-1">
         <div class="container">
-            <a id="sign-in" class="ml-auto">Sign in</a>
+            <button id="sign-in" class="btn ml-auto" data-toggle="modal" data-target="#sign-in-modal">Sign in</button>
         </div>
     </nav>
     <!-- Landing Page Section -->
@@ -32,7 +35,7 @@
                     </div>
                     <div>
                         <div class="row ml-0">
-                            <a href="#" id="get-started" class="custombtn">
+                            <a href="#" id="get-started" class="custombtn" data-toggle="modal" data-target="#get-started-modal">
                                 Get Started 
                             </a>
                         </div>
@@ -45,23 +48,116 @@
         </div>
     </div>
     <!-- Sign in Modal -->
-    <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            ...
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+    <div class="modal fade" style="margin-top: 10%" role="dialog" id="sign-in-modal">
+        <div class="modal-dialog modal-lg modal-box">
+            <div class="box">
+                <div class="inner-box">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <div class="modal-right">
+                        <img src="../assets/modern-art.svg" class="modal-pic" alt="Nook register girl">
+                    </div>
+                    <div class="modal-right">
+                        <h5 class="modal-title" style="font-size: 30px;">nook</h5>
+                        <!-- Log in Form -->
+                        <div class="modal-body">
+                            <form>                       
+                                <div class="form-group mb-2">
+                                    <input type="number" class="form-control" id="user-id" placeholder="&#xf007;  ID Number">
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <input type="password" class="form-control" id="user-pass" placeholder="&#xf084; Password">
+                                </div>
+                            </form>
+                        </div>
+                        <button type="button" id="sign-in-btn" class="custombtn mt-0 mb-4" style="justify-content: center;">sign in</button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+     <!-- Registration Modal -->
+     <div class="modal fade" role="dialog" id="get-started-modal">
+        <div class="modal-dialog modal-xl modal-box">
+            <div class="box">
+                <div class="inner-box">
+                    <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                    </button>
+                    <div class="modal-right">
+                        <h5 class="modal-title" style="font-size: 30px;">Create an account</h5>
+                        <!-- Registration Form -->
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <label for="reg-fname">First Name</label>
+                                            <input type="text" class="form-control" id="reg-fname">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <label for="reg-lname">Last Name</label>
+                                            <input type="text" class="form-control" id="reg-lname">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                <label for="reg-email">School Email</label>
+                                <input type="email" class="form-control" id="reg-email" aria-describedby="emailHelp">
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <label for="reg-idnum">ID Number</label>
+                                            <input type="text" class="form-control" id="reg-idnum">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="form-group">
+                                            <label for="reg-lname">Year Level</label>
+                                            <select class="custom-select">
+                                                <option selected>Select</option>
+                                                <option value="1">Freshman</option>
+                                                <option value="2">Sophomore</option>
+                                                <option value="3">Junior</option>
+                                                <option value="4">Senior</option>
+                                                <option value="5">Masters</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-2">
+                                    <label for="reg-photo">Attach Profile Photo</label>
+                                    <div class="custom-file">
+                                        <label class="custom-file-label">Choose</label>
+                                        <input type="file" class="form-control custom-file-input" id="reg-photo">
+                                    </div>
+                                </div>
+                            
+                                <div class="form-group mb-2">
+                                    <label for="reg-pass">Password</label>
+                                    <input type="password" class="form-control" id="reg-pass">
+                                </div>
+                                
+                                <div class="form-group form-check mb-2">
+                                <input type="checkbox" class="form-check-input" id="is-officer">
+                                <label class="form-check-label" for="is-officer">I'm an officer of an organization</label>
+                                </div>
+                            </form>
+                        </div>
+                        <button type="button" id="register-btn" class="custombtn mt-0 mb-4" style="justify-content: center;">register</button>
+                    </div>
+                    <div class="modal-right">
+                        <img src="../assets/information.svg" class="modal-pic" alt="Nook register girl">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
