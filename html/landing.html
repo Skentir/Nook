@@ -1,6 +1,15 @@
+<!-- 
+    To be implemented:
+    - Add scripts to modals
+    - Add hover animations
+    - Put animation on nook description
+    - Direct buttons to other pages
+-->
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
     <!-- CSS -->
@@ -17,11 +26,11 @@
     <!-- Navigation Bar -->
     <nav class="topnav navbar mb-1">
         <div class="container">
-            <button id="sign-in" class="btn ml-auto" data-toggle="modal" data-target="#sign-in-modal">Sign in</button>
+            <a id="sign-in" class="btn ml-auto" data-toggle="modal" data-target="#sign-in-modal">Sign in</a>
         </div>
     </nav>
     <!-- Landing Page Section -->
-    <div class="container custom-container mt-1">
+    <section class="container custom-container mt-1">
         <div class="box">
             <div class="inner-box">
                 <div class="right-box">
@@ -46,7 +55,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!-- Sign in Modal -->
     <div class="modal fade" style="margin-top: 10%" role="dialog" id="sign-in-modal">
         <div class="modal-dialog modal-lg modal-box">
@@ -78,8 +87,8 @@
             </div>
         </div>
     </div>
-     <!-- Registration Modal -->
-     <div class="modal fade" role="dialog" id="get-started-modal">
+    <!-- Registration Modal -->
+    <div class="modal fade" role="dialog" id="get-started-modal">
         <div class="modal-dialog modal-xl modal-box">
             <div class="box">
                 <div class="inner-box">
