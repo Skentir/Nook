@@ -5,6 +5,9 @@ body{
     background-size: cover;
     background-position: center;
     background-color: #f9f2ff;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
 }
 .topnav {
     width: 100%;
