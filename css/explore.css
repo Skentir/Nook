@@ -86,8 +86,10 @@ header a:hover {
 }
 .card {
     border: none;
-    margin-left: 15px;
+    padding-left: 10px;
+    margin-left: auto;
     margin-right: auto;
+    padding-bottom: 1rem;
 }
 .card-body {
     max-width: fit-content;
