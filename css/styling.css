@@ -25,24 +25,6 @@ body{
     color: #3a3a3a;
 }
 
-.custom-container {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 1300px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.box {
-    padding:1em;
-    box-sizing: border-box;
-    display: block;
-    top: 0;
-    left: 0;
-    justify-content: center;
-    align-content: center;
-}
 .modal-dialog {
     width: 75%;
 }
@@ -51,11 +33,7 @@ body{
     background-color: white;
     border-radius: 27px;
 }
-.inner-box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
+
 .modal-right {
     display: flex;
     flex-wrap: wrap;
@@ -64,21 +42,6 @@ body{
     color: #3a3a3a;
     align-content: center;
     justify-content: center;
-}
-
-.right-box {
-    display: flex;
-    flex-wrap: wrap;
-    width: 450px;
-    padding: 10px;
-    text-align: left;
-    color: #3a3a3a;
-    align-content: center;
-}
-
-.left-box {
-    padding: 10px;
-    width: 600px;
 }
 
 .description {
@@ -109,36 +72,27 @@ h5 {
     width:400px;
     height: auto;
 }
-.custombtn {
-    color: white;
-    background: #3a3a3a;
-    display: inline-block;
-    margin-top: 15px;
-    font-family: Roboto;
-    font-size: 15px;
-    padding: 15px 50px;
-    letter-spacing: 0;
-    border-radius: 2px;
-    font-weight: 700;
+
+.custombtn:hover {
+    background: #b38ad8;
+    color: #521e80;
+    text-decoration: none;
 }
 .close {
     width: 100%;
     margin-left: 95%;
 }
 
-#sign-in-btn, #register-btn {
-    font-weight: 700;
-    font-size: 20px;
-    border-radius: 35.5px;
-}
 #sign-in-modal input {
     margin-right: 14%;
     width: 72%;
 }
 
-input, select, .custom-file {
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
-    border-radius: 4px;
+#get-started-modal .form-group input, #get-started-modal .form-group select {
+    font-size: 14px;
+    height:32px;background:#fff;
+    box-sizing:border-box;
+    border-radius:4px;
 }
 #sign-in-modal .input-group-prepend {
     margin-left: 14%;

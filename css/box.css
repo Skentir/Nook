@@ -1,0 +1,68 @@
+
+.custom-container {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box {
+    padding:1em;
+    box-sizing: border-box;
+    display: block;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-content: center;
+}
+
+.inner-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.right-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 450px;
+    padding: 10px;
+    text-align: left;
+    color: #3a3a3a;
+    align-content: center;
+}
+
+.left-box {
+    padding: 10px;
+    width: 600px;
+}
+
+.form-group label { 
+    font-weight:600;
+    font-size:12px;
+    margin-bottom:8px;
+    color:#3e332e
+}
+
+.custombtn {
+    color: white;
+    background: #3a3a3a;
+    display: inline-block;
+    margin-top: 15px;
+    font-family: Roboto;
+    font-size: 15px;
+    padding: 15px 50px;
+    letter-spacing: 0;
+    border-radius: 2px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.thinbtn {
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 8px 40px;
+}
