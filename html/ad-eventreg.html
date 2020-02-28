@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col">
                                     <div class="form-group">
                                         <label>Date</label>
                                         <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
@@ -113,9 +113,13 @@
                                         });
                                     </script>
                                 </div>
+
+                            </div>
+                            <div class="row">
+                                
                                 <div class='col-sm-6'>
                                     <div class="form-group">
-                                        <label>Time</label>
+                                        <label>Start Time</label>
                                         <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
                                             <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3">
                                             <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
@@ -131,7 +135,25 @@
                                         });
                                     </script>
                                 </div>
-
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <label>End Time</label>
+                                        <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
+                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2">
+                                            <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker3-2').datetimepicker({
+                                                format: 'LT'
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                                
                             </div>
                             <div class="form-group">
                                 <label>Tell us about your event </label>

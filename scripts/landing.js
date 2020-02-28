@@ -46,5 +46,16 @@ $(document).ready(function(){
 
         return check;
     }
+
+    var officerStatus = function () {
+        if ($("#is-officer").is(":checked")) {
+            $('#select-org').show()
+        }
+        else {
+            $('#select-org').hide();
+        }
+      };
+      $(officerStatus);
+      $("#is-officer").change(officerStatus);
     
 });
