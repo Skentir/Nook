@@ -9,21 +9,32 @@ body{
 
  
 .org-header {
-    margin-top: -19px; 
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: -19px;
 }
 
 .org-jumbotron {
     min-width: 100px;
     width: 100%;
     background: linear-gradient(rgba(107, 99, 255, 0.5), 
-    rgba(107, 99, 255, 0.5)), url(../assets/orgs/dsc-header.jpg);
+    rgba(107, 99, 255, 0.5)), url(../assets/events/python-header.jpeg);
     background-position: center center;
     background-size: cover;
-    min-height: 300px;
+    height: 280px;
 }
 
-.org-jumbotron:before {
-    background:  ;
+.inner-header {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.header-name {
+    color: white;
+    font-weight: 400;
+    font-size: 50px;
 }
 
 .textbox{
@@ -39,13 +50,43 @@ body{
 }
 
 /*decriptions*/
-#desc1{
-    padding-left: 200px;
-    font-size: 2.3vw;
-    text-indent:-4.5em;
+
+#org-motto{
+    font-size: 20px;
+    text-indent: 4.5em;
 
 }
+#org-tags {
+    display: inline-flex;
+    padding-left: 0;
+}
+#org-tags li {
+    display: block;
+    margin-right: 5px;
+    padding: 2px 7px;
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    color: white;
+}
 
+.details {
+    width: inherit;
+    display: inline-flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+}
+.left-deet {
+    justify-content: flex-start;
+}
+.ld-1 {
+    margin-left: 3rem;
+}
+.right-deet {
+    display: inline-flex;
+    text-align: end;
+    margin-left: auto;
+    margin-right: 3rem;
+}
 #desc2{
 
     padding-left: 300px;
@@ -84,6 +125,18 @@ body{
 @media all and (max-width: 450px) {
     #settings {
       display: none;
+    }
+}
+
+@media all and (max-width: 998px) {
+    .right-deet {
+        margin-right: auto;
+    }
+    .ld-1 {
+        margin-left: auto;
+    }
+    .ld-2 {
+        margin-right: auto;
     }
 }
 

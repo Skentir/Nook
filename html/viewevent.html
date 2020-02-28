@@ -5,7 +5,7 @@
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -57,27 +57,37 @@
     <!-- Org Image Header -->
     <header class="container">
         <div class = "container-fluid org-header">
-                <div class = "jumbotron jumbotron-fluid org-jumbotron">
-                    <div class ="textbox">
-                        <span id = "jtext" style= "color: white"></span>
-                    </div>
-        </div>
-            <div class ="row justify-content-space-around">
-                <div class = "col-md-5" id = "desc1">
-                    <span>"loren ipsum dolor jda dla la dal calmc a clam cams"</p>
+            <div class = "jumbotron jumbotron-fluid org-jumbotron pb-1">
+                <div class ="inner-header">
+                    <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
                 </div>
-                <div class = "col-md-5 ml-auto" id = "desc2">
-                    <span>tech international education</span>
-                </div>
-                
             </div>
         </div>
     </header>
 
-    <!--container for body-->
+    <!--Event Details-->
     <section class = "container">
+        <!-- Event Sub Details -->
+        <div class="details">
+            <div class="left-deet ld-1 mr-3">
+                <label class="mr-2">Date</label>
+                <span id="event-date">February 13, 2020</span>
+            </div>
+            <div class="left-deet ld-2">
+                <label class="mr-2">Time</label>
+                <span id="time">14:30-17:30</span>
+            </div>
+            <div class="right-deet">
+                <ul id="org-tags">
+                    <li>tech</li>
+                    <li>international</li>
+                    <li>education</li>
+                </ul>
+            </div>
+        </div>
+
         <div class ="row justify-content-space-around">
-            <div class = "col-6" id = "about">
+            <div class = "col" id = "about">
                 <span><h1> About</h1></span>
                 <br>
                 <span>Developer Student Club Taft is the first ever student organization under Google Developers 
@@ -88,7 +98,7 @@
                     knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.
                 </span>
             </div>
-            <div class = "col-6" id ="why">
+            <div class = "col" id ="why">
                 <span><h1> Why should I join</h1></span>
                 <br>
                 <span>Learn about technologies not taught in school and other organization such as mobile development, 
