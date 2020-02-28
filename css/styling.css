@@ -34,6 +34,10 @@ body{
     border-radius: 27px;
 }
 
+.modal-right header {
+    width: 100%;
+}
+
 .modal-right {
     display: flex;
     flex-wrap: wrap;
