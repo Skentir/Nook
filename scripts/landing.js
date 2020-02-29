@@ -41,7 +41,7 @@ $(document).ready(function(){
         }
         if(field.attr("class") =="custom-select"){
             if(field.val() == "Select"){
-                heck = false;
+                check = false;
                 field.css({"border":"1px solid red"}) 
             }
         }

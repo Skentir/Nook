@@ -197,3 +197,50 @@ h5 {
 }
 
 
+#edit-about {
+    height: 180px;
+    width: 350px;
+    border-radius: 6px;
+    border: none;
+    word-wrap: break-word;
+}
+
+#edit-reason {
+    height: 180px;
+    width: 350px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 0 6px #888888;
+    word-wrap: break-word;
+}
+
+#edit-field, #date, #time {
+    width: 350px;
+    height: 35px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 0 6px #888888;
+    margin: 10px;
+    margin-left: 0;
+    padding-left: 10px;
+}
+
+#save-btn {
+    height: 40px;
+    width: 150px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 0 6px #888888;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#date {
+    width: 170px;
+}
+
+#time {
+    width: 130px;
+}
