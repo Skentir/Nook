@@ -290,22 +290,30 @@ ul {
     justify-content: center;
 }
 
-.cardd {
+.item {
     width: 350px;
     text-align: center;
     margin: 20px;
     margin-top: 0;
+    padding-top: 10px;
     margin-bottom: 60px;
 }
 
-.cardd img {
+.item img {
     width: 300px;
     height: 300px;
 }
+.item:hover{
+    background: aliceblue;
+    border-radius: 13px;
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.23);
+}
 
-.cardd p {
-/*    text-decoration: none;*/
+.item p {
     color: #3a3a3a;
     font-size: 20px;
     font-weight: 700;
+}
+a:hover {
+    text-decoration: none!important;
 }

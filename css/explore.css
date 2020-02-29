@@ -24,7 +24,14 @@ header {
     margin-right: auto;
 }
 #type-selector a {
+    text-decoration: none;
+    padding: 1px 15px;
     color: #3a3a3a;
+}
+#type-selector a:hover {
+    color: white;
+    background: #6200EA;
+    border-radius: 8px;
 }
 header a:hover {
     text-decoration: underline;
