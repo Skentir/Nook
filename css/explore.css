@@ -30,21 +30,6 @@ header a:hover {
     text-decoration: underline;
 }
 
-<<<<<<< HEAD
-#explore-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-#explore-menu a{
-    font-weight: 300;
-    font-size: auto;
-    color: #3a3a3a;
-    text-decoration: none;
-}
-=======
->>>>>>> kirsten
 /* Add event reg */
 .contact-form{
     background:#fff;

@@ -227,7 +227,8 @@ h5 {
     word-wrap: break-word;
 }
 
-#edit-field, #date, #time {
+/* EDIT THIS OK */
+#time, #edit-field, #edit-field {
     width: 350px;
     height: 35px;
     border-radius: 6px;
