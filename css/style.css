@@ -290,7 +290,7 @@ ul {
     justify-content: center;
 }
 
-#card {
+.cardd {
     width: 350px;
     text-align: center;
     margin: 20px;
@@ -298,12 +298,12 @@ ul {
     margin-bottom: 60px;
 }
 
-#card img {
+.cardd img {
     width: 300px;
     height: 300px;
 }
 
-#card p {
+.cardd p {
 /*    text-decoration: none;*/
     color: #3a3a3a;
     font-size: 20px;
