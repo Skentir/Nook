@@ -5,7 +5,7 @@
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -57,7 +57,7 @@
     <!-- Org Image Header -->
     <header class="container">
         <div class = "container-fluid org-header">
-            <div class = "jumbotron jumbotron-fluid org-jumbotron pb-1">
+            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-3" id="event-header-pic">
                 <div class ="inner-header">
                     <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
                 </div>
@@ -68,63 +68,74 @@
     <!--Event Details-->
     <section class = "container">
         <!-- Event Sub Details -->
-        <div class="details">
+        <div class="details mb-3">
             <div class="left-deet ld-1 mr-3">
-                <label class="mr-2">Date</label>
+                <label class="mr-2 mb-0">Date</label>
                 <span id="event-date">February 13, 2020</span>
             </div>
             <div class="left-deet ld-2">
-                <label class="mr-2">Time</label>
+                <label class="mr-2 mb-0">Time</label>
                 <span id="time">14:30-17:30</span>
             </div>
             <div class="right-deet">
-                <ul id="org-tags">
+                <ul id="event-tags">
                     <li>tech</li>
-                    <li>international</li>
                     <li>education</li>
                 </ul>
             </div>
         </div>
 
-        <div class ="row justify-content-space-around">
-            <div class = "col" id = "about">
-                <span><h1> About</h1></span>
-                <br>
-                <span>Developer Student Club Taft is the first ever student organization under Google Developers 
-                    and part of the first batch of chapters established in the Philippines. 
-                    We are a community of developers that are passionate about uplifting communities 
-                    through technology and innovation. We aim to help students bridge the gap 
-                    between theories and practice. By joining a DSC, students grow their 
-                    knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.
-                </span>
+        <div class ="inner-box">
+            <div class = "right-box">
+                <div id = "about">
+                    <h5> About</h5>
+                    <span class="sub-desc" id="event-desc">
+                        If you're a complete beginner or an experience programmer this course will provide you with a solid foundation of 
+                        the language & a complete overview for coding. The course is specially tailored for CS and IT students who are 
+                        interested in Data Science & coding.
+                    </span>
+                </div>
+                <div class="event-info mt-3 mb-3 organizer">
+                    <p class="mb-1">Organized by</p>
+                    <div>
+                        <img id="organizer-icon" src="../assets/orgs/dsc-icon.png">
+                        <a id="organizer-name" href="vieworg.html">Developer Student Club Taft</a>
+                    </div>
+                </div>
             </div>
-            <div class = "col" id ="why">
-                <span><h1> Why should I join</h1></span>
-                <br>
-                <span>Learn about technologies not taught in school and other organization such as mobile development, 
-                    machine learning, cloud computing and etc.
-                    Get access to a vast network of Googlers and tech enthusiasts and get access to Google Developer resources
-                    Grow one's tech knowledge in a peer-to-peer learning environment and build solutions for 
-                    local businesses and their community.
-                </span>
-            </div>
-        </div>
-        <div class ="row justify-content-space-around" style="padding-left: 180px; padding-right: 400px;">
-            <div class= "col-xl-1">
-                <span><h1>98</h1></span>
-            </div>
-            <div class= "col-xl-1">
-                <span><h1>14</h1></span>
-            </div>
-            <div class= "col-1">
-                <span><h1>1</h1></span>
-            </div>
+            <div class = "right-box" id ="why">
+                <div class="event-info ei-left mb-2">
+                    <h5 class="mb-0"> Venue</h5>
+                    <span class="sub-desc" id="event-venue"> Gokongwei G304B </span>
+                </div>
+                <div class="event-info ei-left mb-2">
+                    <h5 class="mb-0"> Things to Bring</h5>
+                    <span class="sub-desc" id="event-things"> Laptop, Charger, Notebook, Markers </span>
+                </div>
+                <div class="event-info  ei-left mb-2">
+                    <h5 class="mb-0">Incentives</h5>
+                    <span class="sub-desc" id="event-things">CCPROG3, CCDSTRUC, CCINFOM, CCAPDEV</span>
+                </div>
 
-            <div class = "col-md-1 ml-auto ">
-                <span><button type="button" class="btn btn-secondary btn-lg ">I'm interested</button></span>
+                <button type="button" class="custombtn mt-3 mb-3" id="add-to-planner-btn" data-toggle="modal" data-target="#add-to-planner-modal">I'm interested</button>
             </div>
-
         </div>
     </section>
+    <!-- Add to Planner Modal -->
+    <div class="modal fade sm" role="dialog" id="add-to-planner-modal">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="../assets/completed.svg" style="width:100%; height: auto;">
+                <p class="modal-p mt-3">Added to Planner!</p>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/box.css">
-    <link rel="stylesheet" href="../css/explore.css">
+    <link rel="stylesheet" href="../css/viewevent.css">
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -52,102 +53,68 @@
             </div>
         </div>
     </nav>
-    <!-- Org Selector -->
-    <header class="mb-2 mt-3">
-        <div class="container mt-2">
-            <div id="type-selector">
-                <a href="#" value="CSO">cso</a>
-                <a href="#" value="NON-CSO">non-cso</a>
-                <a href="#" value= "OTHERS">others</a>
+
+    <!-- Org Image Header -->
+    <header class="container">
+        <div class = "container-fluid org-header">
+            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-3" id="org-header-pic">
+                <div class ="inner-header">
+                    <h1 class="ml-3 header-name" id="event-header-name">Developer Student Club Taft</h1>
+                </div>
             </div>
         </div>
     </header>
-   <!-- Org Dashboard -->
-    <section class="pl-5 pr-5 pt-4">
-        <div class="container" class="card-wrapper" style="max-width: 960px;">
-            <div id="explore-menu">
-                <div class="row">
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/dsc-icon.png">
-                            <div class="card-body">      
-                                <span class="org-name">Developer Student Club Taft</span>   
-                            </div>
-                        </a>
+
+    <!--Event Details-->
+    <section class = "container">
+        <!-- Event Sub Details -->
+        <div class="details mb-3">
+            <div class="left-deet ld-1 odeet">
+                <span id="org-motto">“Build. Create. Innovate.”</span>
+            </div>
+            <div class="right-deet">
+                <ul id="org-tags">
+                    <li>tech</li>
+                    <li>education</li>
+                    <li>international</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class ="inner-box">
+            <div class = "right-box">
+                <div id = "about">
+                    <h5> About</h5>
+                    <span class="sub-desc" id="org-desc">
+                        Developer Student Club Taft is the first ever student organization under Google Developers and part of the first batch of chapters established in the Philippines. We are a community of developers that are passionate about uplifting communities through technology and innovation. We aim to help students bridge the gap between theories and practice. By joining a DSC, students grow their knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.
+                    </span>
+                </div>
+                <div class="org-stats mt-2 mb-2">
+                    <div class="stat-item ml-3">
+                        <p  class="stat-count" id="org-member-count">98</p>
+                        <span>Members</span>
                     </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/tls-icon.jpg">
-                            <div class="card-body">
-                                <span>The LaSallian</span>
-                            </div>
-                        </a>
+                    <div class="stat-item ml-3">
+                        <p class="stat-count" id="org-officer-count">14</p>
+                        <span>Officers</span>
                     </div>
-                     <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/catch2t22-icon.png">
-                            <div class="card-body">
-                                <span>CATCH 2T22</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/archers-icon.png">
-                            <div class="card-body">
-                                <span>Archers Network</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top" src="../assets/orgs/comet-icon.png">
-                            <div class="card-body">
-                                <span>DLSU COMET Research Lab</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/animosquad-icon.jpg">
-                            <div class="card-body">
-                                <span>Animo Squad</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/gmg-icon.jpg">
-                            <div class="card-body">
-                                <span>Green Media Group</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/msc-icon.png">
-                            <div class="card-body">
-                                <span>DLSU Microsoft Student Community</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/syntax-icon.png">
-                            <div class="card-body">
-                                <span>Syntax</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg.html">
-                            <img class="card-img-top img-fluid" src="../assets/orgs/dlsusports-icon.jpg">
-                            <div class="card-body">
-                                <span>DLSU Sports</span>
-                            </div>
-                        </a>
+                    <div class="stat-item ml-3 mr-3">
+                        <p class="stat-count" id="org-year-count">1</p>
+                        <span>Years Active</span>
                     </div>
                 </div>
+            </div>
+            <div class = "right-box">
+                <div id="why">
+                    <h5> Why should I join</h5>
+                    <span class="sub-desc" id="join-desc">Learn about technologies not taught in school and other organization such as mobile development, 
+                        machine learning, cloud computing and etc.
+                        Get access to a vast network of Googlers and tech enthusiasts and get access to Google Developer resources
+                        Grow one's tech knowledge in a peer-to-peer learning environment and build solutions for 
+                        local businesses and their community.
+                    </span>
+                </div>
+                <button type="button" class="custombtn mb-3" id="apply-btn">I'm interested</button>
             </div>
         </div>
     </section>
