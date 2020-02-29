@@ -14,7 +14,7 @@ $(document).ready(function(){
     })
 
     $("#register-btn").click(function(){
-        
+
         //boolean 
         var valid = true;
 
