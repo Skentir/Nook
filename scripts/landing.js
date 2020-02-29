@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    //form validation
     $("#sign-in-btn").click(function(){
         
         //boolean 
@@ -31,6 +32,7 @@ $(document).ready(function(){
         }
     })
 
+    //function to check if fields are valid
     function checkifValid(field,val){
         var check = val;
         if(field.val() ==""){
@@ -47,6 +49,8 @@ $(document).ready(function(){
         return check;
     }
 
+
+    //toggles checkboxes
     var officerStatus = function () {
         if ($("#is-officer").is(":checked")) {
             $('#select-org').show()
@@ -57,5 +61,20 @@ $(document).ready(function(){
       };
       $(officerStatus);
       $("#is-officer").change(officerStatus);
+
+      var incentiveStatus = function () {
+        if ($("#incentives").is(":checked")) {
+            $('#incentivesdet').show()
+        }
+        else {
+            $('#incentivesdet').hide();
+        }
+      };
+
+      $(incentiveStatus);
+      $("#incentives").change(incentiveStatus);
     
+    
+
+      
 });

@@ -16,6 +16,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="../scripts/moment.js"></script>
     <script src="../scripts/bootstrap-datepicker.js"></script>
+    
+    <script src="../scripts/landing.js"></script> 
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
    <!-- datetimepicker for bootstrap4-->
@@ -203,6 +205,20 @@
                                         <input type="file" class="form-control custom-file-input" id="event-photo-field">
                                     </div>
                             </div>
+                            <div class= "form-row">
+                                <div class = "col-md-6">
+                                    <div class="form-group form-check mb-2">
+                                        <input type="checkbox" class="form-check-input mt-0" id="incentives">
+                                        <label class="form-check-label" for="incentives">Are there incentives</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-group" id = "incentivesdet">
+                                        <label>Enter course codes</label>
+                                        <input type="text" class="invalid-field" id="details-incentives">
+                                    </div>
+                                </div>
+                            </div>  
                             <button type="button" id="submit-event" class="custombtn thinbtn mt-0">submit</button>
                         </div>
                     </div>
