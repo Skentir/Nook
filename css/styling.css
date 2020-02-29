@@ -28,6 +28,10 @@ body{
 .modal-dialog {
     width: 75%;
 }
+.modal-content {
+    border-color: transparent;
+    border-radius: 27px;
+}
 .modal-box {
     height: fit-content;
     background-color: white;
