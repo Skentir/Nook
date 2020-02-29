@@ -8,8 +8,14 @@ body{
 h5 {
     font-size: 26px;
 }
-/*jumbotron*/
+.box {
+    max-width: max-content;
+    margin: auto;
+    padding: 30px 130px;
+    border-radius: 4px;
+}
 
+/*jumbotron*/
  
 .org-header {
     padding-left: 0;
@@ -60,6 +66,7 @@ h5 {
 /*decriptions*/
 .right-box {
     max-width: 450px;
+    align-content: unset;
 }
 #org-motto{
     font-size: 20px;
@@ -103,10 +110,10 @@ h5 {
     display: flex;
     flex-wrap: wrap;
 }
-#about {
+.color {
     background-color: rgba(167, 208, 255, 0.5);
 }
-#about, #why{
+#about, #why, .color {
     max-width: 450px;
     height: fit-content;
     border-radius: 5px;
@@ -165,6 +172,7 @@ h5 {
     font-weight: 100;
     color: #3A3A3A;
 }
+
 /* MEDIA QUERIES */
 @-ms-viewport {
     width: device-width;

@@ -30,35 +30,6 @@ header a:hover {
     text-decoration: underline;
 }
 
-#explore-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.card img   {
-     max-height: 170px;
-     width: auto;
-     border: .8px solid #acacac;
-}
-.card {
-    border: none;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 1rem;
-    background-color: transparent;
-}
-.card-body {
-    max-width: fit-content;
-    padding: 5px 10px 10px 0px;
-}
-#explore-menu a{
-    font-weight: 300;
-    font-size: auto;
-    color: #3a3a3a;
-    text-decoration: none;
-}
 /* Add event reg */
 .contact-form{
     background:#fff;
