@@ -30,6 +30,7 @@ header a:hover {
     text-decoration: underline;
 }
 
+<<<<<<< HEAD
 #explore-menu {
     display: flex;
     flex-wrap: wrap;
@@ -42,6 +43,8 @@ header a:hover {
     color: #3a3a3a;
     text-decoration: none;
 }
+=======
+>>>>>>> kirsten
 /* Add event reg */
 .contact-form{
     background:#fff;
