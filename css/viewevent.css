@@ -9,11 +9,13 @@ h5 {
     font-size: 26px;
 }
 .box {
-    max-width: max-content;
+    background-color: #ede756;
+    max-width: 100%;
     margin: auto;
     padding: 30px 130px;
     border-radius: 4px;
 }
+
 
 /*jumbotron*/
  
@@ -65,7 +67,8 @@ h5 {
 
 /*decriptions*/
 .right-box {
-    max-width: 450px;
+    width: 555px;
+    max-width: 600px;
     align-content: unset;
 }
 #org-motto{
@@ -88,6 +91,8 @@ h5 {
 }
 
 .details {
+    background: #6200EA;
+    color:white;
     width: inherit;
     display: inline-flex;
     flex-wrap: wrap;
@@ -114,7 +119,7 @@ h5 {
     background-color: rgba(167, 208, 255, 0.5);
 }
 #about, #why, .color {
-    max-width: 450px;
+    max-width: 500px;
     height: fit-content;
     border-radius: 5px;
     padding: 20px 40px;
