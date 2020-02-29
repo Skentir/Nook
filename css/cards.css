@@ -1,5 +1,5 @@
 
-#explore-menu {
+.card-menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -23,7 +23,7 @@
     max-width: fit-content;
     padding: 5px 10px 10px 0px;
 }
-#explore-menu a{
+.card-menu a{
     font-weight: 300;
     font-size: auto;
     color: #3a3a3a;
