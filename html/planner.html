@@ -3,17 +3,18 @@
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/box.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cards.css">
     
     <title>Planner</title>
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav></nav>
     <nav class="topnav">
         <div class="navbar custom-navbar">
             <div class="nav-logo">
@@ -49,119 +50,79 @@
         </div>
     </nav>
     
-    <div id="container">
-        <div id="account-details">
+    <div class="container inner-box">
+        <div class="mt-4" id="account-details">
             <div id="profile">
-                <img src="../assets/orgs/dsc-icon.png">
-                <h1>Developer Student Club Taft</h1>
-                <ul>
-                    <li>tech</li>
-                    <li>international</li>
-                    <li>community</li>
-                    <li>development</li>
-                    <li>education</li>
-                    <li>innovation</li>
-                </ul>
-                <div id="profile-info">
-                    <a href="member-requests.html">
-                        <h3>120</h3>
-                        <p>Members</p>
-                    </a>
-                    <a href="view-officers.html">
-                        <h3>32</h3>
-                        <p>Officers</p>
-                    </a>
-                </div>
+                <img src="../assets/profiles/patrick.jpg">
+                <h1>Kirsten Sison</h1>
+                <p>danielle_sison@dlsu.edu.ph</p>
+                <h2>I’m a Computer Science Student who likes Animal Crossing and Minecraft.</h2>
+                <button>Edit Profile</button>
             </div>
         </div>
-        <div id="info-panel">
-            <h1>Your Events</h1>
-            <h2>January</h2>
-            <div id="information">
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/dsc-icon.png">
-                        <div id="org-details">
-                            <h1>DSC Taft</h1>
-<!--                            <p>description</p>-->
+        <div class="box mt-4" style="background-color: #7c3bff1f;">
+            <div class="mb-3 ml-2 card-menu" id="user-event-list">
+                <h1 style="width: 100%;"> Your Events</h1>
+                <div>
+                    <h5 >January</h5>
+                    <div class="card-wrapper information">            
+                        <div class="card">
+                            <a href="viewevent.html">
+                                <img class="card-img-top img-fluid" src="../assets/events/python-header.jpeg">
+                                <div class="card-body">      
+                                    <span class="org-name">Python for Data Science</span>   
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                        <div class="card">
+                            <a href="viewevent.html">
+                                <img class="card-img-top img-fluid" src="../assets/events/gcp-header.png">
+                                <div class="card-body">
+                                    <span>Intro to Google Cloud Platform</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="viewevent.html">
+                                <img class="card-img-top img-fluid" src="../assets/events/firebase-header.png">
+                                <div class="card-body">
+                                    <span>Build a CRUD Website With Firebase</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/comet-icon.png">
-                        <div id="org-details">
-                            <h1>COMET</h1>
-<!--                            <p>description</p>-->
+                <div>
+                    <h5>February</h5>
+                    <div class="card-wrapper information">
+                        <div class="card-wrapper information">            
+                            <div class="card">
+                                <a href="viewevent.html">
+                                    <img class="card-img-top img-fluid" src="../assets/events/python-header.jpeg">
+                                    <div class="card-body">      
+                                        <span class="org-name">Python for Data Science</span>   
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card">
+                                <a href="viewevent.html">
+                                    <img class="card-img-top img-fluid" src="../assets/events/gcp-header.png">
+                                    <div class="card-body">
+                                        <span>Intro to Google Cloud Platform</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card">
+                                <a href="viewevent.html">
+                                    <img class="card-img-top img-fluid" src="../assets/events/firebase-header.png">
+                                    <div class="card-body">
+                                        <span>Build a CRUD Website With Firebase</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </a>
+                    </div>          
                 </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/dlsusports-icon.jpg">
-                        <div id="org-details">
-                            <h1>DLSU Sports</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/lsdc-icon.jpg">
-                        <div id="org-details">
-                            <h1>LSDC</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/msc-icon.png">
-                        <div id="org-details">
-                            <h1>MSC</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/syntax-icon.png">
-                        <div id="org-details">
-                            <h1>Syntax</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <h2>February</h2>
-            <div id="information">
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/dsc-icon.png">
-                        <div id="org-details">
-                            <h1>DSC Taft</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/comet-icon.png">
-                        <div id="org-details">
-                            <h1>COMET</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>
-                <div id="org">
-                    <a href="">
-                        <img src="../assets/orgs/syntax-icon.png">
-                        <div id="org-details">
-                            <h1>Syntax</h1>
-<!--                            <p>description</p>-->
-                        </div>
-                    </a>
-                </div>          
             </div>
         </div>
     </div>

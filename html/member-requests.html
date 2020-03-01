@@ -3,7 +3,8 @@
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/box.css">
@@ -48,7 +49,7 @@
         </div>
     </nav>
     
-    <div id="container">
+    <div class="container inner-box">
         <div id="account-details">
             <div id="profile">
                 <img src="../assets/orgs/dsc-icon.png">
@@ -73,72 +74,124 @@
                 </div>
             </div>
         </div>
-        <div id="info-panel">
+
+        <div class="box mt-4" style="background-color: #7c3bff1f;">
             <h1>Member Requests</h1>
-            <div id="information">
-                <div id="req-left">
-                    <div id="requests">
-                    <img id="prof-pic" src="../assets/patrick.jpg">
+            <div class="information" id="request-list">
+                <div class="requests">
+                    <img class="prof-pic" src="../assets/profiles/nook-pic.png">
                     <span>
-                        <h1>John Cruz</h1>
+                        <span class="member-name">Robin Reyes</span>
                         <p>1189090</p>
                     </span>
-                    <ul>
-                        <a href=""><li id="check"></li></a>
-                        <a href=""><li id="clear"></li></a>
-                    </ul>
+                    <div class="button-group">
+                        <button type="button" class="reqbtn check">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.79496 15.875L4.62496 11.705L3.20496 13.115L8.79496 18.705L20.795 6.70501L19.385 5.29501L8.79496 15.875Z" fill="black" fill-opacity="0.54"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="reqbtn reject">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.46997 2 2 6.47 2 12C2 17.53 6.46997 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.58997 20 4 16.41 4 12C4 7.59 7.58997 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41003 17L7 15.59L10.59 12L7 8.41L8.41003 7L12 10.59Z" fill="black" fill-opacity="0.54"/>
+                            </svg>    
+                        </button>       
+                    </div>
                 </div>
-            
-                <div id="requests">
-                    <img id="prof-pic" src="../assets/patrick.jpg">
+                <div class="requests">
+                    <img class="prof-pic" src="../assets/profiles/nook-pic.png">
                     <span>
-                        <h1>John Cruz</h1>
+                        <span class="member-name">Michaela Dizon</span>
                         <p>1189090</p>
                     </span>
-                    <ul>
-                        <a href=""><li id="check"></li></a>
-                        <a href=""><li id="clear"></li></a>
-                    </ul>
-                </div>
-                </div>
-                <div id="req-right">
-                    <div id="requests">
-                        <img id="prof-pic" src="../assets/patrick.jpg">
-                        <span>
-                            <h1>John Cruz</h1>
-                            <p>1189090</p>
-                        </span>
-                        <ul>
-                            <a href=""><li id="check"></li></a>
-                            <a href=""><li id="clear"></li></a>
-                        </ul>
-                    </div>
-                    <div id="requests">
-                        <img id="prof-pic" src="../assets/patrick.jpg">
-                        <span>
-                            <h1>John Cruz</h1>
-                            <p>1189090</p>
-                        </span>
-                        <ul>
-                            <a href=""><li id="check"></li></a>
-                            <a href=""><li id="clear"></li></a>
-                        </ul>
-                    </div>
-                    <div id="requests">
-                        <img id="prof-pic" src="../assets/patrick.jpg">
-                        <span>
-                            <h1>John Cruz</h1>
-                            <p>1189090</p>
-                        </span>
-                        <ul>
-                            <a href=""><li id="check"></li></a>
-                            <a href=""><li id="clear"></li></a>
-                        </ul>
+                    <div class="button-group">
+                        <button type="button" class="reqbtn check">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.79496 15.875L4.62496 11.705L3.20496 13.115L8.79496 18.705L20.795 6.70501L19.385 5.29501L8.79496 15.875Z" fill="black" fill-opacity="0.54"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="reqbtn reject">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.46997 2 2 6.47 2 12C2 17.53 6.46997 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.58997 20 4 16.41 4 12C4 7.59 7.58997 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41003 17L7 15.59L10.59 12L7 8.41L8.41003 7L12 10.59Z" fill="black" fill-opacity="0.54"/>
+                            </svg>    
+                        </button>       
                     </div>
                 </div>
-                
+            <div class="requests">
+                <img class="prof-pic" src="../assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.79496 15.875L4.62496 11.705L3.20496 13.115L8.79496 18.705L20.795 6.70501L19.385 5.29501L8.79496 15.875Z" fill="black" fill-opacity="0.54"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.46997 2 2 6.47 2 12C2 17.53 6.46997 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.58997 20 4 16.41 4 12C4 7.59 7.58997 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41003 17L7 15.59L10.59 12L7 8.41L8.41003 7L12 10.59Z" fill="black" fill-opacity="0.54"/>
+                        </svg>    
+                    </button>       
+                </div>
             </div>
-            
+            <div class="requests">
+                <img class="prof-pic" src="../assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.79496 15.875L4.62496 11.705L3.20496 13.115L8.79496 18.705L20.795 6.70501L19.385 5.29501L8.79496 15.875Z" fill="black" fill-opacity="0.54"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.46997 2 2 6.47 2 12C2 17.53 6.46997 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.58997 20 4 16.41 4 12C4 7.59 7.58997 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41003 17L7 15.59L10.59 12L7 8.41L8.41003 7L12 10.59Z" fill="black" fill-opacity="0.54"/>
+                        </svg>    
+                    </button>       
+                </div>
+            </div>
+            <div class="requests">
+                <img class="prof-pic" src="../assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.79496 15.875L4.62496 11.705L3.20496 13.115L8.79496 18.705L20.795 6.70501L19.385 5.29501L8.79496 15.875Z" fill="black" fill-opacity="0.54"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.46997 2 2 6.47 2 12C2 17.53 6.46997 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.58997 20 4 16.41 4 12C4 7.59 7.58997 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41003 17L7 15.59L10.59 12L7 8.41L8.41003 7L12 10.59Z" fill="black" fill-opacity="0.54"/>
+                        </svg>    
+                    </button>       
+                </div>
+            </div>
+            <div class="requests">
+                <img class="prof-pic" src="../assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.79496 15.875L4.62496 11.705L3.20496 13.115L8.79496 18.705L20.795 6.70501L19.385 5.29501L8.79496 15.875Z" fill="black" fill-opacity="0.54"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.46997 2 2 6.47 2 12C2 17.53 6.46997 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.58997 20 4 16.41 4 12C4 7.59 7.58997 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41003 17L7 15.59L10.59 12L7 8.41L8.41003 7L12 10.59Z" fill="black" fill-opacity="0.54"/>
+                        </svg>    
+                    </button>       
+                </div>
+            </div>
         </div>
     </div>
 </body>
