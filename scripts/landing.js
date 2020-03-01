@@ -74,6 +74,42 @@ $(document).ready(function(){
       $(incentiveStatus);
       $("#incentives").change(incentiveStatus);
     
+
+      $("#cso").click(function(){
+        $("div[value = 'cso']").each(function(){
+            $(this).show();
+            $("div[value = 'non-cso']").each(function(){
+                $(this).hide();
+            })
+            $("div[value = 'others']").each(function(){
+                $(this).hide();
+            })
+        })
+      })
+
+      $("#non-cso").click(function(){
+        $("div[value = 'non-cso']").each(function(){
+            $(this).show();
+            $("div[value = 'cso']").each(function(){
+                $(this).hide();
+            })
+            $("div[value = 'others']").each(function(){
+                $(this).hide();
+            })
+        })
+      })
+
+      $("#others").click(function(){
+        $("div[value = 'others']").each(function(){
+            $(this).show();
+            $("div[value = 'non-cso']").each(function(){
+                $(this).hide();
+            })
+            $("div[value = 'cso']").each(function(){
+                $(this).hide();
+            })
+        })
+      })
     
 
       

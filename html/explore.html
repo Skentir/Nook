@@ -14,7 +14,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!-- <script src="../scripts/landing.js"></script> -->
+    <script src="../scripts/landing.js"></script>
     <title>Nook</title>
 </head>
 <body>
@@ -57,9 +57,9 @@
     <header class="mb-2 mt-3">
         <div class="container mt-2">
             <div id="type-selector">
-                <a href="#" value="CSO">cso</a>
-                <a href="#" value="NON-CSO">non-cso</a>
-                <a href="#" value= "OTHERS">others</a>
+                <a href="#" value="CSO" id = "cso">cso</a>
+                <a href="#" value="NON-CSO" id = "non-cso" >non-cso</a>
+                <a href="#" value= "OTHERS" id = "others">others</a>
             </div>
         </div>
     </header>
@@ -68,7 +68,7 @@
         <div class="container" class="card-wrapper" style="max-width: 960px;">
             <div class="card-menu" id="explore-menu">
                 <div class="row">
-                    <div class="card">
+                    <div class="card" value ="cso">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/dsc-icon.png">
                             <div class="card-body">      
@@ -76,7 +76,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "cso">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/tls-icon.jpg">
                             <div class="card-body">
@@ -84,7 +84,7 @@
                             </div>
                         </a>
                     </div>
-                     <div class="card">
+                     <div class="card" value ="others">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/catch2t22-icon.png">
                             <div class="card-body">
@@ -92,7 +92,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "cso">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/archers-icon.png">
                             <div class="card-body">
@@ -100,7 +100,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "cso">
                         <a href="vieworg.html">
                             <img class="card-img-top" src="../assets/orgs/comet-icon.png">
                             <div class="card-body">
@@ -108,7 +108,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "others">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/animosquad-icon.jpg">
                             <div class="card-body">
@@ -116,7 +116,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = 'non-cso'>
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/gmg-icon.jpg">
                             <div class="card-body">
@@ -124,7 +124,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "others">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/msc-icon.png">
                             <div class="card-body">
@@ -132,7 +132,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "non-cso">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/syntax-icon.png">
                             <div class="card-body">
@@ -140,7 +140,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
+                    <div class="card" value = "non-cso">
                         <a href="vieworg.html">
                             <img class="card-img-top img-fluid" src="../assets/orgs/dlsusports-icon.jpg">
                             <div class="card-body">
