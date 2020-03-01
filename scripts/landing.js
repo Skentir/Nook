@@ -24,8 +24,8 @@ $(document).ready(function(){
         valid = checkifValid($("#reg-email"),valid);
         valid = checkifValid($("#reg-idnum"),valid);
         valid = checkifValid($("#reg-pass"),valid);
-        valid = checkifValid($(".custom-select"),valid);
-        
+        valid = checkifValid($("#select-o"),valid);
+        valid = checkifValid($("#select-p"),valid);
 
         if(valid == true){
             location.href = "explore.html";
@@ -39,10 +39,11 @@ $(document).ready(function(){
             check = false;
             field.css({"border":"1px solid red"})
         }
-        if(field.attr("class") =="custom-select"){
-            if(field.val() == "Select"){
+        
+        if($("#is-officer").is(":checked")) {
+            if(field.val() == "0"){
                 check = false;
-                field.css({"border":"1px solid red"}) 
+                field.css({"border":"1px solid red"})
             }
         }
 
@@ -53,10 +54,12 @@ $(document).ready(function(){
     //toggles checkboxes
     var officerStatus = function () {
         if ($("#is-officer").is(":checked")) {
-            $('#select-org').show()
+            $('#select-org').show();
+            $('#select-pos').show();
         }
         else {
             $('#select-org').hide();
+            $('#select-pos').hide();
         }
       };
       $(officerStatus);
