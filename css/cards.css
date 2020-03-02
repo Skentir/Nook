@@ -10,6 +10,9 @@
      object-fit: cover;
      border: .8px solid #acacac;
 }
+.card img:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
 .card {
     border: none;
     padding-left: 8px;
@@ -18,6 +21,9 @@
     margin-right: auto;
     padding-bottom: 1rem;
     background-color: transparent;
+}
+.card:hover {
+    transform: scale(1.1);
 }
 .card-body {
     max-width: fit-content;
