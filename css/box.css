@@ -5,16 +5,18 @@
     height: 80px;
  }
  .custom-navbar {
+     position: fixed;
      background-color: #F4F4F4;
-     height: 75%;
+     height: 60px;
      width: inherit;
      box-sizing: border-box;
-     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);  
+     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); 
+     z-index: 1; 
  }
 
-nav-logo {
-    float: left;
-    padding-left: 5px;
+.nav-logo {
+    margin: auto 10px;
+    margin-right: 42px;
 }
 
 .nav-items {
@@ -22,9 +24,10 @@ nav-logo {
     height: 42px;
     max-width: 70%;
     max-height: 70%;
-    position: inherit;;
 }
-
+.nav-items ul {
+    padding-left: 0;
+}
 .nav-items li {
     display: inline;
     padding-right: 3px;
@@ -116,6 +119,13 @@ svg path:hover{
 }
 
 /*search bar css*/
+.navbar .form-inline {
+    display: none;
+    margin: auto;
+  }
+.has-search {
+    margin-bottom: 0;
+}
 .has-search .form-control {
     padding-left: 2.375rem;
 }
@@ -130,4 +140,29 @@ svg path:hover{
     text-align: center;
     pointer-events: none;
     color: black;
+}
+
+@media all and (max-width: 610px) {
+    #settings {
+      display: none;
+    }
+    .nav-logo {
+        margin-right: 30px;
+    }
+}
+@media all and (max-width: 590px) {
+    #planner {
+      display: none;
+    }
+    .nav-logo {
+        margin-right: 25px;
+    }
+}
+@media all and (max-width: 400px) {
+    div.navbar form {
+      display: none;
+    }
+    .nav-logo {
+        margin-right: 25px;
+    }
 }

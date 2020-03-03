@@ -83,8 +83,3 @@ header h1 {
     width: device-width;
 }
 
-@media all and (max-width: 450px) {
-    #settings {
-      display: none;
-    }
-}
