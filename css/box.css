@@ -155,14 +155,6 @@ svg path:hover{
       display: none;
     }
     .nav-logo {
-        margin-right: 25px;
-    }
-}
-@media all and (max-width: 400px) {
-    div.navbar form {
-      display: none;
-    }
-    .nav-logo {
-        margin-right: 25px;
+        margin-right: 15px;
     }
 }

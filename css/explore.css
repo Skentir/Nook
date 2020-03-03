@@ -78,6 +78,24 @@ header h1 {
 .left-box, .right-box {
     max-width: 510px;
 }
+.row.contact-form:hover {
+    transform: scale(1.1);
+    background: #6b1cb5cf;
+    color: white;
+    text-decoration: none!important;
+}
+.event-name:hover {
+    color:white;
+}
+.event-name {
+    text-decoration: none!important;
+    font-weight: 400;
+    color: inherit;
+}
+.event-date {
+    color: inherit;
+    font-weight: 300;
+}
 /* MEDIA QUERIES */
 @-ms-viewport {
     width: device-width;
