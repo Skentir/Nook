@@ -96,6 +96,7 @@ header h1 {
     color: inherit;
     font-weight: 300;
 }
+
 /* MEDIA QUERIES */
 @-ms-viewport {
     width: device-width;

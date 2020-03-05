@@ -273,6 +273,7 @@ ul {
 }
 
 #menu {
+    max-width: 900px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -280,7 +281,7 @@ ul {
 }
 
 .item {
-    width: 350px;
+    width: 220px;
     text-align: center;
     margin: 20px;
     margin-top: 0;
@@ -289,12 +290,13 @@ ul {
 }
 
 .item img {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: auto;
+    padding:auto;
 }
 .item:hover{
-    background: aliceblue;
-    border-radius: 13px;
+    background: rgba(250, 249, 249, 0.911);
+    border-radius: 4px;
     box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.23);
 }
 
@@ -306,6 +308,13 @@ ul {
 a:hover {
     text-decoration: none!important;
 }
+.month-group {
+    width: 95%;
+}
+.month-label {
+    padding-left: 8px;
+}
+
 
 @media (max-width:992px) {
     .box {
