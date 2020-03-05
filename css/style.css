@@ -29,6 +29,8 @@ button {
     margin-top: 20px;
     color: #3a3a3a;
     font-weight: 600;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 6px #888888;
 }
 
 #profile {
@@ -205,6 +207,7 @@ ul {
     padding: 2px;
     width: 30px;
     margin-top: 0;
+    box-shadow: none;
 }
 .check img, .reject img {
     width: inherit;
