@@ -15,6 +15,9 @@ body {
 h1 {
     color: #3a3a3a;
     font-weight: 400;
+    font-family: 'Roboto';
+    font-size: 40px;
+    line-height: 1.2;
 }
 #account-details {
     width: 200px;
