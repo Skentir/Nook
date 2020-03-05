@@ -8,8 +8,8 @@ body {
 .box {
     max-width: 760px;
     padding: 3.5rem 4rem;
-    border-top-right-radius: 27px;
-    border-top-left-radius: 27px;
+    border-radius: 20px;
+    margin-bottom: 3rem;
 }
 
 h1 {
@@ -164,6 +164,7 @@ ul {
 
 .requests {
     min-width: 266px;
+    width: 290px;
     margin: 10px 10px;
     display: flex;
     align-items: center;
@@ -171,8 +172,8 @@ ul {
 
 .prof-pic {
     border-radius: 50%;
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     margin-right: 10px;
 }
 
@@ -197,21 +198,24 @@ ul {
 }
 .button-group {
     margin: auto;
+    margin-right: 10px;
 }
 .check, .reject {
-    height: fit-content;
+    height: 30px;
     padding: 2px;
-    width: fit-content;
+    width: 30px;
     margin-top: 0;
-    border: 0.5px solid #332992;
 }
-
+.check img, .reject img {
+    width: inherit;
+    height: inherit;
+}
 .check {
     margin-left: 5px;
-    background: #abe6af;
+    background: none;
 }
 .reject {
-    background: #f15e80;
+    background: none;
 }
 
 .officer {
