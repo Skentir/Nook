@@ -131,6 +131,12 @@ button {
     justify-content: space-between;
 }
 
+.edit-profile {
+    height: 100px;
+    width: 200px;
+    box-shadow: 0 0 6px #888888;
+}
+
 #org {
     width: 150px;
 /*    margin-right: 2%;*/

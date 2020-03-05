@@ -211,23 +211,13 @@ h5 {
     }
 }
 
-
-#edit-about {
+textarea {
     height: 220px;
     width: 420px;
     border-radius: 6px;
     border: none;
     word-wrap: break-word;
     box-shadow: 0 0 6px #888888;
-}
-
-#edit-reason {
-    height: 220px;
-    width: 420px;
-    border-radius: 6px;
-    border: none;
-    box-shadow: 0 0 6px #888888;
-    word-wrap: break-word;
 }
 
 /* EDIT THIS OK */
