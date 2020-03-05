@@ -277,25 +277,30 @@ ul {
 }
 
 #menu {
-    max-width: 900px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .item {
+    display: flex;
+    height: 250px;
     width: 220px;
     text-align: center;
     margin: 20px;
-    margin-top: 0;
+    margin-top: 20px;
     padding-top: 10px;
     margin-bottom: 60px;
 }
-
+.item.box {
+    padding: 10px;
+}
 .item img {
     width: 200px;
-    height: auto;
+    height: 200px;
     padding:auto;
 }
 .item:hover{
@@ -308,6 +313,9 @@ ul {
     color: #3a3a3a;
     font-size: 20px;
     font-weight: 700;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 a:hover {
     text-decoration: none!important;
