@@ -8,8 +8,8 @@ body {
 .box {
     max-width: 760px;
     padding: 3.5rem 4rem;
-    border-top-right-radius: 27px;
-    border-top-left-radius: 27px;
+    border-radius: 20px;
+    margin-bottom: 3rem;
 }
 
 h1 {
@@ -126,7 +126,7 @@ button {
     padding-top: 1%;
     display: flex;
     flex-flow: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 #org {
@@ -164,6 +164,7 @@ ul {
 
 .requests {
     min-width: 266px;
+    width: 290px;
     margin: 10px 10px;
     display: flex;
     align-items: center;
@@ -171,8 +172,8 @@ ul {
 
 .prof-pic {
     border-radius: 50%;
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     margin-right: 10px;
 }
 
@@ -197,21 +198,24 @@ ul {
 }
 .button-group {
     margin: auto;
+    margin-right: 10px;
 }
 .check, .reject {
-    height: fit-content;
+    height: 30px;
     padding: 2px;
-    width: fit-content;
+    width: 30px;
     margin-top: 0;
-    border: 0.5px solid #332992;
 }
-
+.check img, .reject img {
+    width: inherit;
+    height: inherit;
+}
 .check {
     margin-left: 5px;
-    background: #abe6af;
+    background: none;
 }
 .reject {
-    background: #f15e80;
+    background: none;
 }
 
 .officer {
@@ -277,24 +281,31 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .item {
-    width: 350px;
+    display: flex;
+    height: 250px;
+    width: 220px;
     text-align: center;
     margin: 20px;
-    margin-top: 0;
+    margin-top: 20px;
     padding-top: 10px;
     margin-bottom: 60px;
 }
-
+.item.box {
+    padding: 10px;
+}
 .item img {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
+    padding:auto;
 }
 .item:hover{
-    background: aliceblue;
-    border-radius: 13px;
+    background: rgba(250, 249, 249, 0.911);
+    border-radius: 4px;
     box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.23);
 }
 
@@ -302,10 +313,20 @@ ul {
     color: #3a3a3a;
     font-size: 20px;
     font-weight: 700;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 a:hover {
     text-decoration: none!important;
 }
+.month-group {
+    width: 95%;
+}
+.month-label {
+    padding-left: 8px;
+}
+
 
 @media (max-width:992px) {
     .box {
