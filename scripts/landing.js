@@ -10,7 +10,7 @@ $(document).ready(function(){
         valid = checkifValid($("#user-pass"),valid);
 
         if(valid == true){
-            location.href = "explore.html";
+            location.href = "explore";
         }
     })
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
         valid = checkifValid($("#select-p"),valid);
 
         if(valid == true){
-            location.href = "explore.html";
+            location.href = "explore";
         }
     })
 
