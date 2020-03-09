@@ -3,13 +3,12 @@
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <!-- Fonts -->
-     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
+    
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/box.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../public/css/box.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
     
     <title>Events</title>
 </head>
@@ -55,39 +54,29 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div id="menu">
-            <div class= "item box">
-                <a href="view-officers" class="inner-box">
-                    <img src="../assets/people.svg">
-                    <p>View Officers</p>
-                </a>
+    
+    <div id="container">
+        <div id="left">
+            <div id="event-panel">
+                <h1>Event List</h1>
+                <div id="events">
+                    <div>
+                        <h2>Python for Data Science</h2>
+                        <h2>Event Name</h2>
+                        <h2>Event Name</h2>
+                    </div>
+                    <div>
+                        <h2>02/13/2020</h2>
+                        <h2>04/18/2020</h2>
+                        <h2>05/17/2020</h2>
+                    </div>
+                </div>
+                
+                
             </div>
-
-            <div class="item box">
-                <a href="ad-eventreg" class="inner-box">
-                    <img src="../assets/partying.svg">
-                    <p>Add an Event</p>
-                </a>
-            </div>
-            <div class ="item box">
-                <a href="ad-eventview" class="inner-box">
-                    <img src="../assets/view-event.svg">
-                    <p>Edit an Event</p>
-                </a>
-            </div>
-            <div class ="item box">
-                <a href="member-requests" class="inner-box">
-                    <img src="../assets/updates.svg">
-                    <p>Member Requests</p>
-                </a>
-            </div>
-            <div class ="item box">
-                <a href="editorg" class="inner-box">
-                    <img src="../assets/add-content.svg">
-                    <p>Edit Org Profile</p>
-                </a>
-            </div>
+        </div>
+        <div id="right">
+            <img src="../../public/assets/view-event.svg" style="height: 85%;">
         </div>
     </div>
 </body>

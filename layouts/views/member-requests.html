@@ -4,17 +4,14 @@
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/box.css">
-    <link rel="stylesheet" href="../css/viewevent.css">
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!-- <script src="../scripts/landing.js"></script> -->
-    <title>Nook</title>
+    <link rel="stylesheet" href="../../public/css/box.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    
+    <title>Members</title>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -58,79 +55,127 @@
             </div>
         </div>
     </nav>
-
-    <!-- Org Image Header -->
-    <header class="container">
-        <div class = "container-fluid org-header">
-            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="event-header-pic">
-                <div class ="inner-header">
-                    <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!--Event Details-->
-    <section class = "container">
-        <!-- Event Sub Details -->
-        <div class="details mb-3">
-            <div class="left-deet ld-1 mr-3">
-                <label class="mr-2 mb-0">Date</label>
-                <input type="date" id="date" name="date">
-            </div>
-            <div class="left-deet ld-2">
-                <label class="mr-2 mb-0">Time</label>
-                <input type="time" id="time" name="time-start">
-                <input type="time" id="time" name="time-end">
-            </div>
-            <div class="right-deet">
-                <ul id="event-tags">
+    
+    <div class="container inner-box">
+        <div id="account-details">
+            <div id="profile">
+                <img src="../../public/assets/orgs/dsc-icon.png">
+                <h1>Developer Student Club Taft</h1>
+                <ul>
                     <li>tech</li>
+                    <li>international</li>
+                    <li>community</li>
+                    <li>development</li>
                     <li>education</li>
+                    <li>innovation</li>
                 </ul>
+                <div id="profile-info">
+                    <a href="member-requests">
+                        <h3>120</h3>
+                        <p>Members</p>
+                    </a>
+                    <a href="view-officers">
+                        <h3>32</h3>
+                        <p>Officers</p>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class ="inner-box">
-            <div class = "right-box">
-                <div id = "about">
-                    <h5> About</h5>
-                    <textarea id="edit-about" name="about"></textarea>
+        <div class="box mt-4" style="background-color: #7c3bff1f;">
+            <h1>Member Requests</h1>
+            <div class="information" id="request-list">
+                <div class="requests">
+                    <img class="prof-pic" src="../../public/assets/profiles/nook-pic.png">
+                    <span>
+                        <span class="member-name">Robin Reyes</span>
+                        <p>1189090</p>
+                    </span>
+                    <div class="button-group">
+                        <button type="button" class="reqbtn check" style="box-shadow: none">
+                            <img src="../assets/accept.png">
+                        </button>
+                        <button type="button" class="reqbtn reject">
+                            <img src="../assets/reject.png">             
+                        </button>       
+                    </div>
+                </div>
+                <div class="requests">
+                    <img class="prof-pic" src="../../public/assets/profiles/nook-pic.png">
+                    <span>
+                        <span class="member-name">Michaela Dizon</span>
+                        <p>1189090</p>
+                    </span>
+                    <div class="button-group">
+                        <button type="button" class="reqbtn check">
+                            <img src="../assets/accept.png">
+                        </button>
+                        <button type="button" class="reqbtn reject">
+                            <img src="../assets/reject.png">             
+                        </button>       
+                    </div>
+                </div>
+            <div class="requests">
+                <img class="prof-pic" src="../../public/assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <img src="../assets/accept.png">
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <img src="../assets/reject.png">             
+                    </button>       
                 </div>
             </div>
-            <div class = "right-box" id ="why">
-                <div class="event-info ei-left mb-2">
-                    <h5 class="mb-0"> Venue</h5>
-                    <input type="text" id="edit-field" name="venue">
+            <div class="requests">
+                <img class="prof-pic" src="../../public/assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <img src="../../public/assets/accept.png">
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <img src="../../public/assets/reject.png">             
+                    </button>       
                 </div>
-                <div class="event-info ei-left mb-2">
-                    <h5 class="mb-0"> Things to Bring</h5>
-                    <input type="text" id="edit-field" name="requirements">
+            </div>
+            <div class="requests">
+                <img class="prof-pic" src="../../public/assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                    <button type="button" class="reqbtn check">
+                        <img src="../assets/accept.png">
+                    </button>
+                    <button type="button" class="reqbtn reject">
+                        <img src="../assets/reject.png">             
+                    </button>       
                 </div>
-                <div class="event-info  ei-left mb-2">
-                    <h5 class="mb-0">Incentives</h5>
-                    <input type="text" id="edit-field" name="incentives">
-                </div>
+            </div>
+            <div class="requests">
+                <img class="prof-pic" src="../../public/assets/profiles/nook-pic.png">
+                <span>
+                    <span class="member-name">Tom Nook</span>
+                    <p>1189090</p>
+                </span>
+                <div class="button-group">
+                        <button type="button" class="reqbtn check">
+                            <img src="../../public/assets/accept.png">
+                        </button>
+                        <button type="button" class="reqbtn reject">
+                            <img src="../../public/assets/reject.png">             
+                        </button>       
+                    </div>
             </div>
         </div>
-        <button id="save-btn">Save</button>
-        
-    </section>
-    <!-- Add to Planner Modal -->
-    <div class="modal fade sm" role="dialog" id="add-to-planner-modal">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="../assets/completed.svg" style="width:100%; height: auto;">
-                <p class="modal-p mt-3">Added to Planner!</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
 </body>
 </html>

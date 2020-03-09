@@ -4,19 +4,17 @@
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/box.css">
-    <link rel="stylesheet" href="../css/styling.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../../public/css/box.css">
+    <link rel="stylesheet" href="../../public/css/viewevent.css">
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-   
-    <title>My Profile</title>
+    <!-- <script src="../../scripts/landing.js"></script> -->
+    <title>Nook</title>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -60,117 +58,79 @@
             </div>
         </div>
     </nav>
-    
-    <div class="container inner-box">
-        <!-- Account Details -->
-        <div class="mt-4" id="account-details">
-            <div id="profile">
-                <img src="../assets/profiles/patrick.jpg">
-                <h1>Kirsten Sison</h1>
-                <p>danielle_sison@dlsu.edu.ph</p>
-                <h2>I’m a Computer Science Student who likes Animal Crossing and Minecraft.</h2>
-                <button type="button" id="register-btn" class="custombtn thinbtn mt-0 mb-4" data-toggle="modal" data-target="#get-started-modal">Edit Profile</button>
-                <button>Logout</button>
-            </div>
-        </div>
-        <div class="box mt-4" style="background-color: #f0f0f0;">
-            <h1 class="mb-3 ml-2"> My Organizations</h1>
-            <div class="card-wrapper mt-2">
-                <div  class="card-menu" id="user-organization-list">
-                    <div class="row">
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../assets/orgs/dsc-icon.png">
-                                <div class="card-body">      
-                                    <span class="org-name">Developer Student Club Taft</span>   
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../assets/orgs/tls-icon.jpg">
-                                <div class="card-body">
-                                    <span>The LaSallian</span>
-                                </div>
-                            </a>
-                        </div>
-                         <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../assets/orgs/catch2t22-icon.png">
-                                <div class="card-body">
-                                    <span>CATCH 2T22</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../assets/orgs/archers-icon.png">
-                                <div class="card-body">
-                                    <span>Archers Network</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top" src="../assets/orgs/comet-icon.png">
-                                <div class="card-body">
-                                    <span>DLSU COMET Research Lab</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../assets/orgs/animosquad-icon.jpg">
-                                <div class="card-body">
-                                    <span>Animo Squad</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <section class="modal fade" role="dialog" id="get-started-modal">
-        <div class="modal-dialog modal-dialog-centered modal-xl modal-box">
-            <div class="box modal-content">
-                <div class="inner-box">
-                    <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                    </button>
-                    <div class="modal-right">
-                        <header>
-                            <h5 class="modal-title" style="font-size: 30px;">Edit Profile</h5>
-                        </header>
-                        <!-- Registration Form -->
-                        <div class="modal-body">
-                            <form>
-                                        <div class="form-group mb-2">
-                                            <label for="reg-fname">Change Profile Photo</label>
-                                            <input type="file" class="form-control" id="reg-photo">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <label for="reg-lname">Change Profile Description</label>
-                                            <input type="text" class="form-control" id="description">
-                                        </div>
-
-                                <div class="form-group mb-2">
-                                    <p style="font-size: 20px; font-weight: 600; margin-top: 20px; margin-bottom: 0">Add an Organization</p>
-                                    <label for="reg-email">Enter Organization Name</label>
-                                    <input type="text" class="form-control" id="org-name">
-                                </div>
-                                
-                            
-                                
-                            </form>
-                        </div>
-                        <button type="button" id="register-btn" class="custombtn thinbtn mt-0 mb-4" style="justify-content: center;">register</button>
-                    </div>
-                </div>
+    <!-- Org Image Header -->
+    <header class="container">
+        <div class = "container-fluid org-header">
+            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="event-header-pic">
+                <div class ="inner-header">
+                    <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
                 </div>
             </div>
         </div>
+    </header>
+
+    <!--Event Details-->
+    <section class = "container">
+        <!-- Event Sub Details -->
+        <div class="details mb-3">
+            <div class="left-deet ld-1 mr-3">
+                <label class="mr-2 mb-0">Date</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="left-deet ld-2">
+                <label class="mr-2 mb-0">Time</label>
+                <input type="time" id="time" name="time-start">
+                <input type="time" id="time" name="time-end">
+            </div>
+            <div class="right-deet">
+                <ul id="event-tags">
+                    <li>tech</li>
+                    <li>education</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class ="inner-box">
+            <div class = "right-box">
+                <div id = "about">
+                    <h5> About</h5>
+                    <textarea id="edit-about" name="about"></textarea>
+                </div>
+            </div>
+            <div class = "right-box" id ="why">
+                <div class="event-info ei-left mb-2">
+                    <h5 class="mb-0"> Venue</h5>
+                    <input type="text" id="edit-field" name="venue">
+                </div>
+                <div class="event-info ei-left mb-2">
+                    <h5 class="mb-0"> Things to Bring</h5>
+                    <input type="text" id="edit-field" name="requirements">
+                </div>
+                <div class="event-info  ei-left mb-2">
+                    <h5 class="mb-0">Incentives</h5>
+                    <input type="text" id="edit-field" name="incentives">
+                </div>
+            </div>
+        </div>
+        <button id="save-btn">Save</button>
+        
     </section>
+    <!-- Add to Planner Modal -->
+    <div class="modal fade sm" role="dialog" id="add-to-planner-modal">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="../assets/completed.svg" style="width:100%; height: auto;">
+                <p class="modal-p mt-3">Added to Planner!</p>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

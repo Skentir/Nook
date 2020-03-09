@@ -3,15 +3,18 @@
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <!-- Fonts -->
-     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/box.css">
-    <link rel="stylesheet" href="../css/style.css">
-    
-    <title>Officers</title>
+    <link rel="stylesheet" href="../../public/css/box.css">
+    <link rel="stylesheet" href="../../public/css/viewevent.css">
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- <script src="../../scripts/landing.js"></script> -->
+    <title>Nook</title>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -55,85 +58,49 @@
             </div>
         </div>
     </nav>
-    
-    <div class="container inner-box">
-        <div id="account-details">
-            <div id="profile">
-                <img src="../assets/orgs/dsc-icon.png">
-                <h1 id="org-name">Developer Student Club Taft</h1>
+
+    <!-- Org Image Header -->
+    <header class="container">
+        <div class = "container-fluid org-header">
+            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="org-header-pic">
+                <div class ="inner-header">
+                    <h1 class="ml-3 header-name" id="event-header-name">Developer Student Club Taft</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Event Details-->
+    <section class = "container">
+        <!-- Event Sub Details -->
+        <div class="details mb-3 pb-3 pt-3">
+            <div class="left-deet ld-1 odeet">
+                <span id="org-motto">“Build. Create. Innovate.”</span>
+            </div>
+            <div class="right-deet">
                 <ul id="org-tags">
                     <li>tech</li>
-                    <li>international</li>
-                    <li>community</li>
-                    <li>development</li>
                     <li>education</li>
-                    <li>innovation</li>
+                    <li>international</li>
                 </ul>
-                <div id="profile-info">
-                    <div href="member-requests">
-                        <h3 id="member-count">98</h3>
-                        <p>Members</p>
-                    </div>
-                    <div>
-                        <h3 id="officer-count">14</h3>
-                        <p>Officers</p>
-                    </div>
-                    <div>
-                        <h3 id="officer-count">1</h3>
-                        <p>Years Active</p>
-                    </div>
+            </div>
+        </div>
+
+        <div class ="inner-box">
+            <div class = "right-box">
+                <div id = "about">
+                    <h5> About</h5>
+                    <textarea id="edit-about"></textarea>
+                </div>
+            </div>
+            <div class = "right-box">
+                <div id="why">
+                    <h5> Why should I join</h5>
+                    <textarea id="edit-reason"></textarea>
                 </div>
             </div>
         </div>
-        <div class="box mt-4" style="background-color: #f0f0f0;">
-            <h5 class="mb-3 ml-2" >Officers</h5>
-            <div class="information card-wrapper" id="officer-list">
-                <div class="officer">
-                    <a href="user-profile">
-                        <img src="../assets/profiles/froggy-pic.png">
-                        <h1>Froggy Chair</h1>
-                        <p>Creatives Associate</p>
-                    </a>
-                </div>
-                
-                <div class="officer">
-                    <a href="user-profile">
-                        <img src="../assets/profiles/nook-pic.png">
-                        <h1>Tom Nook</h1>
-                        <p>Externals Associate</p>
-                    </a>
-                </div>
-                <div class="officer">
-                    <a href="user-profile">
-                        <img src="../assets/profiles/froggy-pic.png">
-                        <h1>Froggy Chair</h1>
-                        <p>Creatives Associate</p>
-                    </a>
-                </div>
-                <div class="officer">
-                    <a href="user-profile">
-                        <img src="../assets/profiles/nook-pic.png">
-                        <h1>Tom Nook</h1>
-                        <p>Externals Associate</p>
-                    </a>
-                </div>
-                <div class="officer">
-                    <a href="user-profile">
-                        <img src="../assets/profiles/froggy-pic.png">
-                        <h1>Froggy Chair</h1>
-                        <p>Creatives Associate</p>
-                    </a>
-                </div>
-                <div class="officer">
-                    <a href="user-profile">
-                        <img src="../assets/profiles/nook-pic.png">
-                        <h1>Tom Nook</h1>
-                        <p>Externals Associate</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
+        <button id="save-btn">Save</button>
+    </section>
 </body>
 </html>
