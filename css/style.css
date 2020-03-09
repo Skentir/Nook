@@ -15,6 +15,9 @@ body {
 h1 {
     color: #3a3a3a;
     font-weight: 400;
+    font-family: 'Roboto';
+    font-size: 40px;
+    line-height: 1.2;
 }
 #account-details {
     width: 200px;
@@ -29,6 +32,8 @@ button {
     margin-top: 20px;
     color: #3a3a3a;
     font-weight: 600;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 6px #888888;
 }
 
 #profile {
@@ -129,6 +134,12 @@ button {
     justify-content: center;
 }
 
+.edit-profile {
+    height: 100px;
+    width: 200px;
+    box-shadow: 0 0 6px #888888;
+}
+
 #org {
     width: 150px;
 /*    margin-right: 2%;*/
@@ -205,6 +216,7 @@ ul {
     padding: 2px;
     width: 30px;
     margin-top: 0;
+    box-shadow: none;
 }
 .check img, .reject img {
     width: inherit;
