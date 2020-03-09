@@ -211,22 +211,13 @@ h5 {
     }
 }
 
-
-#edit-about {
-    height: 180px;
-    width: 350px;
+textarea {
+    height: 220px;
+    width: 420px;
     border-radius: 6px;
     border: none;
     word-wrap: break-word;
-}
-
-#edit-reason {
-    height: 180px;
-    width: 350px;
-    border-radius: 6px;
-    border: none;
     box-shadow: 0 0 6px #888888;
-    word-wrap: break-word;
 }
 
 /* EDIT THIS OK */
@@ -242,15 +233,21 @@ h5 {
 }
 
 #save-btn {
-    height: 40px;
-    width: 150px;
-    border-radius: 6px;
-    border: none;
-    box-shadow: 0 0 6px #888888;
     display: block;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 30px;
+    
+    border-radius: 8px;
+    border: none;
+    width: 140px;
+    height: 40px;
+    
+    margin-top: 20px;
+    color: #3a3a3a;
+    font-weight: 600;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 6px #888888;
 }
 
 #date {
