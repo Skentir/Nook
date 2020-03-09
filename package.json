@@ -1,7 +1,6 @@
 {
   "name": "nook",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js"
@@ -24,5 +23,7 @@
     "mongoose-type-url": "^1.0.6",
     "nodemon": "^2.0.2"
   },
-  "homepage": "https://github.com/Skentir/Nook#readme"
+  "homepage": "https://github.com/Skentir/Nook#readme",
+  "devDependencies": {},
+  "description": ""
 }

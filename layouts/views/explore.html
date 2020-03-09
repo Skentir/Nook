@@ -1,20 +1,20 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/box.css">
-    <link rel="stylesheet" href="../css/viewevent.css">
+    <link rel="stylesheet" href="../../public/css/box.css">
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <link rel="stylesheet" href="../../public/css/cards.css">
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!-- <script src="../scripts/landing.js"></script> -->
+    <script src="../../scripts/landing.js"></script>
     <title>Nook</title>
 </head>
 <body>
@@ -59,89 +59,104 @@
             </div>
         </div>
     </nav>
-
-    <!-- Org Image Header -->
-    <header class="container">
-        <div class = "container-fluid org-header">
-            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="event-header-pic">
-                <div class ="inner-header">
-                    <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
-                </div>
+    <!-- Org Selector -->
+    <header class="mb-2 mt-3">
+        <div class="container mt-2">
+            <div id="type-selector">
+                <a href="#" value="CSO" id = "cso">cso</a>
+                <a href="#" value="NON-CSO" id = "non-cso" >non-cso</a>
+                <a href="#" value= "OTHERS" id = "others">others</a>
             </div>
         </div>
     </header>
-
-    <!--Event Details-->
-    <section class = "container">
-        <!-- Event Sub Details -->
-        <div class="details pt-3 pb-3">
-            <div class="left-deet ld-1 mr-3">
-                <label class="mr-2 mb-0">Date</label>
-                <span id="event-date">February 13, 2020</span>
-            </div>
-            <div class="left-deet ld-2">
-                <label class="mr-2 mb-0">Time</label>
-                <span id="event-time">14:30-17:30</span>
-            </div>
-            <div class="right-deet">
-                <ul id="event-tags">
-                    <li>tech</li>
-                    <li>education</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class ="inner-box">
-            <div class = "right-box">
-                <div class = "color">
-                    <h5> About</h5>
-                    <span class="sub-desc" id="event-desc">
-                        If you're a complete beginner or an experience programmer this course will provide you with a solid foundation of 
-                        the language & a complete overview for coding. The course is specially tailored for CS and IT students who are 
-                        interested in Data Science & coding.
-                    </span>
-                </div>
-                <div class="event-info mt-3 mb-3 organizer">
-                    <p class="mb-1">Organized by</p>
-                    <div>
-                        <img id="organizer-icon" src="../assets/orgs/dsc-icon.png">
-                        <a id="organizer-name" href="vieworg">Developer Student Club Taft</a>
+   <!-- Org Dashboard -->
+    <section class="pl-5 pr-5 pt-4">
+        <div class="container" class="card-wrapper" style="max-width: 960px;">
+            <div class="card-menu" id="explore-menu">
+                <div class="row">
+                    <div class="card" value ="cso">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/dsc-icon.png">
+                            <div class="card-body">      
+                                <span class="org-name">Developer Student Club Taft</span>   
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "cso">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/tls-icon.jpg">
+                            <div class="card-body">
+                                <span>The LaSallian</span>
+                            </div>
+                        </a>
+                    </div>
+                     <div class="card" value ="others">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/catch2t22-icon.png">
+                            <div class="card-body">
+                                <span>CATCH 2T22</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "cso">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/archers-icon.png">
+                            <div class="card-body">
+                                <span>Archers Network</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "cso">
+                        <a href="vieworg">
+                            <img class="card-img-top" src="../../public/assets/orgs/comet-icon.png">
+                            <div class="card-body">
+                                <span>DLSU COMET Research Lab</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "others">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/animosquad-icon.jpg">
+                            <div class="card-body">
+                                <span>Animo Squad</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = 'non-cso'>
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/gmg-icon.jpg">
+                            <div class="card-body">
+                                <span>Green Media Group</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "others">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/msc-icon.png">
+                            <div class="card-body">
+                                <span>DLSU Microsoft Student Community</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "non-cso">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/syntax-icon.png">
+                            <div class="card-body">
+                                <span>Syntax</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card" value = "non-cso">
+                        <a href="vieworg">
+                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/dlsusports-icon.jpg">
+                            <div class="card-body">
+                                <span>DLSU Sports</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class = "right-box" id ="why">
-                <div class="event-info ei-left mb-2">
-                    <h5 class="mb-0"> Venue</h5>
-                    <span class="sub-desc" id="event-venue"> Gokongwei G304B </span>
-                </div>
-                <div class="event-info ei-left mb-2">
-                    <h5 class="mb-0"> Things to Bring</h5>
-                    <span class="sub-desc" id="event-things"> Laptop, Charger, Notebook, Markers </span>
-                </div>
-                <div class="event-info  ei-left mb-2">
-                    <h5 class="mb-0">Incentives</h5>
-                    <span class="sub-desc" id="event-things">CCPROG3, CCDSTRUC, CCINFOM, CCAPDEV</span>
-                </div>
-
-                <button type="button" class="custombtn mt-3 mb-3" id="add-to-planner-btn" data-toggle="modal" data-target="#add-to-planner-modal">I'm interested</button>
-            </div>
         </div>
     </section>
-    <!-- Add to Planner Modal -->
-    <div class="modal fade sm" role="dialog" id="add-to-planner-modal">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="../assets/completed.svg" style="width:100%; height: auto; padding: 10px;">
-                <p class="modal-p mt-3">Added to Planner!</p>
-            </div>
-          </div>
-        </div>
-    </div>
 </body>
 </html>
