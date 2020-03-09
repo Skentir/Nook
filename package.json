@@ -8,7 +8,11 @@
   },
   "repository": {
     "type": "git",
+<<<<<<< HEAD
     "url": "git+https://github.com/Skentir/Nook.git"
+=======
+    "url": "git+ssh://git@github.com/Skentir/Nook.git"
+>>>>>>> 8e34788c7b796a356a4fb248816889d6ae29226d
   },
   "author": "",
   "license": "ISC",
