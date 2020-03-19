@@ -95,6 +95,8 @@ const OrgSchema = mongoose.Schema({
 
 
 
-})
+});
+
+module.exports = mongoose.model('Org', OrgSchema);
 
 

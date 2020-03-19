@@ -16,5 +16,6 @@ const RequestSchema = mongoose.Schema({
     position:{
         type: String
     }
+});
 
-})
+module.exports = mongoose.model('Request', RequestSchema);

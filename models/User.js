@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UsersSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     first_name: {
         type: String,
         required: true,
@@ -36,7 +36,6 @@ const UsersSchema = mongoose.Schema({
     orgs : [{type:ObjectId, ref: "Org"}],
 
     
+});
 
-
-
-})
+module.exports = mongoose.model('User', UserSchema);
