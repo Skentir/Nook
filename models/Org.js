@@ -87,13 +87,12 @@ const OrgSchema = mongoose.Schema({
 
     },
 
-    events:{
-        type: [String]
-    },
+    events:[{type:ObjectId, ref: 'Event'}],
 
     officers:{
         type: [Number]
     }
+
 
 
 })

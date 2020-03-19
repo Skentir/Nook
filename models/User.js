@@ -25,23 +25,17 @@ const UsersSchema = mongoose.Schema({
         required: true,
     }, 
 
-    isOfficer: {
+    isAdmin: {
         type: Boolean,
     },
     
-    organization:{ 
-        type: Number,
-    },
-    position:{ 
-        type: String,
-    },
     planner :{
         type:[String],
     },
 
-    orgs : {
-        type: [String],
-    }
+    orgs : [{type:ObjectId, ref: "Org"}],
+
+    
 
 
 
