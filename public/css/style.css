@@ -1,5 +1,6 @@
 body {
     font-family: "Roboto";
+    background: none;
 }
 
 .container {
@@ -105,10 +106,14 @@ button {
 .profile p {
     font-size: 14px;
     color: gray;
-/*
-    margin-left: 20px;
-    margin-right: 20px;
-*/
+}
+
+.profile-buttons {
+    text-align: center;
+}
+
+.profile-buttons a {
+    width: 150px;
 }
 
 #info-panel {
@@ -194,7 +199,8 @@ ul {
     margin: 2px;
 }
 
-#info-panel h2, #event-panel h2 {
+#info-panel h2, 
+#event-panel h2 {
     font-size: 18px;
     margin-top: 30px;
 }
