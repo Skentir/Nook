@@ -4,6 +4,7 @@
     width: 100%;
     height: 80px;
  }
+
  .custom-navbar {
      position: fixed;
      background-color: #F4F4F4;
@@ -25,9 +26,11 @@
     max-width: 70%;
     max-height: 70%;
 }
+
 .nav-items ul {
     padding-left: 0;
 }
+
 .nav-items li {
     display: inline;
     padding-right: 3px;
@@ -39,13 +42,14 @@
     text-align: right;
     margin-left: .5em;
 }
+
 .nav-logo a{
     font-weight: 700;
     font-size: 20px;
     color: #3a3a3a;
     text-decoration: none;
-
 }
+
 svg path:hover{
     fill: #3333cc;
 }
@@ -122,10 +126,12 @@ svg path:hover{
 .navbar .form-inline {
     display: none;
     margin: auto;
-  }
+}
+
 .has-search {
     margin-bottom: 0;
 }
+
 .has-search .form-control {
     padding-left: 2.375rem;
 }

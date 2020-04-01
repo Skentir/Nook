@@ -5,6 +5,7 @@ header {
     color: #3a3a3a;
     text-decoration: none;
 }
+
 #type-selector {
     display: flex;
     max-width: 300px;
@@ -12,22 +13,25 @@ header {
     margin-left: auto;
     margin-right: auto;
 }
+
 #type-selector a {
     text-decoration: none;
     padding: 1px 15px;
     color: #3a3a3a;
 }
+
 #type-selector a:hover {
     color: white;
     background: #6200EA;
     border-radius: 8px;
 }
+
 header a:hover {
     text-decoration: underline;
 }
 
 /* Add event reg */
-.contact-form{
+.contact-form {
     background:#fff;
     border:1px solid #bdbdbd;
     box-sizing:border-box;
@@ -35,32 +39,40 @@ header a:hover {
     border-radius:4px;padding:30px;
     min-width:420px;max-width:480px;margin:16px 0
 }
+
 @media (max-width:1280px) {
     .contact-form{
         min-width:360px;max-width:420px
     }
 }
+
 @media (max-width:480px){
     .contact-form{
         min-width:100%;max-width:100%
     }
-}.contact-form .form-group {
+}
+
+.contact-form .form-group {
     display:flex;
     flex-direction:column;
     margin-bottom:16px
 }
+
 .contact-form .form-group label { 
     font-weight:600;
     font-size:12px;
     margin-bottom:8px;
     color:#3e332e
 }
-.contact-form .form-group input, .contact-form .form-group select { 
+
+.contact-form .form-group input, 
+.contact-form .form-group select { 
     height:30px;background:#fff;
     border:.4px solid #acacac;
     box-sizing:border-box;
     border-radius:4px
 }
+
 .contact-form .form-group textarea {
     min-height:160px;
     max-height:240px
@@ -70,28 +82,35 @@ header a:hover {
     width: -webkit-fill-available;
     height: auto;
 }
+
 header h1 {
     font-weight: 700;
     font-size: 30px;
     color:#3e332e;
 }
-.left-box, .right-box {
+
+.left-box, 
+.right-box {
     max-width: 510px;
 }
+
 .row.contact-form:hover {
     transform: scale(1.1);
     background: #6b1cb5cf;
     color: white;
     text-decoration: none!important;
 }
+
 .event-name:hover {
     color:white;
 }
+
 .event-name {
     text-decoration: none!important;
     font-weight: 400;
     color: inherit;
 }
+
 .event-date {
     color: inherit;
     font-weight: 300;
