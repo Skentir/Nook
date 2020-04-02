@@ -138,7 +138,6 @@ app.get('/ad-eventview', (req,res)=>{
 })
 
 app.get('/explore', function(req, res) {
-
     OrgModel.find({}, {}, function(err, docs) {
     var objs=[];
         for (var i =0; i<docs.length; i++)

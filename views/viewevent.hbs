@@ -1,0 +1,90 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/box.css">
+    <link rel="stylesheet" href="../../public/css/viewevent.css">
+{{/section}}
+
+<!-- Event Image Header -->
+<header class="container">
+    <div class = "container-fluid org-header">
+        <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="event-header-pic">
+            <div class ="inner-header">
+                <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Event Details-->
+<section class = "container">
+    <!-- Event Sub Details -->
+    <div class="details pt-3 pb-3">
+        <div class="left-deet ld-1 mr-3">
+            <label class="mr-2 mb-0">Date</label>
+            <span id="event-date">February 13, 2020</span>
+        </div>
+        <div class="left-deet ld-2">
+            <label class="mr-2 mb-0">Time</label>
+            <span id="event-time">14:30-17:30</span>
+        </div>
+        <div class="right-deet">
+            <ul id="event-tags">
+                <li>tech</li>
+                <li>education</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class ="inner-box">
+        <div class = "right-box">
+            <div class = "color">
+                <h5> About</h5>
+                <span class="sub-desc" id="event-desc">
+                    If you're a complete beginner or an experience programmer this course will provide you with a solid foundation of 
+                    the language & a complete overview for coding. The course is specially tailored for CS and IT students who are 
+                    interested in Data Science & coding.
+                </span>
+            </div>
+            <div class="event-info mt-3 mb-3 organizer">
+                <p class="mb-1">Organized by</p>
+                <div>
+                    <img id="organizer-icon" src="../assets/orgs/dsc-icon.png">
+                    <a id="organizer-name" href="vieworg">Developer Student Club Taft</a>
+                </div>
+            </div>
+        </div>
+        <div class = "right-box" id ="why">
+            <div class="event-info ei-left mb-2">
+                <h5 class="mb-0"> Venue</h5>
+                <span class="sub-desc" id="event-venue"> Gokongwei G304B </span>
+            </div>
+            <div class="event-info ei-left mb-2">
+                <h5 class="mb-0"> Things to Bring</h5>
+                <span class="sub-desc" id="event-things"> Laptop, Charger, Notebook, Markers </span>
+            </div>
+            <div class="event-info  ei-left mb-2">
+                <h5 class="mb-0">Incentives</h5>
+                <span class="sub-desc" id="event-things">CCPROG3, CCDSTRUC, CCINFOM, CCAPDEV</span>
+            </div>
+
+            <button type="button" class="custombtn mt-3 mb-3" id="add-to-planner-btn" data-toggle="modal" data-target="#add-to-planner-modal">I'm interested</button>
+        </div>
+    </div>
+</section>
+
+<!-- Add to Planner Modal -->
+<div class="modal fade sm" role="dialog" id="add-to-planner-modal">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                &times;
+            </button>
+        </div>
+        <div class="modal-body">
+            <img src="../../public/assets/completed.svg" style="width:100%; height: auto; padding: 10px;">
+            <p class="modal-p mt-3">Added to Planner!</p>
+        </div>
+        </div>
+    </div>
+</div>
