@@ -31,86 +31,25 @@
     <div class="container" class="card-wrapper" style="max-width: 960px;">
         <div class="card-menu" id="explore-menu">
             <div class="row">
-                <div class="card" value ="cso">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/dsc-icon.png">
-                        <div class="card-body">      
-                            <span class="org-name">Developer Student Club Taft</span>   
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "cso">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/tls-icon.jpg">
-                        <div class="card-body">
-                            <span>The LaSallian</span>
-                        </div>
-                    </a>
-                </div>
-                    <div class="card" value ="others">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/catch2t22-icon.png">
-                        <div class="card-body">
-                            <span>CATCH 2T22</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "cso">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/archers-icon.png">
-                        <div class="card-body">
-                            <span>Archers Network</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "cso">
-                    <a href="vieworg">
-                        <img class="card-img-top" src="../../public/assets/orgs/comet-icon.png">
-                        <div class="card-body">
-                            <span>DLSU COMET Research Lab</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "others">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/animosquad-icon.jpg">
-                        <div class="card-body">
-                            <span>Animo Squad</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = 'non-cso'>
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/gmg-icon.jpg">
-                        <div class="card-body">
-                            <span>Green Media Group</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "others">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/msc-icon.png">
-                        <div class="card-body">
-                            <span>DLSU Microsoft Student Community</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "non-cso">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/syntax-icon.png">
-                        <div class="card-body">
-                            <span>Syntax</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" value = "non-cso">
-                    <a href="vieworg">
-                        <img class="card-img-top img-fluid" src="../../public/assets/orgs/dlsusports-icon.jpg">
-                        <div class="card-body">
-                            <span>DLSU Sports</span>
-                        </div>
-                    </a>
-                </div>
+                
+                {{#fromDB}}
+                    {{#if Orgs}}
+                        {{#each Orgs}}
+                            <div class="card">
+                                <a href="vieworg">
+                                    <img class="card-img-top img-fluid" src="{{this.org_logo}}">
+                                    <div class="card-body">
+                                        <span>{{this.org_name}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <p>No orgs yet</p>
+                    {{/if}}
+
+                {{/fromDB}}
+
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ const app = express();
 //Require db models
 const User = require('./models/User');
 const EventModel = require('./models/Event');
+const OrgModel = require('./models/Org');
 
 //Require for parsing and storing data
 const crypto = require("crypto");
@@ -135,9 +136,23 @@ app.get('/ad-eventreg', (req,res)=>{
 app.get('/ad-eventview', (req,res)=>{
     res.sendFile(path.join(__dirname + "/views/ad-eventview.html"));
 })
-app.get('/explore', (req,res)=>{
+
+app.get('/explore', function(req, res) {
+
+    OrgModel.find({}, {}, function(err, docs) {
+    var objs=[];
+    for (var i =0; i<docs.length; i++)
+    {
+        var obj = {
+            fromDB:docs,
+            org_name: docs[i].org_name,
+            org_logo:docs[i].org_logo
+        }
+        objs.push(obj);
+    }
     res.render('explore');
-})
+    });
+});
 
 app.get('/ad-tools', (req,res)=>{
     res.sendFile(path.join(__dirname + "/views/ad-tools.html"));

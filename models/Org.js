@@ -39,12 +39,12 @@ const OrgSchema = new mongoose.Schema({
     },
 
     org_logo:{
-        type: Buffer,
+        type: String,
         required: true
     },
 
     org_header:{
-        type: Buffer,
+        type: String,
         required : true
     },
 
@@ -80,6 +80,7 @@ const OrgSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Org', OrgSchema);
+var collectionName = 'Orgs'
+module.exports = mongoose.model('Org', OrgSchema, collectionName);
 
 
