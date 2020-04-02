@@ -84,8 +84,8 @@ app.get('/view-officers', (req,res)=>{
 
 
 //Connect to DB
-mongoose.connect(process.env.DB_CONNECTION,{ useNewUrlParser: true }, ()=>{
-    console.log("connected to DB!")
+const client = mongoose.connect('mongodb+srv://testboy:nooktestboy@cluster0-pym8a.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
+        console.log("connected to DB! " +  mongoose.connection.readyState);
 })
 
 
