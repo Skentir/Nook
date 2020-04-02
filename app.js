@@ -150,7 +150,7 @@ app.get('/explore', function(req, res) {
         }
         objs.push(obj);
     }
-    res.render('explore');
+    res.render('explore', objs);
     });
 });
 
