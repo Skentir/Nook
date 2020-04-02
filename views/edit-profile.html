@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../public/css/box.css">
-    <link rel="stylesheet" href="../../public/css/style.css">
-    <link rel="stylesheet" href="../../public/css/cards.css">
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <link rel="stylesheet" href="../../public/css/form.css">
     
     <title>My Profile</title>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="topnav">
-        <div class="navbar custom-navbar">
+    <div class="navbar custom-navbar">
+        <div class="nav-content">
             <div class="nav-logo">
                 <a href="explore">
                     nook
@@ -27,7 +28,7 @@
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" placeholder="Search Organization">
-                  </div>
+                    </div>
             </form>
             <div class="nav-items">
                 <ul id="menu" class="p-10">
@@ -55,72 +56,83 @@
                 </ul>
             </div>
         </div>
+    </div>
     </nav>
-    
-    <div class="container inner-box">
-        <!-- Account Details -->
-        <div class="mt-4" id="account-details">
-            <div id="profile">
-                <img src="../../public/assets/profiles/patrick.jpg">
-                <h1>Kirsten Sison</h1>
-                <p>danielle_sison@dlsu.edu.ph</p>
-                <textarea class="edit-profile"></textarea>
-                <a href="user-profile">
-                    <button>Save</button>
-                </a>
-                <button>Logout</button>
+
+    <div class="container">
+        <!-- Edit Header -->
+        <header class="edit-hdr">
+            <img class="hdr-pic" src="../../public/assets/profiles/nook-pic.png">
+            <div>
+                <span class="hdr-text" id="user-name">Kirsten Sison</span>
+                /
+                <span class="hdr-text">Edit Profile</span>
+                <p class="hdr-desc">Setup your Nook user account</p>
             </div>
-        </div>
-        <div class="box mt-4" style="background-color: #7c3bff1f;">
-            <h1 class="mb-3 ml-2"> My Organizations</h1>
-            <div class="card-wrapper mt-2">
-                <div  class="card-menu" id="user-organization-list">
-                    <div class="row">
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../../public/assets/orgs/dsc-icon.png">
-                                <div class="card-body">      
-                                    <span class="org-name">Add Organization</span>   
+        </header>
+        <!-- Form -->
+        <div class="inner-box">
+            <div class="left-box">
+                    <div class="frm-height contact-form">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="invalid-field" id="user-fname-field">
                                 </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../../public/assets/orgs/tls-icon.jpg">
-                                <div class="card-body">
-                                    <span>The LaSallian</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="invalid-field" id="user-lname-field">
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                         <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../../public/assets/orgs/catch2t22-icon.png">
-                                <div class="card-body">
-                                    <span>CATCH 2T22</span>
+                        
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
+                                <input type="email" class="form-control datetimepicker-input" id="user-email-field">
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Profile Bio </label>
+                            <div class='input-group date' id="event-about-field">
+                                <textarea type='text' class="form-control" id="user-bio-field"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Change Profile Picture </label>
+                            <div class="custom-file">
+                                    <label class="custom-file-label">Choose</label>
+                                    <input type="file" class="form-control custom-file-input" id="user-photo-field">
                                 </div>
-                            </a>
                         </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../../public/assets/orgs/archers-icon.png">
-                                <div class="card-body">
-                                    <span>Archers Network</span>
+                        <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
+                    </div>
+                </div>
+                <div class="right-box">
+                    <div class="frm-height contact-form">
+                        <h4 class="mb-3">Pending Requests</h4>
+                        <div class="request-list">
+                            <div class="row request-item">
+                                <span class="col-9 request-org-cell">
+                                    <img class="hdr-pic request-org-pic" src="../../public/assets/orgs/dsc-icon.png">
+                                    <p class="request-org-name">Developer Student Club</p>
+                                </span>
+                                <div class="col-3 cancel">
+                                    <a>Cancel</a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top" src="../../public/assets/orgs/comet-icon.png">
-                                <div class="card-body">
-                                    <span>DLSU COMET Research Lab</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="vieworg">
-                                <img class="card-img-top img-fluid" src="../../public/assets/orgs/animosquad-icon.jpg">
-                                <div class="card-body">
-                                    <span>Animo Squad</span>
+                            </div>
+                            <!-- For Adding Requests-->
+                            <a>
+                                <div class="request-item add-request">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.66666 16C2.66666 8.64002 8.64 2.66669 16 2.66669C23.36 2.66669 29.3333 8.64002 29.3333 16C29.3333 23.36 23.36 29.3334 16 29.3334C8.64 29.3334 2.66666 23.36 2.66666 16ZM17.3333 17.3334H22.6667V14.6667H17.3333V9.33335H14.6667V14.6667H9.33333V17.3334H14.6667V22.6667H17.3333V17.3334Z" fill="#474747"/>
+                                        </svg>
+                                                                             
                                 </div>
                             </a>
                         </div>
@@ -128,5 +140,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>

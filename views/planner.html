@@ -3,14 +3,16 @@
 <head>
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <!-- Fonts -->
-     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../public/css/box.css">
     <link rel="stylesheet" href="../../public/css/style.css">
-    <title>Events</title>
+    <link rel="stylesheet" href="../../public/css/cards.css">
+    
+    <title>Planner</title>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -54,38 +56,78 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div id="menu">
-            <div class= "item box">
-                <a href="view-officers" class="inner-box">
-                    <img src="../../public/assets/people.svg">
-                    <p>View Officers</p>
-                </a>
+    
+    <div class="container inner-box">
+        <div class="mt-4" id="account-details">
+            <div class="profile">
+                <img src="../../public/assets/profiles/patrick.jpg">
+                <h1>Kirsten Sison</h1>
+                <p>danielle_sison@dlsu.edu.ph</p>
+                <h2>I’m a Computer Science Student who likes Animal Crossing and Minecraft.</h2>
             </div>
-
-            <div class="item box">
-                <a href="ad-eventreg" class="inner-box">
-                    <img src="../../public/assets/partying.svg">
-                    <p>Add an Event</p>
-                </a>
-            </div>
-            <div class ="item box">
-                <a href="ad-eventview" class="inner-box">
-                    <img src="../../public/assets/view-event.svg">
-                    <p>Edit an Event</p>
-                </a>
-            </div>
-            <div class ="item box">
-                <a href="member-requests" class="inner-box">
-                    <img src="../../public/assets/updates.svg">
-                    <p>Member Requests</p>
-                </a>
-            </div>
-            <div class ="item box">
-                <a href="editorg" class="inner-box">
-                    <img src="../../public/assets/add-content.svg">
-                    <p>Edit Org Profile</p>
-                </a>
+        </div>
+        <div class="box mt-4" style="background-color: #f0f0f0;">
+            <div class="mb-3 ml-2 card-menu" id="user-event-list">
+                <h1 style="width: 100%;"> My Events</h1>
+                
+                <div class="month-group">
+                    <h5 class="month-label">January</h5>
+                    <div class="card-wrapper information">            
+                        <div class="card">
+                            <a href="viewevent">
+                                <img class="card-img-top img-fluid" src="../../public/assets/events/python-header.jpeg">
+                                <div class="card-body">      
+                                    <span class="org-name">Python for Data Science</span>   
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="viewevent">
+                                <img class="card-img-top img-fluid" src="../../public/assets/events/gcp-header.png">
+                                <div class="card-body">
+                                    <span>Intro to Google Cloud Platform</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="viewevent">
+                                <img class="card-img-top img-fluid" src="../../public/assets/events/firebase-header.png">
+                                <div class="card-body">
+                                    <span>Build a CRUD Website With Firebase</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="month-group">
+                    <h5 class="month-label">February</h5>
+                    <div class="card-wrapper information">            
+                        <div class="card">
+                            <a href="viewevent">
+                                <img class="card-img-top img-fluid" src="../../public/assets/events/python-header.jpeg">
+                                <div class="card-body">      
+                                    <span class="org-name">Python for Data Science</span>   
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="viewevent">
+                                <img class="card-img-top img-fluid" src="../../public/assets/events/gcp-header.png">
+                                <div class="card-body">
+                                    <span>Intro to Google Cloud Platform</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="viewevent">
+                                <img class="card-img-top img-fluid" src="../../public/assets/events/firebase-header.png">
+                                <div class="card-body">
+                                    <span>Build a CRUD Website With Firebase</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
