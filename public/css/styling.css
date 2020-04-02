@@ -101,6 +101,15 @@ h5 {
     width: 72%;
 }
 
+.sign-in-btn-set {
+    display: flex;
+    justify-content: center;
+}
+
+.google-sign-in {
+    width: min-content;
+}
+
 #get-started-modal .form-group input, 
 #get-started-modal .form-group select {
     font-size: 14px;
