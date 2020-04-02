@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+const OrgModel = require('../models/Org.js');
+//var passportLocalMongoose = require("passport-local-mongoose"); 
+mongoose.set('debug', true);
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     first_name: {
         type: String,
         required: true,
@@ -13,12 +16,17 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    year_level:{
+        type: String,
+        required: true
+    },
     email_address: {
         type: String,
         required: true,
     },
     photo: {
-        type:Buffer
+        type: String,
+        required: false
     },
     password:{
         type: String,
@@ -27,15 +35,20 @@ const UserSchema = mongoose.Schema({
 
     isAdmin: {
         type: Boolean,
+        default: false,
+        required: true
     },
     
     planner :{
         type:[String],
+        required: false
     },
 
-    orgs : [{type:ObjectId, ref: "Org"}],
+    orgs : [{type: mongoose.Types.ObjectId, ref: "OrgModel"}],
 
     
 });
 
+
+//UserSchema.plugin(passportLocalMongoose);  
 module.exports = mongoose.model('User', UserSchema);

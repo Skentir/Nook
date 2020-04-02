@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('mongoose-type-url');
 require('mongoose-type-email');
 
-const OrgSchema = mongoose.Schema({
+const OrgSchema = new mongoose.Schema({
     org_id :{
         type: Number,
         required : true
@@ -66,32 +66,15 @@ const OrgSchema = mongoose.Schema({
     },
 
     email:{
-        type: mongoose.SchemaTypes.Email,
+        type: String,
         required: false,
     },
 
-    url :{
-        form : {
-            type: mongoose.SchemaTypes.Url,
-            required :false
-        },
-        fb : {
-            type: mongoose.SchemaTypes.Url,
-            required: false,
-        },
+    url :[{type: String, required: true}],
+    
+    events:[{type:mongoose.Types.ObjectId, ref: 'Event'}],
 
-        ig:{
-            type: mongoose.SchemaTypes.Url,
-            required: false
-        }
-
-    },
-
-    events:[{type:ObjectId, ref: 'Event'}],
-
-    officers:{
-        type: [Number]
-    }
+    officers:[{type:mongoose.Types.ObjectId, ref: 'User'}]
 
 
 

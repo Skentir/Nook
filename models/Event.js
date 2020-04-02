@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const OrgModel = require('../models/Org.js');
 
 const EventSchema = mongoose.Schema({
     event_id:{
         type: Number,
-        required: true
+        required: false,
     },
     event_name:{
         type: String,
@@ -11,7 +12,7 @@ const EventSchema = mongoose.Schema({
     },
 
     header_photo:{
-        type: Buffer,
+        type: String,
         required: false
     },
     tags:{
@@ -44,14 +45,30 @@ const EventSchema = mongoose.Schema({
         required: true
     },
 
+    capacity:{
+        type: Number,
+        required: true
+    },
+
     things:{
         type: String,
         required: true
     },
 
+    codes:{
+        type: String,
+        required: false,
+    },
+
+    incentives:{
+        type: Boolean,
+        required: false
+    },
+
+
     organizer_id:{
-        type : ObjectId,
-        ref: 'Org'
+        type: mongoose.Types.ObjectId,
+        ref: 'OrgModel'
     }
 
 });
