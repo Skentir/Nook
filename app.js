@@ -131,10 +131,10 @@ app.get('/landing',(req,res) =>{
 })
 
 app.get('/ad-eventreg', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/ad-eventreg.html"));
+    res.render('ad-eventreg');
 })
 app.get('/ad-eventview', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/ad-eventview.html"));
+    res.render('ad-eventview');
 })
 
 app.get('/explore', function(req, res) {
@@ -157,49 +157,49 @@ app.get('/explore', function(req, res) {
     });
 });
 
-app.get('/ad-tools', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/ad-tools.html"));
+app.get('/ad-tools', (req,res)=> {
+    res.render('ad-tools');
 })
 
-app.get('/edit-profile', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/edit-profile.html"));
+app.get('/edit-profile', (req,res)=> {
+    res.render( 'edit-profile');
 })
 
-app.get('/editorg', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/editorg.html"));
+app.get('/editorg', (req,res)=> {
+    res.render( 'editorg');
 })
 
-app.get('/editevent', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/editevent.html"));
+app.get('/editevent', (req,res)=> {
+    res.render( 'editevent');
 })
 
-app.get('/member-requests', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/member-requests.html"));
-})
+app.get('/member-requests', (req,res)=> {
+    res.render('member-requests');
+});
 
-app.get('/planner', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/planner.html"));
-})
+app.get('/planner', (req,res)=> {
+    res.render('planner');
+});
 
-app.get('/user-profile', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/user-profile.html"));
-})
+app.get('/user-profile', (req,res)=> {
+    res.render('user-profile');
+});
 
-app.get('/viewevent', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/viewevent.html"));
-})
+app.get('/viewevent', (req,res)=> {
+    res.render('viewevent');
+});
 
-app.get('/vieworg', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/vieworg.html"));
-})
+app.get('/vieworg', (req,res)=> {
+    res.render('vieworg');
+});
 
-app.get('/view-officers', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/view-officers.html"));
-})
+app.get('/view-officers', (req,res)=> {
+    res.render('view-officers');
+});
 
 
-//post for user registration
-app.post('/', upload.single('profilepic'), async (req,res)=>{
+//POST for user registration
+app.post('/', upload.single('profilepic'), async (req,res)=> {
     console.log(req.body.reg_fname);
     console.log(req.file.filename);
     const user = new User({
