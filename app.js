@@ -141,16 +141,20 @@ app.get('/explore', function(req, res) {
 
     OrgModel.find({}, {}, function(err, docs) {
     var objs=[];
-    for (var i =0; i<docs.length; i++)
-    {
-        var obj = {
-            fromDB:docs,
-            org_name: docs[i].org_name,
-            org_logo:docs[i].org_logo
+        for (var i =0; i<docs.length; i++)
+        {
+            var obj = {
+                fromDB:docs,
+                org_type: docs[i].org_type,
+                org_name: docs[i].org_name,
+                org_logo:docs[i].org_logo
+            }
+            objs.push(obj);
         }
-        objs.push(obj);
-    }
-    res.render('explore', objs);
+        res.render('explore', {
+            title: 'Orgs',
+            Orgs: objs,
+        });
     });
 });
 

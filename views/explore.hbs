@@ -32,23 +32,23 @@
         <div class="card-menu" id="explore-menu">
             <div class="row">
                 
-                {{#fromDB}}
-                    {{#if Orgs}}
-                        {{#each Orgs}}
-                            <div class="card">
-                                <a href="vieworg">
-                                    <img class="card-img-top img-fluid" src="{{this.org_logo}}">
-                                    <div class="card-body">
-                                        <span>{{this.org_name}}</span>
-                                    </div>
-                                </a>
-                            </div>
-                        {{/each}}
-                    {{else}}
-                        <p>No orgs yet</p>
-                    {{/if}}
+          
+                {{#if Orgs}}
+                    {{#each Orgs}}
+                        <div class="card" value="{{this.org_type}}">
+                            <a href="vieworg">
+                                <img class="card-img-top img-fluid" src="{{this.org_logo}}">
+                                <div class="card-body">
+                                    <span>{{this.org_name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <p>No orgs yet</p>
+                {{/if}}
 
-                {{/fromDB}}
+            
 
             </div>
         </div>
