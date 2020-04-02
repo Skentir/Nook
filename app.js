@@ -14,6 +14,25 @@ require('dotenv/config');
 //Serve the css files
 app.use(express.static(__dirname+'/'))
 
+const hbs = require('express-handlebars');
+app.set('view engine', 'hbs');
+
+app.engine('hbs', hbs( {
+  extname: 'hbs',  
+  defaultView: 'default',  
+  layoutsDir: path.join(__dirname, '/views/layouts'), // Layouts folder
+  partialsDir: path.join(__dirname, '/views/partials'), // Partials folder
+
+  helpers: {
+    section: function(name, options){
+        if(!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
+    }
+  }
+
+}));
+
 
 /*IMPORT ROUTES
 const adminRoute = require('./routes/admin');
@@ -39,7 +58,7 @@ app.get('/ad-eventview', (req,res)=>{
     res.sendFile(path.join(__dirname + "/views/ad-eventview.html"));
 })
 app.get('/explore', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/explore.html"));
+    res.render('explore');
 })
 
 app.get('/ad-tools', (req,res)=>{
