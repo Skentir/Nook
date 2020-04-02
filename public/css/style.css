@@ -1,6 +1,8 @@
 body {
     font-family: "Roboto";
+    background: none;
 }
+
 .container {
     margin-top: 1rem;
 }
@@ -19,6 +21,7 @@ h1 {
     font-size: 40px;
     line-height: 1.2;
 }
+
 #account-details {
     width: 200px;
 }
@@ -36,18 +39,18 @@ button {
     box-shadow: 0 0 6px #888888;
 }
 
-#profile {
+.profile {
     text-align: center;
 }
 
-#profile img {
+.profile img {
     height: 120px;
     width: 120px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-#profile h1 {
+.profile h1 {
     margin: 10px;
     margin-top: 20px;
     margin-bottom: 2px;
@@ -56,7 +59,7 @@ button {
     font-size: 18px;
 }
 
-#profile h2 {
+.profile h2 {
     margin: 10px;
     margin-top: 20px;
     font-weight: 400;
@@ -64,7 +67,7 @@ button {
     font-size: 16px;
 }
 
-#profile ul {
+.profile ul {
     margin: 10px;
     margin-top: 20px;
     padding: 0px;
@@ -76,7 +79,7 @@ button {
     justify-content: center;
 }
 
-#profile li {
+.profile li {
     background-color: #311B92;
     color: white;
     padding-left: 10px;
@@ -87,12 +90,12 @@ button {
     margin: 4px;
 }
 
-#profile-info {
+.profile-info {
     display: flex;
     justify-content: space-around;
 }
 
-#profile h3 {
+.profile h3 {
     margin: 10px;
     font-weight: 100;
     color: #3a3a3a;
@@ -100,13 +103,17 @@ button {
     
 }
 
-#profile p {
+.profile p {
     font-size: 14px;
     color: gray;
-/*
-    margin-left: 20px;
-    margin-right: 20px;
-*/
+}
+
+.profile-buttons {
+    text-align: center;
+}
+
+.profile-buttons a {
+    width: 150px;
 }
 
 #info-panel {
@@ -143,7 +150,6 @@ button {
 #org {
     width: 150px;
 /*    margin-right: 2%;*/
-    
 /*    margin-right: 40px;*/
 /*    margin-right: 58px;*/
     margin-bottom: 20px;
@@ -193,7 +199,8 @@ ul {
     margin: 2px;
 }
 
-#info-panel h2, #event-panel h2 {
+#info-panel h2, 
+#event-panel h2 {
     font-size: 18px;
     margin-top: 30px;
 }
@@ -204,28 +211,36 @@ ul {
     font-size: 13px;
     margin: 2px;
 }
+
 .member-name {
     font-weight: 400;
 }
+
 .button-group {
     margin: auto;
     margin-right: 10px;
 }
-.check, .reject {
+
+.check,
+.reject {
     height: 30px;
     padding: 2px;
     width: 30px;
     margin-top: 0;
     box-shadow: none;
 }
-.check img, .reject img {
+
+.check img, 
+.reject img {
     width: inherit;
     height: inherit;
 }
+
 .check {
     margin-left: 5px;
     background: none;
 }
+
 .reject {
     background: none;
 }
@@ -281,7 +296,6 @@ ul {
     padding: 4%;
 }
 
-
 #events {
     width: 96%;
     display: flex;
@@ -310,11 +324,13 @@ ul {
 .item.box {
     padding: 10px;
 }
+
 .item img {
     width: 200px;
     height: 200px;
     padding:auto;
 }
+
 .item:hover{
     background: rgba(250, 249, 249, 0.911);
     border-radius: 4px;
@@ -329,16 +345,18 @@ ul {
     padding-left: 10px;
     padding-right: 10px;
 }
+
 a:hover {
     text-decoration: none!important;
 }
+
 .month-group {
     width: 95%;
 }
+
 .month-label {
     padding-left: 8px;
 }
-
 
 @media (max-width:992px) {
     .box {
