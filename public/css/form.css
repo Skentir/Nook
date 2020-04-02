@@ -2,6 +2,27 @@
 .right-box {
     width: max-content;
 }
+
+.form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #fff;
+    border-radius:4px;
+    border: 1px solid #bdbdbd;
+    box-sizing: border-box;
+    min-width: 420px;
+}
+
+.sub-form {
+    display: block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 30px;
+    width: 420px;
+    margin: 16px 0;
+}
+
 .edit-hdr {
     display: flex;
     flex-wrap: wrap;

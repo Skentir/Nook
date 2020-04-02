@@ -9,17 +9,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../public/css/box.css">
-    <link rel="stylesheet" href="../../public/css/viewevent.css">
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!-- <script src="../../scripts/landing.js"></script> -->
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <link rel="stylesheet" href="../../public/css/form.css">
+    
     <title>Nook</title>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="topnav">
-        <div class="navbar custom-navbar">
+    <div class="navbar custom-navbar">
+        <div class="nav-content">
             <div class="nav-logo">
                 <a href="explore">
                     nook
@@ -29,7 +28,7 @@
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" placeholder="Search Organization">
-                  </div>
+                    </div>
             </form>
             <div class="nav-items">
                 <ul id="menu" class="p-10">
@@ -57,50 +56,83 @@
                 </ul>
             </div>
         </div>
+    </div>
     </nav>
 
-    <!-- Org Image Header -->
-    <header class="container">
-        <div class = "container-fluid org-header">
-            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="org-header-pic">
-                <div class ="inner-header">
-                    <h1 class="ml-3 header-name" id="event-header-name">Developer Student Club Taft</h1>
-                </div>
+    <div class="container">
+        <!-- Edit Header -->
+        <header class="edit-hdr">
+            <img class="hdr-pic" src="../../public/assets/orgs/dsc-icon.png">
+            <div>
+                <span class="hdr-text" id="user-name">Developer Student Club Taft</span>
+                /
+                <span class="hdr-text">Edit Profile</span>
+                <p class="hdr-desc">Setup your organization's Nook account</p>
             </div>
-        </div>
-    </header>
+        </header>
+        <!-- Form -->
+        <div class="inner-box">
+            <div class="frm-height mt-4">
+                    <div class="form-wrapper">
+                        <div class="sub-form">
+                            <div class="form-group">
+                                <label>Organization Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control invalid-field" id="user-email-field">
+                                </div>
+                            </div>
+                            
+    
+                            <div class="form-group">
+                                <label>Profile Bio </label>
+                                <div class='input-group date' id="event-about-field">
+                                    <textarea type='text' class="form-control" id="user-bio-field"></textarea>
+                                </div>
+                            </div>
 
-    <!--Event Details-->
-    <section class = "container">
-        <!-- Event Sub Details -->
-        <div class="details mb-3 pb-3 pt-3">
-            <div class="left-deet ld-1 odeet">
-                <span id="org-motto">“Build. Create. Innovate.”</span>
-            </div>
-            <div class="right-deet">
-                <ul id="org-tags">
-                    <li>tech</li>
-                    <li>education</li>
-                    <li>international</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class ="inner-box">
-            <div class = "right-box">
-                <div id = "about">
-                    <h5> About</h5>
-                    <textarea id="edit-about"></textarea>
+                            <div class="form-group">
+                                <label>Recruitment Description </label>
+                                <div class='input-group date' id="event-about-field">
+                                    <textarea type='text' class="form-control" id="user-bio-field"></textarea>
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label>Change Header Picture </label>
+                                <div class="custom-file">
+                                        <label class="custom-file-label">Choose</label>
+                                        <input type="file" class="form-control custom-file-input" id="user-photo-field">
+                                    </div>
+                            </div>
+                            <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
+                        </div>
+                       
+                        <div class="sub-form">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="user-email-field">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Facebook Link</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="user-email-field">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Instagram Link</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="user-email-field">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class = "right-box">
-                <div id="why">
-                    <h5> Why should I join</h5>
-                    <textarea id="edit-reason"></textarea>
-                </div>
-            </div>
         </div>
-        <button id="save-btn">Save</button>
-    </section>
+    </div>
 </body>
 </html>

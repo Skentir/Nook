@@ -50,8 +50,8 @@ app.get('/edit-profile', (req,res)=>{
     res.sendFile(path.join(__dirname + "/views/edit-profile.html"));
 })
 
-app.get('/edit-org', (req,res)=>{
-    res.sendFile(path.join(__dirname + "/views/edit-org.html"));
+app.get('/editorg', (req,res)=>{
+    res.sendFile(path.join(__dirname + "/views/editorg.html"));
 })
 
 app.get('/editevent', (req,res)=>{

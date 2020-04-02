@@ -4,22 +4,30 @@
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../public/css/box.css">
-    <link rel="stylesheet" href="../../public/css/viewevent.css">
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <link rel="stylesheet" href="../../public/css/form.css">
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!-- <script src="../../scripts/landing.js"></script> -->
+    <script src="../../scripts/moment.js"></script>
+    <script src="../../scripts/bootstrap-datepicker.js"></script>
+    <script src="../../scripts/landing.js"></script> 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+    <!-- datetimepicker for bootstrap4-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
     <title>Nook</title>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="topnav">
-        <div class="navbar custom-navbar">
+    <div class="navbar custom-navbar">
+        <div class="nav-content">
             <div class="nav-logo">
                 <a href="explore">
                     nook
@@ -29,7 +37,7 @@
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" placeholder="Search Organization">
-                  </div>
+                    </div>
             </form>
             <div class="nav-items">
                 <ul id="menu" class="p-10">
@@ -57,80 +65,136 @@
                 </ul>
             </div>
         </div>
+    </div>
     </nav>
 
-    <!-- Org Image Header -->
-    <header class="container">
-        <div class = "container-fluid org-header">
-            <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="event-header-pic">
-                <div class ="inner-header">
-                    <h1 class="ml-3 header-name" id="event-header-name">Python for Data Science</h1>
-                </div>
+    <div class="container">
+        <!-- Edit Header -->
+        <header class="edit-hdr">
+            <img class="hdr-pic" src="../../public/assets/events/python-header.jpeg">
+            <div>
+                <span class="hdr-text" id="user-name">Python for Data Science</span>
+                /
+                <span class="hdr-text">Edit Profile</span>
+                <p class="hdr-desc">Setup your organization's Nook account</p>
             </div>
-        </div>
-    </header>
+        </header>
+        <!-- Form -->
+        <div class="inner-box">
+            <div class="frm-height mt-4">
+                    <div class="form-wrapper">
+                        <div class="sub-form">
+                            <div class="form-group">
+                                <label>Event Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control invalid-field" id="event-name-field">
+                                </div>
+                            </div>
+                            
+    
+                            <div class="form-group">
+                                <label>Description </label>
+                                <div class='input-group date' id="event-about-field">
+                                    <textarea type='text' class="form-control" id="event-desc-field"></textarea>
+                                </div>
+                            </div>
 
-    <!--Event Details-->
-    <section class = "container">
-        <!-- Event Sub Details -->
-        <div class="details mb-3">
-            <div class="left-deet ld-1 mr-3">
-                <label class="mr-2 mb-0">Date</label>
-                <input type="date" id="date" name="date">
-            </div>
-            <div class="left-deet ld-2">
-                <label class="mr-2 mb-0">Time</label>
-                <input type="time" id="time" name="time-start">
-                <input type="time" id="time" name="time-end">
-            </div>
-            <div class="right-deet">
-                <ul id="event-tags">
-                    <li>tech</li>
-                    <li>education</li>
-                </ul>
-            </div>
-        </div>
+                            <div class="form-group">
+                                <label>Things to Bring</label>
+                                <div class='input-group date' id="event-about-field">
+                                    <textarea type='text' class="form-control" id="event-items-field"></textarea>
+                                </div>
+                            </div>
 
-        <div class ="inner-box">
-            <div class = "right-box">
-                <div id = "about">
-                    <h5> About</h5>
-                    <textarea id="edit-about" name="about"></textarea>
-                </div>
-            </div>
-            <div class = "right-box" id ="why">
-                <div class="event-info ei-left mb-2">
-                    <h5 class="mb-0"> Venue</h5>
-                    <input type="text" id="edit-field" name="venue">
-                </div>
-                <div class="event-info ei-left mb-2">
-                    <h5 class="mb-0"> Things to Bring</h5>
-                    <input type="text" id="edit-field" name="requirements">
-                </div>
-                <div class="event-info  ei-left mb-2">
-                    <h5 class="mb-0">Incentives</h5>
-                    <input type="text" id="edit-field" name="incentives">
+                            <div class="form-group">
+                                <label>Change Header Picture </label>
+                                <div class="custom-file">
+                                    <label class="custom-file-label">Choose</label>
+                                    <input type="file" class="form-control custom-file-input" id="event-photo-field">
+                                </div>
+                            </div>
+                            <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
+                        </div>
+                       
+                        <div class="sub-form">
+                            <div class="form-group">
+                                <label>Venue</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="event-venue-field">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" id="event-date-field">
+                                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker4').datetimepicker({
+                                                format: 'L'
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <label>Start Time</label>
+                                        <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
+                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3">
+                                            <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker3').datetimepicker({
+                                                format: 'LT'
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <label>End Time</label>
+                                        <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
+                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2">
+                                            <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker3-2').datetimepicker({
+                                                format: 'LT'
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Incentives</label>
+                                <div class='input-group date' id="event-about-field">
+                                    <textarea type='text' class="form-control" id="event-incentives-field"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <button id="save-btn">Save</button>
-        
-    </section>
-    <!-- Add to Planner Modal -->
-    <div class="modal fade sm" role="dialog" id="add-to-planner-modal">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="../assets/completed.svg" style="width:100%; height: auto;">
-                <p class="modal-p mt-3">Added to Planner!</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
 </body>
 </html>
