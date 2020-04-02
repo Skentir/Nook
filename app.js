@@ -21,6 +21,7 @@ const Grid = require('gridfs-stream');
 
 //Require Mongoose for DB
 const mongoose = require('mongoose');
+mongoose.set('debug', true);
 
 //Require path for file
 const path = require('path');
