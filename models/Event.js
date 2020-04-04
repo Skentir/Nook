@@ -15,6 +15,7 @@ const EventSchema = mongoose.Schema({
         type: String,
         required: false
     },
+
     tags:{
         type: [String],
         required: false
@@ -50,7 +51,7 @@ const EventSchema = mongoose.Schema({
         required: true
     },
 
-    things:{
+    things: {
         type: String,
         required: true
     },
@@ -61,7 +62,7 @@ const EventSchema = mongoose.Schema({
     },
 
     incentives:{
-        type: Boolean,
+        type: String,
         required: false
     },
 

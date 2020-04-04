@@ -215,12 +215,19 @@ app.get('/viewevent/:eventId', (req,res)=> {
             if (err) {
                 res.send(err);
               } else {
-                res.json(docs);
-              }
-            /*
-            res.render('viewevent', {
-            });
-            */
+                /*
+                event_id: docs._id,
+                event_name : docs.event_name,
+                event_header : docs.header_photo,
+                tags : [...docs.tags],
+                date: docs.date,
+                about_desc: docs.about_desc,
+                capacity: docs.capacity,
+                incentives: docs.incentives,
+                organizer_id: docs.organizer_id
+                */
+                res.render('viewevent', docs);
+            }
         });
 });
 
@@ -261,14 +268,9 @@ app.get('/vieworg/:orgId', (req,res)=> {
                         console.log(result + "\n\n" + array);
                         for(var i = 0; i<array.length; i++){
                             eobj = {
+                                event_id: array[i]._id,
                                 event_name : array[i].event_name,
                                 event_header : array[i].header_photo,
-                                tags : [...array[i].tags],
-                                date: array[i].date,
-                                about_desc: array[i].about_desc,
-                                capacity: array[i].capacity,
-                                incentives: array[i].incentives,
-                                organizer_id: array[i].organizer_id
                             }
                             eobjs.push(eobj);
                         }
