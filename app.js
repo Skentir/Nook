@@ -245,7 +245,9 @@ app.get('/vieworg/:orgId', (req,res)=> {
                     date_established: result.date_established,
                     no_of_officers: result.no_of_officers,
                     no_of_members: result.no_of_members,
-                    url: [...result.url],
+                    form_url: result.form_url,
+                    fb_url: result.fb_url,
+                    ig_url: result.ig_url,
                     officers: [...result.officers]
                 };
 

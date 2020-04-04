@@ -70,7 +70,9 @@ const OrgSchema = new mongoose.Schema({
         required: false,
     },
 
-    url :[{type: String, required: true}],
+    form_url :{type: String, required: true},
+    fb_url:{type: String, required: true},
+    ig_url: {type: String, required: true},
     
     events:[{type:mongoose.Types.ObjectId, ref: 'Event'}],
 
