@@ -204,17 +204,24 @@ app.get('/vieworg/:orgId', (req,res)=> {
     const orgId = req.params.orgId;
 
     OrgModel.findById(orgId,
-        function(err, docs) {
+        function(err, result) {
             if (err) {
                 res.send(err);
               } else {
-                res.json(docs);
-              }
-            /*
-            res.render('vieworg', {
-                Orgs:obj
-            });
-            */
+            
+                EventModel.find({ _id: {
+                    $in: result.events }
+                },  function(err, array) {
+                    if (err) {
+                        res.send(err)
+                    } else {
+                        res.render('vieworg', {
+                            result, 
+                            events:array
+                        });
+                    }
+                });        
+            }
         });
 });
 

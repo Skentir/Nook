@@ -7,9 +7,11 @@
 <!-- Org Image Header -->
 <header class="container">
     <div class = "container-fluid org-header">
-        <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" id="org-header-pic">
+        <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" style="background: linear-gradient(rgba(107, 99, 255, 0.5), 
+            rgba(107, 99, 255, 0.5)), url({{org_header}});background-position: center center;
+            background-size: cover;">
             <div class ="inner-header">
-                <h1 class="ml-3 header-name" id="event-header-name">Developer Student Club Taft</h1>
+                <h1 class="ml-3 header-name" id="event-header-name">{{org_name}}</h1>
             </div>
         </div>
     </div>
@@ -20,13 +22,15 @@
     <!-- Org Sub Details -->
     <div class="details pt-3 pb-3">
         <div class="left-deet ld-1 odeet">
-            <span id="org-motto">“Build. Create. Innovate.”</span>
+            <span id="org-motto">{{tagline}}</span>
         </div>
         <div class="right-deet">
             <ul id="org-tags">
-                <li>tech</li>
-                <li>education</li>
-                <li>international</li>
+                {{#if tags}}
+                    {{#each tags}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                {{/if}}
             </ul>
         </div>
     </div>
@@ -36,20 +40,20 @@
             <article id = "about">
                 <h5> About</h5>
                 <span class="sub-desc" id="org-desc">
-                    Developer Student Club Taft is the first ever student organization under Google Developers and part of the first batch of chapters established in the Philippines. We are a community of developers that are passionate about uplifting communities through technology and innovation. We aim to help students bridge the gap between theories and practice. By joining a DSC, students grow their knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.
+                    {{about_desc}}
                 </span>
             </article>
             <div class="org-stats mt-2 mb-2">
                 <div class="stat-item ml-3">
-                    <p  class="stat-count" id="org-member-count">98</p>
+                    <p  class="stat-count" id="org-member-count">{{no_of_members}}</p>
                     <span>Members</span>
                 </div>
                 <div class="stat-item ml-3">
-                    <p class="stat-count" id="org-officer-count">14</p>
+                    <p class="stat-count" id="org-officer-count">{{no_of_officers}}</p>
                     <span>Officers</span>
                 </div>
                 <div class="stat-item ml-3 mr-3">
-                    <p class="stat-count" id="org-year-count">1</p>
+                    <p class="stat-count" id="org-year-count">{{date_established}}</p>
                     <span>Years Active</span>
                 </div>
             </div>
@@ -57,11 +61,8 @@
         <div class = "right-box">
             <article id="why">
                 <h5> Why should I join</h5>
-                <span class="sub-desc" id="join-desc">Learn about technologies not taught in school and other organization such as mobile development, 
-                    machine learning, cloud computing and etc.
-                    Get access to a vast network of Googlers and tech enthusiasts and get access to Google Developer resources
-                    Grow one's tech knowledge in a peer-to-peer learning environment and build solutions for 
-                    local businesses and their community.
+                <span class="sub-desc" id="join-desc">
+                    {{join_desc}}
                 </span>
             </article>
             <button type="button" class="custombtn mb-3" id="apply-btn">I'm interested</button>
@@ -76,38 +77,18 @@
         <div class="card-wrapper">
             <div class="card-menu" id="org-events-list">
                 <div class="row">
-                    <div class="card">
-                        <a href="viewevent">
-                            <img class="card-img-top img-fluid" src="../../public/assets/events/python-header.jpeg">
-                            <div class="card-body">      
-                                <span class="org-name">Python for Data Science</span>   
+                    {{#if events}}
+                        {{#each events}}
+                            <div class="card">
+                                <a href="viewevent">
+                                    <img class="card-img-top img-fluid" src="{{event_header}}">
+                                    <div class="card-body">      
+                                        <span class="org-name">{{event_name}}</span>   
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="viewevent">
-                            <img class="card-img-top img-fluid" src="../../public/assets/events/gcp-header.png">
-                            <div class="card-body">
-                                <span>Intro to Google Cloud Platform</span>
-                            </div>
-                        </a>
-                    </div>
-                        <div class="card">
-                        <a href="viewevent">
-                            <img class="card-img-top img-fluid" src="../../public/assets/events/firebase-header.png">
-                            <div class="card-body">
-                                <span>Build a CRUD Website With Firebase</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="viewevent">
-                            <img class="card-img-top img-fluid" src="../../public/assets/events/bigquery-header.png">
-                            <div class="card-body">
-                                <span>ML With BigQuery</span>
-                            </div>
-                        </a>
-                    </div>
+                        {{/each}}
+                    {{/if}}
                 </div>
             </div>
         </div>
