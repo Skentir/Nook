@@ -49,10 +49,12 @@
             </div>
             <div class="event-info mt-3 mb-3 organizer">
                 <p class="mb-1">Organized by</p>
+                {{#each organizer_id}}
                 <div>
-                    <img id="organizer-icon" src="../assets/orgs/dsc-icon.png">
-                    <a id="organizer-name" href="vieworg">Developer Student Club Taft</a>
+                    <img id="organizer-icon" src="{{this.org_logo}}">
+                    <a id="organizer-name" href="/vieworg/{{this._id}}">{{this.org_name}}</a>
                 </div>
+                {{/each}}
             </div>
         </div>
         <div class = "right-box" id ="why">

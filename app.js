@@ -210,23 +210,15 @@ app.get('/user-profile', (req,res)=> {
 app.get('/viewevent/:eventId', (req,res)=> {
     const eventId = req.params.eventId;
 
-    EventModel.findById(eventId,
-        function(err, docs) {
+    EventModel.findById(eventId)
+        .populate('organizer_id', '_id org_name org_logo')
+        .exec(function(err, post) {
             if (err) {
                 res.send(err);
-              } else {
-                /*
-                event_id: docs._id,
-                event_name : docs.event_name,
-                event_header : docs.header_photo,
-                tags : [...docs.tags],
-                date: docs.date,
-                about_desc: docs.about_desc,
-                capacity: docs.capacity,
-                incentives: docs.incentives,
-                organizer_id: docs.organizer_id
-                */
-                res.render('viewevent', docs);
+            } else {
+                console.log(post);
+                var event = JSON.parse(JSON.stringify(post))
+                res.render('viewevent', event);
             }
         });
 });

@@ -67,9 +67,8 @@ const EventSchema = mongoose.Schema({
     },
 
 
-    organizer_id:{
-        type: mongoose.Types.ObjectId,
-        ref: 'OrgModel'
+    organizer_id: {
+        type:  [{type: mongoose.Schema.Types.ObjectId, ref: 'Org'}]
     }
 
 });
