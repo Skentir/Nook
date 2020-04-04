@@ -18,6 +18,7 @@ const GridFsStorage = require("multer-gridfs-storage");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Grid = require('gridfs-stream');
+const Handlebars = require('handlebars');
 
 
 //Require Mongoose for DB

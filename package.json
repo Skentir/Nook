@@ -23,6 +23,7 @@
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
     "gridfs-stream": "^1.1.1",
+    "handlebars": "^4.7.6",
     "mongoose": "^5.9.3",
     "mongoose-type-email": "^1.0.12",
     "mongoose-type-url": "^1.0.6",
