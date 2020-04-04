@@ -149,23 +149,10 @@ app.get('/ad-eventview', (req,res)=>{
 })
 
 app.get('/explore', function(req, res) {
-    OrgModel.find({}, {}, function(err, docs) {
-    var objs=[];
-        for (var i =0; i<docs.length; i++)
-        {
-            var obj = {
-                fromDB:docs,
-                org_id: docs[i]._id,
-                org_type: docs[i].org_type,
-                org_name: docs[i].org_name,
-                org_logo:docs[i].org_logo
-            }
-            objs.push(obj);
-        }
-        res.render('explore', {
-            title: 'Orgs',
-            Orgs: objs,
-        });
+    OrgModel.find({})
+        .exec( function(err, result) {
+        var org = JSON.parse(JSON.stringify(result));
+        res.render('explore', {orgs:org});
     });
 });
 

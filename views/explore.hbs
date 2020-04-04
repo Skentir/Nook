@@ -21,10 +21,10 @@
     <div class="container" class="card-wrapper" style="max-width: 960px;">
         <div class="card-menu" id="explore-menu">
             <div class="row">
-                {{#if Orgs}}
-                    {{#each Orgs}}
+                {{#if orgs}}
+                    {{#each orgs}}
                         <div class="card" value="{{this.org_type}}">
-                            <a href="vieworg/{{this.org_id}}">
+                            <a href="vieworg/{{this._id}}">
                                 <img class="card-img-top img-fluid" src="{{this.org_logo}}">
                                 <div class="card-body">
                                     <span>{{this.org_name}}</span>
