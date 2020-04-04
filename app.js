@@ -64,6 +64,16 @@ app.engine('hbs', hbs( {
         if(!this._sections) this._sections = {};
         this._sections[name] = options.fn(this);
         return null;
+    },
+    'notNull' : function(value, options) {
+
+        if(!Handlebars.Utils.isArray(value)){
+            return [];
+        } else {
+            return value.filter(function(ele){
+                return !Handlebars.Utils.isEmpty(ele);
+            });
+        }
     }
   }
 
@@ -221,7 +231,24 @@ app.get('/vieworg/:orgId', (req,res)=> {
             if (err) {
                 res.send(err);
               } else {
-            
+                var eobjs =[];
+                var eobj;
+                var obj = {
+                    org_type: result.org_type,
+                    org_name: result.org_name,
+                    tagline: result.tagline,
+                    tags: [...result.tags],
+                    about_desc: result.about_desc,
+                    join_desc: result.join_desc,
+                    org_logo: result.org_logo,
+                    org_header: result.org_header,
+                    date_established: result.date_established,
+                    no_of_officers: result.no_of_officers,
+                    no_of_members: result.no_of_members,
+                    url: [...result.url],
+                    officers: [...result.officers]
+                };
+
                 EventModel.find({ _id: {
                     $in: result.events }
                 },  function(err, array) {
@@ -229,10 +256,23 @@ app.get('/vieworg/:orgId', (req,res)=> {
                         res.send(err)
                     } else {
                         console.log(result + "\n\n" + array);
-                        res.render('vieworg', 
-                            result,
-                            array
-                        );
+                        for(var i = 0; i<array.length; i++){
+                            eobj = {
+                                event_name : array[i].event_name,
+                                event_header : array[i].header_photo,
+                                tags : [...array[i].tags],
+                                date: array[i].date,
+                                about_desc: array[i].about_desc,
+                                capacity: array[i].capacity,
+                                incentives: array[i].incentives,
+                                organizer_id: array[i].organizer_id
+                            }
+                            eobjs.push(eobj);
+                        }
+                        res.render('vieworg', {
+                            org: obj,
+                            events: eobjs
+                        });
                     }
                 });        
             }
