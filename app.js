@@ -215,10 +215,11 @@ app.get('/vieworg/:orgId', (req,res)=> {
                     if (err) {
                         res.send(err)
                     } else {
-                        res.render('vieworg', {
-                            result, 
-                            events:array
-                        });
+                        console.log(result + "\n\n" + array);
+                        res.render('vieworg', 
+                            result,
+                            array
+                        );
                     }
                 });        
             }
