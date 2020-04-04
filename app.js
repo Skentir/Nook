@@ -212,12 +212,12 @@ app.get('/viewevent/:eventId', (req,res)=> {
 
     EventModel.findById(eventId)
         .populate('organizer_id', '_id org_name org_logo')
-        .exec(function(err, post) {
+        .exec(function(err, result) {
             if (err) {
                 res.send(err);
             } else {
                 console.log(post);
-                var event = JSON.parse(JSON.stringify(post))
+                var event = JSON.parse(JSON.stringify(result));
                 res.render('viewevent', event);
             }
         });
@@ -226,52 +226,15 @@ app.get('/viewevent/:eventId', (req,res)=> {
 app.get('/vieworg/:orgId', (req,res)=> {
     const orgId = req.params.orgId;
 
-    OrgModel.findById(orgId,
-        function(err, result) {
+    OrgModel.findById(orgId)
+        .populate('events', '_id event_name header_photo')
+        .exec(function(err, result)  {
             if (err) {
                 res.send(err);
-              } else {
-                var eobjs =[];
-                var eobj;
-                var obj = {
-                    org_type: result.org_type,
-                    org_name: result.org_name,
-                    tagline: result.tagline,
-                    tags: [...result.tags],
-                    about_desc: result.about_desc,
-                    join_desc: result.join_desc,
-                    org_logo: result.org_logo,
-                    org_header: result.org_header,
-                    date_established: result.date_established,
-                    no_of_officers: result.no_of_officers,
-                    no_of_members: result.no_of_members,
-                    form_url: result.form_url,
-                    fb_url: result.fb_url,
-                    ig_url: result.ig_url,
-                    officers: [...result.officers]
-                };
-
-                EventModel.find({ _id: {
-                    $in: result.events }
-                },  function(err, array) {
-                    if (err) {
-                        res.send(err)
-                    } else {
-                        console.log(result + "\n\n" + array);
-                        for(var i = 0; i<array.length; i++){
-                            eobj = {
-                                event_id: array[i]._id,
-                                event_name : array[i].event_name,
-                                event_header : array[i].header_photo,
-                            }
-                            eobjs.push(eobj);
-                        }
-                        res.render('vieworg', {
-                            org: obj,
-                            events: eobjs
-                        });
-                    }
-                });        
+              } else {        
+                console.log(result);
+                var org = JSON.parse(JSON.stringify(result));
+                res.render('vieworg', org);       
             }
         });
 });
