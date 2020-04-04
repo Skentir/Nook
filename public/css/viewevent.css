@@ -24,17 +24,15 @@ h5 {
     margin-top: -19px;
 }
 
-#org-header-pic {
-    background: linear-gradient(rgba(107, 99, 255, 0.5), 
-    rgba(107, 99, 255, 0.5)), url(../assets/orgs/dsc-header.jpg);
-    background-position: center center;
-    background-size: cover;
-}
-
 .custom-jumbotron {
     min-width: 100px;
     width: 100%;
     height: 235px;
+}
+
+#org-header-pic {
+    background-position: center center;
+    background-size: cover;
 }
 
 #event-header-pic {
