@@ -196,8 +196,21 @@ app.get('/user-profile', (req,res)=> {
     */
 });
 
-app.get('/viewevent', (req,res)=> {
-    res.render('viewevent');
+app.get('/viewevent/:eventId', (req,res)=> {
+    const eventId = req.params.eventId;
+
+    EventModel.findById(eventId,
+        function(err, docs) {
+            if (err) {
+                res.send(err);
+              } else {
+                res.json(docs);
+              }
+            /*
+            res.render('viewevent', {
+            });
+            */
+        });
 });
 
 app.get('/vieworg/:orgId', (req,res)=> {
