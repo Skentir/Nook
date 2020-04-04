@@ -24,7 +24,7 @@
                 {{#if Orgs}}
                     {{#each Orgs}}
                         <div class="card" value="{{this.org_type}}">
-                            <a href="vieworg">
+                            <a href="vieworg/{{this.org_id}}">
                                 <img class="card-img-top img-fluid" src="{{this.org_logo}}">
                                 <div class="card-body">
                                     <span>{{this.org_name}}</span>

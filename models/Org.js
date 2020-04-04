@@ -4,7 +4,7 @@ require('mongoose-type-email');
 
 const OrgSchema = new mongoose.Schema({
     org_id :{
-        type: Number,
+        type: String,
         required : true
     },
 

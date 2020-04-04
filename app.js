@@ -144,6 +144,7 @@ app.get('/explore', function(req, res) {
         {
             var obj = {
                 fromDB:docs,
+                org_id: docs[i]._id,
                 org_type: docs[i].org_type,
                 org_name: docs[i].org_name,
                 org_logo:docs[i].org_logo
@@ -183,14 +184,38 @@ app.get('/planner', (req,res)=> {
 
 app.get('/user-profile', (req,res)=> {
     res.render('user-profile');
+    /*
+        User.findOne({email: req.session.user.email})
+            .populate("org_id")
+            .then(function(user){
+                res.render('user-profile', {
+                    // insert needed contents for userprofile.hbs 
+                
+                });                              
+            });
+    */
 });
 
 app.get('/viewevent', (req,res)=> {
     res.render('viewevent');
 });
 
-app.get('/vieworg', (req,res)=> {
-    res.render('vieworg');
+app.get('/vieworg/:orgId', (req,res)=> {
+    const orgId = req.params.orgId;
+
+    OrgModel.findById(orgId,
+        function(err, docs) {
+            if (err) {
+                res.send(err);
+              } else {
+                res.json(docs);
+              }
+            /*
+            res.render('vieworg', {
+                Orgs:obj
+            });
+            */
+        });
 });
 
 app.get('/view-officers', (req,res)=> {
