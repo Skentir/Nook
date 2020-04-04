@@ -232,7 +232,6 @@ app.get('/vieworg/:orgId', (req,res)=> {
             if (err) {
                 res.send(err);
               } else {        
-                console.log(result);
                 var org = JSON.parse(JSON.stringify(result));
                 res.render('vieworg', org);       
             }
