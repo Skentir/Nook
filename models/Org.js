@@ -74,9 +74,9 @@ const OrgSchema = new mongoose.Schema({
     fb_url:{type: String, required: true},
     ig_url: {type: String, required: true},
     
-    events:[{type:mongoose.Types.ObjectId, ref: 'Event'}],
+    events:[{type:mongoose.Schema.Types.ObjectId, ref: 'Event'}],
 
-    officers:[{type:mongoose.Types.ObjectId, ref: 'User'}]
+    officers:[{type:mongoose.Schema.Types.ObjectId, ref: 'User'}]
 
 
 

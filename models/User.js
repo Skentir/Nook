@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema({
         required: false
     },
 
-    orgs : [{type: mongoose.Types.ObjectId, ref: "OrgModel"}],
+    orgs : [{type: mongoose.Schema.Types.ObjectId, ref: 'Org'}],
 
     
 });
