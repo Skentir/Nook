@@ -188,8 +188,17 @@ app.get('/edit-profile', (req,res)=> {
     res.render( 'edit-profile');
 })
 
-app.get('/editorg', (req,res)=> {
-    res.render( 'editorg');
+app.get('/editorg/:orgId', (req,res)=> {
+    var orgId = req.params.orgId;
+    
+    OrgModel.findById(orgId)
+        .exec(function (err,result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.render('editorg', result);
+            }
+        });
 })
 
 app.get('/editevent/:eventId', (req,res)=> {
