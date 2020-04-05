@@ -266,8 +266,22 @@ app.get('/vieworg/:orgId', (req,res)=> {
         });
 });
 
-app.get('/view-officers', (req,res)=> {
-    res.render('view-officers');
+app.get('/view-officers/:orgId', (req,res)=> {
+    const orgId = req.params.orgId;
+
+    OrgModel.find({'_id':orgId}, {'org_id':orgId})
+    .select('org_name org_logo tags no_of_officers no_of_members date_established')
+    .populate('officers','_id photo first_name last_name orgs.position')
+    .limit(1)
+    .exec(function(err, result)  {
+        if (err) {
+            res.send(err);
+          } else {       
+            
+            var officer = JSON.parse(JSON.stringify(result[0]));
+            res.render('view-officers', officer);
+        }
+    }); 
 });
 
 

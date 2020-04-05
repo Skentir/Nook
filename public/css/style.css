@@ -14,6 +14,10 @@ body {
     margin-bottom: 3rem;
 }
 
+.box.mt-4 {
+    min-width: 750px;
+}
+
 h1 {
     color: #3a3a3a;
     font-weight: 400;
