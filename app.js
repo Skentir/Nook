@@ -3,6 +3,7 @@
 //Require and Execute Express
 const express = require('express');
 const app = express();
+
 //Require Handlebar
 const hbs = require('express-handlebars');
 const Handlebars = require('handlebars');
@@ -19,6 +20,7 @@ const multer = require('multer');
 const GridFsStorage = require("multer-gridfs-storage");
 const bodyParser = require('body-parser');
 const Grid = require('gridfs-stream');
+const bcrypt = require('bcryptjs');
 
 // Require for DateTime Formatting
 const moment = require('moment');
@@ -47,7 +49,7 @@ app.use(express.static(__dirname+'/'))
 app.use(bodyParser.urlencoded({
     extended: true
  }));
- //app.use(bodyParser.json());
+ app.use(bodyParser.json());
  //app.use(cors());
 
 // User session
@@ -94,6 +96,12 @@ app.use(require("express-session")({
     resave: true,    
     saveUninitialized: true
 }));
+
+
+app.use((req, res, next) => {
+    res.locals.loggedIn = req.isAuthenticated();
+    next();
+});
 
 
 
@@ -253,8 +261,8 @@ app.get('/view-officers', (req,res)=> {
 
 
 //POST for user registration
-app.post('/', upload.single('profilepic'), async (req,res)=> {
-    console.log(req.body.reg_fname);
+app.post('/', upload.single('profilepic'), (req,res)=> {
+    /*console.log(req.body.reg_fname);
     console.log(req.file.filename);
     const user = new User({
         first_name : req.body.reg_fname,
@@ -275,7 +283,38 @@ app.post('/', upload.single('profilepic'), async (req,res)=> {
     catch(err){
         res.status(500).send("error message");
         console.log("error");
-    }
+    }*/
+    User.findOne({ email_address: req.body.reg_email})
+    .then( userr => {
+        if(userr){
+            console.log("user exists");
+        }
+        else{
+            const user = new User({
+                first_name : req.body.reg_fname,
+                last_name: req.body.reg_lname,
+                id_number: req.body.reg_idnum,
+                year_level: req.body.reg_yrlevel,
+                email_address: req.body.reg_email,
+                password: req.body.reg_pass,
+                photo: req.file.filename
+            });
+
+            console.log(user.first_name);
+
+            bcrypt.genSalt(10, (err, salt) => 
+                bcrypt.hash(user.password, salt, (err, hash) => {
+                    if(err) throw err;
+                    // Hashed password
+                    user.password = hash;
+                    user.save()
+                    .then(acct => {
+                        res.redirect('/');
+                    })
+                    .catch(err => console.log(err));
+                }))
+        }
+    })
 });
 
 
@@ -311,11 +350,11 @@ app.post('/ad-eventreg', upload.single('event_photo'), async(req,res)=>{
 
 
 app.post('/login', (req, res, next) => {
-    passport.authenticate('local', {    
-      successRedirect: '/explore',
-      failureRedirect: '/',
+    passport.authenticate('local', {
+    successRedirect: '/explore',
+    failureRedirect: '/',
     })(req, res, next);
-  });
+});
   
 
 //listen to port

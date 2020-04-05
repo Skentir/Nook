@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    //form validation
+    /*form validation
     $("#sign-in-btn").click(function(){
         var email = $("email").val();
         var pass = $("password").val();
@@ -18,10 +18,10 @@ $(document).ready(function(){
                 console.log(xhr.statusText);
             }
         });
-      
-    })
+      */
 
-    /*User Registration */
+
+    /*User Registration  thru ajax
     $("#register-btn").click(function(){
 
         //boolean 
@@ -36,32 +36,6 @@ $(document).ready(function(){
         valid = checkifValid($("#select-p"),valid);
 
         if(valid == true){
-            /*var firstname  = $("#reg-fname").val();
-            var lastname = $("#reg-lname").val();
-            var email = $("#reg-email").val();
-            var idnum = $("#reg-idnum").val();
-            var pass = $("#reg-pass").val();
-            var admin = $("#select-o").val();
-            var position = $("#select-p option:selected").text();
-            var yrlevel = $("#reg-yrlvl option:selected").text();
-
-            //for forms with text only
-            $.ajax({
-                url:"/",
-                type: "POST",
-                contentType: "application/json",
-                headers: {'Content-Type': 'application/json'},
-                data:JSON.stringify({
-                    first_name: firstname, last_name: lastname,
-                    email: email, idnum: idnum, password: pass, 
-                    admin: admin, position:position, yrlvl : yrlevel
-                }),
-                success: console.log("success"),
-                error: function(xhr){
-                    console.log(xhr.statusText);
-                }
-            });*/
-
                 //get form 
                 var myform = document.getElementById("reg_form");
                 //create formdata object
@@ -84,7 +58,7 @@ $(document).ready(function(){
                         for (var value of formData.values()) {
                             console.log(value); 
                          }
-                         window.location.assign('/explore');
+                         //window.location.assign('/explore');
                     }
                 })
             
@@ -93,12 +67,12 @@ $(document).ready(function(){
 
         
         }
-    })
+    })*/
 
 
-    /*Event Creation*/
+    /*Event Creation
     $("#submit-event").click(function(){
-        /*place validation here*/
+   
 
         var myform = document.getElementById("event_reg");
         console.log(myform);
@@ -130,7 +104,7 @@ $(document).ready(function(){
         })
 
     })
-
+*/
 
 
     //function to check if fields are valid
