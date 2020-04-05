@@ -3,7 +3,9 @@
 //Require and Execute Express
 const express = require('express');
 const app = express();
-
+//Require Handlebar
+const hbs = require('express-handlebars');
+const Handlebars = require('handlebars');
 
 //Require db models
 const User = require('./models/User');
@@ -18,7 +20,9 @@ const GridFsStorage = require("multer-gridfs-storage");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Grid = require('gridfs-stream');
-const Handlebars = require('handlebars');
+
+// Require for DateTime Formatting
+const moment = require('moment');
 
 
 //Require Mongoose for DB
@@ -36,7 +40,6 @@ const passport = require('passport');
 require('./scripts/passport')(passport);
 
 
-
 /*Middlewares*/
 //Serve the css files
 app.use(express.static(__dirname+'/'))
@@ -48,10 +51,10 @@ app.use(bodyParser.urlencoded({
  app.use(bodyParser.json());
  app.use(cors());
 
-//user session
+// User session
 app.use(passport.initialize());
 app.use(passport.session());
-const hbs = require('express-handlebars');
+
 app.set('view engine', 'hbs');
 
 app.engine('hbs', hbs( {
@@ -66,7 +69,7 @@ app.engine('hbs', hbs( {
         this._sections[name] = options.fn(this);
         return null;
     },
-    'notNull' : function(value, options) {
+    'notNull': function(value, options) {
 
         if(!Handlebars.Utils.isArray(value)){
             return [];
@@ -75,6 +78,12 @@ app.engine('hbs', hbs( {
                 return !Handlebars.Utils.isEmpty(ele);
             });
         }
+    },
+    'formatToYear': function(dateTime) {
+        return moment(dateTime).format('YYYY');
+    },
+    'formatDate': function(dateTime) {
+        return moment(dateTime).format('MMMM DD, YYYY');
     }
   }
 
@@ -203,7 +212,6 @@ app.get('/viewevent/:eventId', (req,res)=> {
             if (err) {
                 res.send(err);
             } else {
-                console.log(post);
                 var event = JSON.parse(JSON.stringify(result));
                 res.render('viewevent', event);
             }
