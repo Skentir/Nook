@@ -15,12 +15,12 @@
 <div class="container">
     <!-- Edit Header -->
     <header class="edit-hdr">
-        <img class="hdr-pic" src="../../public/assets/events/python-header.jpeg">
+        <img class="hdr-pic" src="{{header_photo}}">
         <div>
-            <span class="hdr-text" id="user-name">Python for Data Science</span>
+            <span class="hdr-text" id="user-name">{{event_name}}</span>
             /
             <span class="hdr-text">Edit Profile</span>
-            <p class="hdr-desc">Setup your organization's Nook account</p>
+            <p class="hdr-desc">Setup your organization's Nook event</p>
         </div>
     </header>
     <!-- Form -->
@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label>Event Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control invalid-field" id="event-name-field">
+                                <input type="text" class="form-control invalid-field" id="event-name-field" placeholder="{{event_name}}">
                             </div>
                         </div>
                         
@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label>Description </label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="event-desc-field"></textarea>
+                                <textarea type='text' class="form-control" id="event-desc-field" placeholder="{{about_desc}}"></textarea>
                             </div>
                         </div>
 
@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label>Venue</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="event-venue-field">
+                                <input type="text" class="form-control" id="event-venue-field" placeholder="{{venue}}">
                             </div>
                         </div>
                         
@@ -73,7 +73,8 @@
                                 <div class="form-group">
                                     <label>Date</label>
                                     <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" id="event-date-field">
+                                        <input type="text" class="form-control datetimepicker-input" id="event-date-field"
+                                            placeholder="{{formatDate date}}">
                                         <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -94,7 +95,8 @@
                                 <div class="form-group">
                                     <label>Start Time</label>
                                     <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
-                                        <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3">
+                                        <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3"
+                                            placeholder="{{start_time}}">
                                         <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                         </div>
@@ -112,7 +114,8 @@
                                 <div class="form-group">
                                     <label>End Time</label>
                                     <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
-                                        <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2">
+                                        <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2"
+                                            placeholder="{{end_time}}">
                                         <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                         </div>
@@ -131,7 +134,7 @@
                         <div class="form-group">
                             <label>Incentives</label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="event-incentives-field"></textarea>
+                                <textarea type='text' class="form-control" id="event-incentives-field" placeholder="{{incentives}}"></textarea>
                             </div>
                         </div>
                     </div>

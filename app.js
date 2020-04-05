@@ -192,8 +192,17 @@ app.get('/editorg', (req,res)=> {
     res.render( 'editorg');
 })
 
-app.get('/editevent', (req,res)=> {
-    res.render( 'editevent');
+app.get('/editevent/:eventId', (req,res)=> {
+    var eventId = req.params.eventId;
+    
+    EventModel.findById(eventId)
+        .exec(function (err,result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.render('editevent', result);
+            }
+        });
 })
 
 app.get('/member-requests', (req,res)=> {
