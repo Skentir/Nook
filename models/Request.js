@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const RequestSchema = mongoose.Schema({
     user_id: {
-        type: ObjectId,
+        type:  [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     },
 
     org_id: {
-        type: ObjectId,
+        type:  [{type: mongoose.Schema.Types.ObjectId, ref: 'Org'}]
     },
 
     status:{

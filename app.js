@@ -11,6 +11,7 @@ const Handlebars = require('handlebars');
 const User = require('./models/User');
 const EventModel = require('./models/Event');
 const OrgModel = require('./models/Org');
+const Request = require('./models/Request');
 
 //Require for parsing and storing data
 const crypto = require("crypto");
@@ -184,21 +185,20 @@ app.get('/ad-tools', (req,res)=> {
     res.render('ad-tools', obj);
 })
 
-app.get('/edit-profile', (req,res)=> {
-    res.render( 'edit-profile');
-})
-
-app.get('/editorg/:orgId', (req,res)=> {
-    var orgId = req.params.orgId;
-    
-    OrgModel.findById(orgId)
+app.get('/editprofile/:userId', (req,res)=> {
+    var userId = req.params.userId;
+    /* TODO: Get req.user.email from session or the id */
+    User.findById(userId)
         .exec(function (err,result) {
             if (err) {
                 res.send(err);
             } else {
-                res.render('editorg', result);
+                res.render('edit-profile', result);
             }
         });
+})
+
+app.get('/editorg', (req,res)=> {
 })
 
 app.get('/editevent/:eventId', (req,res)=> {
@@ -214,8 +214,22 @@ app.get('/editevent/:eventId', (req,res)=> {
         });
 })
 
-app.get('/member-requests', (req,res)=> {
-    res.render('member-requests');
+app.get('/member-requests/:orgId', (req,res)=> {
+    var orgId = req.params.orgId;
+    
+    Request.find({org_id: orgId})
+        .select('position')
+        .populate('user_id', '_id photo id_number first_name last_name')
+        .populate('org_id', 'tags org_logo no_of_members no_of_officers')
+        .exec(function (err,result) {
+            if (err) {
+                res.send(err);
+            } else {
+                var request = JSON.parse(JSON.stringify(result[0]));
+                console.log(request);
+                res.render('member-requests', request);
+            }
+        });
 });
 
 app.get('/planner', (req,res)=> {
