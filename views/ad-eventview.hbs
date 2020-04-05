@@ -19,30 +19,20 @@
                         <h1>Event List</h1>
                     </header>
                     <div id="event-list">
-                        <div class="row contact-form">
-                            <a href="editevent" class="col-8 event-name">
-                                Python for Data Science
-                            </a>
-                            <div class="col">
-                                <span class="event-date">02/13/2020</span>
-                            </div>
-                        </div>
-                        <div class="row contact-form">
-                            <a href="editevent" class="col-8 event-name">
-                                Introduction to Google Cloud Platform
-                            </a>
-                            <div class="col">
-                                <span class="event-date">02/13/2020</span>
-                            </div>
-                        </div>
-                            <div class="row contact-form">
-                            <a href="editevent" class="col-8 event-name">
-                                Build a CRUD Website with Firbase
-                            </a>
-                            <div class="col">
-                                <span class="event-date">02/13/2020</span>
-                            </div>
-                        </div>
+                        {{#if events}}
+                            {{#each events}}
+                                <div class="row contact-form">
+                                    <a href="editevent/{{this._id}}" class="col-8 event-name">
+                                        {{this.event_name}}
+                                    </a>
+                                    <div class="col">
+                                        <span class="event-date">{{formatDate this.date}}</span>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            {{else}}
+                                <p>No events yet.</p>
+                        {{/if}}
                     </div>
                 </div>
                 <figure class="right-box">

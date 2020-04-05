@@ -153,8 +153,18 @@ app.get('/landing',(req,res) =>{
 app.get('/ad-eventreg', (req,res)=>{
     res.render('ad-eventreg');
 })
-app.get('/ad-eventview', (req,res)=>{
-    res.render('ad-eventview');
+app.get('/eventlist/:orgId', (req,res)=>{
+    var orgId = req.params.orgId;
+
+    EventModel.find({'organizer_id':orgId}, {event_name:1, date:1})
+        .exec(function(err, result) {
+            if (err) {
+                res.send(err);
+            } else {
+                var event = JSON.parse(JSON.stringify(result));
+                res.render('ad-eventview', {events:event});
+            }
+        });
 })
 
 app.get('/explore', function(req, res) {
@@ -166,7 +176,12 @@ app.get('/explore', function(req, res) {
 });
 
 app.get('/ad-tools', (req,res)=> {
-    res.render('ad-tools');
+    /* TODO: GET ORG ID FROM USER */
+    
+    var obj = {
+        _id : "5e8229291c9d4400009aa35f"
+    }
+    res.render('ad-tools', obj);
 })
 
 app.get('/edit-profile', (req,res)=> {
