@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
-const OrgModel = require('../models/Org.js');
+const Org = require('../models/Org.js');
 //var passportLocalMongoose = require("passport-local-mongoose"); 
 mongoose.set('debug', true);
+
+/*var orgInfoSchema = new mongoose.Schema({
+    org_id: {type: mongoose.Schema.Types.ObjectId, ref:'Org'},
+    position: {type: String }, { noId: true },
+});*/
+/*var orgInfoSchema = new mongoose.Schema({ org_id: mongoose.Schema.Types.ObjectId, 
+    position: String}, { noId: true });
+*/
 
 const UserSchema = new mongoose.Schema({
     first_name: {
@@ -44,7 +52,13 @@ const UserSchema = new mongoose.Schema({
         required: false
     },
 
-    orgs : [{org_id: mongoose.Schema.Types.ObjectId, ref: 'Org'}, {position: String}],
+    orgs : [{
+        org_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Org'
+        },
+        position: String,
+    },{noId:true}],
 
     
 });

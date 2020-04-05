@@ -18,7 +18,6 @@ const fs = require('fs');
 const multer = require('multer');
 const GridFsStorage = require("multer-gridfs-storage");
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const Grid = require('gridfs-stream');
 
 // Require for DateTime Formatting
@@ -46,10 +45,10 @@ app.use(express.static(__dirname+'/'))
 
 //parsing
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
  }));
- app.use(bodyParser.json());
- app.use(cors());
+ //app.use(bodyParser.json());
+ //app.use(cors());
 
 // User session
 app.use(passport.initialize());
