@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
+const User = require('../models/User.js');
+const Org = require('../models/Org.js');
 
 const RequestSchema = mongoose.Schema({
     user_id: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
 
     org_id: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId, ref: 'Org'
     },
 
     status:{
-        type: Boolean
+        type: String
     },
 
     position:{
@@ -18,4 +20,5 @@ const RequestSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Request', RequestSchema);
+const collectionname = 'requests'
+module.exports = mongoose.model('Request', RequestSchema, collectionname);

@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema({
         required: false
     },
 
-    orgs : [{type: mongoose.Schema.Types.ObjectId, ref: 'Org'}],
+    orgs : [{org_id: mongoose.Schema.Types.ObjectId, ref: 'Org'}, {position: String}],
 
     
 });

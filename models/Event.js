@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const OrgModel = require('../models/Org.js');
+const Org = require('../models/Org.js');
 
 const EventSchema = mongoose.Schema({
     event_id:{
