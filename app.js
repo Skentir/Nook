@@ -209,28 +209,36 @@ app.get('/editprofile', (req,res, next)=> {
         res.redirect('/');  
     } else {
         var userId = req.session.passport.user;
-        var requests;
-        Request.find({user_id: userId})
-            .populate('org_id', '_id org_name org_logo')
-            .exec(function (err,result) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    requests = JSON.parse(JSON.stringify(result));
-                }
-            });
+        
         User.findById(userId)
-        .exec(function (err,result) {
+        .exec(function (err,user) {
             if (err) {
                 res.send(err);
             } else {
-                var result = JSON.parse(JSON.stringify(result));
-                var params = {
-                    layout: 'main',
-                    requests,
-                    result,
-                    };
-                res.render('edit-profile', params);
+
+                Request.find({user_id: userId})
+                .populate('org_id', '_id org_name org_logo')
+                .exec(function (err,result) {
+                    if (err) {
+                        var users = JSON.parse(JSON.stringify(user));
+                        var params = {
+                            layout: 'main',
+                            user_data: users,
+                        };
+                        res.json(params);
+                        // res.render('edit-profile', params);
+                    } else {
+                        var users = JSON.parse(JSON.stringify(user));
+                        var reqs = JSON.parse(JSON.stringify(result));
+                        var params = {
+                            layout: 'main',
+                            user_data: users,
+                            requests: reqs
+                        };
+                        res.json(params);
+                        // res.render('edit-profile', params);
+                    }
+                });
             }
         });
     }
