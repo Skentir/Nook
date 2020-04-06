@@ -52,9 +52,6 @@ app.use(bodyParser.urlencoded({
  app.use(bodyParser.json());
  //app.use(cors());
 
-// User session
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.set('view engine', 'hbs');
 
@@ -90,6 +87,7 @@ app.engine('hbs', hbs( {
 
 }));
 
+// User session
 
 app.use(require("express-session")({    
     secret:"session",    
@@ -102,6 +100,10 @@ app.use((req, res, next) => {
     res.locals.loggedIn = req.isAuthenticated();
     next();
 });
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
@@ -262,28 +264,6 @@ app.get('/view-officers', (req,res)=> {
 
 //POST for user registration
 app.post('/', upload.single('profilepic'), (req,res)=> {
-    /*console.log(req.body.reg_fname);
-    console.log(req.file.filename);
-    const user = new User({
-        first_name : req.body.reg_fname,
-        last_name: req.body.reg_lname,
-        id_number: req.body.reg_idnum,
-        year_level: req.body.reg_yrlevel,
-        email_address: req.body.reg_email,
-        password: req.body.reg_pass,
-        photo: req.file.filename
-    });
-    try{
-    await user.save((err, user)=>{
-        if(err) return res.json(err);
-        else res.send(user);
-    });
-        
-    }
-    catch(err){
-        res.status(500).send("error message");
-        console.log("error");
-    }*/
     User.findOne({ email_address: req.body.reg_email})
     .then( userr => {
         if(userr){
