@@ -32,7 +32,7 @@ module.exports = function(passport){
     });
     
     passport.deserializeUser(function(id, done) {
-        user.findById(id, function(err, acct) {
+        user.findById(id, function(err, user) {
             done(err, user);
         });
     });
