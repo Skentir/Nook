@@ -18,12 +18,14 @@
             <p>{{info.short_bio}}</p>
             <h2>{{info.email_address}}</h2>
         </div>
+        {{#if isUser}}
         <div class="profile-buttons">
             <a id="register-btn" class="custombtn thinbtn mt-2" href="/editprofile">
                 Edit Profile
             </a>
             <a class="custombtn thinbtn" id="logout-btn" style="color:white;">Logout</a>
         </div>
+        {{/if}}
     </div>
     <!-- User Organizations -->
     <div class="box mt-4" style="background-color: #f0f0f0;">
@@ -34,10 +36,10 @@
                    {{#if info.orgs}}
                    {{#each info.orgs}}
                     <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top img-fluid" src="{{this.org_photo}}">
+                        <a href="/vieworg/{{this.org_id._id}}">
+                            <img class="card-img-top img-fluid" src="{{this.org_id.org_logo}}">
                             <div class="card-body">
-                                <span>{{this.org_name}}</span>
+                                <span>{{this.org_id.org_name}}</span>
                             </div>
                         </a>
                     </div>

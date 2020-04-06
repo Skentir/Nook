@@ -307,20 +307,38 @@ app.get('/member-requests/:orgId', (req,res)=> {
 });
 
 app.get('/planner', (req,res)=> {
-    res.render('planner');
+    if (!req.isAuthenticated()) { 
+        res.redirect('/');  
+    } else {
+    var userId = req.session.passport.user;
+    User.findById(userId)
+            .populate('planner','_id event_name event_header')
+            .exec( function(err,result) { 
+                if (err) { res.send(err)
+                } else  {
+             
+                var user = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    info:user
+                }
+                res.render('planner', params);   
+                }                           
+            });
+    }
 });
 
+// View User Profile
 app.get('/user-profile', (req,res, next) => {    
     if (!req.isAuthenticated()) { 
         res.redirect('/');  
     } else {
     var userId = req.session.passport.user;
     User.findById(userId)
-            .populate('org_id', 'org_name org_logo')
+            .populate('orgs.org_id','_id org_name org_logo')
             .exec( function(err,result) { 
                 if (err) { res.send(err)
                 } else  {
-                var id = result.photo._id;
              
                 var user = JSON.parse(JSON.stringify(result));
                 var params = {
@@ -332,6 +350,26 @@ app.get('/user-profile', (req,res, next) => {
                 }                           
             });
     }
+});
+
+// View Profile
+app.get('/user-profile/:userId', (req,res, next) => {    
+    var userId = req.params.userId;
+    User.findById(userId)
+            .populate('orgs.org_id','_id org_name org_logo')
+            .exec( function(err,result) { 
+                if (err) { res.send(err)
+                } else  {
+             
+                var user = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    isUser: false,
+                    info:user
+                }
+                res.render('user-profile', params);   
+                }                           
+            });
 });
 
 app.get('/viewevent/:eventId', (req,res)=> {
