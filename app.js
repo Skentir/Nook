@@ -434,7 +434,7 @@ app.get('/view-officers/:orgId', (req,res)=> {
             res.send(err);
           } else {        
 
-           User.find({'orgs.org_id':orgId})
+           User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
             .select('_id photo first_name last_name orgs.position')
             .exec(function(err, result)  {
                 if (err) {
