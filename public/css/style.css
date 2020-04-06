@@ -27,7 +27,9 @@ h1 {
 }
 
 #account-details {
-    width: 200px;
+    min-width: 200px;
+    padding-top: 20px;
+    max-width: 260px;
 }
 
 button {
