@@ -19,6 +19,7 @@ const crypto = require("crypto");
 const fs = require('fs');
 const multer = require('multer');
 const GridFsStorage = require("multer-gridfs-storage");
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const Grid = require('gridfs-stream');
 const bcrypt = require('bcryptjs');
@@ -47,6 +48,10 @@ require('./scripts/passport')(passport);
 app.use(express.static(__dirname+'/'))
 
 //parsing
+const cookieExpirationDate = new Date();
+const cookieExpirationDays = 365;
+cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
+
 app.use(bodyParser.urlencoded({
     extended: true
  }));
@@ -56,6 +61,21 @@ app.use(bodyParser.urlencoded({
 // User session
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser("session"));
+app.use(require("express-session")({    
+    secret:"session",    
+    resave: true,    
+    saveUninitialized: true,
+    cookie: {
+	    httpOnly: true,
+	    expires: cookieExpirationDate
+	}
+}));
+
+app.use((req, res, next) => {
+    res.locals.loggedIn = req.isAuthenticated();
+    next();
+});
 
 app.set('view engine', 'hbs');
 
@@ -90,21 +110,6 @@ app.engine('hbs', hbs( {
   }
 
 }));
-
-
-app.use(require("express-session")({    
-    secret:"session",    
-    resave: true,    
-    saveUninitialized: true
-}));
-
-
-app.use((req, res, next) => {
-    res.locals.loggedIn = req.isAuthenticated();
-    next();
-});
-
-
 
 //Connect to DB
 const client = mongoose.connect('mongodb+srv://testboy:nooktestboy@cluster0-pym8a.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
@@ -205,7 +210,17 @@ app.get('/editprofile/:userId', (req,res)=> {
         });
 })
 
-app.get('/editorg', (req,res)=> {
+app.get('/editorg/:orgId', (req,res)=> {
+    var orgId = req.params.orgId;
+    /* TODO: Get req.user.email from session or the id */
+    OrgModel.findById(orgId)
+        .exec(function (err,result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.render('editorg', result);
+            }
+        });
 })
 
 app.get('/editevent/:eventId', (req,res)=> {
@@ -224,17 +239,33 @@ app.get('/editevent/:eventId', (req,res)=> {
 app.get('/member-requests/:orgId', (req,res)=> {
     var orgId = req.params.orgId;
     
-    Request.find({org_id: orgId})
-        .select('position')
-        .populate('user_id', '_id photo id_number first_name last_name')
-        .populate('org_id', 'tags org_logo no_of_members no_of_officers')
-        .exec(function (err,result) {
+
+    OrgModel.find({'links.url':req.params.query}, function(err, foundUsers){
+        // ---
+     });
+
+    OrgModel.findById(orgId)
+        .select('tags org_logo no_of_members no_of_officers')
+        .exec(function (err, docs) {
             if (err) {
                 res.send(err);
             } else {
-                var request = JSON.parse(JSON.stringify(result[0]));
-                console.log(request);
-                res.render('member-requests', request);
+                
+                var org_id = docs.map(function(doc) { return doc._id; });
+
+                Request.find({org_id: org_id})
+                    .select('position')
+                    .populate('user_id', '_id photo id_number first_name last_name')
+                    .exec(function (err, docs) {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            console.log("has requests");
+                            res.json(docs);
+                        }/*
+                            var request = JSON.parse(JSON.stringify(result));
+                            res.render('member-requests', request);*/
+                    });
             }
         });
 });
@@ -243,8 +274,17 @@ app.get('/planner', (req,res)=> {
     res.render('planner');
 });
 
-app.get('/user-profile', (req,res)=> {
+app.get('/user-profile', (req,res, next) => {
+    console.log(req.session);
+    console.log("passport user" + req.session.passport.user);
+    
+    if (!req.isAuthenticated()) { res.redirect('/'); } else {
+
+    const _id = req.session.passport.user;
+    console.log("yo" + _id);
+
     res.render('user-profile');
+    }
     /*
         User.findOne({email: req.session.user.email})
             .populate("org_id")
