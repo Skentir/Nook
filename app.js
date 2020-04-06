@@ -286,13 +286,24 @@ app.get('/member-requests/:orgId', (req,res)=> {
                     .populate('user_id', '_id photo id_number first_name last_name')
                     .exec(function (err, result) {
                         if (err) {
-                            res.render('member-requests',{outer: docs});
+                            var request = JSON.parse(JSON.stringify(docs));
+                            var params = {
+                                layout: 'main',
+                                data: [{ org: docs }]
+                            }
+                            res.render('member-requests', params);
                         } else {
                             var request = JSON.parse(JSON.stringify(result));
-                            res.json('member-requests', {
-                                out:request,
-                                outer: docs,
-                            });
+                            var params = {
+                                layout: 'main',
+                                data: [
+                                    {
+                                        reqs:request,
+                                        org: docs,
+                                    }
+                                ]
+                            }
+                            res.render('member-requests', params);
                         }
                     });
             }
@@ -414,19 +425,37 @@ app.get('/view-officers/:orgId', (req,res)=> {
 
     OrgModel.find({'_id':orgId}, {'org_id':orgId})
     .select('org_name org_logo tags no_of_officers no_of_members date_established')
-    .populate('officers','_id photo first_name last_name orgs.position')
     .limit(1)
-    .exec(function(err, result)  {
+    .exec(function(err, org)  {
         if (err) {
             res.send(err);
-          } else {       
-            
-            var officer = JSON.parse(JSON.stringify(result[0]));
-            var params = {
-                layout: 'main',
-                officer
-              };
-            res.render('view-officers', params);
+          } else {        
+
+           User.find({'orgs.org_id':orgId})
+            .select('_id photo first_name last_name orgs.position')
+            .exec(function(err, result)  {
+                if (err) {
+                    var orgs = JSON.parse(JSON.stringify(org));
+                    var params = {
+                        layout: 'main', 
+                        data: [{org_data: orgs}]
+                    };
+                    res.json(params);
+                   // res.render('view-officers', params);
+                } else {       
+                    var orgs = JSON.parse(JSON.stringify(org));
+                    var officer = JSON.parse(JSON.stringify(result));
+                    var params = {
+                        layout: 'main', 
+                        data: [{
+                            org_data: orgs,
+                            officers: officer
+                        }]
+                    };
+                    res.json(params);
+                    //res.render('view-officers', params);
+        }
+    }); 
         }
     }); 
 });
