@@ -204,22 +204,37 @@ app.get('/ad-tools', (req,res)=> {
     res.render('ad-tools', obj);
 })
 
-app.get('/editprofile/:userId', (req,res)=> {
-    var userId = req.params.userId;
-    /* TODO: Get req.user.email from session or the id */
-    User.findById(userId)
+app.get('/editprofile', (req,res, next)=> {
+    if (!req.isAuthenticated()) { 
+        res.redirect('/');  
+    } else {
+        var userId = req.session.passport.user;
+        var requests;
+        Request.find({user_id: userId})
+            .populate('org_id', '_id org_name org_logo')
+            .exec(function (err,result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    requests = JSON.parse(JSON.stringify(result));
+                }
+            });
+        User.findById(userId)
         .exec(function (err,result) {
             if (err) {
                 res.send(err);
             } else {
+                var result = JSON.parse(JSON.stringify(result));
                 var params = {
                     layout: 'main',
-                    result
-                  };
+                    requests,
+                    result,
+                    };
                 res.render('edit-profile', params);
             }
         });
-})
+    }
+});
 
 app.get('/editorg/:orgId', (req,res)=> {
     var orgId = req.params.orgId;
@@ -295,27 +310,28 @@ app.get('/planner', (req,res)=> {
     res.render('planner');
 });
 
-app.get('/user-profile', (req,res, next) => {
-    console.log(req.session);
-    console.log("passport user" + req.session.passport.user);
-    
-    if (!req.isAuthenticated()) { res.redirect('/'); } else {
-
-    const _id = req.session.passport.user;
-    console.log("yo" + _id);
-
-    res.render('user-profile');
-    }
-    /*
-        User.findOne({email: req.session.user.email})
-            .populate("org_id")
-            .then(function(user){
-                res.render('user-profile', {
-                    // insert needed contents for userprofile.hbs 
-                
-                });                              
+app.get('/user-profile', (req,res, next) => {    
+    if (!req.isAuthenticated()) { 
+        res.redirect('/');  
+    } else {
+    var userId = req.session.passport.user;
+    User.findById(userId)
+            .populate('org_id', 'org_name org_logo')
+            .exec( function(err,result) { 
+                if (err) { res.send(err)
+                } else  {
+                var id = result.photo._id;
+             
+                var user = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    isUser: true,
+                    info:user
+                }
+                res.render('user-profile', params);   
+                }                           
             });
-    */
+    }
 });
 
 app.get('/viewevent/:eventId', (req,res)=> {
