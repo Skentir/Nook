@@ -274,33 +274,26 @@ app.get('/editevent/:eventId', (req,res)=> {
 
 app.get('/member-requests/:orgId', (req,res)=> {
     var orgId = req.params.orgId;
-    
-
-    OrgModel.find({'links.url':req.params.query}, function(err, foundUsers){
-        // ---
-     });
 
     OrgModel.findById(orgId)
-        .select('tags org_logo no_of_members no_of_officers')
+        .select('tags org_name org_logo no_of_members no_of_officers')
         .exec(function (err, docs) {
             if (err) {
                 res.send(err);
             } else {
-                
-                var org_id = docs.map(function(doc) { return doc._id; });
-
-                Request.find({org_id: org_id})
+                Request.find({org_id: docs._id})
                     .select('position')
                     .populate('user_id', '_id photo id_number first_name last_name')
-                    .exec(function (err, docs) {
+                    .exec(function (err, result) {
                         if (err) {
-                            res.send(err);
+                            res.render('member-requests',{outer: docs});
                         } else {
-                            console.log("has requests");
-                            res.json(docs);
-                        }/*
                             var request = JSON.parse(JSON.stringify(result));
-                            res.render('member-requests', request);*/
+                            res.json('member-requests', {
+                                out:request,
+                                outer: docs,
+                            });
+                        }
                     });
             }
         });
