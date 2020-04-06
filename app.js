@@ -156,11 +156,10 @@ const upload = multer({storage: storage});
 
 //ROUTES
 app.get('/',(req,res) =>{
-    res.sendFile(path.join(__dirname + "/views/landing.html")); 
-})
-
-app.get('/landing',(req,res) =>{
-    res.sendFile(path.join(__dirname + "/views/landing.html")); 
+    var params = {
+        layout: 'simple',
+      };
+    res.render('landing', params); 
 })
 
 app.get('/ad-eventreg', (req,res)=>{
@@ -175,7 +174,11 @@ app.get('/eventlist/:orgId', (req,res)=>{
                 res.send(err);
             } else {
                 var event = JSON.parse(JSON.stringify(result));
-                res.render('ad-eventview', {events:event});
+                var params = {
+                    layout: 'main',
+                    events: event
+                  };
+                res.render('ad-eventview', params);
             }
         });
 })
@@ -184,7 +187,11 @@ app.get('/explore', function(req, res) {
     OrgModel.find({})
         .exec( function(err, result) {
         var org = JSON.parse(JSON.stringify(result));
-        res.render('explore', {orgs:org});
+        var params = {
+            layout: 'main',
+            orgs: org
+          };
+        res.render('explore', params);
     });
 });
 
@@ -205,7 +212,11 @@ app.get('/editprofile/:userId', (req,res)=> {
             if (err) {
                 res.send(err);
             } else {
-                res.render('edit-profile', result);
+                var params = {
+                    layout: 'main',
+                    result
+                  };
+                res.render('edit-profile', params);
             }
         });
 })
@@ -218,7 +229,12 @@ app.get('/editorg/:orgId', (req,res)=> {
             if (err) {
                 res.send(err);
             } else {
-                res.render('editorg', result);
+                var org = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    org
+                  };
+                res.render('editorg', params);
             }
         });
 })
@@ -231,7 +247,12 @@ app.get('/editevent/:eventId', (req,res)=> {
             if (err) {
                 res.send(err);
             } else {
-                res.render('editevent', result);
+                event = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    event
+                  };
+                res.render('editevent', params);
             }
         });
 })
@@ -307,7 +328,11 @@ app.get('/viewevent/:eventId', (req,res)=> {
                 res.send(err);
             } else {
                 var event = JSON.parse(JSON.stringify(result));
-                res.render('viewevent', event);
+                var params = {
+                    layout: 'main',
+                    event
+                  };
+                res.render('viewevent', params);
             }
         });
 });
@@ -322,7 +347,11 @@ app.get('/vieworg/:orgId', (req,res)=> {
                 res.send(err);
               } else {        
                 var org = JSON.parse(JSON.stringify(result));
-                res.render('vieworg', org);       
+                var params = {
+                    layout: 'main',
+                    org
+                  };
+                res.render('vieworg', params);       
             }
         });
 });
@@ -340,7 +369,11 @@ app.get('/view-officers/:orgId', (req,res)=> {
           } else {       
             
             var officer = JSON.parse(JSON.stringify(result[0]));
-            res.render('view-officers', officer);
+            var params = {
+                layout: 'main',
+                officer
+              };
+            res.render('view-officers', params);
         }
     }); 
 });
