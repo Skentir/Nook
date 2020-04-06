@@ -18,7 +18,7 @@
 </header>
 
 <!--Org Details-->
-<section class = "container">
+<section class = "container" style="min-height: 400px;">
     <!-- Org Sub Details -->
     <div class="details pt-3 pb-3">
         <div class="left-deet ld-1 odeet">
@@ -70,14 +70,14 @@
 
 <!-- Org Events-->
 <section class="container">
-    <div class="box" style="background-color: #7c3bff1f;">
+    <div class="box" style="background-color: #7c3bff1f; min-height: 218px;">
         <h5 class="mb-3" style="text-align: center;">Upcoming Events</h5>
         <div class="card-wrapper">
             <div class="card-menu" id="org-events-list">
                 <div class="row">
                     {{#if events}}
                         {{#each (notNull events)}}
-                            <div class="card">
+                            <div class="card pb-0">
                                 <a href="/viewevent/{{this._id}}">
                                     <img class="card-img-top img-fluid" src="{{this.header_photo}}">
                                     <div class="card-body">      

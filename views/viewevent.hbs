@@ -69,8 +69,10 @@
                 {{/if}}
             </div>
             <div class="event-info  ei-left mb-2">
-                <h5 class="mb-0">Incentives</h5>
-                <span class="sub-desc" id="event-things">{{incentives}}</span>
+                {{#if incentives includeZero=true}}
+                    <h5 class="mb-0">Incentives</h5>
+                    <span class="sub-desc" id="event-things">{{incentives}}</span>
+                {{/if}}
             </div>
 
             <button type="button" class="custombtn mt-3 mb-3" id="add-to-planner-btn" data-toggle="modal" data-target="#add-to-planner-modal">I'm interested</button>
