@@ -225,8 +225,7 @@ app.get('/editprofile', (req,res, next)=> {
                             layout: 'main',
                             user_data: users,
                         };
-                        res.json(params);
-                        // res.render('edit-profile', params);
+                        res.render('edit-profile', params);
                     } else {
                         var users = JSON.parse(JSON.stringify(user));
                         var reqs = JSON.parse(JSON.stringify(result));
@@ -235,8 +234,7 @@ app.get('/editprofile', (req,res, next)=> {
                             user_data: users,
                             requests: reqs
                         };
-                        res.json(params);
-                        // res.render('edit-profile', params);
+                        res.render('edit-profile', params);
                     }
                 });
             }
@@ -294,22 +292,19 @@ app.get('/member-requests/:orgId', (req,res)=> {
                     .populate('user_id', '_id photo id_number first_name last_name')
                     .exec(function (err, result) {
                         if (err) {
-                            var request = JSON.parse(JSON.stringify(docs));
+                            var orgs = JSON.parse(JSON.stringify(docs));
                             var params = {
                                 layout: 'main',
-                                data: [{ org: docs }]
+                                org: orgs
                             }
                             res.render('member-requests', params);
                         } else {
+                            var orgs = JSON.parse(JSON.stringify(docs));
                             var request = JSON.parse(JSON.stringify(result));
                             var params = {
                                 layout: 'main',
-                                data: [
-                                    {
-                                        reqs:request,
-                                        org: docs,
-                                    }
-                                ]
+                                reqs:request,
+                                org: orgs
                             }
                             res.render('member-requests', params);
                         }
@@ -446,24 +441,22 @@ app.get('/view-officers/:orgId', (req,res)=> {
                     var orgs = JSON.parse(JSON.stringify(org));
                     var params = {
                         layout: 'main', 
-                        data: [{org_data: orgs}]
+                        org_data: orgs
                     };
-                    res.json(params);
-                   // res.render('view-officers', params);
+                   
+                   res.render('view-officers', params);
                 } else {       
                     var orgs = JSON.parse(JSON.stringify(org));
                     var officer = JSON.parse(JSON.stringify(result));
                     var params = {
                         layout: 'main', 
-                        data: [{
-                            org_data: orgs,
-                            officers: officer
-                        }]
+                        org_data: orgs,
+                        officers: officer
+                        }
                     };
-                    res.json(params);
-                    //res.render('view-officers', params);
-        }
-    }); 
+                    
+                    res.render('view-officers', params);
+            }); 
         }
     }); 
 });
