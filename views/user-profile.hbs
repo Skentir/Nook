@@ -29,7 +29,11 @@
     </div>
     <!-- User Organizations -->
     <div class="box mt-4" style="background-color: #f0f0f0;">
+        {{#if isUser}}
         <h1 class="mb-3 ml-2"> My Organizations</h1>
+        {{else}}
+        <h1 class="mb-3 ml-2"> {{info.first_name}}'s Organizations</h1>
+        {{/if}}
         <div class="card-wrapper mt-2">
             <div  class="card-menu" id="user-organization-list">
                 <div class="row">

@@ -31,7 +31,7 @@
         <div class="information" id="request-list">
         {{#if user_id}}
         {{#each user_id}}
-        <div class="requests">
+        <a class="requests" hrf={{this._id}}>
             <img class="prof-pic" src="{{this.photo}}">
             <span>
                 <span class="member-name">{{this.first_name}} {{this.last_name}}</span>
@@ -45,7 +45,7 @@
                     <img src="../assets/reject.png">             
                 </button>       
             </div>
-        </div>
+        </a>
        {{/each}}
        {{else}}
         <p> No requests yet.</p>

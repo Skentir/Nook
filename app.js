@@ -312,7 +312,7 @@ app.get('/planner', (req,res)=> {
     } else {
     var userId = req.session.passport.user;
     User.findById(userId)
-            .populate('planner','_id event_name event_header')
+            .populate('planner','_id event_name header_photo')
             .exec( function(err,result) { 
                 if (err) { res.send(err)
                 } else  {
@@ -360,11 +360,17 @@ app.get('/user-profile/:userId', (req,res, next) => {
             .exec( function(err,result) { 
                 if (err) { res.send(err)
                 } else  {
-             
                 var user = JSON.parse(JSON.stringify(result));
+                // Goes to user profile
+                var bool = false;
+                if (req.user) {
+                    if (req.session.passport.user == userId)
+                        bool = true;       
+                }
+                
                 var params = {
                     layout: 'main',
-                    isUser: false,
+                    isUser: bool,
                     info:user
                 }
                 res.render('user-profile', params);   
