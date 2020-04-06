@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    short_bio: {
+        type: String
+    },
     year_level:{
         type: String,
         required: true
