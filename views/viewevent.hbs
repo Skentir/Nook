@@ -7,10 +7,10 @@
 <header class="container">
     <div class = "container-fluid org-header">
         <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" style="background: linear-gradient(rgba(107, 99, 255, 0.5), 
-            rgba(107, 99, 255, 0.5)), url({{header_photo}});background-position: center center;
+            rgba(107, 99, 255, 0.5)), url({{event.header_photo}});background-position: center center;
             background-size: cover;">
             <div class ="inner-header">
-                <h1 class="ml-3 header-name" id="event-header-name">{{event_name}}</h1>
+                <h1 class="ml-3 header-name" id="event-header-name">{{event.event_name}}</h1>
             </div>
         </div>
     </div>
@@ -22,11 +22,11 @@
     <div class="details pt-3 pb-3">
         <div class="left-deet ld-1 mr-3">
             <label class="mr-2 mb-0">Date</label>
-            <span id="event-date">{{formatDate date}}</span>
+            <span id="event-date">{{formatDate event.date}}</span>
         </div>
         <div class="left-deet ld-2">
             <label class="mr-2 mb-0">Time</label>
-            <span id="event-time">{{start_time}} - {{end_time}}</span>
+            <span id="event-time">{{event.start_time}} - {{event.end_time}}</span>
         </div>
         <div class="right-deet">
             <ul id="event-tags">
@@ -44,12 +44,12 @@
             <div class = "color">
                 <h5> About</h5>
                 <span class="sub-desc" id="event-desc">
-                    {{about_desc}}
+                    {{event.about_desc}}
                 </span>
             </div>
             <div class="event-info mt-3 mb-3 organizer">
                 <p class="mb-1">Organized by</p>
-                {{#each organizer_id}}
+                {{#each event.organizer_id}}
                 <div>
                     <img id="organizer-icon" src="{{this.org_logo}}">
                     <a id="organizer-name" href="/vieworg/{{this._id}}">{{this.org_name}}</a>
@@ -60,18 +60,18 @@
         <div class = "right-box" id ="why">
             <div class="event-info ei-left mb-2">
                 <h5 class="mb-0"> Venue</h5>
-                <span class="sub-desc" id="event-venue"> {{venue}} </span>
+                <span class="sub-desc" id="event-venue"> {{event.venue}} </span>
             </div>
             <div class="event-info ei-left mb-2">
-                {{#if things includeZero=true}}
+                {{#if event.things includeZero=true}}
                     <h5 class="mb-0"> Things to Bring</h5>
-                    <span class="sub-desc" id="event-things">{{things}}</span>
+                    <span class="sub-desc" id="event-things">{{event.things}}</span>
                 {{/if}}
             </div>
             <div class="event-info  ei-left mb-2">
                 {{#if incentives includeZero=true}}
                     <h5 class="mb-0">Incentives</h5>
-                    <span class="sub-desc" id="event-things">{{incentives}}</span>
+                    <span class="sub-desc" id="event-things">{{event.incentives}}</span>
                 {{/if}}
             </div>
 

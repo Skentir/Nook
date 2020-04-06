@@ -6,24 +6,24 @@
 <div class="container inner-box">
     <div id="account-details">
         <div class="profile">
-            <img src="{{org_logo}}">
-            <h1 id="org-name">{{org_name}}</h1>
+            <img src="{{officer.org_logo}}">
+            <h1 id="org-name">{{officer.org_name}}</h1>
             <ul id="org-tags">
-            {{#each tags}}
+            {{#each officer.tags}}
                 <li>{{this}}</li>
             {{/each}}
             </ul>
             <div class="profile-info">
                 <div href="member-requests">
-                    <h3 id="member-count">{{no_of_members}}</h3>
+                    <h3 id="member-count">{{officer.no_of_members}}</h3>
                     <p>Members</p>
                 </div>
                 <div>
-                    <h3 id="officer-count">{{no_of_officers}}</h3>
+                    <h3 id="officer-count">{{officer.no_of_officers}}</h3>
                     <p>Officers</p>
                 </div>
                 <div>
-                    <h3 id="officer-count">{{formatToYear date_established}}</h3>
+                    <h3 id="officer-count">{{formatToYear officer.date_established}}</h3>
                     <p>Year Established</p>
                 </div>
             </div>
@@ -32,7 +32,7 @@
     <div class="box mt-4" style="background-color: #f0f0f0;">
         <h5 class="mb-3 ml-2" >Officers</h5>
         <div class="information card-wrapper" id="officer-list">
-        {{#each officers}}
+        {{#each officer.officers}}
             <div class="officer">
                 <a href="/user-profile/{{this._id}}">
                     <img src="{{this.photo}}">
