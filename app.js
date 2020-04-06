@@ -59,8 +59,7 @@ app.use(bodyParser.urlencoded({
  //app.use(cors());
 
 // User session
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.use(cookieParser("session"));
 app.use(require("express-session")({    
     secret:"session",    
@@ -71,7 +70,8 @@ app.use(require("express-session")({
 	    expires: cookieExpirationDate
 	}
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use((req, res, next) => {
     res.locals.loggedIn = req.isAuthenticated();
     next();
