@@ -10,30 +10,30 @@
 <!-- Carousell -->
 <div class="container pt-5">
     <div class="jumbotron p-0" style="height: 335px;">
-    <div class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        {{#if events}}
-        {{#each events}}
-            {{#if @first}}
-                 <a class="carousel-item active" href="/viewevent/{{this._id}}">
-                    <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
-                        <div class ="centered">
-                        {{this.event_name}}
-                        </div>
-                </a>
-            {{else}}
-            <a class="carousel-item" href="/viewevent/{{this._id}}">
-                <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
-                    <div class ="centered">
-                    {{this.event_name}}
-                    </div>
-            </a>
-            {{/if}}
-        {{/each}}
-        {{/if}}
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {{#if events}}
+                {{#each events}}
+                    {{#if @first}}
+                        <a class="carousel-item active" href="/viewevent/{{this._id}}">
+                            <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                                <div class ="centered">
+                                {{this.event_name}}
+                                </div>
+                        </a>
+                    {{else}}
+                    <a class="carousel-item" href="/viewevent/{{this._id}}">
+                        <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                            <div class ="centered">
+                            {{this.event_name}}
+                            </div>
+                    </a>
+                    {{/if}}
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
     </div>
-    </div>
-</div>
 </div>
 
 

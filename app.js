@@ -185,7 +185,7 @@ app.get('/eventlist/:orgId', (req,res)=>{
 
 app.get('/explore', function(req, res) {
     OrgModel.find({})
-        .select('_id type org_logo org_name')
+        .select('_id org_type org_logo org_name')
         .exec( function(err, docs) {
             if (err) {
                 res.send(err);
