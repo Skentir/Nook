@@ -1,10 +1,41 @@
 {{#section 'head'}}
     <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/explore.css">
-    <link rel="stylesheet" href="../../public/css/cards.css">
+    <link rel="stylesheet" href="/public/css/explore.css">
+    <link rel="stylesheet" href="/public/css/cards.css">
+    <link rel="stylesheet" href="/public/css/carousell.css">
     <!-- Scripts -->
     <script src="../scripts/landing.js"></script>
 {{/section}}
+
+<!-- Carousell -->
+<div class="container pt-5">
+    <div class="jumbotron p-0" style="height: 335px;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {{#if events}}
+        {{#each events}}
+            {{#if @first}}
+                 <div class="carousel-item active" href="/viewevent/{{this_id}}">
+                    <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                        <div class ="centered">
+                        {{this.event_name}}
+                        </div>
+                </div>
+            {{else}}
+            <div class="carousel-item" href="/viewevent/{{this._id}}">
+                <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                    <div class ="centered">
+                    {{this.event_name}}
+                    </div>
+            </div>
+            {{/if}}
+        {{/each}}
+        {{/if}}
+    </div>
+    </div>
+</div>
+</div>
+
 
 <!-- Org Selector -->
 <header class="mb-2 mt-3">
