@@ -36,7 +36,6 @@ To Use the App
 |--------------------------------|----------|----------------------------------------|
 | robin_jerome_reyes@dlsu.edu.ph | abc      | User has pending requests. Admin user. |
 | jerome_reyes@dlsu.edu.ph       | abc      |                                        |
-|                                |          |                                        |
 
 ## :rocket: Dependencies ##
 * BcryptJS
