@@ -14,8 +14,7 @@ Password: abc
 
 The current working features are:
 * Viewing the list of organization in the /explore page, along with viewing the specific org by clicking on it.
-* Viewing the Planner.
-* Viewing the list events per organization.
+* Viewing the list of events per organization.
 * Viewing the list of officers per organization.
 * Viewing the user profile which includes the organizations the user is part of and the events he/she has on their planner.
  
