@@ -1,0 +1,44 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <!-- Scripts -->
+    <script src="../../scripts/moment.js"></script>
+    <script src="../../scripts/bootstrap-datepicker.js"></script>
+    <script src="../../scripts/landing.js"></script> 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+   <!-- datetimepicker for bootstrap4-->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+{{/section}}
+ 
+<section>
+    <div class="container">
+        <div class="box">
+            <div class="inner-box">
+                <div class="left-box">
+                    <header class="mb-1">
+                        <h1>Event List</h1>
+                    </header>
+                    <div id="event-list">
+                        {{#if events}}
+                            {{#each events}}
+                                <div class="row contact-form">
+                                    <a href="/editevent/{{this._id}}" class="col-8 event-name">
+                                        {{this.event_name}}
+                                    </a>
+                                    <div class="col">
+                                        <span class="event-date">{{formatDate this.date}}</span>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            {{else}}
+                                <p>No events yet.</p>
+                        {{/if}}
+                    </div>
+                </div>
+                <figure class="right-box">
+                    <img src="../public/assets/view-event.svg" id="eventreg-pic" alt="Nook event party">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>

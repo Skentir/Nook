@@ -1,0 +1,54 @@
+{{#section 'head'}}
+ <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/style.css">
+{{/section}}
+   
+<div class="container inner-box">
+    <div id="account-details">
+        <div class="profile">
+            <img src="{{org.org_logo}}">
+            <h1>{{org.org_name}}</h1>
+            <ul>
+                 {{#each org.tags}}
+                <li>{{this}}</li>
+                 {{/each}}
+            </ul>
+            <div class="profile-info">
+                <a href="member-requests">
+                    <h3>{{org.no_of_members}}</h3>
+                    <p>Members</p>
+                </a>
+                <a href="view-officers">
+                    <h3>{{org.no_of_officers}}</h3>
+                    <p>Officers</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="box mt-4" style="background-color: #7c3bff1f;">
+        <h1>Member Requests</h1>
+        <div class="information" id="request-list">
+        {{#if reqs}}
+        {{#each reqs}}
+        <a class="requests" href="/user-profile/{{this.user_id.0._id}}">
+            <img class="prof-pic" src="{{this.user_id.0.photo}}">
+            <span>
+                <span class="member-name">{{this.user_id.0.first_name}} {{this.user_id.0.last_name}}</span>
+                <p>{{this.user_id.0.position}}</p>
+            </span>
+            <div class="button-group">
+                <button type="button" class="reqbtn check">
+                    <img src="../assets/accept.png">
+                </button>
+                <button type="button" class="reqbtn reject">
+                    <img src="../assets/reject.png">             
+                </button>       
+            </div>
+        </a>
+       {{/each}}
+       {{else}}
+        <p> No requests yet.</p>
+    {{/if}}
+    </div>
+</div>

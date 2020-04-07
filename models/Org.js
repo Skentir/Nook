@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 require('mongoose-type-url');
 require('mongoose-type-email');
 
-const OrgSchema = mongoose.Schema({
+const OrgSchema = new mongoose.Schema({
     org_id :{
-        type: Number,
+        type: String,
         required : true
     },
 
@@ -39,12 +39,12 @@ const OrgSchema = mongoose.Schema({
     },
 
     org_logo:{
-        type: Buffer,
+        type: String,
         required: true
     },
 
     org_header:{
-        type: Buffer,
+        type: String,
         required : true
     },
 
@@ -66,36 +66,23 @@ const OrgSchema = mongoose.Schema({
     },
 
     email:{
-        type: mongoose.SchemaTypes.Email,
+        type: String,
         required: false,
     },
 
-    url :{
-        form : {
-            type: mongoose.SchemaTypes.Url,
-            required :false
-        },
-        fb : {
-            type: mongoose.SchemaTypes.Url,
-            required: false,
-        },
+    form_url :{type: String, required: true},
+    fb_url:{type: String, required: true},
+    ig_url: {type: String, required: true},
+    
+    events:[{type:mongoose.Schema.Types.ObjectId, ref: 'Event'}],
 
-        ig:{
-            type: mongoose.SchemaTypes.Url,
-            required: false
-        }
-
-    },
-
-    events:{
-        type: [String]
-    },
-
-    officers:{
-        type: [Number]
-    }
+    officers:[{type:mongoose.Schema.Types.ObjectId, ref: 'User'}]
 
 
-})
+
+});
+
+var collectionName = 'Orgs'
+module.exports = mongoose.model('Org', OrgSchema, collectionName);
 
 

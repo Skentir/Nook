@@ -1,0 +1,117 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/viewevent.css">
+    <link rel="stylesheet" href="../../public/css/cards.css">
+{{/section}}
+
+<!-- Org Image Header -->
+<header class="container">
+    <div class = "container-fluid org-header">
+        <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" style="background: linear-gradient(rgba(107, 99, 255, 0.5), 
+            rgba(107, 99, 255, 0.5)), url({{org.org_header}});background-position: center center;
+            background-size: cover;">
+            <div class ="inner-header">
+                <h1 class="ml-3 header-name" id="event-header-name">{{org.org_name}}</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Org Details-->
+<section class = "container" style="min-height: 400px;">
+    <!-- Org Sub Details -->
+    <div class="details pt-3 pb-3">
+        <div class="left-deet ld-1 odeet">
+            <span id="org-motto">{{org.tagline}}</span>
+        </div>
+        <div class="right-deet">
+            <ul id="org-tags">
+                {{#each org.tags}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class ="inner-box">
+        <div class = "right-box">
+            <article id = "about">
+                <h5> About</h5>
+                <span class="sub-desc" id="org-desc">
+                    {{org.about_desc}}
+                </span>
+            </article>
+            <div class="org-stats mt-2 mb-2">
+                <div class="stat-item ml-3">
+                    <p  class="stat-count" id="org-member-count">{{org.no_of_members}}</p>
+                    <span>Members</span>
+                </div>
+                <div class="stat-item ml-3">
+                    <p class="stat-count" id="org-officer-count">{{org.no_of_officers}}</p>
+                    <span>Officers</span>
+                </div>
+                <div class="stat-item ml-3 mr-3">
+                    <p class="stat-count" id="org-year-count">{{formatToYear org.date_established}}</p>
+                    <span>Year Established</span>
+                </div>
+            </div>
+        </div>
+        <div class = "right-box">
+            <article id="why">
+                <h5> Why should I join</h5>
+                <span class="sub-desc" id="join-desc">
+                    {{org.join_desc}}
+                </span>
+            </article>
+            <button type="button" class="custombtn mb-3" id="apply-btn" onclick = 'window.location.href = "{{org.form_url}}"'>I'm interested</button>
+        </div>
+    </div>
+</section>
+
+<!-- Org Events-->
+<section class="container">
+    <div class="box" style="background-color: #7c3bff1f; min-height: 218px;">
+        <h5 class="mb-3" style="text-align: center;">Upcoming Events</h5>
+        <div class="card-wrapper">
+            <div class="card-menu" id="org-events-list">
+                <div class="row">
+                    {{#if org.events}}
+                        {{#each (notNull org.events)}}
+                            <div class="card pb-0">
+                                <a href="/viewevent/{{this._id}}">
+                                    <img class="card-img-top img-fluid" src="{{this.header_photo}}">
+                                    <div class="card-body">      
+                                        <span class="org-name">{{this.event_name}}</span>   
+                                    </div>
+                                </a>
+                            </div>
+                        {{/each}}
+                        {{else}}
+                            <p>No events yet!</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Media Links -->
+<footer class="container" id="social-links" style="text-align: center;">
+    <div class="pt-3 pb-3" style="background: #311B92;">
+        <a href="{{org.fb_url}}">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 2.71997C8.66663 2.71997 2.66663 8.70664 2.66663 16.08C2.66663 22.7466 7.54663 28.28 13.92 29.28V19.9466H10.5333V16.08H13.92V13.1333C13.92 9.78664 15.9066 7.94664 18.96 7.94664C20.4133 7.94664 21.9333 8.19997 21.9333 8.19997V11.4933H20.2533C18.6 11.4933 18.08 12.52 18.08 13.5733V16.08H21.7866L21.1866 19.9466H18.08V29.28C21.2219 28.7838 24.0829 27.1807 26.1465 24.7601C28.2102 22.3394 29.3404 19.2608 29.3333 16.08C29.3333 8.70664 23.3333 2.71997 16 2.71997Z" fill="white"/>
+            </svg>                    
+        </a>
+        <a href="{{org.email}}" style ="margin-left: 50px; margin-right: 50px;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M26.6666 5.33325H5.33329C3.86663 5.33325 2.67996 6.53325 2.67996 7.99992L2.66663 23.9999C2.66663 25.4666 3.86663 26.6666 5.33329 26.6666H26.6666C28.1333 26.6666 29.3333 25.4666 29.3333 23.9999V7.99992C29.3333 6.53325 28.1333 5.33325 26.6666 5.33325ZM5.3333 23.9999V10.6666L16 17.3332L26.6666 10.6666V23.9999H5.3333ZM5.3333 7.99993L16 14.6666L26.6666 7.99993H5.3333Z" fill="white"/>
+            </svg>                                    
+        </a>
+        <a href="{{org.ig_url}}">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.4 2.66675H21.6C25.8666 2.66675 29.3333 6.13341 29.3333 10.4001V21.6001C29.3333 23.6511 28.5185 25.6181 27.0683 27.0684C25.618 28.5187 23.651 29.3334 21.6 29.3334H10.4C6.13329 29.3334 2.66663 25.8668 2.66663 21.6001V10.4001C2.66663 8.34907 3.48139 6.38207 4.93167 4.93179C6.38195 3.48151 8.34895 2.66675 10.4 2.66675ZM10.1333 5.33341C8.86025 5.33341 7.63935 5.83913 6.73918 6.7393C5.83901 7.63948 5.33329 8.86038 5.33329 10.1334V21.8667C5.33329 24.5201 7.47996 26.6667 10.1333 26.6667H21.8666C23.1397 26.6667 24.3606 26.161 25.2607 25.2609C26.1609 24.3607 26.6666 23.1398 26.6666 21.8667V10.1334C26.6666 7.48008 24.52 5.33341 21.8666 5.33341H10.1333ZM23 7.33342C23.442 7.33342 23.8659 7.50901 24.1785 7.82157C24.491 8.13413 24.6666 8.55805 24.6666 9.00008C24.6666 9.44211 24.491 9.86603 24.1785 10.1786C23.8659 10.4912 23.442 10.6667 23 10.6667C22.5579 10.6667 22.134 10.4912 21.8214 10.1786C21.5089 9.86603 21.3333 9.44211 21.3333 9.00008C21.3333 8.55805 21.5089 8.13413 21.8214 7.82157C22.134 7.50901 22.5579 7.33342 23 7.33342ZM16 9.33342C17.7681 9.33342 19.4638 10.0358 20.714 11.286C21.9642 12.5363 22.6666 14.232 22.6666 16.0001C22.6666 17.7682 21.9642 19.4639 20.714 20.7141C19.4638 21.9644 17.7681 22.6667 16 22.6667C14.2318 22.6667 12.5362 21.9644 11.2859 20.7141C10.0357 19.4639 9.33329 17.7682 9.33329 16.0001C9.33329 14.232 10.0357 12.5363 11.2859 11.286C12.5362 10.0358 14.2318 9.33342 16 9.33342ZM16 12.0001C14.9391 12.0001 13.9217 12.4215 13.1715 13.1717C12.4214 13.9218 12 14.9392 12 16.0001C12 17.0609 12.4214 18.0784 13.1715 18.8285C13.9217 19.5787 14.9391 20.0001 16 20.0001C17.0608 20.0001 18.0782 19.5787 18.8284 18.8285C19.5785 18.0784 20 17.0609 20 16.0001C20 14.9392 19.5785 13.9218 18.8284 13.1717C18.0782 12.4215 17.0608 12.0001 16 12.0001Z" fill="white"/>
+            </svg>                                   
+        </a>
+    </div>
+</footer>

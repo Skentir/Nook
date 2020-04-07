@@ -1,18 +1,28 @@
 /* Custom Website Boxing! */
 .topnav {
+    display: flex;
     position: relative;
     width: 100%;
-    height: 80px;
+    height: 60px;
+    justify-content: center;
  }
+
  .custom-navbar {
      position: fixed;
-     background-color: #F4F4F4;
-     height: 60px;
-     width: inherit;
+     width: 100%;
      box-sizing: border-box;
+     padding: auto;
      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); 
+     background-color: #F4F4F4;
      z-index: 1; 
  }
+
+ .nav-content {
+    max-width: 1132px;
+    display: inline-flex;
+    margin: auto;
+    width: 100%;
+}
 
 .nav-logo {
     margin: auto 10px;
@@ -24,10 +34,16 @@
     height: 42px;
     max-width: 70%;
     max-height: 70%;
+    display: flex;
+    align-items: center;
 }
+
 .nav-items ul {
     padding-left: 0;
+    margin-bottom: 0;
+    height: 24px;
 }
+
 .nav-items li {
     display: inline;
     padding-right: 3px;
@@ -39,13 +55,14 @@
     text-align: right;
     margin-left: .5em;
 }
+
 .nav-logo a{
     font-weight: 700;
     font-size: 20px;
     color: #3a3a3a;
     text-decoration: none;
-
 }
+
 svg path:hover{
     fill: #3333cc;
 }
@@ -122,10 +139,12 @@ svg path:hover{
 .navbar .form-inline {
     display: none;
     margin: auto;
-  }
+}
+
 .has-search {
     margin-bottom: 0;
 }
+
 .has-search .form-control {
     padding-left: 2.375rem;
 }
@@ -140,6 +159,10 @@ svg path:hover{
     text-align: center;
     pointer-events: none;
     color: black;
+}
+
+.has-search input {
+    width: 200px;
 }
 
 @media all and (max-width: 610px) {

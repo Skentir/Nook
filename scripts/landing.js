@@ -1,19 +1,27 @@
 $(document).ready(function(){
 
-    //form validation
+    /*form validation
     $("#sign-in-btn").click(function(){
-        
-        //boolean 
-        var valid = true;
+        var email = $("email").val();
+        var pass = $("password").val();
+        $.ajax({
+            url:"/login",
+            type: "POST",
+            contentType: "application/json",
+            headers: {'Content-Type': 'application/json'},
+            data:JSON.stringify({
+               email:email,
+               password:pass
+            }),
+            success: console.log("success"),
+            error: function(xhr){
+                console.log(xhr.statusText);
+            }
+        });
+      */
 
-        valid = checkifValid($("#user-id"),valid);
-        valid = checkifValid($("#user-pass"),valid);
 
-        if(valid == true){
-            location.href = "explore";
-        }
-    })
-
+    /*User Registration  thru ajax
     $("#register-btn").click(function(){
 
         //boolean 
@@ -28,9 +36,76 @@ $(document).ready(function(){
         valid = checkifValid($("#select-p"),valid);
 
         if(valid == true){
-            location.href = "explore";
+                //get form 
+                var myform = document.getElementById("reg_form");
+                //create formdata object
+                var formData = new FormData(myform);
+
+                //ajax request to post the formdata to the url
+                $.ajax({
+                    url: '/', 
+                    type: 'POST',
+                    data:formData,
+                    processData:false,
+                    contentType: false,
+                    error: function(jXhr, status){
+                        console.log('error: '+status);  
+                        console.log(formData);
+                        
+                    },
+                    success: function(data){
+                        console.log('upload successful: '+data);
+                        for (var value of formData.values()) {
+                            console.log(value); 
+                         }
+                         //window.location.assign('/explore');
+                    }
+                })
+            
+       
+
+
+        
         }
+    })*/
+
+
+    /*Event Creation
+    $("#submit-event").click(function(){
+   
+
+        var myform = document.getElementById("event_reg");
+        console.log(myform);
+        var formData = new FormData(myform);
+
+        $(myForm + 'input[type=checkbox]:not(:checked)').each(function () {
+            // set value 0 and check it
+        $(myForm).attr('checked', true).val(0);
+        })
+
+        $.ajax({
+            url: '/ad-eventreg', 
+            type: 'POST',
+            data:formData,
+            processData:false,
+            contentType: false,
+            error: function(jXhr, status){
+                console.log('error: '+status);  
+                console.log(formData);
+                
+            },
+            success: function(data){
+                console.log('upload successful: '+data);
+                for (var value of formData.values()) {
+                    console.log(value); 
+                 }
+                 //window.location.assign('/explore');
+            }
+        })
+
     })
+*/
+
 
     //function to check if fields are valid
     function checkifValid(field,val){
@@ -49,6 +124,9 @@ $(document).ready(function(){
 
         return check;
     }
+
+
+
 
 
     //toggles checkboxes

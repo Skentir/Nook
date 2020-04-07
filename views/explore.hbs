@@ -1,0 +1,72 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="/public/css/explore.css">
+    <link rel="stylesheet" href="/public/css/cards.css">
+    <link rel="stylesheet" href="/public/css/carousell.css">
+    <!-- Scripts -->
+    <script src="../scripts/landing.js"></script>
+{{/section}}
+
+<!-- Carousell -->
+<div class="container pt-5">
+    <div class="jumbotron p-0" style="height: 335px;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {{#if events}}
+        {{#each events}}
+            {{#if @first}}
+                 <a class="carousel-item active" href="/viewevent/{{this._id}}">
+                    <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                        <div class ="centered">
+                        {{this.event_name}}
+                        </div>
+                </a>
+            {{else}}
+            <a class="carousel-item" href="/viewevent/{{this._id}}">
+                <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                    <div class ="centered">
+                    {{this.event_name}}
+                    </div>
+            </a>
+            {{/if}}
+        {{/each}}
+        {{/if}}
+    </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Org Selector -->
+<header class="mb-2 mt-3">
+    <div class="container mt-2">
+        <div id="type-selector">
+            <a href="#" value="CSO" id = "cso">cso</a>
+            <a href="#" value="NON-CSO" id = "non-cso" >non-cso</a>
+            <a href="#" value= "OTHERS" id = "others">others</a>
+        </div>
+    </div>
+</header>
+<!-- Org Dashboard -->
+<section class="pl-5 pr-5 pt-4">
+    <div class="container" class="card-wrapper" style="max-width: 960px;">
+        <div class="card-menu" id="explore-menu">
+            <div class="row">
+                {{#if orgs}}
+                    {{#each orgs}}
+                        <div class="card" value="{{this.org_type}}">
+                            <a href="vieworg/{{this._id}}">
+                                <img class="card-img-top img-fluid" src="{{this.org_logo}}">
+                                <div class="card-body">
+                                    <span>{{this.org_name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <p>No orgs yet</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>

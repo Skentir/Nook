@@ -1,0 +1,50 @@
+{{#section 'head'}}
+<!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/style.css">
+{{/section}}
+    
+<div class="container inner-box">
+    <div id="account-details">
+        <div class="profile">
+            <img src="{{org_data.0.org_logo}}">
+            <h1 id="org-name">{{org_data.0.org_name}}</h1>
+            <ul id="org-tags">
+            {{#each org_data.0.tags}}
+                <li>{{this}}</li>
+            {{/each}}
+            </ul>
+            <div class="profile-info">
+                <div href="member-requests">
+                    <h3 id="member-count">{{org_data.0.no_of_members}}</h3>
+                    <p>Members</p>
+                </div>
+                <div>
+                    <h3 id="officer-count">{{org_data.0.no_of_officers}}</h3>
+                    <p>Officers</p>
+                </div>
+                <div>
+                    <h3 id="officer-count">{{formatToYear org_data.0.date_established}}</h3>
+                    <p>Year Established</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box mt-4" style="background-color: #7c3bff1f;">
+        <h1 class="mb-3 ml-2" >Officers</h1>
+        <div class="information card-wrapper" id="officer-list">
+        {{#if officers}}
+        {{#each officers}}
+            <div class="officer">
+                <a href="/user-profile/{{this._id}}">
+                    <img src="{{this.photo}}">
+                    <h1>{{this.first_name}} {{this.last_name}}</h1>
+                    <p>{{this.position}}</p>
+                </a>
+            </div>
+        {{/each}}
+        {{else}}
+            <p>No officers yet.</p>
+        {{/if}}
+        </div>
+    </div>
+</div>

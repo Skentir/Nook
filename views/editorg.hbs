@@ -1,0 +1,81 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <link rel="stylesheet" href="../../public/css/form.css">
+{{/section}}
+
+<div class="container">
+    <!-- Edit Header -->
+    <header class="edit-hdr">
+        <img class="hdr-pic" src="{{org.org_logo}}">
+        <div>
+            <span class="hdr-text" id="user-name">{{org.org_name}}</span>
+            /
+            <span class="hdr-text">Edit Profile</span>
+            <p class="hdr-desc">Setup your organization's Nook account</p>
+        </div>
+    </header>
+    <!-- Form -->
+    <div class="inner-box">
+        <div class="frm-height mt-4">
+                <div class="form-wrapper">
+                    <div class="sub-form">
+                        <div class="form-group">
+                            <label>Organization Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control invalid-field" id="user-email-field" placeholder="{{org.org_name}}">
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label>Profile Bio </label>
+                            <div class='input-group date' id="event-about-field">
+                                <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{org.about_desc}}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Recruitment Description </label>
+                            <div class='input-group date' id="event-about-field">
+                                <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{org.join_desc}}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Change Header Picture </label>
+                            <div class="custom-file">
+                                    <label class="custom-file-label">Choose</label>
+                                    <input type="file" class="form-control custom-file-input" id="user-photo-field">
+                                </div>
+                        </div>
+                        <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
+                    </div>
+                    
+                    <div class="sub-form">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="user-email-field">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Facebook Link</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="user-email-field">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Instagram Link</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="user-email-field">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

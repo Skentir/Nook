@@ -1,0 +1,74 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/cards.css">
+{{/section}}
+
+<div class="container inner-box">
+    <div class="mt-4" id="account-details">
+       <div class="profile">
+            {{#if info.photo includeZero=true}}
+                <img src="{{info.photo}}">
+            {{else}}
+                <img src="/public/assets/profiles/nook-pic.png">
+            {{/if}}
+            <h1>{{info.first_name}} {{info.last_name}}</h1>
+            <p>{{info.short_bio}}</p>
+            <h2>{{info.email_address}}</h2>
+        </div>
+    </div>
+    <div class="box mt-4" style="background-color: #7c3bff1f;">
+        <div class="mb-3 ml-2 card-menu" id="user-event-list">
+            <h1 style="width: 100%;"> My Events</h1>
+            
+            <div class="month-group">
+                <h5 class="month-label">January</h5>
+                <div class="card-wrapper information">            
+                   {{#if info.planner includeZero=true}}
+                   {{#each info.planner}}
+                    <div class="card">
+                        <a href="/viewevent/{{this._id}}">
+                            <img class="card-img-top img-fluid" src="{{this.header_photo}}">
+                            <div class="card-body">
+                                <span>{{this.event_name}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <p>No plans yet.</p>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="month-group">
+                <h5 class="month-label">February</h5>
+                <div class="card-wrapper information">            
+                    <div class="card">
+                        <a href="viewevent">
+                            <img class="card-img-top img-fluid" src="../../public/assets/events/python-header.jpeg">
+                            <div class="card-body">      
+                                <span class="org-name">Python for Data Science</span>   
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <a href="viewevent">
+                            <img class="card-img-top img-fluid" src="../../public/assets/events/gcp-header.png">
+                            <div class="card-body">
+                                <span>Intro to Google Cloud Platform</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <a href="viewevent">
+                            <img class="card-img-top img-fluid" src="../../public/assets/events/firebase-header.png">
+                            <div class="card-body">
+                                <span>Build a CRUD Website With Firebase</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

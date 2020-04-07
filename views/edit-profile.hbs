@@ -1,0 +1,98 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/explore.css">
+    <link rel="stylesheet" href="../../public/css/form.css">
+{{/section}}
+
+<div class="container">
+
+    <!-- Edit Header -->
+    <header class="edit-hdr">
+        {{#if user_data.photo includeZero=true}}
+            <img class="hdr-pic" src="{{user_data.photo}}">
+        {{else}}
+            <img class="hdr-pic" src="../../public/assets/profiles/nook-pic.png">
+        {{/if}}
+        <div>
+            <span class="hdr-text" id="user-name">{{user_data.first_name}} {{user_data.last_name}}</span>
+            /
+            <span class="hdr-text">Edit Profile</span>
+            <p class="hdr-desc">Setup your Nook user account</p>
+        </div>
+    </header>
+
+    <!-- Form -->
+    <div class="inner-box">
+        <div class="left-box">
+                <div class="frm-height contact-form">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="invalid-field" id="user-fname-field" placeholder="{{user_data.first_name}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="invalid-field" id="user-lname-field" placeholder="{{user_data.last_name}}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
+                            <input type="email" class="form-control datetimepicker-input" id="user-email-field" placeholder="{{user_data.email_address}}">
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Profile Bio </label>
+                        <div class='input-group date' id="event-about-field">
+                            <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{user_data.short_bio}}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Change Profile Picture </label>
+                        <div class="custom-file">
+                                <label class="custom-file-label">Choose</label>
+                                <input type="file" class="form-control custom-file-input" id="user-photo-field">
+                            </div>
+                    </div>
+                    <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
+                </div>
+            </div>
+            <div class="right-box">
+                <div class="frm-height contact-form">
+                    <h4 class="mb-3">Pending Requests</h4>
+                    <div class="request-list">
+                        {{#if requests includeZero=true}}
+                        {{#each requests}}
+                        <div class="row request-item">
+                            <span class="col-9 request-org-cell">
+                                <img class="hdr-pic request-org-pic" src="{{this.org_id.0.org_logo}}">
+                                <p class="request-org-name">{{this.org_id.0.org_name}}</p>
+                            </span>
+                            <div class="col-3 cancel">
+                                <a>Cancel</a>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                        <!-- For Adding Requests-->
+                        <a>
+                            <div class="request-item add-request">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.66666 16C2.66666 8.64002 8.64 2.66669 16 2.66669C23.36 2.66669 29.3333 8.64002 29.3333 16C29.3333 23.36 23.36 29.3334 16 29.3334C8.64 29.3334 2.66666 23.36 2.66666 16ZM17.3333 17.3334H22.6667V14.6667H17.3333V9.33335H14.6667V14.6667H9.33333V17.3334H14.6667V22.6667H17.3333V17.3334Z" fill="#474747"/>
+                                    </svg>
+                                                                            
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+{{#section 'head'}}
+    <!-- CSS -->          
+    <link rel="stylesheet" href="../../public/css/styling.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/cards.css">
+{{/section}}
+
+<div class="container inner-box">
+    <!-- Account Details -->
+    <div class="mt-4" id="account-details">
+        <div class="profile">
+            {{#if info.photo includeZero=true}}
+                <img src="{{info.photo}}">
+            {{else}}
+                <img src="/public/assets/profiles/nook-pic.png">
+            {{/if}}
+            <h1>{{info.first_name}} {{info.last_name}}</h1>
+            <p>{{info.short_bio}}</p>
+            <h2>{{info.email_address}}</h2>
+        </div>
+        {{#if isUser}}
+        <div class="profile-buttons">
+            <a id="register-btn" class="custombtn thinbtn mt-2" href="/editprofile">
+                Edit Profile
+            </a>
+            <a class="custombtn thinbtn" id="logout-btn" style="color:white;">Logout</a>
+        </div>
+        {{/if}}
+    </div>
+    <!-- User Organizations -->
+    <div class="box mt-4" style="background-color: #7c3bff1f;">
+        {{#if isUser}}
+        <h1 class="mb-3 ml-2"> My Organizations</h1>
+        {{else}}
+        <h1 class="mb-3 ml-2"> {{info.first_name}}'s Organizations</h1>
+        {{/if}}
+        <div class="card-wrapper mt-2">
+            <div  class="card-menu" id="user-organization-list">
+                <div class="row">
+                   {{#if info.orgs}}
+                   {{#each info.orgs}}
+                    <div class="card">
+                        <a href="/vieworg/{{this.org_id._id}}">
+                            <img class="card-img-top img-fluid" src="{{this.org_id.org_logo}}">
+                            <div class="card-body">
+                                <span>{{this.org_id.org_name}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                        {{#if isUser}}
+                        <p>No orgs yet.</p>
+                        {{else}}
+                        <p>{{first_name}} is not part of any orgs.</p>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

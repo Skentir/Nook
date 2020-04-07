@@ -1,0 +1,98 @@
+{{#section 'head'}}
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../public/css/viewevent.css">
+{{/section}}
+
+<!-- Event Image Header -->
+<header class="container">
+    <div class = "container-fluid org-header">
+        <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" style="background: linear-gradient(rgba(107, 99, 255, 0.5), 
+            rgba(107, 99, 255, 0.5)), url({{event.header_photo}});background-position: center center;
+            background-size: cover;">
+            <div class ="inner-header">
+                <h1 class="ml-3 header-name" id="event-header-name">{{event.event_name}}</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Event Details-->
+<section class = "container">
+    <!-- Event Sub Details -->
+    <div class="details pt-3 pb-3">
+        <div class="left-deet ld-1 mr-3">
+            <label class="mr-2 mb-0">Date</label>
+            <span id="event-date">{{formatDate event.date}}</span>
+        </div>
+        <div class="left-deet ld-2">
+            <label class="mr-2 mb-0">Time</label>
+            <span id="event-time">{{event.start_time}} - {{event.end_time}}</span>
+        </div>
+        <div class="right-deet">
+            <ul id="event-tags">
+                  {{#if tags}}
+                    {{#each tags}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+
+    <div class ="inner-box">
+        <div class = "right-box">
+            <div class = "color">
+                <h5> About</h5>
+                <span class="sub-desc" id="event-desc">
+                    {{event.about_desc}}
+                </span>
+            </div>
+            <div class="event-info mt-3 mb-3 organizer">
+                <p class="mb-1">Organized by</p>
+                {{#each event.organizer_id}}
+                <div>
+                    <img id="organizer-icon" src="{{this.org_logo}}">
+                    <a id="organizer-name" href="/vieworg/{{this._id}}">{{this.org_name}}</a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class = "right-box" id ="why">
+            <div class="event-info ei-left mb-2">
+                <h5 class="mb-0"> Venue</h5>
+                <span class="sub-desc" id="event-venue"> {{event.venue}} </span>
+            </div>
+            <div class="event-info ei-left mb-2">
+                {{#if event.things includeZero=true}}
+                    <h5 class="mb-0"> Things to Bring</h5>
+                    <span class="sub-desc" id="event-things">{{event.things}}</span>
+                {{/if}}
+            </div>
+            <div class="event-info  ei-left mb-2">
+                {{#if incentives includeZero=true}}
+                    <h5 class="mb-0">Incentives</h5>
+                    <span class="sub-desc" id="event-things">{{event.incentives}}</span>
+                {{/if}}
+            </div>
+
+            <button type="button" class="custombtn mt-3 mb-3" id="add-to-planner-btn" data-toggle="modal" data-target="#add-to-planner-modal">I'm interested</button>
+        </div>
+    </div>
+</section>
+
+<!-- Add to Planner Modal -->
+<div class="modal fade sm" role="dialog" id="add-to-planner-modal">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                &times;
+            </button>
+        </div>
+        <div class="modal-body">
+            <img src="../../public/assets/completed.svg" style="width:100%; height: auto; padding: 10px;">
+            <p class="modal-p mt-3">Added to Planner!</p>
+        </div>
+        </div>
+    </div>
+</div>
