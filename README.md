@@ -31,6 +31,7 @@ Some startup scripts in place to run the server:
 To Use the App
 1. Go to [http://localhost:3000/](http://localhost:3000/)
 2.  Log in using either of the following credentials. 
+
 | Email                          | Password | Notes                                  |
 |--------------------------------|----------|----------------------------------------|
 | robin_jerome_reyes@dlsu.edu.ph | abc      | User has pending requests. Admin user. |
