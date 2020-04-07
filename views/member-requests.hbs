@@ -8,11 +8,11 @@
         <div class="profile">
             <img src="{{org.org_logo}}">
             <h1>{{org.org_name}}</h1>
-            {{#each org.tags}}
             <ul>
+                 {{#each org.tags}}
                 <li>{{this}}</li>
+                 {{/each}}
             </ul>
-            {{/each}}
             <div class="profile-info">
                 <a href="member-requests">
                     <h3>{{org.no_of_members}}</h3>
