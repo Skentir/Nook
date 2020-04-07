@@ -1,5 +1,5 @@
 # Nook
-## About ##
+## :house: About ##
 A centralized space to view CSO and Non-CSO organizations, explore events in DLSU, and easily apply for membership!
 
 ## :dancers: Authors ##
@@ -9,6 +9,7 @@ A centralized space to view CSO and Non-CSO organizations, explore events in DLS
 
 ## :art: Design ##
 Before coding this project, we had a design sprint on what the layout of Nook would be like. In this process, we did a bit of design research in drabbble for standard UIs for web apps similar to Nook. We tried to stick with a Bootstrap themed website as this was the CSS Framework we used. Our group used Figma to create a wireframe. 
+
 Check out our design here: https://www.figma.com/file/6kQnYwzV4RmNTf1FnVLr7R/Nook?node-id=0%3A1
 
 ## :star2: Features ##
@@ -30,10 +31,11 @@ Some startup scripts in place to run the server:
 To Use the App
 1. Go to [http://localhost:3000/](http://localhost:3000/)
 2.  Log in using either of the following credentials. 
-Email: robin_jerome_reyes@dlsu.edu.ph
-Password: abc
-Email: jerome_reyes@dlsu.edu.ph
-Password: abc
+| Email                          | Password | Notes                                  |
+|--------------------------------|----------|----------------------------------------|
+| robin_jerome_reyes@dlsu.edu.ph | abc      | User has pending requests. Admin user. |
+| jerome_reyes@dlsu.edu.ph       | abc      |                                        |
+|                                |          |                                        |
 
 ## :rocket: Dependencies ##
 * BcryptJS
