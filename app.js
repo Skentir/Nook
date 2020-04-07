@@ -220,6 +220,9 @@ app.get('/editprofile', (req,res, next)=> {
                 .populate('org_id', '_id org_name org_logo')
                 .exec(function (err,result) {
                     if (err) {
+                        res.send(err);
+                    } else if (!result) {
+                        // No pending request found
                         var users = JSON.parse(JSON.stringify(user));
                         var params = {
                             layout: 'main',
@@ -249,6 +252,8 @@ app.get('/editorg/:orgId', (req,res)=> {
         .exec(function (err,result) {
             if (err) {
                 res.send(err);
+            } else if (!result) {
+                res.redirect('/ad-tools');
             } else {
                 var org = JSON.parse(JSON.stringify(result));
                 var params = {
@@ -267,6 +272,9 @@ app.get('/editevent/:eventId', (req,res)=> {
         .exec(function (err,result) {
             if (err) {
                 res.send(err);
+            } else if (!result) {
+                // No event found
+                res.redirect('/ad-tools');
             } else {
                 event = JSON.parse(JSON.stringify(result));
                 var params = {
@@ -284,14 +292,17 @@ app.get('/member-requests/:orgId', (req,res)=> {
     OrgModel.findById(orgId)
         .select('tags org_name org_logo no_of_members no_of_officers')
         .exec(function (err, docs) {
-            if (err) {
-                res.send(err);
+            if (err) { res.send(err) 
+            } else if (!docs) { 
+                res.redirect('/ad-tools'); // Org Not Found
             } else {
                 Request.find({org_id: docs._id})
                     .select('position')
                     .populate('user_id', '_id photo id_number first_name last_name')
                     .exec(function (err, result) {
-                        if (err) {
+                        if (err) { res.send(err) 
+                        } else if (!result) {
+                            // Request not found, send org data
                             var orgs = JSON.parse(JSON.stringify(docs));
                             var params = {
                                 layout: 'main',
@@ -323,13 +334,12 @@ app.get('/planner', (req,res)=> {
             .exec( function(err,result) { 
                 if (err) { res.send(err)
                 } else  {
-             
-                var user = JSON.parse(JSON.stringify(result));
-                var params = {
-                    layout: 'main',
-                    info:user
-                }
-                res.render('planner', params);   
+                    var user = JSON.parse(JSON.stringify(result));
+                    var params = {
+                        layout: 'main',
+                        info:user
+                    }
+                    res.render('planner', params);   
                 }                           
             });
     }
@@ -340,22 +350,21 @@ app.get('/user-profile', (req,res, next) => {
     if (!req.isAuthenticated()) { 
         res.redirect('/');  
     } else {
-    var userId = req.session.passport.user;
-    User.findById(userId)
-            .populate('orgs.org_id','_id org_name org_logo')
-            .exec( function(err,result) { 
-                if (err) { res.send(err)
-                } else  {
-             
-                var user = JSON.parse(JSON.stringify(result));
-                var params = {
-                    layout: 'main',
-                    isUser: true,
-                    info:user
-                }
-                res.render('user-profile', params);   
-                }                           
-            });
+        var userId = req.session.passport.user;
+        User.findById(userId)
+                .populate('orgs.org_id','_id org_name org_logo')
+                .exec( function(err,result) { 
+                    if (err) { res.send(err);
+                    } else  {
+                    var user = JSON.parse(JSON.stringify(result));
+                    var params = {
+                        layout: 'main',
+                        isUser: true,
+                        info:user
+                    }
+                    res.render('user-profile', params);   
+                    }                           
+                });
     }
 });
 
@@ -366,21 +375,24 @@ app.get('/user-profile/:userId', (req,res, next) => {
             .populate('orgs.org_id','_id org_name org_logo')
             .exec( function(err,result) { 
                 if (err) { res.send(err)
-                } else  {
-                var user = JSON.parse(JSON.stringify(result));
-                // Goes to user profile
-                var bool = false;
-                if (req.user) {
-                    if (req.session.passport.user == userId)
-                        bool = true;       
-                }
-                
-                var params = {
-                    layout: 'main',
-                    isUser: bool,
-                    info:user
-                }
-                res.render('user-profile', params);   
+                } else if (!result)  {
+                    // User not Found
+                    res.redirect('/explore');
+                } else {
+                    var user = JSON.parse(JSON.stringify(result));
+                    // Goes to user profile
+                    var bool = false;
+                    if (req.user) {
+                        if (req.session.passport.user == userId)
+                            bool = true;       
+                    }
+                    
+                    var params = {
+                        layout: 'main',
+                        isUser: bool,
+                        info:user
+                    }
+                    res.render('user-profile', params);   
                 }                           
             });
 });
@@ -393,6 +405,9 @@ app.get('/viewevent/:eventId', (req,res)=> {
         .exec(function(err, result) {
             if (err) {
                 res.send(err);
+            } else if (!result) {
+                // Event not Found
+                res.redirect('/explore');
             } else {
                 var event = JSON.parse(JSON.stringify(result));
                 var params = {
@@ -404,7 +419,7 @@ app.get('/viewevent/:eventId', (req,res)=> {
         });
 });
 
-app.get('/vieworg/:orgId', (req,res)=> {
+app.get('/vieworg/:orgId', (req,res) => {
     const orgId = req.params.orgId;
 
     OrgModel.findById(orgId)
@@ -412,6 +427,9 @@ app.get('/vieworg/:orgId', (req,res)=> {
         .exec(function(err, result)  {
             if (err) {
                 res.send(err);
+              } else  if (!result) {
+                // Org not Found
+                res.redirect('/explore')
               } else {        
                 var org = JSON.parse(JSON.stringify(result));
                 var params = {
@@ -438,12 +456,14 @@ app.get('/view-officers/:orgId', (req,res)=> {
             .select('_id photo first_name last_name orgs.position')
             .exec(function(err, result)  {
                 if (err) {
+                    res.send(err);
+                } else if (!result) {
+                    // No officers found, return org data
                     var orgs = JSON.parse(JSON.stringify(org));
                     var params = {
                         layout: 'main', 
                         org_data: orgs
                     };
-                   
                    res.render('view-officers', params);
                 } else {       
                     var orgs = JSON.parse(JSON.stringify(org));
@@ -454,7 +474,6 @@ app.get('/view-officers/:orgId', (req,res)=> {
                         officers: officer
                         }
                     };
-                    
                     res.render('view-officers', params);
             }); 
         }
