@@ -11,6 +11,7 @@ A centralized space to view CSO and Non-CSO organizations, explore events in DLS
 Before coding this project, we had a design sprint on what the layout of Nook would be like. In this process, we did a bit of design research in drabbble for standard UIs for web apps similar to Nook. We tried to stick with a Bootstrap themed website as this was the CSS Framework we used. Our group used Figma to create a wireframe. 
 
 Check out our design here: https://www.figma.com/file/6kQnYwzV4RmNTf1FnVLr7R/Nook?node-id=0%3A1
+
 Check out our roadmap here: https://www.notion.so/fb304c10db6a4be2938b4c6b42c8bfb8?v=577938c01f914e6aaee17347a6317a6a
 
 ## :star2: Features ##
