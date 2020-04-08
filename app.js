@@ -341,7 +341,8 @@ app.get('/member-requests/:orgId', (req,res)=> {
                                 reqs:request,
                                 org: orgs
                             }
-                            res.render('member-requests', params);
+                         //   res.json(params);
+                          res.render('member-requests', params);
                         }
                     });
             }

@@ -33,16 +33,16 @@
         {{#each reqs}}
         <a class="requests" href="/user-profile/{{this.user_id.0._id}}">
             <img class="prof-pic" src="{{this.user_id.0.photo}}">
-            <span>
+            <div style="width:112px;">
                 <span class="member-name">{{this.user_id.0.first_name}} {{this.user_id.0.last_name}}</span>
-                <p>{{this.user_id.0.position}}</p>
-            </span>
+                <p>{{this.position}}</p>
+            </div>
             <div class="button-group">
                 <button type="button" class="reqbtn check">
-                    <img src="../assets/accept.png">
+                    <img src="/public/assets/accept.png">
                 </button>
                 <button type="button" class="reqbtn reject">
-                    <img src="../assets/reject.png">             
+                    <img src="/public/assets/reject.png">             
                 </button>       
             </div>
         </a>

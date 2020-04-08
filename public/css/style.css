@@ -219,12 +219,15 @@ ul {
 }
 
 .member-name {
+    color: black;
     font-weight: 400;
+    text-decoration: none;
 }
 
 .button-group {
     margin: auto;
     margin-right: 10px;
+    width: 78px;
 }
 
 .check,
