@@ -12,12 +12,14 @@ const Handlebars = require('handlebars');
 const User = require('./models/User');
 const EventModel = require('./models/Event');
 const OrgModel = require('./models/Org');
+const Request = require('./models/Request');
 
 //Require for parsing and storing data
 const crypto = require("crypto");
 const fs = require('fs');
 const multer = require('multer');
 const GridFsStorage = require("multer-gridfs-storage");
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const Grid = require('gridfs-stream');
 const bcrypt = require('bcryptjs');
@@ -46,12 +48,37 @@ require('./scripts/passport')(passport);
 app.use(express.static(__dirname+'/'))
 
 //parsing
+const cookieExpirationDate = new Date();
+const cookieExpirationDays = 365;
+cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
+
 app.use(bodyParser.urlencoded({
     extended: true
  }));
  app.use(bodyParser.json());
  //app.use(cors());
 
+// User session
+
+app.use(cookieParser("session"));
+app.use(require("express-session")({    
+    secret:"session",    
+    resave: true,    
+    saveUninitialized: true,
+    cookie: {
+	    httpOnly: true,
+	    expires: cookieExpirationDate
+	}
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.loggedIn = req.isAuthenticated();
+    if (req.user) {
+        res.locals.isAdmin = req.user.isAdmin; 
+    }
+    next();
+});
 
 app.set('view engine', 'hbs');
 
@@ -86,26 +113,6 @@ app.engine('hbs', hbs( {
   }
 
 }));
-
-// User session
-
-app.use(require("express-session")({    
-    secret:"session",    
-    resave: true,    
-    saveUninitialized: true
-}));
-
-
-app.use((req, res, next) => {
-    res.locals.loggedIn = req.isAuthenticated();
-    next();
-});
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 
 //Connect to DB
 const client = mongoose.connect('mongodb+srv://testboy:nooktestboy@cluster0-pym8a.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
@@ -152,11 +159,10 @@ const upload = multer({storage: storage});
 
 //ROUTES
 app.get('/',(req,res) =>{
-    res.sendFile(path.join(__dirname + "/views/landing.html")); 
-})
-
-app.get('/landing',(req,res) =>{
-    res.sendFile(path.join(__dirname + "/views/landing.html")); 
+    var params = {
+        layout: 'simple',
+      };
+    res.render('landing', params); 
 })
 
 app.get('/ad-eventreg', (req,res)=>{
@@ -171,17 +177,49 @@ app.get('/eventlist/:orgId', (req,res)=>{
                 res.send(err);
             } else {
                 var event = JSON.parse(JSON.stringify(result));
-                res.render('ad-eventview', {events:event});
+                var params = {
+                    layout: 'main',
+                    events: event
+                  };
+                res.render('ad-eventview', params);
             }
         });
 })
 
 app.get('/explore', function(req, res) {
     OrgModel.find({})
-        .exec( function(err, result) {
-        var org = JSON.parse(JSON.stringify(result));
-        res.render('explore', {orgs:org});
-    });
+        .select('_id org_type org_logo org_name')
+        .exec( function(err, docs) {
+            if (err) {
+                res.send(err);
+            } else {
+                EventModel.find({})
+                    .select('_id event_name header_photo')
+                    .limit(5)
+                    .exec( function(err, result) {
+                        if (err) {
+                            res.send(err);
+                        } else if (!result) {
+                            var org = JSON.parse(JSON.stringify(docs));
+                            var params = {
+                                layout: 'main',
+                                orgs: org
+                            };
+                            res.render('explore', params);
+                        } else {
+                            var org = JSON.parse(JSON.stringify(docs));
+                            var event = JSON.parse(JSON.stringify(result));
+                            var params = {
+                                layout: 'main',
+                                orgs: org,
+                                events: event
+                            };
+                            res.render('explore', params);
+                        }
+                    });
+            }
+        });
+
 });
 
 app.get('/ad-tools', (req,res)=> {
@@ -193,38 +231,198 @@ app.get('/ad-tools', (req,res)=> {
     res.render('ad-tools', obj);
 })
 
-app.get('/edit-profile', (req,res)=> {
-    res.render( 'edit-profile');
+app.get('/editprofile', (req,res, next)=> {
+    if (!req.isAuthenticated()) { 
+        res.redirect('/');  
+    } else {
+        var userId = req.session.passport.user;
+        
+        User.findById(userId)
+        .exec(function (err,user) {
+            if (err) {
+                res.send(err);
+            } else {
+
+                Request.find({user_id: userId})
+                .populate('org_id', '_id org_name org_logo')
+                .exec(function (err,result) {
+                    if (err) {
+                        res.send(err);
+                    } else if (!result) {
+                        // No pending request found
+                        var users = JSON.parse(JSON.stringify(user));
+                        var params = {
+                            layout: 'main',
+                            user_data: users,
+                        };
+                        res.render('edit-profile', params);
+                    } else {
+                        var users = JSON.parse(JSON.stringify(user));
+                        var reqs = JSON.parse(JSON.stringify(result));
+                        var params = {
+                            layout: 'main',
+                            user_data: users,
+                            requests: reqs
+                        };
+                        res.render('edit-profile', params);
+                    }
+                });
+            }
+        });
+    }
+});
+
+app.get('/editorg/:orgId', (req,res)=> {
+    var orgId = req.params.orgId;
+    /* TODO: Get req.user.email from session or the id */
+    OrgModel.findById(orgId)
+        .exec(function (err,result) {
+            if (err) {
+                res.send(err);
+            } else if (!result) {
+                res.redirect('/ad-tools');
+            } else {
+                var org = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    org
+                  };
+                res.render('editorg', params);
+            }
+        });
 })
 
-app.get('/editorg', (req,res)=> {
-    res.render( 'editorg');
+app.get('/editevent/:eventId', (req,res)=> {
+    var eventId = req.params.eventId;
+    
+    EventModel.findById(eventId)
+        .exec(function (err,result) {
+            if (err) {
+                res.send(err);
+            } else if (!result) {
+                // No event found
+                res.redirect('/ad-tools');
+            } else {
+                event = JSON.parse(JSON.stringify(result));
+                var params = {
+                    layout: 'main',
+                    event
+                  };
+                res.render('editevent', params);
+            }
+        });
 })
 
-app.get('/editevent', (req,res)=> {
-    res.render( 'editevent');
-})
+app.get('/member-requests/:orgId', (req,res)=> {
+    var orgId = req.params.orgId;
 
-app.get('/member-requests', (req,res)=> {
-    res.render('member-requests');
+    OrgModel.findById(orgId)
+        .select('tags org_name org_logo no_of_members no_of_officers')
+        .exec(function (err, docs) {
+            if (err) { res.send(err) 
+            } else if (!docs) { 
+                res.redirect('/ad-tools'); // Org Not Found
+            } else {
+                Request.find({org_id: docs._id})
+                    .select('position')
+                    .populate('user_id', '_id photo id_number first_name last_name')
+                    .exec(function (err, result) {
+                        if (err) { res.send(err) 
+                        } else if (!result) {
+                            // Request not found, send org data
+                            var orgs = JSON.parse(JSON.stringify(docs));
+                            var params = {
+                                layout: 'main',
+                                org: orgs
+                            }
+                            res.render('member-requests', params);
+                        } else {
+                            var orgs = JSON.parse(JSON.stringify(docs));
+                            var request = JSON.parse(JSON.stringify(result));
+                            var params = {
+                                layout: 'main',
+                                reqs:request,
+                                org: orgs
+                            }
+                         //   res.json(params);
+                          res.render('member-requests', params);
+                        }
+                    });
+            }
+        });
 });
 
 app.get('/planner', (req,res)=> {
-    res.render('planner');
+    if (!req.isAuthenticated()) { 
+        res.redirect('/');  
+    } else {
+    var userId = req.session.passport.user;
+    User.findById(userId)
+            .populate('planner','_id event_name header_photo')
+            .exec( function(err,result) { 
+                if (err) { res.send(err)
+                } else  {
+                    var user = JSON.parse(JSON.stringify(result));
+                    var params = {
+                        layout: 'main',
+                        info:user
+                    }
+                    res.render('planner', params);   
+                }                           
+            });
+    }
 });
 
-app.get('/user-profile', (req,res)=> {
-    res.render('user-profile');
-    /*
-        User.findOne({email: req.session.user.email})
-            .populate("org_id")
-            .then(function(user){
-                res.render('user-profile', {
-                    // insert needed contents for userprofile.hbs 
-                
-                });                              
+// View User Profile
+app.get('/user-profile', (req,res, next) => {    
+    if (!req.isAuthenticated()) { 
+        res.redirect('/');  
+    } else {
+        var userId = req.session.passport.user;
+        User.findById(userId)
+                .populate('orgs.org_id','_id org_name org_logo')
+                .exec( function(err,result) { 
+                    if (err) { res.send(err);
+                    } else  {
+                    var user = JSON.parse(JSON.stringify(result));
+                    var params = {
+                        layout: 'main',
+                        isUser: true,
+                        info:user
+                    }
+                    res.render('user-profile', params);   
+                    }                           
+                });
+    }
+});
+
+// View Profile
+app.get('/user-profile/:userId', (req,res, next) => {    
+    var userId = req.params.userId;
+    User.findById(userId)
+            .populate('orgs.org_id','_id org_name org_logo')
+            .exec( function(err,result) { 
+                if (err) { res.send(err)
+                } else if (!result)  {
+                    // User not Found
+                    res.redirect('/explore');
+                } else {
+                    var user = JSON.parse(JSON.stringify(result));
+                    // Goes to user profile
+                    var bool = false;
+                    if (req.user) {
+                        if (req.session.passport.user == userId)
+                            bool = true;       
+                    }
+                    
+                    var params = {
+                        layout: 'main',
+                        isUser: bool,
+                        info:user
+                    }
+                    res.render('user-profile', params);   
+                }                           
             });
-    */
 });
 
 app.get('/viewevent/:eventId', (req,res)=> {
@@ -235,14 +433,21 @@ app.get('/viewevent/:eventId', (req,res)=> {
         .exec(function(err, result) {
             if (err) {
                 res.send(err);
+            } else if (!result) {
+                // Event not Found
+                res.redirect('/explore');
             } else {
                 var event = JSON.parse(JSON.stringify(result));
-                res.render('viewevent', event);
+                var params = {
+                    layout: 'main',
+                    event
+                  };
+                res.render('viewevent', params);
             }
         });
 });
 
-app.get('/vieworg/:orgId', (req,res)=> {
+app.get('/vieworg/:orgId', (req,res) => {
     const orgId = req.params.orgId;
 
     OrgModel.findById(orgId)
@@ -250,15 +455,57 @@ app.get('/vieworg/:orgId', (req,res)=> {
         .exec(function(err, result)  {
             if (err) {
                 res.send(err);
+              } else  if (!result) {
+                // Org not Found
+                res.redirect('/explore')
               } else {        
                 var org = JSON.parse(JSON.stringify(result));
-                res.render('vieworg', org);       
+                var params = {
+                    layout: 'main',
+                    org
+                  };
+                res.render('vieworg', params);       
             }
         });
 });
 
-app.get('/view-officers', (req,res)=> {
-    res.render('view-officers');
+app.get('/view-officers/:orgId', (req,res)=> {
+    const orgId = req.params.orgId;
+
+    OrgModel.find({'_id':orgId}, {'org_id':orgId})
+    .select('org_name org_logo tags no_of_officers no_of_members date_established')
+    .limit(1)
+    .exec(function(err, org)  {
+        if (err) {
+            res.send(err);
+          } else {        
+
+           User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
+            .select('_id photo first_name last_name orgs.position')
+            .exec(function(err, result)  {
+                if (err) {
+                    res.send(err);
+                } else if (!result) {
+                    // No officers found, return org data
+                    var orgs = JSON.parse(JSON.stringify(org));
+                    var params = {
+                        layout: 'main', 
+                        org_data: orgs
+                    };
+                   res.render('view-officers', params);
+                } else {       
+                    var orgs = JSON.parse(JSON.stringify(org));
+                    var officer = JSON.parse(JSON.stringify(result));
+                    var params = {
+                        layout: 'main', 
+                        org_data: orgs,
+                        officers: officer
+                        }
+                    };
+                    res.render('view-officers', params);
+            }); 
+        }
+    }); 
 });
 
 
@@ -335,6 +582,19 @@ app.post('/login', (req, res, next) => {
     failureRedirect: '/',
     })(req, res, next);
 });
+
+app.get('/logout', function(req, res, next) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function(err) {
+        if(err) {
+          return next(err);
+        } else {
+          return res.redirect('/');
+        }
+      });
+    }
+  });
   
 
 //listen to port

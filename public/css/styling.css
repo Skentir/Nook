@@ -104,6 +104,8 @@ h5 {
 .sign-in-btn-set {
     display: flex;
     justify-content: center;
+    margin: auto;
+    margin-top: 15px;
 }
 
 .google-sign-in {

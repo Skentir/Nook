@@ -14,6 +14,10 @@ body {
     margin-bottom: 3rem;
 }
 
+.box.mt-4 {
+    min-width: 750px;
+}
+
 h1 {
     color: #3a3a3a;
     font-weight: 400;
@@ -23,7 +27,9 @@ h1 {
 }
 
 #account-details {
-    width: 200px;
+    min-width: 200px;
+    padding-top: 20px;
+    max-width: 260px;
 }
 
 button {
@@ -213,12 +219,15 @@ ul {
 }
 
 .member-name {
+    color: black;
     font-weight: 400;
+    text-decoration: none;
 }
 
 .button-group {
     margin: auto;
     margin-right: 10px;
+    width: 78px;
 }
 
 .check,

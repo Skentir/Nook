@@ -9,72 +9,54 @@
     <!-- Account Details -->
     <div class="mt-4" id="account-details">
         <div class="profile">
-            <img src="../../public/assets/profiles/patrick.jpg">
-            <h1>Kirsten Sison</h1>
-            <p>danielle_sison@dlsu.edu.ph</p>
-            <h2>I’m a Computer Science Student who likes Animal Crossing and Minecraft.</h2>
+            {{#if info.photo includeZero=true}}
+                <img src="{{info.photo}}">
+            {{else}}
+                <img src="/public/assets/profiles/nook-pic.png">
+            {{/if}}
+            <h1>{{info.first_name}} {{info.last_name}}</h1>
+            <p>{{info.short_bio}}</p>
+            <h2>{{info.email_address}}</h2>
         </div>
+        {{#if isUser}}
         <div class="profile-buttons">
-            <a id="register-btn" class="custombtn thinbtn mt-2" href="/edit-profile">
+            <a id="register-btn" class="custombtn thinbtn mt-2" href="/editprofile">
                 Edit Profile
             </a>
-            <a class="custombtn thinbtn" id="logout-btn" style="color:white;">Logout</a>
+            <form method = 'GET' action ='/logout'>
+                <button class="custombtn thinbtn" id="logout-btn" style="color:white;">Logout</button>
+            </form>
         </div>
+        {{/if}}
     </div>
     <!-- User Organizations -->
-    <div class="box mt-4" style="background-color: #f0f0f0;">
+    <div class="box mt-4" style="background-color: #7c3bff1f;">
+        {{#if isUser}}
         <h1 class="mb-3 ml-2"> My Organizations</h1>
+        {{else}}
+        <h1 class="mb-3 ml-2"> {{info.first_name}}'s Organizations</h1>
+        {{/if}}
         <div class="card-wrapper mt-2">
             <div  class="card-menu" id="user-organization-list">
                 <div class="row">
+                   {{#if info.orgs}}
+                   {{#each info.orgs}}
                     <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/dsc-icon.png">
-                            <div class="card-body">      
-                                <span class="org-name">Developer Student Club Taft</span>   
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/tls-icon.jpg">
+                        <a href="/vieworg/{{this.org_id._id}}">
+                            <img class="card-img-top img-fluid" src="{{this.org_id.org_logo}}">
                             <div class="card-body">
-                                <span>The LaSallian</span>
+                                <span>{{this.org_id.org_name}}</span>
                             </div>
                         </a>
                     </div>
-                        <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/catch2t22-icon.png">
-                            <div class="card-body">
-                                <span>CATCH 2T22</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/archers-icon.png">
-                            <div class="card-body">
-                                <span>Archers Network</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top" src="../../public/assets/orgs/comet-icon.png">
-                            <div class="card-body">
-                                <span>DLSU COMET Research Lab</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="vieworg">
-                            <img class="card-img-top img-fluid" src="../../public/assets/orgs/animosquad-icon.jpg">
-                            <div class="card-body">
-                                <span>Animo Squad</span>
-                            </div>
-                        </a>
-                    </div>
+                    {{/each}}
+                    {{else}}
+                        {{#if isUser}}
+                        <p>No orgs yet.</p>
+                        {{else}}
+                        <p>{{first_name}} is not part of any orgs.</p>
+                        {{/if}}
+                    {{/if}}
                 </div>
             </div>
         </div>

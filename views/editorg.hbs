@@ -7,9 +7,9 @@
 <div class="container">
     <!-- Edit Header -->
     <header class="edit-hdr">
-        <img class="hdr-pic" src="../../public/assets/orgs/dsc-icon.png">
+        <img class="hdr-pic" src="{{org.org_logo}}">
         <div>
-            <span class="hdr-text" id="user-name">Developer Student Club Taft</span>
+            <span class="hdr-text" id="user-name">{{org.org_name}}</span>
             /
             <span class="hdr-text">Edit Profile</span>
             <p class="hdr-desc">Setup your organization's Nook account</p>
@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label>Organization Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control invalid-field" id="user-email-field">
+                                <input type="text" class="form-control invalid-field" id="user-email-field" placeholder="{{org.org_name}}">
                             </div>
                         </div>
                         
@@ -31,14 +31,14 @@
                         <div class="form-group">
                             <label>Profile Bio </label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="user-bio-field"></textarea>
+                                <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{org.about_desc}}"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Recruitment Description </label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="user-bio-field"></textarea>
+                                <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{org.join_desc}}"></textarea>
                             </div>
                         </div>
 
