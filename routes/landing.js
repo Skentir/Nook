@@ -7,6 +7,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 
+
 const multer = require('multer');
 const crypto = require("crypto");
 const GridFsStorage = require("multer-gridfs-storage");
@@ -53,6 +54,7 @@ const storage = new GridFsStorage({
 });
 
 const upload = multer({storage: storage});
+
 
 router.get('/',(req,res) =>{
     var params = {
