@@ -5,6 +5,7 @@ const passport = require('passport');
 
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
 const multer = require('multer');
 const crypto = require("crypto");
@@ -14,18 +15,14 @@ const bodyParser = require('body-parser');
 const Grid = require('gridfs-stream');
 const mongoose = require('mongoose');
 
+const initDb = require("../config/db").initDb;
+const getDb = require("../config/db").getDb;
 
-const client = mongoose.connect('mongodb+srv://testboy:nooktestboy@cluster0-pym8a.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
-    if(mongoose.connection.readyState == 1);
-    {   
-        console.log("connected to DB! " +  mongoose.connection.readyState);
-    }
-   
-})
 
 let gfs; 
 
-var db = mongoose.connection;
+var db = getDb();
+
 
 db.once('open', ()=>{
     //Init Stream
@@ -35,7 +32,7 @@ db.once('open', ()=>{
 
 //create storage engine for user and event reg
 const storage = new GridFsStorage({
-  db: client,
+  db: db,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
         //crypto to generate random names
