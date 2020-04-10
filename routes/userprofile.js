@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User');
+const controller = require('../controller');
 
-
-router.get('/user-profile', (req,res, next) => {    
+/*router.get('/user-profile', (req,res, next) => {    
     if (!req.isAuthenticated()) { 
         res.redirect('/');  
     } else {
@@ -24,7 +24,9 @@ router.get('/user-profile', (req,res, next) => {
                     }                           
                 });
     }
-});
+});*/
+
+router.get('/user-profile', controller.renderUser);
 
 
 

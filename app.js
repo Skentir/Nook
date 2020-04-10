@@ -69,6 +69,7 @@ app.use((req, res, next) => {
     res.locals.loggedIn = req.isAuthenticated();
     if (req.user) {
         res.locals.isAdmin = req.user.isAdmin; 
+        res.locals.photo = req.user.photo;
     }
     next();
 });
