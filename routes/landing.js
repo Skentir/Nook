@@ -4,6 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 
 const User = require('../models/User');
+const OrgModel= require('../models/Org');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 
@@ -55,12 +56,37 @@ const storage = new GridFsStorage({
 
 const upload = multer({storage: storage});
 
+function objectToArray(obj) {
+  var array = [];
+  for (prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+          array.push(obj[prop]);
+      }
+  }
+  return array;
+}
 
-router.get('/',(req,res) =>{
-    var params = {
-        layout: 'simple',
-      };
-    res.render('landing', params); 
+router.get('/',(req,res) => {
+  OrgModel.find({})
+    .select('-_id org_name')
+    .exec( function(err, result) { 
+      if (err) { res.send(err); }
+      else {
+        
+        var resu = JSON.stringify(result).split(",");
+        var array = [];
+        for (var i=1; i < resu.length; i++) {
+          array.push(resu[i].substring(13, resu[i].length-2));
+        }
+
+        var params = {
+          layout: 'simple',
+          result,
+          org_list: array
+        };
+        res.render('landing', params); 
+      }
+    });
 });
 
 
