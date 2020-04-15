@@ -1,11 +1,38 @@
 {{#section 'head'}}
+    <title>Nook</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/styling.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/redmond/jquery-ui.css">
+    <link rel="stylesheet" href="/public/css/styling.css">
+    <link rel="stylesheet" href="/public/css/widgets.css">
     <script src="../../scripts/landing.js"></script> 
     <!-- Google Sign-In -->
     <meta name="google-signin-client_id" content="473203977419-114n43ik4g8rcjvfech0ckgddv0250c3.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title>Nook</title>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        var availableTags = [
+        "La Salle Computer Society",
+        "SPRINT",
+        "Junior Entrepreneurs Marketing Association",
+        "DLSU Mathematics Circle",
+        "Young Entrepreneurs Society",
+        "DLSU Syntnax",
+        "Ang Pahayagang Plaridel",
+        "SDFO Paragons",
+        "ENGLICOM",
+        "DLSU Chorale",
+        "The LaSallian",
+        "Developer Student Club Taft",
+        "DLSU COMET"
+        ];
+        $( "#org-list" ).autocomplete({
+        source: availableTags
+        });
+    });
+    </script>
 {{/section}}
 
 <!-- Landing Page Section -->
@@ -185,40 +212,25 @@
                                 <input type="password" class="form-control" id="reg-pass" name = "reg_pass">
                             </div>
                             
-                            <div class= "form-row">
-                                <div class = "col-md-6">
-                                    <div class="form-group form-check mb-2">
-                                        <input type="checkbox" class="form-check-input mt-0" id="is-officer">
-                                        <label class="form-check-label" for="is-officer">I'm an officer of an organization</label>
-                                    </div>
+                            <div class= "form-group">
+                                <div class="form-group form-check mb-2">
+                                    <input type="checkbox" class="form-check-input mt-0" id="is-officer">
+                                    <label class="form-check-label" style="margin-top:8px;"for="is-officer">
+                                        I'm an officer of an organization
+                                    </label>
                                 </div>
                             </div>
-                            <div class = "form-row">
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-group" id = "select-org">
-                                        <select class="custom-select" id = "select-o">
-                                            <option value = "0" selected>Select Org</option>
-                                            <option value="1">DLSU Sports</option>
-                                            <option value="2">Syntax</option>
-                                            <option value="3">Developer Student Club Taft</option>
-                                            <option value="4">Green Media Group</option>
-                                            <option value="5">Animo Squad</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-group" id = "select-pos">
-                                        <select class="custom-select" id = "select-p">
-                                            <option value = "0" selected>Select Position</option>
-                                            <option value="1">President</option>
-                                            <option value="2">Vice President</option>
-                                            <option value="3">Secretary</option>
-                                            <option value="4">Treasurer</option>
-                                            <option value="5">Representative</option>
-                                        </select>
-                                    </div>
-                                </div>
+
+                            <div class = "form-group ui-widget" id="select-org">
+                                <label for="org-list"> Organization Name</label>
+                                <input class="form-control" id="org-list">
                             </div>
+                            
+                            <div class="form-group" id="select-pos">
+                                <label for="org-postion">Position</label>
+                                <input class="form-control">
+                            </div>
+
                             <button type="submit" id="register-btn" class="custombtn thinbtn mt-0 mb-4" style="justify-content: center;">register</button>
                         </form>
                     </div>
