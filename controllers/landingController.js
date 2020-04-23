@@ -1,7 +1,4 @@
-const express = require('express');
-
 const passport = require('passport');
-const OrgModel= require('../models/Org');
 
 exports.login = (req, res, next) => {
     passport.authenticate('local', {
