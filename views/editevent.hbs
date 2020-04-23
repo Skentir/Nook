@@ -6,6 +6,7 @@
     <script src="../../scripts/moment.js"></script>
     <script src="../../scripts/bootstrap-datepicker.js"></script>
     <script src="../../scripts/landing.js"></script> 
+    <script src="../../scripts/orgs.js"></script> 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
     <!-- Datetimepicker for Bootstrap 4-->
@@ -24,6 +25,7 @@
         </div>
     </header>
     <!-- Form -->
+    <form id = "event-edit">
     <div class="inner-box">
         <div class="frm-height mt-4">
                 <div class="form-wrapper">
@@ -57,7 +59,7 @@
                                 <input type="file" class="form-control custom-file-input" id="event-photo-field">
                             </div>
                         </div>
-                        <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
+                        <button type="button" id="edit-event" class="custombtn thinbtn mt-0">save</button>
                     </div>
                     
                     <div class="sub-form">
@@ -95,7 +97,7 @@
                                 <div class="form-group">
                                     <label>Start Time</label>
                                     <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
-                                        <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3"
+                                        <input type='text' class="form-control datetimepicker-input" id="start-time-field" data-target="#datetimepicker3"
                                             placeholder="{{event.start_time}}">
                                         <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
@@ -114,7 +116,7 @@
                                 <div class="form-group">
                                     <label>End Time</label>
                                     <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
-                                        <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2"
+                                        <input type='text' class="form-control datetimepicker-input" id="end-time-field" data-target="#datetimepicker3-2"
                                             placeholder="{{event.end_time}}">
                                         <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
@@ -141,5 +143,6 @@
                 </div>
             </div>
         </div>
+        </form> 
     </div>
 </div>
