@@ -129,32 +129,7 @@ $(document).ready(function(){
 
 
 
-    //toggles checkboxes
-    var officerStatus = function () {
-        if ($("#is-officer").is(":checked")) {
-            $('#select-org').show();
-            $('#select-pos').show();
-        }
-        else {
-            $('#select-org').hide();
-            $('#select-pos').hide();
-        }
-      };
-      $(officerStatus);
-      $("#is-officer").change(officerStatus);
-
-      var incentiveStatus = function () {
-        if ($("#incentives").is(":checked")) {
-            $('#incentivesdet').show()
-        }
-        else {
-            $('#incentivesdet').hide();
-        }
-      };
-
-      $(incentiveStatus);
-      $("#incentives").change(incentiveStatus);
-    
+  
 
       $("#cso").click(function(){
         $("div[value = 'cso']").each(function(){

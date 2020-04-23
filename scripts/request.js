@@ -6,15 +6,24 @@ $(document).ready(function(){
 
         console.log("Check me " + id);
         
-        /*
         $.ajax({
-            type: "DELETE",
-            url: "/lineitem/". id,  // or whatever is the URL to the destroy action in the controller
+            type: "PUT",
+            url: "/admin/accept-request/"+ id,  
             success: function (data) {
-                $('.cart-data-details__total').remove(); // assumes that the wrapper for each line item is cart-data-details__total
+               console.log("Added to user's organizations")
             }               
         });
-        */
+
+        $.ajax({
+            type: "DELETE",
+            url: "/admin/delete-request/"+ id,  
+            success: function (data) {
+               var string = '#' + id;
+            $(string).remove(); 
+            }               
+        });
+
+
        var string = '#' + id;
         $(string).remove(); 
        return false;
@@ -28,7 +37,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: "DELETE",
-            url: "/delete-request/"+ id,  // or whatever is the URL to the destroy action in the controller
+            url: "/admin/delete-request/"+ id,  
             success: function (data) {
                var string = '#' + id;
         $(string).remove(); 
