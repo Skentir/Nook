@@ -1,3 +1,7 @@
+body {
+    background-image: none;
+    background-color: white;
+}
 
 header {
     margin-bottom: -10px;
