@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    console.log("Inside file")
-    $(".check").click(function(){
+
+    $(".check").click(function() {
         var $addBtn = $(this);
         var id = $addBtn.data('id');
 
@@ -19,13 +19,10 @@ $(document).ready(function(){
             url: "/admin/delete-request/"+ id,  
             success: function (data) {
                var string = '#' + id;
-            $(string).remove(); 
+                $(string).remove(); 
             }               
         });
 
-
-       var string = '#' + id;
-        $(string).remove(); 
        return false;
     });
 
@@ -39,11 +36,29 @@ $(document).ready(function(){
             type: "DELETE",
             url: "/admin/delete-request/"+ id,  
             success: function (data) {
-               var string = '#' + id;
-        $(string).remove(); 
+                var string = '#' + id;
+                $(string).remove(); 
             }               
         });
 
         return false;
+    });
+
+    $(".cancel").click(function() {
+        var $deleteBtn = $(this);
+        var id = $deleteBtn.data('id');
+
+        console.log("Cancel me " + id);
+
+        $.ajax({
+            type: "DELETE",
+            url: "/admin/delete-request/"+ id,  
+            success: function (data) {
+               var string = '#request-' + id;
+                $(string).remove(); 
+            }               
+        });
+
+       return false;
     });
 })
