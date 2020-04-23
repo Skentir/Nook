@@ -205,6 +205,10 @@ ul {
     margin: 2px;
 }
 
+.request-info {
+    display: contents;
+}
+
 #info-panel h2, 
 #event-panel h2 {
     font-size: 18px;
