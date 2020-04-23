@@ -25,8 +25,16 @@ $(document).ready(function(){
         var id = $deleteBtn.data('id');
 
         console.log("Delete me " + id)
-        
-        var string = '#' + id;
+
+        $.ajax({
+            type: "DELETE",
+            url: "/delete-request/"+ id,  // or whatever is the URL to the destroy action in the controller
+            success: function (data) {
+               var string = '#' + id;
         $(string).remove(); 
+            }               
+        });
+
+        return false;
     });
 })

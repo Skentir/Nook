@@ -41,3 +41,10 @@ exports.viewrequests = (req,res)=> {
             }
         });
 };
+
+exports.deleterequest = (req,res)=> {
+    var requestId = req.params.reqId;
+
+    console.log("Request to delete for "+requestId);
+
+}
