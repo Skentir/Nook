@@ -1,7 +1,35 @@
 {{#section 'head'}}
     <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/explore.css">
-    <link rel="stylesheet" href="../../public/css/form.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/redmond/jquery-ui.css">
+    <link rel="stylesheet" href="/public/css/styling.css">
+    <link rel="stylesheet" href="/public/css/explore.css">
+    <link rel="stylesheet" href="/public/css/form.css">
+    <link rel="stylesheet" href="/public/css/widgets.css">
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        var availableTags = [
+        "La Salle Computer Society",
+        "SPRINT",
+        "Junior Entrepreneurs Marketing Association",
+        "DLSU Mathematics Circle",
+        "Young Entrepreneurs Society",
+        "DLSU Syntnax",
+        "Ang Pahayagang Plaridel",
+        "SDFO Paragons",
+        "ENGLICOM",
+        "DLSU Chorale",
+        "The LaSallian",
+        "Developer Student Club Taft",
+        "DLSU COMET"
+        ];
+        $( "#org-list" ).autocomplete({
+        source: availableTags
+        });
+    });
+    </script>
 {{/section}}
 
 <div class="container">
@@ -82,7 +110,7 @@
                         {{/each}}
                         {{/if}}
                         <!-- For Adding Requests-->
-                        <a>
+                        <a href="#" data-toggle="modal" data-target="#add-request-modal">
                             <div class="request-item add-request">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M2.66666 16C2.66666 8.64002 8.64 2.66669 16 2.66669C23.36 2.66669 29.3333 8.64002 29.3333 16C29.3333 23.36 23.36 29.3334 16 29.3334C8.64 29.3334 2.66666 23.36 2.66666 16ZM17.3333 17.3334H22.6667V14.6667H17.3333V9.33335H14.6667V14.6667H9.33333V17.3334H14.6667V22.6667H17.3333V17.3334Z" fill="#474747"/>
@@ -96,3 +124,35 @@
         </div>
     </div>
 </div>
+
+<!-- Add Request Modal -->
+<section class="modal fade" role="dialog" id="add-request-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="box modal-content">
+            <div class="inner-box">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <div class="modal-right">
+                    <header>
+                        <h5 class="modal-title mb-3" style="font-size: 30px;">Add an Organization</h5>
+                    </header>
+                    <!-- Log in Form -->
+                    <div class="modal-body">
+                        <form name ="log_in" method='POST' action='/login'>                       
+                            <div class = "form-group ui-widget" id="select-org">
+                                <label for="org-list"> Organization Name</label>
+                                <input class="form-control" id="org-list">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="reg-email">Position</label>
+                                <input type="text" class="form-control" id="req_org_name" name = "req_org_position">
+                            </div>
+                               <button type="submit" id="add-req-btn" class="custombtn thinbtn mt-0 mb-4" style="justify-content: center;">submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
