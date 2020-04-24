@@ -1,6 +1,8 @@
 {{#section 'head'}}
- <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/style.css">
+<!-- CSS -->    
+<link rel="stylesheet" href="/public/css/style.css">
+<!-- JS -->
+<script src="/scripts/request.js"></script>
 {{/section}}
    
 <div class="container inner-box">
@@ -31,21 +33,23 @@
         <div class="information" id="request-list">
         {{#if reqs}}
         {{#each reqs}}
-        <a class="requests" href="/user-profile/{{this.user_id.0._id}}">
-            <img class="prof-pic" src="{{this.user_id.0.photo}}">
-            <div style="width:112px;">
-                <span class="member-name">{{this.user_id.0.first_name}} {{this.user_id.0.last_name}}</span>
-                <p>{{this.position}}</p>
-            </div>
+        <div class="requests" id="{{this._id}}">
+            <a class="request-info" href="/user-profile/{{this.user_id.0._id}}">
+                <img class="prof-pic" src="{{this.user_id.0.photo}}">
+                <div style="width:112px;">
+                    <span class="member-name">{{this.user_id.0.first_name}} {{this.user_id.0.last_name}}</span>
+                    <p>{{this.position}}</p>
+                </div>
+            </a>
             <div class="button-group">
-                <button type="button" class="reqbtn check">
+                <button type="button" class="reqbtn check" data-id="{{this._id}}">
                     <img src="/public/assets/accept.png">
                 </button>
-                <button type="button" class="reqbtn reject">
+                <button type="button" class="reqbtn reject" data-id="{{this._id}}">
                     <img src="/public/assets/reject.png">             
                 </button>       
             </div>
-        </a>
+        </div>
        {{/each}}
        {{else}}
         <p> No requests yet.</p>

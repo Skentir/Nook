@@ -1,5 +1,3 @@
-const express = require('express');
-
 const EventModel = require('../models/Event');
 
 exports.addevent = (req,res)=>{

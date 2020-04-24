@@ -8,6 +8,8 @@
     <!-- jQuery UI -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- JS -->
+    <script src="/scripts/request.js"></script>
     <script>
     $( function() {
         var availableTags = [
@@ -98,13 +100,13 @@
                     <div class="request-list">
                         {{#if requests includeZero=true}}
                         {{#each requests}}
-                        <div class="row request-item">
+                        <div class="row request-item" id="request-{{this._id}}">
                             <span class="col-9 request-org-cell">
                                 <img class="hdr-pic request-org-pic" src="{{this.org_id.0.org_logo}}">
                                 <p class="request-org-name">{{this.org_id.0.org_name}}</p>
                             </span>
-                            <div class="col-3 cancel">
-                                <a>Cancel</a>
+                            <div class="col-3 cancel-req">
+                                <a class="cancel" data-id="{{this._id}}">Cancel</a>
                             </div>
                         </div>
                         {{/each}}

@@ -1,5 +1,3 @@
-const express = require('express');
-
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 
@@ -41,3 +39,16 @@ exports.viewrequests = (req,res)=> {
             }
         });
 };
+
+exports.deleterequest = (req,res)=> {
+    var requestId = req.params.reqId;
+    // TODO: Delete from Request and User Request
+    console.log("Request to delete for "+requestId);
+
+}
+
+exports.acceptrequest = (req,res) => {
+    var requestId = req.params.reqId;
+    // TODO: Delete from Request and User Request, Add to User Organizations
+    console.log("Request to accept for "+requestId)
+}
