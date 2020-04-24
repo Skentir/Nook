@@ -56,6 +56,8 @@ exports.viewplanner = (req,res)=> {
         res.redirect('/');  
     } else {
     var userId = req.session.passport.user;
+    // sort from jan to dec
+    // groupby months
     User.findById(userId)
             .populate('planner','_id event_name header_photo')
             .exec( function(err,result) { 
@@ -66,7 +68,8 @@ exports.viewplanner = (req,res)=> {
                         layout: 'main',
                         info:user
                     }
-                    res.render('planner', params);   
+                    //to do
+                    res.send(params);   
                 }                           
             });
     }
