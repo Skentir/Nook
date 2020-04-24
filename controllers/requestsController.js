@@ -49,6 +49,6 @@ exports.deleterequest = (req,res)=> {
 
 exports.acceptrequest = (req,res) => {
     var requestId = req.params.reqId;
-    // TODO: Delete from Request and User Request, Add to User Organizations
+    // Add to User Organizations n include the position
     console.log("Request to accept for "+requestId)
 }
