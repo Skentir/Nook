@@ -12,9 +12,9 @@
      width: 100%;
      box-sizing: border-box;
      padding: auto;
-     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); 
-     background-color: #F4F4F4;
-     z-index: 1; 
+     background-color: #f4f4f4a8;
+    z-index: 1;
+    backdrop-filter: saturate(180%) blur(20px); 
  }
 
  .nav-content {
