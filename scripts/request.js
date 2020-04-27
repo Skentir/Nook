@@ -10,10 +10,12 @@ $(document).ready(function(){
             type: "PUT",
             url: "/admin/accept-request/"+ id,  
             success: function (data) {
-               console.log("Added to user's organizations")
+               console.log("Added to user's organizations");
+               var string = '#' + id;
+               $(string).remove(); 
             }               
         });
-
+        /*
         $.ajax({
             type: "DELETE",
             url: "/admin/delete-request/"+ id,  
@@ -22,6 +24,7 @@ $(document).ready(function(){
                 $(string).remove(); 
             }               
         });
+        */
 
        return false;
     });
@@ -61,4 +64,24 @@ $(document).ready(function(){
 
        return false;
     });
+
+    /*
+    $("#add-req-btn").click(function() {
+        Get get input 
+        data_Z = {
+            org_name: jafiejf
+            position: fjaefoafka
+        }
+         $.ajax({
+            type: "POST",
+            url: "/aokfaefjw",  
+            data: data_Z
+            success: function (data) {
+               console.log("SUccEssfully created a requset")
+            }               
+        });
+
+
+    })
+    */
 })

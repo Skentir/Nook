@@ -18,6 +18,9 @@ h5 {
 }
 
 /*jumbotron*/
+header.container {
+    margin-top: 15px;
+}
 .org-header {
     padding-left: 0;
     padding-right: 0;

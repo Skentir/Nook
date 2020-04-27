@@ -43,6 +43,13 @@ exports.viewrequests = (req,res)=> {
 
 exports.deleterequest = (req,res)=> {
     var requestId = req.params.reqId;
+    /*
+    RequestModel.findById(requestId) {
+        //delete the request
+    }
+    // TODO: Delete from Request and User Request
+    */
+    console.log("Request to delete for "+ requestId);
 
     var query = {'_id': requestId};
     Request.remove(query, function(err, obj) {
@@ -53,19 +60,28 @@ exports.deleterequest = (req,res)=> {
 
 exports.acceptrequest = (req,res) => {
     var requestId = req.params.reqId;
-    /*
-    RequestModel.find(id:requestId)
-    .exec( function (req,result) { 
-    
-    UserModel.find(result.user_id) {
-    //basata append tas update
-    }
-    
-    })}*/
-    // Add to User Organizations n include the position
 
-
+    
+    Request.findById(requestId)
+    .exec(function (err, result) {
+        new_org = {
+            user_id = result.user_id,
+            org_id = result.org_id,
+            position = result.position
+        }
+        /*Put Update here*/
+        console.log(result);
+        
+    })
+   
     /* DONT DO THIS PART YET!! */
     // Update yung sa org no_of_officers or no_of_members if-else
-    console.log("Request to accept for "+requestId)
+    console.log("Request to accept for " + requestId);
 }
+
+/*
+exports.createrequssts ({
+
+    req.body.org_name
+    req.body.position
+}) */
