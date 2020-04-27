@@ -1,5 +1,6 @@
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
+const UserModel = require('../models/User');
 
 exports.viewrequests = (req,res)=> {
     var orgId = req.params.orgId;
@@ -42,14 +43,12 @@ exports.viewrequests = (req,res)=> {
 
 exports.deleterequest = (req,res)=> {
     var requestId = req.params.reqId;
-    /*
-    RequestModel.findById(requestId) {
-        //delete the request
-    }
-    // TODO: Delete from Request and User Request
-    */
-    console.log("Request to delete for "+requestId);
 
+    var query = {'_id': requestId};
+    Request.remove(query, function(err, obj) {
+        if(err) throw err;
+        else console.log(requestId + " deleted");
+    })
 }
 
 exports.acceptrequest = (req,res) => {
