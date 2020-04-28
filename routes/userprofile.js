@@ -27,7 +27,7 @@ const userController = require('../controllers/userController');
     }
 });*/
 
-router.get('/user-profile', controller.renderUser);
+router.get('/user-profile', userController.renderUser);
 
 //View Profile
 router.get('/user-profile/:userId', userController.viewprofile);
