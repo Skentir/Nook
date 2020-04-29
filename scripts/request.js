@@ -65,23 +65,27 @@ $(document).ready(function(){
        return false;
     });
 
-    /*
+    // var name = $('#event-name-field').val();
     $("#add-req-btn").click(function() {
-        Get get input 
-        data_Z = {
-            org_name: jafiejf
-            position: fjaefoafka
+        var org = $('#org-list').val();
+        var pos = $('#req-position').val();
+        
+        new_request = {
+            org_name: org,
+            position: pos
         }
-         $.ajax({
+
+        // console.log(new_request)
+
+        $.ajax({
             type: "POST",
-            url: "/aokfaefjw",  
-            data: data_Z
+            url: "/editprofile",  
+            data: new_request,
             success: function (data) {
                console.log("SUccEssfully created a requset")
-            }               
+            } 
         });
 
-
+        return false;
     })
-    */
 })

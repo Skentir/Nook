@@ -1,3 +1,4 @@
+var mongoose = require('mongoose')
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 const UserModel = require('../models/User');
@@ -43,45 +44,62 @@ exports.viewrequests = (req,res)=> {
 
 exports.deleterequest = (req,res)=> {
     var requestId = req.params.reqId;
-    /*
-    RequestModel.findById(requestId) {
-        //delete the request
-    }
-    // TODO: Delete from Request and User Request
-    */
-    console.log("Request to delete for "+ requestId);
-
     var query = {'_id': requestId};
+
     Request.remove(query, function(err, obj) {
         if(err) throw err;
         else console.log(requestId + " deleted");
+        res.send('member-requests');
     })
 }
 
 exports.acceptrequest = (req,res) => {
     var requestId = req.params.reqId;
-
     
     Request.findById(requestId)
     .exec(function (err, result) {
         new_org = {
-            user_id = result.user_id,
-            org_id = result.org_id,
-            position = result.position
+            user_id: result.user_id,
+            org_id: result.org_id,
+            position: result.position
         }
-        /*Put Update here*/
-        console.log(result);
-        
-    })
+
+        console.log(new_org);
+
+        // add new_org to orgs array
+    });
    
     /* DONT DO THIS PART YET!! */
     // Update yung sa org no_of_officers or no_of_members if-else
     console.log("Request to accept for " + requestId);
 }
 
-/*
-exports.createrequssts ({
+exports.createrequests = (req,res) => {
+    var orgName = req.body.org_name
+    var pos = req.body.position
+    var user = req.session.passport.user
+    var userId = mongoose.Types.ObjectId(user)
 
-    req.body.org_name
-    req.body.position
-}) */
+    OrgModel.findOne({org_name:orgName})
+        .lean().exec(function(err, result) {
+            if(err) throw err
+            else {
+                var orgId = result._id
+
+                new_req = {
+                    user_id: userId,
+                    org_id: orgId,
+                    status: "Pending",
+                    position: pos
+                }
+    
+                console.log(new_req)
+    
+                Request.create(new_req, function(err, obj){
+                    if(err) throw err
+                    else console.log("added")
+                    res.send('editprofile')
+                })
+            }
+        });
+}
