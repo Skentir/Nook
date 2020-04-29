@@ -1,4 +1,3 @@
-var mongoose = require('mongoose')
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 const UserModel = require('../models/User');
@@ -47,9 +46,8 @@ exports.deleterequest = (req,res)=> {
     var query = {'_id': requestId};
 
     Request.remove(query, function(err, obj) {
-        if(err) throw err;
-        else console.log(requestId + " deleted");
-        res.send('member-requests');
+        if(err) res.send(err);
+        else res.send('member-requests');
     })
 }
 
@@ -59,14 +57,25 @@ exports.acceptrequest = (req,res) => {
     Request.findById(requestId)
     .exec(function (err, result) {
         new_org = {
-            user_id: result.user_id,
             org_id: result.org_id,
             position: result.position
         }
 
-        console.log(new_org);
-
-        // add new_org to orgs array
+        UserModel.updateOne(
+            {_id: result.user_id},
+            {$addToSet: {orgs:new_org}},
+            function(err, result) {
+                if(err) res.send(err)
+                else {
+                    var query = {'_id': requestId};
+    
+                    Request.remove(query, function(err, obj) {
+                        if(err) throw err;
+                        else res.send('member-requests')
+                    })
+                }
+            }
+        )
     });
    
     /* DONT DO THIS PART YET!! */

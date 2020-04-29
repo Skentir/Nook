@@ -34,10 +34,10 @@
         {{#if reqs}}
         {{#each reqs}}
         <div class="requests" id="{{this._id}}">
-            <a class="request-info" href="/user-profile/{{this.user_id.0._id}}">
-                <img class="prof-pic" src="{{this.user_id.0.photo}}">
+            <a class="request-info" href="/user-profile/{{this.user_id._id}}">
+                <img class="prof-pic" src="{{this.user_id.photo}}">
                 <div style="width:112px;">
-                    <span class="member-name">{{this.user_id.0.first_name}} {{this.user_id.0.last_name}}</span>
+                    <span class="member-name">{{this.user_id.first_name}} {{this.user_id.last_name}}</span>
                     <p>{{this.position}}</p>
                 </div>
             </a>
