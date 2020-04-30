@@ -45,7 +45,7 @@ exports.deleterequest = (req,res)=> {
     var requestId = req.params.reqId;
     var query = {'_id': requestId};
 
-    Request.remove(query, function(err, obj) {
+    Request.deleteOne(query, function(err, obj) {
         if(err) res.send(err);
         else res.send('member-requests');
     })
@@ -61,26 +61,35 @@ exports.acceptrequest = (req,res) => {
             position: result.position
         }
 
-        UserModel.updateOne(
-            {_id: result.user_id},
-            {$addToSet: {orgs:new_org}},
-            function(err, result) {
-                if(err) res.send(err)
-                else {
-                    var query = {'_id': requestId};
-    
-                    Request.remove(query, function(err, obj) {
-                        if(err) throw err;
-                        else res.send('member-requests')
-                    })
-                }
+        var conditions = {_id:result.org_id}
+        var options = {multi: true}
+        var update = {$inc: {no_of_officers: 1}}
+
+        if(result.position == "Member" || result.position == "") {
+            update = {$inc: {no_of_members: 1}}
+        }
+
+        OrgModel.updateOne(conditions, update, options, function(err, num){
+            if(err) res.send(err)
+            else {
+                UserModel.updateOne(
+                    {_id: result.user_id},
+                    {$addToSet: {orgs:new_org}},
+                    function(err, result) {
+                        if(err) res.send(err)
+                        else {
+                            var query = {'_id': requestId};
+            
+                            Request.deleteOne(query, function(err, obj) {
+                                if(err) res.send(err);
+                                else res.send('member-requests')
+                            })
+                        }
+                    }
+                )
             }
-        )
+        });
     });
-   
-    /* DONT DO THIS PART YET!! */
-    // Update yung sa org no_of_officers or no_of_members if-else
-    console.log("Request to accept for " + requestId);
 }
 
 exports.createrequests = (req,res) => {
@@ -102,12 +111,9 @@ exports.createrequests = (req,res) => {
                     position: pos
                 }
     
-                console.log(new_req)
-    
                 Request.create(new_req, function(err, obj){
-                    if(err) throw err
-                    else console.log("added")
-                    res.send('editprofile')
+                    if(err) res.send(err)
+                    else res.send('editprofile')
                 })
             }
         });
