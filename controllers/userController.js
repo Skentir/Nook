@@ -301,3 +301,47 @@ exports.logout = function(req, res, next) {
       });
     }
 };
+
+exports.editprofiledetails = (req, res) =>{
+    var userId = req.session.passport.user;
+    if(!req.file){
+    User.findByIdAndUpdate({_id: userId}, 
+      {
+      $set: {
+        first_name: req.body.edit_fname,
+        last_name: req.body.edit_lname,
+        email_address: req.body.edit_email,
+        short_bio: req.body.edit_bio
+      }
+      }, (err)=>{
+        if(err){
+          console.log("here");
+          res.send(err);
+        }
+        else{
+          res.redirect('/user-profile');
+        }
+      })
+    }
+
+   else{
+    User.findByIdAndUpdate({_id: userId}, 
+      {
+      $set: {
+        first_name: req.body.edit_fname,
+        last_name: req.body.edit_lname,
+        email_address: req.body.edit_email,
+        photo: req.file.filename,
+        short_bio: req.body.edit_bio
+      }
+      }, (err)=>{
+        if(err){
+          console.log("here");
+          res.send(err);
+        }
+        else{
+          res.redirect('/user-profile');
+        }
+      })
+    }
+}
