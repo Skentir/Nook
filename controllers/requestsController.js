@@ -1,6 +1,7 @@
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 const UserModel = require('../models/User');
+var mongoose = require('mongoose');
 
 exports.viewrequests = (req,res)=> {
     var orgId = req.params.orgId;
@@ -33,7 +34,7 @@ exports.viewrequests = (req,res)=> {
                                 reqs:request,
                                 org: orgs
                             }
-                        //   res.json(params);
+            
                         res.render('member-requests', params);
                         }
                     });

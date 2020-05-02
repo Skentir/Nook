@@ -8,24 +8,12 @@ $(document).ready(function(){
         
         $.ajax({
             type: "PUT",
-            url: "/admin/accept-request/"+ id,  
-            done: function (data) {
-               console.log("Added to user's organizations");
-               var string = '#' + id;
-               $(string).remove(); 
-            }               
+            url: "/admin/accept-request/"+ id,              
+        }).done(function (data) {
+            console.log("Added to user's organizations");
+            var string = '#' + id;
+            $(string).remove(); 
         });
-        /*
-        $.ajax({
-            type: "DELETE",
-            url: "/admin/delete-request/"+ id,  
-            success: function (data) {
-               var string = '#' + id;
-                $(string).remove(); 
-            }               
-        });
-        */
-
        return false;
     });
 
@@ -37,11 +25,11 @@ $(document).ready(function(){
 
         $.ajax({
             type: "DELETE",
-            url: "/admin/delete-request/"+ id,  
-            done: function (data) {
-                var string = '#' + id;
-                $(string).remove(); 
-            }               
+            url: "/admin/delete-request/"+ id,            
+        }).done(function (data) {
+           
+            var string = '#' + id;
+            $(string).remove(); 
         });
 
         return false;
@@ -55,12 +43,11 @@ $(document).ready(function(){
 
         $.ajax({
             type: "DELETE",
-            url: "/admin/delete-request/"+ id,  
-            done: function (data) {
-               var string = '#request-' + id;
-                $(string).remove(); 
-            }               
-        });
+            url: "/admin/delete-request/"+ id,       
+        }).done(function (data) {
+            var string = '#request-' + id;
+             $(string).remove(); 
+         });
 
        return false;
     });
@@ -69,21 +56,29 @@ $(document).ready(function(){
     $("#add-req-btn").click(function() {
         var org = $('#org-list').val();
         var pos = $('#req-position').val();
-        
         new_request = {
             org_name: org,
             position: pos
         }
 
-        // console.log(new_request)
-
         $.ajax({
             type: "POST",
             url: "/editprofile",  
             data: new_request,
-            done: function (data) {
-               console.log("SUccEssfully created a requset")
-            } 
+        }).done( function (data) {
+            $('#add-request-modal').modal('toggle');
+            console.log("SUccEssfully created a requset");
+            var string = 
+            `<div class="row request-item" id="request-{{this._id}}">
+                <span class="col-9 request-org-cell">
+                    <img class="hdr-pic request-org-pic" src="{{this.org_id.0.org_logo}}">
+                    <p class="request-org-name">{{this.org_id.0.org_name}}</p>
+                </span>
+                <div class="col-3 cancel-req">
+                    <a class="cancel" data-id="{{this._id}}">Cancel</a>
+                </div>
+             </div>`
+            $('#requestlist').append(string)
         });
 
         return false;
