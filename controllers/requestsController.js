@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 const UserModel = require('../models/User');
