@@ -15,6 +15,7 @@ $(document).ready(function(){
             type: "GET",
             url: form_url+'?org_name='+orgName,
         }).done(function (data) {
+            window.location.replace(form_url+'?org_name='+orgName);
             console.log("Hello!");
          });
       });

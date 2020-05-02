@@ -39,6 +39,19 @@ exports.view = function(req, res) {
 
 exports.searchOrg = function(req, res) {
     var org_name = req.query.org_name;
-    console.log("search this org" + org_name);
-    //OrgModel.find({})
+   
+    OrgModel.find({'org_name': { "$regex": org_name, "$options": "i" }})
+    .select('_id org_name org_logo')
+    .exec( function(err, docs){
+        if (err) {
+            res.send(err);
+        } else {
+            var org = JSON.parse(JSON.stringify(docs));
+            var params = {
+                layout: 'main',
+                orgs: org,
+            };
+            res.render('search', params);
+        }
+    });
 }
