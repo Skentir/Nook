@@ -34,14 +34,21 @@ exports.view = function(req, res) {
                     });
             }
         });*/
+
         async.parallel({
             //for each(for eaach) org queried, query filename and chunks(waterfall)
           orgs:function gatherOrgData(callback) {
               OrgModel.find({}).select('_id org_type org_logo org_name').limit(2).then(results=>{
-                               if (results) {
-                     callback(null, results);
-                 }
-              });
+                if (results) {
+                    async.eachSeries(results, function(org, callbackEach) {
+                        console.log("ok so this is the org---> " + org);
+                        callbackEach(null);
+                    }, function() {
+                    //when all item.somethingElse is done, call the upper callback
+                        callback(null, results);
+                    });
+                }
+            })
           },
           events: function gatherEventsData(callback) {
               EventModel.find({}).select('_id event_name header_photo').limit(5).then(results=>{
