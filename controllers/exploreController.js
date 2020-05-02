@@ -43,13 +43,14 @@ exports.view = function(req, res) {
         async.parallel({
             //for each(for eaach) org queried, query filename and chunks(waterfall)
           orgs:function gatherOrgData(callback) {
-              OrgModel.find({}).select('_id org_type org_logo org_name').limit(1).then(results=>{
+              OrgModel.find({}).select('_id org_type org_logo org_name').limit(2).then(results=>{
                 if (results) {
+                    async.forEach(results, function(result,resultCallback){
                     async.waterfall([ 
                     function(callbackEach) {
                         //console.log("ok so this is the org---> " + org);
                         //console.log(callbackEach);
-                        callbackEach(null, results[0]);
+                        callbackEach(null, result);
                     },
                     function getImageFilname(org, callbackEach){
                         collection.find({filename: org.org_logo}).toArray(function(err, docs){
@@ -85,18 +86,21 @@ exports.view = function(req, res) {
                         })
                         
                     },
-                    function(callbackEach) {
-                    //when all item.somethingElse is done, call the upper callback
-                        console.log(""+ images.length);
+                        function(callbackEach) {
+                            resultCallback();
+                            //callback(null, results);
+                        }
+                    ]);},function(err){
+                        //console.log("Loop completed");
                         callback(null, results);
-                    }
-                ]);
+                    })
                 }
+
             })
           },
           events: function gatherEventsData(callback) {
               EventModel.find({}).select('_id event_name header_photo').limit(5).then(results=>{
-                               if (results) {
+                    if (results) {
                      callback(null, results);
                  }
               });
@@ -108,7 +112,16 @@ exports.view = function(req, res) {
            if (err) {
              console.log("error")
          } else {
-             console.log(results.events);
+             var org = JSON.parse(JSON.stringify(results.orgs))
+             for(var i = 0; i<org.length;i++){
+                 org[i].img = images[i];
+             }
+             var params = {
+                layout: 'main',
+                events: JSON.parse(JSON.stringify(results.events)),
+                orgs: org
+              };
+             res.render('explore',params);
          }
        })
 
