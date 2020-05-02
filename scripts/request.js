@@ -9,7 +9,7 @@ $(document).ready(function(){
         $.ajax({
             type: "PUT",
             url: "/admin/accept-request/"+ id,  
-            success: function (data) {
+            done: function (data) {
                console.log("Added to user's organizations");
                var string = '#' + id;
                $(string).remove(); 
@@ -38,7 +38,7 @@ $(document).ready(function(){
         $.ajax({
             type: "DELETE",
             url: "/admin/delete-request/"+ id,  
-            success: function (data) {
+            done: function (data) {
                 var string = '#' + id;
                 $(string).remove(); 
             }               
@@ -56,7 +56,7 @@ $(document).ready(function(){
         $.ajax({
             type: "DELETE",
             url: "/admin/delete-request/"+ id,  
-            success: function (data) {
+            done: function (data) {
                var string = '#request-' + id;
                 $(string).remove(); 
             }               
@@ -81,7 +81,7 @@ $(document).ready(function(){
             type: "POST",
             url: "/editprofile",  
             data: new_request,
-            success: function (data) {
+            done: function (data) {
                console.log("SUccEssfully created a requset")
             } 
         });

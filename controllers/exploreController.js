@@ -36,3 +36,9 @@ exports.view = function(req, res) {
         });
 
 };
+
+exports.searchOrg = function(req, res) {
+    var org_name = req.query.org_name;
+    console.log("search this org" + org_name);
+    //OrgModel.find({})
+}
