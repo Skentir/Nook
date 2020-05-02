@@ -74,7 +74,7 @@ exports.editprofile = (req,res, next)=> {
                         } 
                     )   
                     
-                    } else {    collection.find({filename: fileName}).toArray(function(err, docs){
+                    } else {collection.find({filename: fileName}).toArray(function(err, docs){
                         if(err){
                           return res.send(err);
                         }
