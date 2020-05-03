@@ -8,39 +8,6 @@ const collectionChunks = db.collection('uploads.chunks');
 
 exports.view = function(req, res) {
     let orgList = [];
-    /*OrgModel.find({})
-        .select('_id org_type org_logo org_name')
-        .exec( function(err, docs) {
-            if (err) {
-                res.send(err);
-            } else {
-                EventModel.find({})
-                    .select('_id event_name header_photo')
-                    .limit(5)
-                    .exec( function(err, result) {
-                        if (err) {
-                            res.send(err);
-                        } else if (!result) {
-                            var org = JSON.parse(JSON.stringify(docs));
-                            var params = {
-                                layout: 'main',
-                                orgs: org
-                            };
-                            res.render('explore', params);
-                        } else {
-                            var org = JSON.parse(JSON.stringify(docs));
-                            var event = JSON.parse(JSON.stringify(result));
-                            var params = {
-                                layout: 'main',
-                                orgs: org,
-                                events: event
-                            };
-                            res.render('explore', params);
-                        }
-                    });
-            }
-        });*/
-
         async.parallel({
             //for each(for eaach) org queried, query filename and chunks(waterfall)
           orgs:function gatherOrgData(callback) {
@@ -97,7 +64,9 @@ exports.view = function(req, res) {
                             resultCallback();
                             //callback(null, results);
                         }
-                    ]);},function(err){
+                    ]);
+                    
+                    },function(err) {
                         //console.log("Loop completed");
                         callback(null, results);
                     })
