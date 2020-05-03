@@ -66,83 +66,81 @@ exports.viewofficers = (req,res)=> {
     }); 
     */
     const orgId = req.params.orgId;
-    var officerList = [];
-    async.parallel({
+    var orgj;
+    let officerList = [];
+        async.parallel({
             //for each(for eaach) org queried, query filename and chunks(waterfall)
-          orgs: function gatherOrgData(callback) {
-            OrgModel.find({'_id':orgId}, {'org_id':orgId})
-            .select('org_name org_logo tags no_of_officers no_of_members date_established')
-            .limit(1)
-            .then(result =>{
-                if (result) {
-                    console.log("tom nook here"+result)
-                    collection.find({filename: result.org_logo})
-                        .toArray(function(err, docs) {
-                        if(err) {
-                            return res.send(err);
-                        }
-                        if(!docs || docs.length === 0){
-                            return res.send(err);
-                        } else {
-                        //Retrieving the chunks from the db
-                        collectionChunks.find({files_id : docs[0]._id}).sort({n: 1})
-                            .toArray(function(err, chunks) {
-                               if(err){
-                                return res.send(err);
-                               }
-                               if(!chunks || chunks.length === 0){
-                               //No data found
-                                return res.send(err);
-                               }
-                               //Append Chunks
-                               var fileData = [];
-                               for(let i=0; i<chunks.length;i++){
-                   
-                               //This is in Binary JSON or BSON format, which is stored
-                               //in fileData array in base64 endocoded string format
-                               fileData.push(chunks[i].data.toString('base64'));
-                               }
-                               //Display the chunks using the data URI format
-                               finalFile1 = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-                               org = JSON.parse(JSON.stringify(result));
-                               org.orgImage = finalFile1;
+          orgs:function gatherOrgData(callback) {
+            OrgModel.findById(orgId)
+                .select('org_name org_logo tags no_of_officers no_of_members date_established')
+                .then( results => {
+                    if (results) {
+                            collection.find({filename: results.org_logo}).toArray(function(err, docs){
+                                if(err){
+                                    return callbackEach(err);
+                                }
+                                if(!docs || docs.length === 0){
+                                    return callbackEach(err);
+                                } else {
+                                //Retrieving the chunks from the db
+                                    collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                        if(err){
+                                        return callbackEach(err);
+                                        }
+                                        if(!chunks || chunks.length === 0){
+                                        //No data found
+                                        return callbackEach(err);
+                                        }
+                                        //Append Chunks
+                                        var fileData = [];
+                                        for(let i=0; i<chunks.length;i++){
+                        
+                                        //This is in Binary JSON or BSON format, which is stored
+                                        //in fileData array in base64 endocoded string format
+                                        fileData.push(chunks[i].data.toString('base64'));
+                                        }
+                                        //Display the chunks using the data URI format
+                                        var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+
+                                        //create a json object for the org
+                                        orgj = JSON.parse(JSON.stringify(results));
+
+                                        //add the image property to json object and assign the image uri
+                                        orgj.img = finalFile;
+                                    });
+                                }
                             })
                         }
-                    })
-                }
-            },function(err){
-                callback(null, result);
-            });
-          },
-            officers: function gatherEventsData(callback) {
-                User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
-                //.populate('')
+                    }, function(callbackEach) {
+                            callback(null, results);
+                        });
+            },
+          events: function gatherEventsData(callback) {
+              User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
                 .select('_id photo first_name last_name orgs.position')
-                .then(results=> {
+                .then(results=>{
                     if (results) {
-                        console.log("isablel "+results);
                         async.forEach(results, function(result,resultCallback){
                             async.waterfall([ 
                             function(callbackEach) {
                                 callbackEach(null, result);
                             },
-                            function getImageFilname(officer, callbackEach) {
-                                collection.find({filename: officer.photo})
-                                    .toArray(function(err, docs){
+                            function getImageFilname(officer, callbackEach){
+                                collection.find({filename: officer.photo}).toArray(function(err, docs){
                                     if(err){
-                                        return callbackEach(err);
+                                    return callbackEach(err);
                                     }
                                     if(!docs || docs.length === 0){
-                                        return callbackEach(err);
+                                    return callbackEach(err);
                                     }else{
                                     //Retrieving the chunks from the db
                                         collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
                                             if(err){
-                                                return callbackEach(err);
+                                            return callbackEach(err);
                                             }
                                             if(!chunks || chunks.length === 0){
                                             //No data found
-                                                return callbackEach(err);
+                                            return callbackEach(err);
                                             }
                                             //Append Chunks
                                             var fileData = [];
@@ -168,37 +166,35 @@ exports.viewofficers = (req,res)=> {
                                     }
                                 })
                                 
-                            },
-                                function(callbackEach) {
+                            }, function(callbackEach) {
                                     resultCallback();
-                                    //callback(null, results);
                                 }
-                        ])
-                        },function(err){
+                            ]);
+                        },  function(err) {
                                 console.log("taco bell")
                                 callback(null, results);
-                        });
-                    }  
+                            });
+                    }
                 });
             }   
-          
-          //combine results and render
    
-        }, function (err, results) {
+       }, function (err, results) {
+           console.log(results);
             if (err) {
                 console.log("error")
             } else {
                 console.log("yo here")
-                var params = {
-                    layout: 'main',
-                    officers: officerList,
-                    org_data: org
-                };
-                //res.render('view-officers',params);
-                res.send(params);
+             var params = {
+                layout: 'main',
+                officers: officerList,
+                org_data: orgj
+              };
+             //res.render('explore',params);
+             res.send(params);
             }
-        });
+       })
 };
+
 
 exports.vieworg = (req,res) => {
     const orgId = req.params.orgId;

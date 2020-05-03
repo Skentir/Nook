@@ -17,14 +17,11 @@ exports.viewtools = (req,res)=> {
       if (err) {
         res.send(err);
       } else {
-        console.log("ORG ID IS"+result);
         result = JSON.parse(JSON.stringify(result))
         var params = {
           layout: 'main',
           result
         }
-        console.log("Params" + params)
-        // res.send(params)
         res.render('ad-tools', params);
       }
     })
