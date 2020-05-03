@@ -152,7 +152,6 @@ exports.view = function(req, res) {
              //res.send(orgList);
          }
        })
-
 };
 
 exports.searchOrg = function(req, res) {
