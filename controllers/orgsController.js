@@ -67,29 +67,10 @@ exports.viewofficers = (req,res)=> {
 
 exports.vieworg = (req,res) => {
     const orgId = req.params.orgId;
-    /*
+    var finalFile1, eventList = [], org;
     OrgModel.findById(orgId)
         .populate('events', '_id event_name header_photo')
-        .exec(function(err, result)  {
-            if (err) {
-                res.send(err);
-              } else  if (!result) {
-                // Org not Found
-                res.redirect('/explore')
-              } else {        
-                var org = JSON.parse(JSON.stringify(result));
-                var params = {
-                    layout: 'main',
-                    org
-                  };
-                res.render('vieworg', params);       
-            }
-        });
-    */
-   var finalFile1, eventList = [], org;
-   OrgModel.findById(orgId)
-   .populate('events', '_id event_name header_photo')
-       .exec(function(err, result) {
+        .exec(function(err, result) {
            if (err) {
                res.send(err);
            } else if (!result) {
