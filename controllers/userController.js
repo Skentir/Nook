@@ -1,6 +1,7 @@
 const getDb = require('../config/db').getDb;
 const User = require('../models/User');
 const Request = require('../models/Request');
+const OrgModel = require('../models/Org');
 
 
 const db = getDb();
@@ -9,12 +10,24 @@ const collection = db.collection('uploads.files');
 const collectionChunks = db.collection('uploads.chunks');
 
 exports.viewtools = (req,res)=> {
-    /* TODO: GET ORG ID FROM USER */
-    
-    var obj = {
-        _id : "5e8229291c9d4400009aa35f"
-    }
-    res.render('ad-tools', obj);
+  var user_id = req.session.passport.user;
+  OrgModel.find({officers: { "$in" : [user_id]} })
+    .select('id')
+    .exec( function(err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log("ORG ID IS"+result);
+        result = JSON.parse(JSON.stringify(result))
+        var params = {
+          layout: 'main',
+          result
+        }
+        console.log("Params" + params)
+        // res.send(params)
+        res.render('ad-tools', params);
+      }
+    })
 };
 
 exports.editprofile = (req,res, next)=> {
