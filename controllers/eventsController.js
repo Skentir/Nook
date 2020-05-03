@@ -59,9 +59,7 @@ exports.viewevent = (req,res)=> {
             } else if (!result) {
                 // Event not Found
                 res.redirect('/explore');
-            } else {
-                
-                //collections.find for the event
+            } else { 
                 collection.find({filename: result.header_photo})
                     .toArray(function(err, docs) {
                         if(err){
@@ -127,10 +125,7 @@ exports.viewevent = (req,res)=> {
                                                 var params = {
                                                     layout: 'main',
                                                     event
-                                                }
-                                                console.log("NEW")
-                                                //console.log(event);
-                                                //es.send(params);  
+                                                } 
                                                 res.render('viewevent', params)
                                             })
                                         }
