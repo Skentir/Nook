@@ -5,8 +5,9 @@ const getDb = require('../config/db').getDb;
 const db = getDb();
 const collection = db.collection('uploads.files');
 const collectionChunks = db.collection('uploads.chunks');
-let images = [];
+
 exports.view = function(req, res) {
+    let orgList = [];
     /*OrgModel.find({})
         .select('_id org_type org_logo org_name')
         .exec( function(err, docs) {
@@ -43,13 +44,11 @@ exports.view = function(req, res) {
         async.parallel({
             //for each(for eaach) org queried, query filename and chunks(waterfall)
           orgs:function gatherOrgData(callback) {
-              OrgModel.find({}).select('_id org_type org_logo org_name').limit(2).then(results=>{
+              OrgModel.find({}).select('_id org_type org_logo org_name').then(results=>{
                 if (results) {
                     async.forEach(results, function(result,resultCallback){
                     async.waterfall([ 
                     function(callbackEach) {
-                        //console.log("ok so this is the org---> " + org);
-                        //console.log(callbackEach);
                         callbackEach(null, result);
                     },
                     function getImageFilname(org, callbackEach){
@@ -79,7 +78,15 @@ exports.view = function(req, res) {
                                     }
                                     //Display the chunks using the data URI format
                                     finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-                                    images.push(finalFile);
+
+                                    //create a json object for the org
+                                    var orgj = JSON.parse(JSON.stringify(org));
+
+                                    //add the image property to json object and assign the image uri
+                                    orgj.img = finalFile;
+
+                                    //push it into list of orgs
+                                    orgList.push(orgj);
                                     callbackEach(null);
                                 });
                             }
@@ -112,16 +119,17 @@ exports.view = function(req, res) {
            if (err) {
              console.log("error")
          } else {
-             var org = JSON.parse(JSON.stringify(results.orgs))
+             /*var org = JSON.parse(JSON.stringify(results.orgs))
              for(var i = 0; i<org.length;i++){
                  org[i].img = images[i];
-             }
+             }*/
              var params = {
                 layout: 'main',
                 events: JSON.parse(JSON.stringify(results.events)),
-                orgs: org
+                orgs: orgList
               };
              res.render('explore',params);
+             //res.send(orgList);
          }
        })
 
