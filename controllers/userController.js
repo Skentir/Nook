@@ -135,6 +135,7 @@ exports.viewplanner = (req,res)=> {
                     if(err){
                       return res.send(err);
                     }
+<<<<<<< HEAD
                     if(!docs || docs.length === 0){
                       return res.send(err);
                     }else{
@@ -169,6 +170,11 @@ exports.viewplanner = (req,res)=> {
                     }
                 } 
                 )}                                             
+=======
+                    //to do
+                    res.send(params);   
+                }                           
+>>>>>>> kirsten
             });
     }
 };

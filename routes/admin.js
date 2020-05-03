@@ -13,6 +13,7 @@ router.get('/editorg/:orgId', orgsController.editorg);
 router.get('/editevent/:eventId', eventsController.editevent);
 router.get('/member-requests/:orgId', requestsController.viewrequests);
 router.get('/view-officers/:orgId', orgsController.viewofficers);
-router.get('/delete-request/:reqId', requestsController.deleterequest);
+router.delete('/delete-request/:reqId', requestsController.deleterequest);
+router.put('/accept-request/:reqId', requestsController.acceptrequest);
 
 module.exports = router;

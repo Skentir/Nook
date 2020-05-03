@@ -1,5 +1,7 @@
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
+const UserModel = require('../models/User');
+var mongoose = require('mongoose');
 
 exports.viewrequests = (req,res)=> {
     var orgId = req.params.orgId;
@@ -32,7 +34,7 @@ exports.viewrequests = (req,res)=> {
                                 reqs:request,
                                 org: orgs
                             }
-                        //   res.json(params);
+            
                         res.render('member-requests', params);
                         }
                     });
@@ -42,13 +44,78 @@ exports.viewrequests = (req,res)=> {
 
 exports.deleterequest = (req,res)=> {
     var requestId = req.params.reqId;
-    // TODO: Delete from Request and User Request
-    console.log("Request to delete for "+requestId);
+    var query = {'_id': requestId};
 
+    Request.deleteOne(query, function(err, obj) {
+        if(err) res.send(err);
+        else res.send('member-requests');
+    })
 }
 
 exports.acceptrequest = (req,res) => {
     var requestId = req.params.reqId;
-    // TODO: Delete from Request and User Request, Add to User Organizations
-    console.log("Request to accept for "+requestId)
+    
+    Request.findById(requestId)
+    .exec(function (err, result) {
+        new_org = {
+            org_id: result.org_id,
+            position: result.position
+        }
+
+        var conditions = {_id:result.org_id}
+        var options = {multi: true}
+        var update = {$inc: {no_of_officers: 1}}
+
+        if(result.position == "Member" || result.position == "") {
+            update = {$inc: {no_of_members: 1}}
+        }
+
+        OrgModel.updateOne(conditions, update, options, function(err, num){
+            if(err) res.send(err)
+            else {
+                UserModel.updateOne(
+                    {_id: result.user_id},
+                    {$addToSet: {orgs:new_org}},
+                    function(err, result) {
+                        if(err) res.send(err)
+                        else {
+                            var query = {'_id': requestId};
+            
+                            Request.deleteOne(query, function(err, obj) {
+                                if(err) res.send(err);
+                                else res.send('member-requests')
+                            })
+                        }
+                    }
+                )
+            }
+        });
+    });
+}
+
+exports.createrequests = (req,res) => {
+    var orgName = req.body.org_name
+    var pos = req.body.position
+    var user = req.session.passport.user
+    var userId = mongoose.Types.ObjectId(user)
+
+    OrgModel.findOne({org_name:orgName})
+        .lean().exec(function(err, result) {
+            if(err) throw err
+            else {
+                var orgId = result._id
+
+                new_req = {
+                    user_id: userId,
+                    org_id: orgId,
+                    status: "Pending",
+                    position: pos
+                }
+    
+                Request.create(new_req, function(err, obj){
+                    if(err) res.send(err)
+                    else res.send('editprofile')
+                })
+            }
+        });
 }
