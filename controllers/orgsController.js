@@ -70,116 +70,127 @@ exports.viewofficers = (req,res)=> {
     let officerList = [];
         async.parallel({
             //for each(for eaach) org queried, query filename and chunks(waterfall)
-          orgs:function gatherOrgData(callback) {
-            OrgModel.findById(orgId)
-                .select('org_name org_logo tags no_of_officers no_of_members date_established')
-                .then( results => {
-                    if (results) {
-                            collection.find({filename: results.org_logo}).toArray(function(err, docs){
-                                if(err){
-                                    return callbackEach(err);
-                                }
-                                if(!docs || docs.length === 0){
-                                    return callbackEach(err);
-                                } else {
-                                //Retrieving the chunks from the db
-                                    collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+            orgs:function gatherOrgData(callback) {
+                OrgModel.findById(orgId)
+                    .select('org_name org_logo tags no_of_officers no_of_members date_established')
+                    .then( results => {
+                        if (results) {
+                            async.waterfall([ 
+                                function(callbackEach) {
+                                    callbackEach(null, results);
+                                },
+                                function getImageFilname(org, callbackEach){
+                                    collection.find({filename: org.org_logo}).toArray(function(err, docs){
                                         if(err){
                                         return callbackEach(err);
                                         }
-                                        if(!chunks || chunks.length === 0){
-                                        //No data found
+                                        if(!docs || docs.length === 0){
                                         return callbackEach(err);
-                                        }
-                                        //Append Chunks
-                                        var fileData = [];
-                                        for(let i=0; i<chunks.length;i++){
-                        
-                                        //This is in Binary JSON or BSON format, which is stored
-                                        //in fileData array in base64 endocoded string format
-                                        fileData.push(chunks[i].data.toString('base64'));
-                                        }
-                                        //Display the chunks using the data URI format
-                                        var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-
-                                        //create a json object for the org
-                                        orgj = JSON.parse(JSON.stringify(results));
-
-                                        //add the image property to json object and assign the image uri
-                                        orgj.img = finalFile;
-                                    });
-                                }
-                            })
-                        }
-                    }, function(callbackEach) {
-                            callback(null, results);
-                        });
-            },
-          events: function gatherEventsData(callback) {
-              User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
-                .select('_id photo first_name last_name orgs.position')
-                .then(results=>{
-                    if (results) {
-                        async.forEach(results, function(result,resultCallback){
-                            async.waterfall([ 
-                            function(callbackEach) {
-                                callbackEach(null, result);
-                            },
-                            function getImageFilname(officer, callbackEach){
-                                collection.find({filename: officer.photo}).toArray(function(err, docs){
-                                    if(err){
-                                    return callbackEach(err);
-                                    }
-                                    if(!docs || docs.length === 0){
-                                    return callbackEach(err);
-                                    }else{
-                                    //Retrieving the chunks from the db
-                                        collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
-                                            if(err){
-                                            return callbackEach(err);
-                                            }
-                                            if(!chunks || chunks.length === 0){
-                                            //No data found
-                                            return callbackEach(err);
-                                            }
-                                            //Append Chunks
-                                            var fileData = [];
-                                            for(let i=0; i<chunks.length;i++){
-                            
-                                            //This is in Binary JSON or BSON format, which is stored
-                                            //in fileData array in base64 endocoded string format
-                                            fileData.push(chunks[i].data.toString('base64'));
-                                            }
-                                            //Display the chunks using the data URI format
-                                            var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-        
-                                            //create a json object for the org
-                                            var officerj = JSON.parse(JSON.stringify(officer));
-        
-                                            //add the image property to json object and assign the image uri
-                                            officerj.img = finalFile;
-        
-                                            //push it into list of orgs
-                                            officerList.push(officerj);
-                                            callbackEach(null);
-                                        });
-                                    }
-                                })
+                                        }else{
+                                        //Retrieving the chunks from the db
+                                            collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                                if(err){
+                                                return callbackEach(err);
+                                                }
+                                                if(!chunks || chunks.length === 0){
+                                                //No data found
+                                                return callbackEach(err);
+                                                }
+                                                //Append Chunks
+                                                var fileData = [];
+                                                for(let i=0; i<chunks.length;i++){
                                 
-                            }, function(callbackEach) {
-                                    resultCallback();
-                                }
-                            ]);
-                        },  function(err) {
-                                console.log("taco bell")
-                                callback(null, results);
-                            });
+                                                //This is in Binary JSON or BSON format, which is stored
+                                                //in fileData array in base64 endocoded string format
+                                                fileData.push(chunks[i].data.toString('base64'));
+                                                }
+                                                //Display the chunks using the data URI format
+                                                var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+            
+                                                //create a json object for the org
+                                                orgj = JSON.parse(JSON.stringify(org));
+            
+                                                //add the image property to json object and assign the image uri
+                                                orgj.img = finalFile;
+                                                callbackEach(null);
+                                            });
+                                        }
+                                    })
+                                }, function(callbackEach) {
+                                        console.log("shkayes" + results)
+                                        callback(null, results);
+                                    }
+                            ])    
+                        }
+                    }
+                )
+            },
+            events: function gatherEventsData(callback) {
+                User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
+                    .select('_id photo first_name last_name orgs.position')
+                    .then(results=>{
+                        if (results) {
+                            async.forEach(results, function(result,resultCallback){
+                                async.waterfall([ 
+                                function(callbackEach) {
+                                    callbackEach(null, result);
+                                },
+                                function getImageFilname(officer, callbackEach){
+                                    collection.find({filename: officer.photo}).toArray(function(err, docs){
+                                        if(err){
+                                            return callbackEach(err);
+                                        }
+                                        if(!docs || docs.length === 0){
+                                            return callbackEach(err);
+                                        } else {
+                                        //Retrieving the chunks from the db
+                                            collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                                if(err){
+                                                return callbackEach(err);
+                                                }
+                                                if(!chunks || chunks.length === 0){
+                                                //No data found
+                                                return callbackEach(err);
+                                                }
+                                                //Append Chunks
+                                                var fileData = [];
+                                                for(let i=0; i<chunks.length;i++){
+                                
+                                                //This is in Binary JSON or BSON format, which is stored
+                                                //in fileData array in base64 endocoded string format
+                                                fileData.push(chunks[i].data.toString('base64'));
+                                                }
+                                                //Display the chunks using the data URI format
+                                                var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+            
+                                                //create a json object for the org
+                                                var officerj = JSON.parse(JSON.stringify(officer));
+            
+                                                //add the image property to json object and assign the image uri
+                                                officerj.img = finalFile;
+            
+                                                //push it into list of orgs
+                                                officerList.push(officerj);
+                                                callbackEach(null);
+                                            });
+                                        }
+                                    })
+                                    
+                                }, function(callbackEach) {
+                                        console.log("LENGTH "+officerList.length)
+                                        resultCallback();
+                                    }
+                                ]);
+                            },  function(err) {
+                                    console.log("taco bell" + results)
+                                    callback(null, results);
+                                });
                     }
                 });
             }   
    
        }, function (err, results) {
-           console.log(results);
+           console.log("duloo na"+results);
             if (err) {
                 console.log("error")
             } else {
