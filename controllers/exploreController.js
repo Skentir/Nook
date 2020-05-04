@@ -126,32 +126,26 @@ exports.view = function(req, res) {
                                     resultCallback();
                                     //callback(null, results);
                                 }
-                            ]);},function(err){
+                            ]);
+                        },function(err){
                                 callback(null, results);
-                            })
-                 }
-              });
-          }   
-          
-          //combine results and render
-   
+                        })
+                    }
+                });
+            }   
        }, function (err, results) {
            if (err) {
              console.log("error")
          } else {
-             /*var org = JSON.parse(JSON.stringify(results.orgs))
-             for(var i = 0; i<org.length;i++){
-                 org[i].img = images[i];
-             }*/
              var params = {
                 layout: 'main',
                 events: eventList,
                 orgs: orgList
-              };
+              }
              res.render('explore',params);
              //res.send(orgList);
          }
-       })
+       });
 };
 
 exports.searchOrg = function(req, res) {
