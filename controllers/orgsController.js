@@ -5,6 +5,7 @@ const getDb = require('../config/db').getDb;
 const db = getDb();
 const collection = db.collection('uploads.files');
 const collectionChunks = db.collection('uploads.chunks');
+const mongoose = require('mongoose');
 
 exports.editorg = (req,res)=> {
     var orgId = req.params.orgId;
@@ -27,44 +28,6 @@ exports.editorg = (req,res)=> {
 };
 
 exports.viewofficers = (req,res)=> {
-    /*
-    const orgId = req.params.orgId;
-
-    OrgModel.find({'_id':orgId}, {'org_id':orgId})
-    .select('org_name org_logo tags no_of_officers no_of_members date_established')
-    .limit(1)
-    .exec(function(err, org)  {
-        if (err) {
-            res.send(err);
-        } else {        
-
-        User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
-            .select('_id photo first_name last_name orgs.position')
-            .exec(function(err, result)  {
-                if (err) {
-                    res.send(err);
-                } else if (!result) {
-                    // No officers found, return org data
-                    var orgs = JSON.parse(JSON.stringify(org));
-                    var params = {
-                        layout: 'main', 
-                        org_data: orgs
-                    };
-                res.render('view-officers', params);
-                } else {       
-                    var orgs = JSON.parse(JSON.stringify(org));
-                    var officer = JSON.parse(JSON.stringify(result));
-                    var params = {
-                        layout: 'main', 
-                        org_data: orgs,
-                        officers: officer
-                        }
-                    };
-                    res.render('view-officers', params);
-            }); 
-        }
-    }); 
-    */
     const orgId = req.params.orgId;
     var orgj;
     let officerList = [];
@@ -117,7 +80,6 @@ exports.viewofficers = (req,res)=> {
                                         }
                                     })
                                 }, function(callbackEach) {
-                                        console.log("shkayes" + results)
                                         callback(null, results);
                                     }
                             ])    
@@ -125,9 +87,12 @@ exports.viewofficers = (req,res)=> {
                     }
                 )
             },
-            events: function gatherEventsData(callback) {
-                User.find({'orgs.org_id':orgId}, { 'orgs.position': { $ne: null } })
-                    .select('_id photo first_name last_name orgs.position')
+            officers: function gatherEventsData(callback) {
+                User.find(
+                    {   'orgs': {$elemMatch: {org_id: orgId,
+                        position: {$nin: ['Member',null]}}}
+                    },{'orgs.$':1})
+                    .select('_id photo first_name last_name')
                     .then(results=>{
                         if (results) {
                             async.forEach(results, function(result,resultCallback){
@@ -177,12 +142,10 @@ exports.viewofficers = (req,res)=> {
                                     })
                                     
                                 }, function(callbackEach) {
-                                        console.log("LENGTH "+officerList.length)
                                         resultCallback();
                                     }
                                 ]);
                             },  function(err) {
-                                    console.log("taco bell" + results)
                                     callback(null, results);
                                 });
                     }
@@ -190,18 +153,15 @@ exports.viewofficers = (req,res)=> {
             }   
    
        }, function (err, results) {
-           console.log("duloo na"+results);
             if (err) {
-                console.log("error")
+                res.send(err);
             } else {
-                console.log("yo here")
-             var params = {
-                layout: 'main',
-                officers: officerList,
-                org_data: orgj
-              };
-             //res.render('explore',params);
-             res.send(params);
+                var params = {
+                    layout: 'main',
+                    officers: officerList,
+                    org_data: orgj
+                };
+                res.render('view-officers',params);
             }
        })
 };
@@ -249,7 +209,6 @@ exports.vieworg = (req,res) => {
                                finalFile1 = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
                                org = JSON.parse(JSON.stringify(result));
                                org.orgImage = finalFile1;
-                               console.log("HELLO " + result.events)
                                     async.forEach(result.events, function(result,resultCallback) {
                                         async.waterfall([ 
                                             function(callbackEach) {
@@ -307,8 +266,6 @@ exports.vieworg = (req,res) => {
                                                 org: org,
                                                 events: eventList
                                             };
-                                            // console.log(params);
-                                           // res.send(params);
                                             res.render('vieworg',params);
                                     })
                             })
