@@ -5,7 +5,6 @@ const getDb = require('../config/db').getDb;
 const db = getDb();
 const collection = db.collection('uploads.files');
 const collectionChunks = db.collection('uploads.chunks');
-const mongoose = require('mongoose');
 
 exports.editorg = (req,res)=> {
     var orgId = req.params.orgId;
