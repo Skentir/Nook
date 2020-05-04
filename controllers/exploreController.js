@@ -220,21 +220,5 @@ exports.searchOrg = function(req, res) {
         }
     
     })
-    
-    
-    
-    
-    /*
-    .exec( function(err, docs){
-        if (err) {
-            res.send(err);
-        } else {
-            var org = JSON.parse(JSON.stringify(docs));
-            var params = {
-                layout: 'main',
-                orgs: org,
-            };
-            res.render('search', params);
-        }
-    });*/
+
 }

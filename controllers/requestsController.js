@@ -2,11 +2,18 @@ const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 const UserModel = require('../models/User');
 var mongoose = require('mongoose');
+const async = require('async');
+const getDb = require('../config/db').getDb;
+const db = getDb();
+const collection = db.collection('uploads.files');
+const collectionChunks = db.collection('uploads.chunks');
 
 exports.viewrequests = (req,res)=> {
     var orgId = req.params.orgId;
-
-    OrgModel.findById(orgId)
+    var orgj;
+    let requestList = [];
+    var orgm;
+    /*OrgModel.findById(orgId)
         .select('tags org_name org_logo no_of_members no_of_officers')
         .exec(function (err, docs) {
             if (err) { res.send(err) 
@@ -39,8 +46,132 @@ exports.viewrequests = (req,res)=> {
                         }
                     });
             }
-        });
+        });*/
+            //for each(for eaach) org queried, query filename and chunks(waterfall)
+                OrgModel.findById(orgId)
+                    .select('tags org_name org_logo no_of_members no_of_officers')
+                    .then( results => {
+                        if (results) {
+                            async.waterfall([ 
+                                function(callbackEach) {
+                                    orgm = results;
+                                    callbackEach(null, results);
+                                },
+                                function getImageFilname(org, callbackEach){
+                                    collection.find({filename: org.org_logo}).toArray(function(err, docs){
+                                        if(err){
+                                        return callbackEach(err);
+                                        }
+                                        if(!docs || docs.length === 0){
+                                        return callbackEach(err);
+                                        }else{
+                                        //Retrieving the chunks from the db
+                                            collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                                if(err){
+                                                return callbackEach(err);
+                                                }
+                                                if(!chunks || chunks.length === 0){
+                                                //No data found
+                                                return callbackEach(err);
+                                                }
+                                                //Append Chunks
+                                                var fileData = [];
+                                                for(let i=0; i<chunks.length;i++){
+                                
+                                                //This is in Binary JSON or BSON format, which is stored
+                                                //in fileData array in base64 endocoded string format
+                                                fileData.push(chunks[i].data.toString('base64'));
+                                                }
+                                                //Display the chunks using the data URI format
+                                                var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+            
+                                                //create a json object for the org
+                                                orgj = JSON.parse(JSON.stringify(org));
+            
+                                                //add the image property to json object and assign the image uri
+                                                orgj.img = finalFile;
+                                                callbackEach(null);
+                                            });
+                                        }
+                                    })
+                                }, function gatherEventsData(callbackEach) {
+                                    Request.find({org_id: orgm._id})
+                                        .select('position')
+                                        .populate('user_id', '_id photo id_number first_name last_name')
+                                        .then(results=>{
+                                            if (results) {
+                                                async.forEach(results, function(result,resultCallback){
+                                                    async.waterfall([ 
+                                                    function(callbackEach2) {
+                                                        callbackEach2(null, result);
+                                                    },
+                                                    function getImageFilname(request, callbackEach2){
+                                                        collection.find({filename: request.user_id.photo}).toArray(function(err, docs){
+                                                            if(err){
+                                                                return callbackEach2(err);
+                                                            }
+                                                            if(!docs || docs.length === 0){
+                                                                return callbackEach2(err);
+                                                            } else {
+                                                            //Retrieving the chunks from the db
+                                                                collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                                                    if(err){
+                                                                    return callbackEach2(err);
+                                                                    }
+                                                                    if(!chunks || chunks.length === 0){
+                                                                    //No data found
+                                                                    return callbackEach2(err);
+                                                                    }
+                                                                    //Append Chunks
+                                                                    var fileData = [];
+                                                                    for(let i=0; i<chunks.length;i++){
+                                                    
+                                                                    //This is in Binary JSON or BSON format, which is stored
+                                                                    //in fileData array in base64 endocoded string format
+                                                                    fileData.push(chunks[i].data.toString('base64'));
+                                                                    }
+                                                                    //Display the chunks using the data URI format
+                                                                    var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+                                
+                                                                    //create a json object for the org
+                                                                    var requestj = JSON.parse(JSON.stringify(request));
+                                
+                                                                    //add the image property to json object and assign the image uri
+                                                                    requestj.img = finalFile;
+                                
+                                                                    //push it into list of orgs
+                                                                    requestList.push(requestj);
+                                                                    callbackEach2(null);
+                                                                });
+                                                            }
+                                                        })
+                                                        
+                                                    }, function(callbackEach2) {
+                                                            resultCallback();
+                                                        }
+                                                    ]);
+                                                },  function(err) {
+                                                        callbackEach(null, results);
+                                                    });
+                                        }
+                                    });
+                                },function(err){
+                                        var params = {
+                                            layout: 'main',
+                                            reqs: requestList,
+                                            org: orgj
+                                        };
+                                        res.render('member-requests',params);
+                                        //res.send(params);
+                            }])    
+                        }
+                        else{
+                            res.redirect('/ad-tools');
+                        }
+                    }
+                )
 };
+            
 
 exports.deleterequest = (req,res)=> {
     var requestId = req.params.reqId;
