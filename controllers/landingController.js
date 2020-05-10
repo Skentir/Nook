@@ -1,4 +1,6 @@
 const passport = require('passport');
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 exports.login = (req, res, next) => {
     passport.authenticate('local', {
@@ -12,8 +14,17 @@ exports.register = (req,res)=> {
     .then( userr => {
         if(userr){
             console.log("user exists");
+            res.redirect('/');
         }
+        
         else{
+            //if the user does not upload any files
+             if(!req.file){
+                var user_photo = "05315a4aa355c6bff09be30717efaaed.jpg";
+            }
+            else{
+                user_photo = req.file.filename;
+            }
             const user = new User({
                 first_name : req.body.reg_fname,
                 last_name: req.body.reg_lname,
@@ -21,7 +32,7 @@ exports.register = (req,res)=> {
                 year_level: req.body.reg_yrlevel,
                 email_address: req.body.reg_email,
                 password: req.body.reg_pass,
-                photo: req.file.filename
+                photo: user_photo
             });
   
             console.log(user.first_name);
@@ -31,6 +42,7 @@ exports.register = (req,res)=> {
                     if(err) throw err;
                     // Hashed password
                     user.password = hash;
+                    //if the user did not upload any file use default
                     user.save()
                     .then(acct => {
                         res.redirect('/');

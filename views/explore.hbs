@@ -16,14 +16,14 @@
                 {{#each events}}
                     {{#if @first}}
                         <a class="carousel-item active" href="/viewevent/{{this._id}}">
-                            <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                            <img class="carousel-pic" style="" src="{{this.img}}" alt="First slide">
                                 <div class ="centered">
                                 {{this.event_name}}
                                 </div>
                         </a>
                     {{else}}
                     <a class="carousel-item" href="/viewevent/{{this._id}}">
-                        <img class="carousel-pic" style="" src="{{this.header_photo}}" alt="First slide">
+                        <img class="carousel-pic" style="" src="{{this.img}}" alt="First slide">
                             <div class ="centered">
                             {{this.event_name}}
                             </div>
@@ -56,7 +56,7 @@
                     {{#each orgs}}
                         <div class="card" value="{{this.org_type}}">
                             <a href="vieworg/{{this._id}}">
-                                <img class="card-img-top img-fluid" src="{{this.org_logo}}">
+                                <img class="card-img-top img-fluid" src="{{this.img}}">
                                 <div class="card-body">
                                     <span>{{this.org_name}}</span>
                                 </div>

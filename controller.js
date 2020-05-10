@@ -19,7 +19,6 @@ module.exports.renderUser = (req, res) => {
                     } else  {
 
                         collection.find({filename: fileName}).toArray(function(err, docs){
-                            console.log(docs._id + " id");
                             if(err){
                               return res.send(err);
                             }

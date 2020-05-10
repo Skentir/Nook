@@ -8,7 +8,7 @@
 <header class="container">
     <div class = "container-fluid org-header">
         <div class = "jumbotron jumbotron-fluid custom-jumbotron pb-1 mb-0" style="background: linear-gradient(rgba(107, 99, 255, 0.5), 
-            rgba(107, 99, 255, 0.5)), url({{org.org_header}});background-position: center center;
+            rgba(107, 99, 255, 0.5)), url({{org.orgImage}});background-position: center center;
             background-size: cover;">
             <div class ="inner-header">
                 <h1 class="ml-3 header-name" id="event-header-name">{{org.org_name}}</h1>
@@ -75,11 +75,11 @@
         <div class="card-wrapper">
             <div class="card-menu" id="org-events-list">
                 <div class="row">
-                    {{#if org.events}}
-                        {{#each (notNull org.events)}}
+                    {{#if events}}
+                        {{#each (notNull events)}}
                             <div class="card pb-0">
                                 <a href="/viewevent/{{this._id}}">
-                                    <img class="card-img-top img-fluid" src="{{this.header_photo}}">
+                                    <img class="card-img-top img-fluid" src="{{this.img}}">
                                     <div class="card-body">      
                                         <span class="org-name">{{this.event_name}}</span>   
                                     </div>
