@@ -28,6 +28,7 @@ exports.viewtools = (req,res)=> {
 };
 
 exports.editprofile = (req,res, next)=> {
+    var userrid
     if (!req.isAuthenticated()) { 
         res.redirect('/');  
     } else {
@@ -38,7 +39,8 @@ exports.editprofile = (req,res, next)=> {
             if (err) {
                 res.send(err);
             } else {
-                Request.find({user_id: userId})
+                userrid = user
+                Request.find({user_id:userrid._id})
                 .populate('org_id', '_id org_name org_logo')
                 .exec(function (err,result) {
                     if (err) {
@@ -79,6 +81,7 @@ exports.editprofile = (req,res, next)=> {
                                     image: finalFile
                                 }
                                 res.render('edit-profile', params);  
+                                console.log("no req")
                               });
                             }
                         } 
@@ -112,14 +115,17 @@ exports.editprofile = (req,res, next)=> {
                             //Display the chunks using the data URI format
                             var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
                             var userr = JSON.parse(JSON.stringify(user));
+                            console.log(result);
                             var reqs = JSON.parse(JSON.stringify(result));
                             var params = {
                                 layout: 'main',
                                 user_data: userr,
-                                requests: reqs,
+                                reqs: reqs,
                                 image: finalFile
                             }
+                            // res.send(params);
                             res.render('edit-profile', params);  
+                            console.log(reqs + " hello")
                           });
                         }
                     } 

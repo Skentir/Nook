@@ -43,7 +43,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: "DELETE",
-            url: "/admin/delete-request/"+ id,       
+            url: "/cancel-request/" + id,       
         }).done(function (data) {
             var string = '#request-' + id;
              $(string).remove(); 
@@ -79,8 +79,12 @@ $(document).ready(function(){
                 </div>
              </div>`
             $('#requestlist').append(string)
-        });
-
+            res.redirect('editprofile');
+        })
+        // success: function(data){
+        //     res.send('editprofile');
+        // };
+        location.reload();
         return false;
     })
 })

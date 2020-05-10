@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 const OrgModel = require('../models/Org');
 const Request = require('../models/Request');
 const UserModel = require('../models/User');
-var mongoose = require('mongoose');
 
 exports.viewrequests = (req,res)=> {
     var orgId = req.params.orgId;
@@ -35,7 +34,6 @@ exports.viewrequests = (req,res)=> {
                                 reqs:request,
                                 org: orgs
                             }
-            
                         res.render('member-requests', params);
                         }
                     });
@@ -50,6 +48,16 @@ exports.deleterequest = (req,res)=> {
     Request.deleteOne(query, function(err, obj) {
         if(err) res.send(err);
         else res.send('member-requests');
+    })
+}
+
+exports.cancelrequest = (req,res)=> {
+    var requestId = req.params.reqId;
+    var query = {'_id': requestId};
+
+    Request.deleteOne(query, function(err, obj) {
+        if(err) res.send(err);
+        else res.send('editprofile');
     })
 }
 
@@ -115,7 +123,7 @@ exports.createrequests = (req,res) => {
     
                 Request.create(new_req, function(err, obj){
                     if(err) res.send(err)
-                    else res.send('editprofile')
+                    else res.redirect('editprofile')
                 })
             }
         });

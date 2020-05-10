@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controllers/userController');
+const reqController = require('../controllers/requestsController');
 const multer = require('multer');
 const crypto = require("crypto");
 const GridFsStorage = require("multer-gridfs-storage");
@@ -49,5 +50,9 @@ const storage = new GridFsStorage({
 const upload = multer({storage: storage});
 
 router.get('/editprofile', controller.editprofile);
-router.post('/editprofile', upload.single('edit_pic'), controller.editprofiledetails);
+router.post('/edit-profile', upload.single('edit_pic'), controller.editprofiledetails);
+router.post('/editprofile', reqController.createrequests);
+router.delete('/editprofile', reqController.deleterequest);
+router.delete('/cancel-request/:reqId', reqController.cancelrequest);
+
 module.exports = router;
