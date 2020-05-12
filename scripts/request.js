@@ -14,14 +14,11 @@ $(document).ready(function(){
     $(".check").click(function() {
         var $addBtn = $(this);
         var id = $addBtn.data('id');
-
-        console.log("Check me " + id);
         
         $.ajax({
             type: "PUT",
             url: "/admin/accept-request/"+ id,              
         }).done(function (data) {
-            console.log("Added to user's organizations");
             var string = '#' + id;
             $(string).remove(); 
         });
@@ -32,8 +29,6 @@ $(document).ready(function(){
     $(".reject").click(function(){
         var $deleteBtn = $(this);
         var id = $deleteBtn.data('id');
-
-        console.log("Delete me " + id)
 
         $.ajax({
             type: "DELETE",
@@ -50,8 +45,6 @@ $(document).ready(function(){
     $(".cancel").click(function() {
         var $deleteBtn = $(this);
         var id = $deleteBtn.data('id');
-
-        console.log("Cancel me " + id);
 
         $.ajax({
             type: "DELETE",
@@ -85,7 +78,6 @@ $(document).ready(function(){
                 data: new_request,
             }).done( function (data) {
                 $('#add-request-modal').modal('toggle');
-                console.log("SUccEssfully created a requset");
                 var string = 
                 `<div class="row request-item" id="request-{{this._id}}">
                     <span class="col-9 request-org-cell">
