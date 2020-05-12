@@ -2,6 +2,7 @@ const getDb = require('../config/db').getDb;
 const User = require('../models/User');
 const Request = require('../models/Request');
 const OrgModel = require('../models/Org');
+const Event = require('../models/Event');
 
 
 const db = getDb();
@@ -249,6 +250,21 @@ exports.viewprofile = (req,res, next) => {
             });
 };
 
+exports.addtoplanner = (req, res) => {
+    var userId = req.session.passport.user;
+    var eventId = req.params.id;
+
+    User.updateOne(
+      {_id: userId},
+      {$addToSet: {planner: eventId}},
+      function(err, result) {
+        if(err) res.send(err)
+        else {
+          res.send('add-to-planner')
+        }
+      }
+    )
+}
 
 exports.renderUser = (req, res) => {
       if (!req.isAuthenticated()) { 
