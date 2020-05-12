@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
     },
     
     planner :{
-        type:[{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}],
+        type: mongoose.Schema.Types, ref: 'Event',
         required: false
     },
 

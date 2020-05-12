@@ -1,3 +1,4 @@
+var mongoose = require('mongoose')
 const getDb = require('../config/db').getDb;
 const User = require('../models/User');
 const Request = require('../models/Request');
@@ -143,50 +144,61 @@ exports.viewplanner = (req,res)=> {
     } else {
     var userId = req.session.passport.user;
     var fileName = res.locals.photo;
-    User.findById(userId)
-            .populate('planner','_id event_name header_photo')
-            .exec( function(err,result) { 
-                if (err) { res.send(err)
-                } else  { 
-                    collection.find({filename: fileName}).toArray(function(err, docs){
-                    if(err){
-                      return res.send(err);
-                    }
-                    if(!docs || docs.length === 0){
-                      return res.send(err);
-                    }else{
-                      //Retrieving the chunks from the db
+
+    function dates(event1, event2) {
+      return event1.date - event2.date
+    }
+
+    User.findOne({_id:userId}, function(err, user) {
+      user.planner.sort(dates).forEach(function(event) {
+        console.log('event: ' + event.date)
+      })
+    })
+
+    // User.findById(userId)
+    //         .populate('planner','_id event_name header_photo')
+    //         .exec( function(err,result) { 
+    //             if (err) { res.send(err)
+    //             } else  { 
+    //                 collection.find({filename: fileName}).toArray(function(err, docs){
+    //                 if(err){
+    //                   return res.send(err);
+    //                 }
+    //                 if(!docs || docs.length === 0){
+    //                   return res.send(err);
+    //                 }else{
+    //                   //Retrieving the chunks from the db
                       
-                      collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
-                        if(err){
-                          return res.send(err);
-                        }
-                        if(!chunks || chunks.length === 0){
-                          //No data found
-                          return res.send(err);
-                        }
-                        //Append Chunks
-                        var fileData = [];
-                        for(let i=0; i<chunks.length;i++){
+    //                   collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+    //                     if(err){
+    //                       return res.send(err);
+    //                     }
+    //                     if(!chunks || chunks.length === 0){
+    //                       //No data found
+    //                       return res.send(err);
+    //                     }
+    //                     //Append Chunks
+    //                     var fileData = [];
+    //                     for(let i=0; i<chunks.length;i++){
             
-                          //This is in Binary JSON or BSON format, which is stored
-                          //in fileData array in base64 endocoded string format
-                          fileData.push(chunks[i].data.toString('base64'));
-                        }
-                        //Display the chunks using the data URI format
-                        var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-                        var user = JSON.parse(JSON.stringify(result));
-                        var params = {
-                            layout: 'main',
-                            info:user,
-                            image: finalFile
-                        }
-                        res.render('planner', params);  
-                      });
-                    }
-                } 
-                )}                                             
-            });
+    //                       //This is in Binary JSON or BSON format, which is stored
+    //                       //in fileData array in base64 endocoded string format
+    //                       fileData.push(chunks[i].data.toString('base64'));
+    //                     }
+    //                     //Display the chunks using the data URI format
+    //                     var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+    //                     var user = JSON.parse(JSON.stringify(result));
+    //                     var params = {
+    //                         layout: 'main',
+    //                         info:user,
+    //                         image: finalFile
+    //                     }
+    //                     res.render('planner', params);  
+    //                   });
+    //                 }
+    //             } 
+    //             )}                                             
+    //         });
     }
 };
 
@@ -252,18 +264,30 @@ exports.viewprofile = (req,res, next) => {
 
 exports.addtoplanner = (req, res) => {
     var userId = req.session.passport.user;
-    var eventId = req.params.id;
+    var eventId = mongoose.Types.ObjectId(req.params.id)
 
-    User.updateOne(
-      {_id: userId},
-      {$addToSet: {planner: eventId}},
-      function(err, result) {
-        if(err) res.send(err)
-        else {
-          res.send('add-to-planner')
+    Event.findOne({_id:eventId}, function(err, docs) {
+      if(err) res.send(err)
+      else {
+        var date = docs.date
+      
+        var new_event = {
+          _id:eventId,
+          date:date
         }
+        
+        User.updateOne(
+          {_id: userId},
+          {$addToSet: {planner: new_event}},
+          function(err, result) {
+            if(err) res.send(err)
+            else {
+              res.send('add-to-planner')
+            }
+          }
+        )
       }
-    )
+    })
 }
 
 exports.renderUser = (req, res) => {
