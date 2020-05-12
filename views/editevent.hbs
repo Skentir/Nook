@@ -16,7 +16,7 @@
 <div class="container">
     <!-- Edit Header -->
     <header class="edit-hdr">
-        <img class="hdr-pic" src="{{event.header_photo}}">
+        <img class="hdr-pic" src="{{image}}">
         <div>
             <span class="hdr-text" id="user-name">{{event.event_name}}</span>
             /
@@ -25,15 +25,15 @@
         </div>
     </header>
     <!-- Form -->
-    <form id = "event-edit">
+    <form id = "event-edit" method = "POST" action = "/admin/editevent/{{event._id}}" enctype="multipart/form-data">
     <div class="inner-box">
         <div class="frm-height mt-4">
-                <form class="form-wrapper">
+                <div class="form-wrapper">
                     <div class="sub-form">
                         <div class="form-group">
                             <label>Event Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control invalid-field" id="event-name-field" placeholder="{{event.event_name}}">
+                                <input type="text" class="form-control invalid-field" id="event-name-field" value="{{event.event_name}}" name = "edit_event_name">
                             </div>
                         </div>
                         
@@ -41,14 +41,14 @@
                         <div class="form-group">
                             <label>Description </label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="event-desc-field" placeholder="{{event.about_desc}}"></textarea>
+                                <textarea type='text' class="form-control" id="event-desc-field" name = "edit_about_desc">{{event.about_desc}}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Things to Bring</label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="event-items-field"></textarea>
+                                <textarea type='text' class="form-control" id="event-items-field" name = "edit_things">{{event.things}}</textarea>
                             </div>
                         </div>
 
@@ -56,17 +56,17 @@
                             <label>Change Header Picture </label>
                             <div class="custom-file">
                                 <label class="custom-file-label">Choose</label>
-                                <input type="file" class="form-control custom-file-input" id="event-photo-field">
+                                <input type="file" class="form-control custom-file-input" id="event-photo-field" name = "edit_event_photo">
                             </div>
                         </div>
-                        <button type="button" id="edit-event" class="custombtn thinbtn mt-0">save</button>
+                        <button type="submit" id="edit-event" class="custombtn thinbtn mt-0">save</button>
                     </div>
                     
                     <div class="sub-form">
                         <div class="form-group">
                             <label>Venue</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="event-venue-field" placeholder="{{event.venue}}">
+                                <input type="text" class="form-control" id="event-venue-field" value="{{event.venue}}" name = "edit_venue">
                             </div>
                         </div>
                         
@@ -76,7 +76,7 @@
                                     <label>Date</label>
                                     <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
                                         <input type="text" class="form-control datetimepicker-input" id="event-date-field"
-                                            placeholder="{{formatDate event.date}}">
+                                            value="{{event.date}}" name = "edit_event_date">
                                         <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -98,7 +98,7 @@
                                     <label>Start Time</label>
                                     <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
                                         <input type='text' class="form-control datetimepicker-input" id="start-time-field" data-target="#datetimepicker3"
-                                            placeholder="{{event.start_time}}">
+                                            value="{{event.start_time}}" name = "edit_start_time">
                                         <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                         </div>
@@ -117,7 +117,7 @@
                                     <label>End Time</label>
                                     <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
                                         <input type='text' class="form-control datetimepicker-input" id="end-time-field" data-target="#datetimepicker3-2"
-                                            placeholder="{{event.end_time}}">
+                                            value="{{event.end_time}}" name = "edit_end_time">
                                         <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                         </div>
@@ -136,11 +136,11 @@
                         <div class="form-group">
                             <label>Incentives</label>
                             <div class='input-group date' id="event-about-field">
-                                <textarea type='text' class="form-control" id="event-incentives-field" placeholder="{{event.incentives}}"></textarea>
+                                <textarea type='text' class="form-control" id="event-incentives-field" name="edit_event_incentives">{{event.incentives}}</textarea>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         </form> 
