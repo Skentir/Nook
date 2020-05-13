@@ -18,7 +18,7 @@
         "Junior Entrepreneurs Marketing Association",
         "DLSU Mathematics Circle",
         "Young Entrepreneurs Society",
-        "DLSU Syntnax",
+        "DLSU Syntax",
         "Ang Pahayagang Plaridel",
         "SDFO Paragons",
         "ENGLICOM",
@@ -52,7 +52,7 @@
     </header>
 
     <!-- Form -->
-    <form name = "edit_profile" method = "POST" action = '/editprofile' enctype="multipart/form-data">
+    <form name = "edit_profile" method = "POST" action = '/edit-profile' enctype="multipart/form-data">
     <div class="inner-box">
         <div class="left-box">
                 <div class="frm-height contact-form">
@@ -100,15 +100,15 @@
                 <div class="frm-height contact-form">
                     <h4 class="mb-3">Pending Requests</h4>
                     <div class="request-list">
-                        {{#if requests includeZero=true}}
-                        {{#each requests}}
+                        {{#if reqs includeZero=true}}
+                        {{#each reqs}}
                         <div class="row request-item" id="request-{{this._id}}">
                             <span class="col-9 request-org-cell">
                                 <img class="hdr-pic request-org-pic" src="{{this.org_id.0.org_logo}}">
                                 <p class="request-org-name">{{this.org_id.0.org_name}}</p>
                             </span>
                             <div class="col-3 cancel-req">
-                                <a class="cancel" data-id="{{this._id}}">Cancel</a>
+                                <button style="color:red; border:0px; background-color:white" class="cancel" data-id="{{this._id}}">Cancel</button>
                             </div>
                         </div>
                         {{/each}}
