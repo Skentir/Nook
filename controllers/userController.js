@@ -4,7 +4,8 @@ const User = require('../models/User');
 const Request = require('../models/Request');
 const OrgModel = require('../models/Org');
 const Event = require('../models/Event');
-
+const async = require('async');
+var mongoose = require('mongoose');
 
 const db = getDb();
       
@@ -29,115 +30,146 @@ exports.viewtools = (req,res)=> {
     })
 };
 
-exports.editprofile = (req,res, next)=> {
-    var userrid
-    if (!req.isAuthenticated()) { 
-        res.redirect('/');  
-    } else {
-        var userId = req.session.passport.user;
-        var fileName = res.locals.photo;
-        User.findById(userId)
-        .exec(function (err,user) {
-            if (err) {
-                res.send(err);
-            } else {
-                userrid = user
-                Request.find({user_id:userrid._id})
-                .populate('org_id', '_id org_name org_logo')
-                .exec(function (err,result) {
-                    if (err) {
-                        res.send(err);
-                    } else if (!result) {
-                        // No pending request found
-                        collection.find({filename: fileName}).toArray(function(err, docs){
-                            if(err){
-                              return res.send(err);
-                            }
-                            if(!docs || docs.length === 0){
-                              return res.send(err);
-                            }else{
+exports.editprofile = (req,res,next)=> {
+  if(!req.isAuthenticated()) {
+    res.redirect('/');
+  } else {
+    var userId = req.session.passport.user;
+    var id = mongoose.Types.ObjectId(userId);
+    let userj;
+    let reqList = []
+    async.parallel({
+          reqs:function gatherRequests(callback) {
+            Request.find({user_id:id})
+            .populate('org_id', '_id org_name org_logo').then(results=>{
+                if (results) {
+                    async.forEach(results, function(result,resultCallback) {
+                      async.waterfall([ 
+                        function(callbackEach) {
+                            console.log("damn son");
+                            callbackEach(null, result);
+                        },
+                        function getImageFilname(request, callbackEach) {
+                          collection.find({filename: request.org_id.org_logo}).toArray(function(err, docs){
+                              if(err){
+                              return callbackEach(err);
+                              }
+                              if(!docs || docs.length === 0){
+                              return callbackEach(err);
+                              }else{
                               //Retrieving the chunks from the db
-                              
-                              collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                  collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                      if(err){
+                                      return callbackEach(err);
+                                      }
+                                      if(!chunks || chunks.length === 0){
+                                      //No data found
+                                      return callbackEach(err);
+                                      }
+                                      //Append Chunks
+                                      var fileData = [];
+                                      for(let i=0; i<chunks.length;i++){
+                      
+                                      //This is in Binary JSON or BSON format, which is stored
+                                      //in fileData array in base64 endocoded string format
+                                      fileData.push(chunks[i].data.toString('base64'));
+                                      }
+                                      //Display the chunks using the data URI format
+                                      var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+  
+                                      //create a json object for the org
+                                      var reqj = JSON.parse(JSON.stringify(request));
+  
+                                      //add the image property to json object and assign the image uri
+                                      reqj.img = finalFile;
+  
+                                      //push it into list of orgs
+                                      reqList.push(reqj);
+                                      callbackEach(null);
+                                  });
+                              }
+                          })
+                      },
+                      function(callbackEach) {
+                        resultCallback();
+                        //callback(null, results);
+                      }
+                      ]);
+                    },
+                    function(err){
+                      console.log("fsecond")  
+                          callback(null, results);
+                    });
+                }
+            })
+          },
+          user: function gatherUserData(callback) {
+            User.findById(userId)
+            .then( results => {
+                if (results) {
+                    async.waterfall([ 
+                        function(callbackEach) {
+                            callbackEach(null, results);
+                        },
+                        function getImageFilname(user, callbackEach){
+                            collection.find({filename: user.photo}).toArray(function(err, docs){
                                 if(err){
-                                  return res.send(err);
+                                return callbackEach(err);
                                 }
-                                if(!chunks || chunks.length === 0){
-                                  //No data found
-                                  return res.send(err);
+                                if(!docs || docs.length === 0){
+                                return callbackEach(err);
+                                }else{
+                                //Retrieving the chunks from the db
+                                    collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                        if(err){
+                                        return callbackEach(err);
+                                        }
+                                        if(!chunks || chunks.length === 0){
+                                        //No data found
+                                        return callbackEach(err);
+                                        }
+                                        //Append Chunks
+                                        var fileData = [];
+                                        for(let i=0; i<chunks.length;i++){
+                        
+                                        //This is in Binary JSON or BSON format, which is stored
+                                        //in fileData array in base64 endocoded string format
+                                        fileData.push(chunks[i].data.toString('base64'));
+                                        }
+                                        //Display the chunks using the data URI format
+                                        var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+    
+                                        //create a json object for the org
+                                        userj = JSON.parse(JSON.stringify(user));
+    
+                                        //add the image property to json object and assign the image uri
+                                        userj.img = finalFile;
+                                        callbackEach(null);
+                                    });
                                 }
-                                //Append Chunks
-                                var fileData = [];
-                                for(let i=0; i<chunks.length;i++){
-                    
-                                  //This is in Binary JSON or BSON format, which is stored
-                                  //in fileData array in base64 endocoded string format
-                                  fileData.push(chunks[i].data.toString('base64'));
-                                }
-                                //Display the chunks using the data URI format
-                                var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-                                var userr = JSON.parse(JSON.stringify(user));
-                                var params = {
-                                    layout: 'main',
-                                    user_data: userr,
-                                    image: finalFile
-                                }
-                                res.render('edit-profile', params);  
-                                console.log("no req")
-                              });
+                            })
+                        }, function(callbackEach) {
+                                callback(null, results);
                             }
-                        } 
-                    )   
-                    
-                    } else {collection.find({filename: fileName}).toArray(function(err, docs){
-                        if(err){
-                          return res.send(err);
-                        }
-                        if(!docs || docs.length === 0){
-                          return res.send(err);
-                        }else{
-                          //Retrieving the chunks from the db
-                          
-                          collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
-                            if(err){
-                              return res.send(err);
-                            }
-                            if(!chunks || chunks.length === 0){
-                              //No data found
-                              return res.send(err);
-                            }
-                            //Append Chunks
-                            var fileData = [];
-                            for(let i=0; i<chunks.length;i++){
-                
-                              //This is in Binary JSON or BSON format, which is stored
-                              //in fileData array in base64 endocoded string format
-                              fileData.push(chunks[i].data.toString('base64'));
-                            }
-                            //Display the chunks using the data URI format
-                            var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-                            var userr = JSON.parse(JSON.stringify(user));
-                            console.log(result);
-                            var reqs = JSON.parse(JSON.stringify(result));
-                            var params = {
-                                layout: 'main',
-                                user_data: userr,
-                                reqs: reqs,
-                                image: finalFile
-                            }
-                            // res.send(params);
-                            res.render('edit-profile', params);  
-                            console.log(reqs + " hello")
-                          });
-                        }
-                    } 
-                )}      
-                });
-            }
-        });
-    }
-};
-
+                    ])  
+                  }  
+          })
+        }
+      }, function (err, results) {
+          if (err) {
+            console.log("error")
+        } else {
+            var params = {
+                layout: 'main',
+                requests: reqList,
+                user: userj
+              }
+            res.render('edit-profile',params);
+            //res.send(params);
+        }
+      });
+  }
+}
 exports.viewplanner = (req,res)=> {
     if (!req.isAuthenticated()) { 
         res.redirect('/');  
