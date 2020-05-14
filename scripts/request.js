@@ -1,5 +1,3 @@
-import { nextTick } from "async";
-
 $(document).ready(function(){
 
     function isValid(field, val) {
@@ -34,7 +32,6 @@ $(document).ready(function(){
             type: "DELETE",
             url: "/admin/delete-request/"+ id,            
         }).done(function (data) {
-           
             var string = '#' + id;
             $(string).remove(); 
         });
@@ -57,46 +54,57 @@ $(document).ready(function(){
        return false;
     });
 
-    // var name = $('#event-name-field').val();
-    $("#add-req-btn").click(function() {
+    $("#create-request-form").submit(function() {
+        event.preventDefault();
+        var org = $('#org-name-field').val();
+        var pos = $('#req-position').val();
+        console.log("Client Org: " + org)
+        console.log("Client Pos: "+ pos);
         var valid = true;
-
-        valid = isValid($("#org-list"),valid);
+        /*
+        valid = isValid($("#org-name-field"),valid);
         valid = isValid($("#req-position"),valid);
-        
+        */
+
         if(valid) {
-            var org = $('#org-list').val();
-            var pos = $('#req-position').val();
-            
+            console.log("Req fields valid.")
+
             new_request = {
                 org_name: org,
                 position: pos
             }
+
             $.ajax({
                 type: "POST",
-                url: "/editprofile",  
+                url: "/edit-profile/create-request",  
                 data: new_request,
             }).done( function (data) {
+                console.log("Done creating! Adding to CSS ... ")
+                // Close the modal
                 $('#add-request-modal').modal('toggle');
+                orgName = org.replace(/\s/g, '+')
+                // Get the org assets of new request
+                $.ajax({
+                    type: "GET",
+                    url: "/search-results?org_name="+orgName+"&type=2",  
+                    dataType: 'json'
+                }).done( function (data) {
+                console.log("Request assets retrieved!")  
                 var string = 
-                `<div class="row request-item" id="request-{{this._id}}">
+                `<div class="row request-item" id="request-`+data._id+`">
                     <span class="col-9 request-org-cell">
-                        <img class="hdr-pic request-org-pic" src="{{this.org_id.0.org_logo}}">
-                        <p class="request-org-name">{{this.org_id.0.org_name}}</p>
+                        <img class="hdr-pic request-org-pic" src=`+data.img+`>
+                        <p class="request-org-name">`+data.org_name+`</p>
                     </span>
                     <div class="col-3 cancel-req">
                         <button style="color:red; border:0px; background-color:white" class="cancel" data-id="{{this._id}}">Cancel</button>
                     </div>
                  </div>`
-                $('#requestlist').append(string)
-                res.redirect('editprofile');
+                // Add to list
+                $(string).insertBefore('#request-list a');
+                });
             })
         }
-        else {
-            
-        }
-        
-        location.reload();
         return false;
     })
 })

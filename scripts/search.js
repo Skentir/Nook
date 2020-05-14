@@ -13,9 +13,9 @@ $(document).ready(function(){
 
         $.ajax({
             type: "GET",
-            url: form_url+'?org_name='+orgName,
+            url: form_url+'?org_name='+orgName+"&type=1",
         }).done(function (data) {
-            window.location.replace(form_url+'?org_name='+orgName);
+            window.location.replace(form_url+'?org_name='+orgName+"&type=1");
             console.log("Hello!");
          });
       });

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/public/css/form.css">
     <link rel="stylesheet" href="/public/css/widgets.css">
     <!-- jQuery UI -->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- JS -->
     <script src="/scripts/request.js"></script>
@@ -99,7 +99,7 @@
             <div class="right-box">
                 <div class="frm-height contact-form">
                     <h4 class="mb-3">Pending Requests</h4>
-                    <div class="request-list">
+                    <div id="request-list">
                         {{#if requests includeZero=true}}
                         {{#each requests}}
                         <div class="row request-item" id="request-{{this._id}}">
@@ -141,18 +141,18 @@
                     <header>
                         <h5 class="modal-title mb-3" style="font-size: 30px;">Add an Organization</h5>
                     </header>
-                    <!-- Log in Form -->
+                    <!-- Add Request Form -->
                     <div class="modal-body">
-                        <form name ="create_request" method='POST' action='/editprofile'>                       
+                        <form id ="create-request-form" method='POST' action='/edit-profile/create-request'>                       
                             <div class = "form-group ui-widget" id="select-org">
                                 <label for="org-list"> Organization Name</label>
-                                <input class="form-control" id="org-list">
+                                <input class="form-control" id="org-name-field">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="reg-email">Position</label>
                                 <input type="text" class="form-control" id="req-position" name = "req_org_position">
                             </div>
-                               <button type="submit" id="add-req-btn" class="custombtn thinbtn mt-0 mb-4" style="justify-content: center;">submit</button>
+                            <button type="submit" id="add-req-btn" class="custombtn thinbtn mt-0 mb-4" style="justify-content: center;">submit</button>
                         </form>
                     </div>
                 </div>
