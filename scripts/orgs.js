@@ -7,6 +7,34 @@ $(document).ready(function(){
     //     }
     //     return valid;
     // }
+    var id = $(this).data('id');
+    $("#editorg").click(function(){
+                //get form 
+                var myform = document.getElementById("editorgprofile");
+                //create formdata object
+                var formData = new FormData(myform);
+
+                //ajax request to post the formdata to the url
+                $.ajax({
+                    url: '/admin/editorg', 
+                    type: 'POST',
+                    data:formData,
+                    processData:false,
+                    contentType: false,
+                    error: function(jXhr, status){
+                        console.log('error: '+status);  
+                        console.log(formData);
+                        
+                    },
+                    success: function(data){
+                        console.log('upload successful: '+data);
+                        for (var value of formData.values()) {
+                            console.log(value); 
+                         }
+                         window.location.assign('/ad-tools');
+                    }
+                });
+    })
 
     $("#edit-event").click(function(){
         // var valid = true;

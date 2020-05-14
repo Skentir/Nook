@@ -16,13 +16,44 @@ exports.editorg = (req,res)=> {
             } else if (!result) {
                 res.redirect('/ad-tools');
             } else {
-                var org = JSON.parse(JSON.stringify(result));
-                var params = {
-                    layout: 'main',
-                    org
-                };
-                res.render('editorg', params);
-            }
+                collection.find({filename: result.org_logo }).toArray(function(err, docs){
+                    if(err){
+                      return res.send(err);
+                    }
+                    if(!docs || docs.length === 0){
+                      return res.send(err);
+                    }else{
+                      //Retrieving the chunks from the db
+                      
+                      collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                        if(err){
+                          return res.send(err);
+                        }
+                        if(!chunks || chunks.length === 0){
+                          //No data found
+                          return res.send(err);
+                        }
+                        //Append Chunks
+                        var fileData = [];
+                        for(let i=0; i<chunks.length;i++){
+            
+                          //This is in Binary JSON or BSON format, which is stored
+                          //in fileData array in base64 endocoded string format
+                          fileData.push(chunks[i].data.toString('base64'));
+                        }
+                        //Display the chunks using the data URI format
+                        var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+                        var org = JSON.parse(JSON.stringify(result));
+                        var params = {
+                            layout: 'main',
+                            org,
+                            image: finalFile,
+                        }
+                        res.render('editorg', params);  
+                      });
+                    }
+                } 
+            )}
         });
 };
 
@@ -273,3 +304,53 @@ exports.vieworg = (req,res) => {
                }
        })
 };
+
+exports.editorgdetails = (req, res) =>{
+
+
+    if(!req.file){
+    OrgModel.findByIdAndUpdate({_id: req.params.orgId}, 
+      {
+      $set: {
+        org_name: req.body.edit_org_name,
+        about_desc: req.body.edit_about_desc,
+        join_desc: req.body.edit_join_desc,
+        email: req.body.edit_email,
+        fb_url: req.body.edit_fb_url,
+        ig_url: req.body.edit_ig_url
+
+      }
+      }, (err)=>{
+        if(err){
+
+          res.send(err);
+        }
+        else{
+          res.redirect('/admin/ad-tools');
+        }
+      })
+    }
+
+   else{
+    OrgModel.findByIdAndUpdate({_id: req.params.orgId}, 
+      {
+        $set: {
+            org_name: req.body.edit_org_name,
+            about_desc: req.body.edit_about_desc,
+            join_desc: req.body.edit_join_desc,
+            email: req.body.edit_email,
+            org_header: req.file.filename,
+            fb_url: req.body.edit_fb_url,
+            ig_url: req.body.edit_ig_url
+      }
+      }, (err)=>{
+        if(err){
+
+          res.send(err);
+        }
+        else{
+          res.redirect('/admin/ad-tools');
+        }
+      })
+    }
+}

@@ -11,7 +11,7 @@
 {{/section}}
 
 <section>
-    <form id ="event_reg" enctype="multipart/form-data" action= "/ad-eventreg" method ="POST">
+    <form id ="event_reg" enctype="multipart/form-data" action= "/admin/ad-eventreg/{{orgId}}" method ="POST">
         <div class="container">
             <div class="box">
                 <div class="inner-box">
@@ -97,7 +97,7 @@
                             <div class="form-group">
                                 <label>Tell us about your event </label>
                                 <div class='input-group date' id="event-about-field">
-                                    <input type ="text" class ="form-control" name = "event_about"> <!--<textarea type='text' class="form-control" id="event-about-field" name = "about_event"></textarea></input>-->
+                                    <textarea type='text' class="form-control" id="event-about-field" name = "about_event"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -145,8 +145,9 @@
                             <div class= "form-row">
                                 <div class = "col-md-6">
                                     <div class="form-group form-check mb-2">
-                                        <input type="checkbox" class="form-check-input mt-0" style="height:fit-content;" id="incentives" name ="incentives">
-                                        <label class="form-check-label" for="incentives">Are there incentives</label>
+                                        <label>Are there incentives</label>
+                                        <input type="text" class="form-check-input mt-0" style="height:fit-content;" id="incentives" name ="incentives">
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
@@ -156,7 +157,7 @@
                                     </div>
                                 </div>
                             </div>  
-                            <button type="button" id="submit-event" class="custombtn thinbtn mt-0">submit</button>
+                            <button type="submit" id="submit-event" class="custombtn thinbtn mt-0">submit</button>
                         </div>
                     </div>
                     <figure class="right-box">

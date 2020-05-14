@@ -8,7 +8,7 @@
 <div class="container inner-box">
     <div id="account-details">
         <div class="profile">
-            <img src="{{org.org_logo}}">
+            <img src="{{org.img}}">
             <h1>{{org.org_name}}</h1>
             <ul>
                  {{#each org.tags}}
@@ -35,7 +35,7 @@
         {{#each reqs}}
         <div class="requests" id="{{this._id}}">
             <a class="request-info" href="/user-profile/{{this.user_id._id}}">
-                <img class="prof-pic" src="{{this.user_id.photo}}">
+                <img class="prof-pic" src="{{this.img}}">
                 <div style="width:112px;">
                     <span class="member-name">{{this.user_id.first_name}} {{this.user_id.last_name}}</span>
                     <p>{{this.position}}</p>

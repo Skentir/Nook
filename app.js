@@ -47,7 +47,7 @@ const cookieExpirationDays = 365;
 cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
 
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
  }));
  app.use(bodyParser.json());
 

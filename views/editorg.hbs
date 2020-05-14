@@ -7,7 +7,7 @@
 <div class="container">
     <!-- Edit Header -->
     <header class="edit-hdr">
-        <img class="hdr-pic" src="{{org.org_logo}}">
+        <img class="hdr-pic" src="{{image}}">
         <div>
             <span class="hdr-text" id="user-name">{{org.org_name}}</span>
             /
@@ -16,64 +16,66 @@
         </div>
     </header>
     <!-- Form -->
-    <div class="inner-box">
-        <div class="frm-height mt-4">
-            <form class="form-wrapper">
-                <div class="sub-form">
-                    <div class="form-group">
-                        <label>Organization Name</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control invalid-field" id="user-email-field" placeholder="{{org.org_name}}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Profile Bio </label>
-                        <div class='input-group date' id="event-about-field">
-                            <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{org.about_desc}}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Recruitment Description </label>
-                        <div class='input-group date' id="event-about-field">
-                            <textarea type='text' class="form-control" id="user-bio-field" placeholder="{{org.join_desc}}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Change Header Picture </label>
-                        <div class="custom-file">
-                                <label class="custom-file-label">Choose</label>
-                                <input type="file" class="form-control custom-file-input" id="user-photo-field">
+    <form method="POST" action="/admin/editorg/{{org._id}}" enctype="multipart/form-data">
+        <div class="inner-box">
+            <div class="frm-height mt-4">
+                <form class="form-wrapper">
+                    <div class="sub-form">
+                        <div class="form-group">
+                            <label>Organization Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control invalid-field" id="user-email-field" value="{{org.org_name}}" name = "edit_org_name">
                             </div>
-                    </div>
-                    <button type="button" id="submit-event" class="custombtn thinbtn mt-0">save</button>
-                </div>
-                
-                <div class="sub-form">
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="user-email-field">
                         </div>
+                        
+                        <div class="form-group">
+                            <label>Profile Bio </label>
+                            <div class='input-group date' id="event-about-field">
+                                <textarea name = "edit_about_desc" type='text' class="form-control" id="user-bio-field">{{org.about_desc}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Recruitment Description </label>
+                            <div class='input-group date' id="event-about-field">
+                                <textarea name ="edit_join_desc" type='text' class="form-control" id="user-bio-field">{{org.join_desc}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Change Header Picture </label>
+                            <div class="custom-file">
+                                    <label class="custom-file-label">Choose</label>
+                                    <input name = "edit_org_header" type="file" class="form-control custom-file-input" id="user-photo-field">
+                                </div>
+                        </div>
+                        <button id = "editorg" type="submit" id="submit-event" class="custombtn thinbtn mt-0">save</button>
                     </div>
                     
-                    <div class="form-group">
-                        <label>Facebook Link</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="user-email-field">
+                    <div class="sub-form">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <div class="input-group">
+                                <input name = "edit_email"type="text" class="form-control" id="user-email-field" value = "{{org.email}}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Facebook Link</label>
+                            <div class="input-group">
+                                <input name = "edit_fb_url" type="text" class="form-control" id="user-email-field" value="{{org.fb_url}}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Instagram Link</label>
+                            <div class="input-group">
+                                <input name = "edit_ig_url" type="text" class="form-control" id="user-email-field" value = "{{org.ig_url}}">
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label>Instagram Link</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="user-email-field">
-                        </div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
