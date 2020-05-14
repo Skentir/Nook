@@ -46,7 +46,6 @@ exports.editprofile = (req,res,next)=> {
                     async.forEach(results, function(result,resultCallback) {
                       async.waterfall([ 
                         function(callbackEach) {
-                            console.log("damn son");
                             callbackEach(null, result);
                         },
                         function getImageFilname(request, callbackEach) {
@@ -97,7 +96,6 @@ exports.editprofile = (req,res,next)=> {
                       ]);
                     },
                     function(err){
-                      console.log("fsecond")  
                           callback(null, results);
                     });
                 }

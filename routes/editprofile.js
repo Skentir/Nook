@@ -51,7 +51,7 @@ const upload = multer({storage: storage});
 
 router.get('/editprofile', controller.editprofile);
 router.post('/edit-profile', upload.single('edit_pic'), controller.editprofiledetails);
-router.post('/editprofile', reqController.createrequests);
+router.post('/edit-profile/create-request', reqController.createrequests);
 router.delete('/editprofile', reqController.deleterequest);
 router.delete('/cancel-request/:reqId', reqController.cancelrequest);
 

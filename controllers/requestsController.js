@@ -146,17 +146,17 @@ exports.deleterequest = (req,res)=> {
 
     Request.deleteOne(query, function(err, obj) {
         if(err) res.send(err);
-        else res.send('member-requests');
     })
 }
 
 exports.cancelrequest = (req,res)=> {
-    var requestId = req.params.reqId;
+    var requestId =  mongoose.Types.ObjectId(req.params.reqId);
     var query = {'_id': requestId};
+    console.log("Cancelling: " + requestId);
 
     Request.deleteOne(query, function(err, obj) {
         if(err) res.send(err);
-        else res.send('editprofile');
+        else console.log("Request Deleted!");
     })
 }
 
@@ -204,28 +204,35 @@ exports.acceptrequest = (req,res) => {
 }
 
 exports.createrequests = (req,res) => {
-    var orgName = req.body.org_name
-    var pos = req.body.position
-    var user = req.session.passport.user
-    var userId = mongoose.Types.ObjectId(user)
+    console.log("Here!");
+        var orgName = req.body.org_name
+        var pos = req.body.position
+        var user = req.session.passport.user
+        var userId = mongoose.Types.ObjectId(user)
+        console.log("Org name retrieved: " + orgName);
+        console.log("Position retrieved: " + pos);
 
-    OrgModel.findOne({org_name:orgName})
-        .lean().exec(function(err, result) {
-            if(err) throw err
-            else {
-                var orgId = result._id
-
-                new_req = {
-                    user_id: userId,
-                    org_id: orgId,
-                    status: "Pending",
-                    position: pos
+        OrgModel.findOne({org_name:orgName})
+            .lean().exec(function(err, result) {
+                if(err) throw err
+                else if (!result) {
+                    res.send(err);
+                } else {
+                    var orgId = result._id
+                    new_req = new Request({
+                        user_id: userId,
+                        org_id: orgId,
+                        status: "Pending",
+                        position: pos
+                    })
+        
+                    new_req.save().then(req=> {
+                        if(err) res.send(err)
+                        else {
+                            console.log("A request is made!");
+                            res.send("Success")
+                        };
+                    })
                 }
-    
-                Request.create(new_req, function(err, obj){
-                    if(err) res.send(err)
-                    else res.redirect('editprofile')
-                })
-            }
-        });
+            });
 }

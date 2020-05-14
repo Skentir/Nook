@@ -305,9 +305,7 @@ exports.vieworg = (req,res) => {
        })
 };
 
-exports.editorgdetails = (req, res) =>{
-
-
+exports.editorgdetails = (req, res) => {
     if(!req.file){
     OrgModel.findByIdAndUpdate({_id: req.params.orgId}, 
       {
@@ -354,3 +352,4 @@ exports.editorgdetails = (req, res) =>{
       })
     }
 }
+
