@@ -9,8 +9,8 @@
     <!-- Account Details -->
     <div class="mt-4" id="account-details">
         <div class="profile">
-            {{#if image includeZero=true}}
-                <img src="{{image}}">
+            {{#if info.img includeZero=true}}
+                <img src="{{info.img}}">
             {{else}}
                 <img src="/public/assets/profiles/nook-pic.png">
             {{/if}}
@@ -39,11 +39,11 @@
         <div class="card-wrapper mt-2">
             <div  class="card-menu" id="user-organization-list">
                 <div class="row">
-                   {{#if info.orgs}}
-                   {{#each info.orgs}}
+                   {{#if orgs}}
+                   {{#each orgs}}
                     <div class="card">
                         <a href="/vieworg/{{this.org_id._id}}">
-                            <img class="card-img-top img-fluid" src="{{this.org_id.org_logo}}">
+                            <img class="card-img-top img-fluid" src="{{this.img}}">
                             <div class="card-body">
                                 <span>{{this.org_id.org_name}}</span>
                             </div>
@@ -54,7 +54,7 @@
                         {{#if isUser}}
                         <p>No orgs yet.</p>
                         {{else}}
-                        <p>{{first_name}} is not part of any orgs.</p>
+                        <p>{{info.first_name}} is not part of any orgs.</p>
                         {{/if}}
                     {{/if}}
                 </div>
