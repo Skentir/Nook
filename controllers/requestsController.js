@@ -139,16 +139,6 @@ exports.viewrequests = (req,res)=> {
                 )
 };
             
-
-exports.deleterequest = (req,res)=> {
-    var requestId = req.params.reqId;
-    var query = {'_id': requestId};
-
-    Request.deleteOne(query, function(err, obj) {
-        if(err) res.send(err);
-    })
-}
-
 exports.cancelrequest = (req,res)=> {
     var requestId =  mongoose.Types.ObjectId(req.params.reqId);
     var query = {'_id': requestId};
@@ -156,7 +146,10 @@ exports.cancelrequest = (req,res)=> {
 
     Request.deleteOne(query, function(err, obj) {
         if(err) res.send(err);
-        else console.log("Request Deleted!");
+        else {
+            console.log("Request Deleted!")
+            res.send("Done!");
+        };
     })
 }
 

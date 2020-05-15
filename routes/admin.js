@@ -57,7 +57,7 @@ router.get('/editorg/:orgId', orgsController.editorg);
 router.get('/editevent/:eventId', eventsController.editevent);
 router.get('/member-requests/:orgId', requestsController.viewrequests);
 router.get('/view-officers/:orgId', orgsController.viewofficers);
-router.delete('/delete-request/:reqId', requestsController.deleterequest);
+router.delete('/delete-request/:reqId', requestsController.cancelrequest);
 router.put('/accept-request/:reqId', requestsController.acceptrequest);
 router.post('/editorg/:orgId',upload.single('edit_org_header'), orgsController.editorgdetails);
 router.post('/editevent/:eventId', upload.single('edit_event_photo'), eventsController.editeventdetails);
