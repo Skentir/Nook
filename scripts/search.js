@@ -20,16 +20,20 @@ $(document).ready(function(){
       });
 
 
-      var availableTags = [];
-      $.ajax({
-        type: "GET",
-        url: "/get-org-list/",
-        }).done(function (data) {
-        for (var i=0; i < data.length; i++)
-            availableTags.push(data[i].org_name)
-     });
+    var availableTags = [];
+    $.ajax({
+    type: "GET",
+    url: "/get-org-list/",
+    }).done(function (data) {
+    for (var i=0; i < data.length; i++)
+        availableTags.push(data[i].org_name)
+    });
 
-      $( "#org-name-field" ).autocomplete({
+    $( "#org-name-field" ).autocomplete({
         source: availableTags
     });
+
+    $("#search-textbox").autocomplete({
+        source: availableTags
+    })
 })
