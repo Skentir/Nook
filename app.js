@@ -108,6 +108,9 @@ app.engine('hbs', hbs( {
 
 }));
 
+app.get('/error', function(req, res) {
+    res.render('error')
+})
 
 var requiresAdmin = function() {
     return [
