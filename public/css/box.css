@@ -147,6 +147,8 @@ svg path:hover{
 
 .has-search .form-control {
     padding-left: 2.375rem;
+    width: 350px;
+    text-align: center;
 }
 
 .has-search .form-control-feedback {
@@ -161,8 +163,10 @@ svg path:hover{
     color: black;
 }
 
-.has-search input {
-    width: 200px;
+.fa.fa-search.form-control-feedback {
+    background:#8a898959;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 @media all and (max-width: 610px) {
