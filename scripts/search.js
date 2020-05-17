@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    console.log("here!");
     $("#search-bar").submit(function(event) {
 
         event.preventDefault();
@@ -19,4 +18,18 @@ $(document).ready(function(){
             console.log("Hello!");
          });
       });
+
+
+      var availableTags = [];
+      $.ajax({
+        type: "GET",
+        url: "/get-org-list/",
+        }).done(function (data) {
+        for (var i=0; i < data.length; i++)
+            availableTags.push(data[i].org_name)
+     });
+
+      $( "#org-name-field" ).autocomplete({
+        source: availableTags
+    });
 })
