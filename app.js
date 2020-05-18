@@ -93,10 +93,16 @@ app.engine('hbs', hbs( {
         if(!Handlebars.Utils.isArray(value)){
             return [];
         } else {
-            return value.filter(function(ele){
+            return value.filter(function(ele) {
                 return !Handlebars.Utils.isEmpty(ele);
             });
         }
+    },
+    'linkExists': function(link) {
+        if (link === null || link === "" || link === undefined)
+            return false
+        else
+            return true
     },
     'formatToYear': function(dateTime) {
         return moment(dateTime).format('YYYY');
