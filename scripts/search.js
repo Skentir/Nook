@@ -16,7 +16,10 @@ $(document).ready(function(){
         }).done(function (data) {
             window.location.replace(form_url+'?org_name='+orgName+"&type=1");
             console.log("Hello!");
-         });
+        })
+        .fail(function()  {
+            alert("Sorry. Server unavailable. ");
+        }); 
       });
 
 
@@ -27,6 +30,9 @@ $(document).ready(function(){
     }).done(function (data) {
     for (var i=0; i < data.length; i++)
         availableTags.push(data[i].org_name)
+    })
+    .fail(function()  {
+        alert("Sorry. Server unavailable. ");
     });
 
     $( "#org-name-field" ).autocomplete({

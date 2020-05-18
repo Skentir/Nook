@@ -8,6 +8,9 @@ $(document).ready(function(){
             url: "/add-to-planner/"+ id,              
         }).done(function (data) {
             $('#add-to-planner-modal').modal('toggle');
+        })
+        .fail(function()  {
+            alert("Sorry. Server unavailable. ");
         });
    });
 })
