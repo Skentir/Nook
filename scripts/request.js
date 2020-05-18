@@ -78,7 +78,8 @@ $(document).ready(function(){
                 type: "POST",
                 url: "/edit-profile/create-request",  
                 data: new_request,
-            }).done( function (data) {
+            }).done( function (msg) {
+                console.log("message"+msg);
                 console.log("Done creating! Adding to CSS ... ")
                 // Close the modal
                 $('#add-request-modal').modal('toggle');
@@ -104,6 +105,9 @@ $(document).ready(function(){
                 $(string).insertBefore('#request-list a');
                 });
             })
+            .fail(function()  {
+                alert("Sorry. Server unavailable. ");
+            }); 
         }
         return false;
     })

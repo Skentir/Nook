@@ -222,7 +222,7 @@ exports.createrequests = (req,res) => {
                     new_req.save().then(req=> {
                         if(err) res.send(err)
                         else {
-                            console.log("A request is made!");
+                            //console.log("A request is made!");
                             res.send("Success")
                         };
                     })
