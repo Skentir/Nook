@@ -8,7 +8,7 @@ $(document).ready(function(){
 
         return valid;
     }
-    
+
     $(".check").click(function() {
         var $addBtn = $(this);
         var id = $addBtn.data('id');
@@ -60,11 +60,10 @@ $(document).ready(function(){
         var pos = $('#req-position').val();
         console.log("Client Org: " + org)
         console.log("Client Pos: "+ pos);
-        var valid = true;
-        /*
+        var valid = false;
+        
         valid = isValid($("#org-name-field"),valid);
         valid = isValid($("#req-position"),valid);
-        */
 
         if(valid) {
             console.log("Req fields valid.")
@@ -109,6 +108,10 @@ $(document).ready(function(){
                 alert("Sorry. Server unavailable. ");
             }); 
         }
+        else {
+            window.location.assign('/error')
+        }
+
         return false;
     })
 })
