@@ -1,4 +1,8 @@
 /* Custom Website Boxing! */
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
 .topnav {
     display: flex;
     position: relative;
@@ -56,9 +60,10 @@
     margin-left: .5em;
 }
 
-.nav-logo a{
-    font-weight: 700;
-    font-size: 20px;
+.nav-logo a {
+    font-family: 'Roboto';
+    font-weight: 700 !important;
+    font-size: 20px !important;
     color: #3a3a3a;
     text-decoration: none;
 }
