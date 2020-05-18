@@ -296,7 +296,7 @@ exports.addtoplanner = (req, res) => {
     var userId = req.session.passport.user;
     var eventId = mongoose.Types.ObjectId(req.params.id)
 
-    Event.findOne({_id:eventId}, function(err, docs) {
+    Event.findOne({_id:eventId, planner: {$elemMatch:{_id:eventId}}}, function(err, docs) {
       if(err) res.send(err)
       else {
         var date = docs.date
