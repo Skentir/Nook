@@ -91,6 +91,8 @@ exports.viewevents = (req,res)=>{
         .exec(function(err, result) {
             if (err) {
                 res.send(err);
+            } else if (!result) {
+              res.redirect('/error');
             } else {
                 var event = JSON.parse(JSON.stringify(result));
                 var params = {
@@ -263,17 +265,13 @@ exports.editeventdetails = (req, res) =>{
 
       }
       }, (err)=>{
-        if(err){
-
+        if(err) {
           res.send(err);
-        }
-        else{
+        } else{
           res.redirect('/admin/eventlist/'+ orgID);
         }
-      })
-    }
-
-   else{
+      });
+    } else {
     EventModel.findByIdAndUpdate({_id: req.params.eventId}, 
       {
         $set: {
@@ -288,13 +286,10 @@ exports.editeventdetails = (req, res) =>{
             incentives: req.body.edit_event_incentives
       }
       }, (err)=>{
-        if(err){
-
-          res.send(err);
-        }
-        else{
+        if(err) { res.send(err); 
+        } else {
           res.redirect('/admin/eventlist/'+ orgID);
         }
-      })
+      });
     }
 }

@@ -225,8 +225,8 @@ exports.searchOrg = function(req, res) {
                     }
                 }
             })
-        }
-    
+        } else if (!results)
+            res.redirect('/error');
     })
 
 }
@@ -237,6 +237,8 @@ exports.getOrgNames = function(req, res) {
         .exec(function(err, result){
             if (err)
                 res.send(err);
+            else if (!result)
+                res.redirect('/error');
             else
                 res.send(result);
         });

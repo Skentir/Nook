@@ -12,12 +12,12 @@ exports.login = (req, res, next) => {
 exports.register = (req,res)=> {
     User.findOne({ email_address: req.body.reg_email})
     .then( userr => {
-        if(userr){
+        if(userr) {
             console.log("user exists");
             res.redirect('/');
-        }
-        
-        else{
+        } else if (!userr) {
+            res.redirect('/error');
+        } else {
             //if the user does not upload any files
              if(!req.file){
                 var user_photo = "05315a4aa355c6bff09be30717efaaed.jpg";
