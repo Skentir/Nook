@@ -1,12 +1,41 @@
 $(document).ready(function(){
-    // function checkTime(start,end,val){
-    //     var valid = val;
-    //     if(start.getTime() > end.getTime()){
-    //         valid = false;
-    //         start.css({"border":"1px solid red"});
-    //     }
-    //     return valid;
-    // }
+
+    function parseTime(s) {
+        var part = s.match(/(\d+):(\d+)(?: )?(am|pm)?/i);
+        var hh = parseInt(part[1], 10);
+        var mm = parseInt(part[2], 10);
+        var ap = part[3] ? part[3].toUpperCase() : null;
+        if (ap === "AM") {
+            if (hh == 12) {
+                hh = 0;
+            }
+        }
+        if (ap === "PM") {
+            if (hh != 12) {
+                hh += 12;
+            }
+        }
+        return { hh: hh, mm: mm };
+    }
+    
+    function checkTime(s, e) {
+        var valid = true
+        
+        var start = parseTime(s)
+        var end = parseTime(e)
+        
+        if(start.hh > end.hh) {
+            valid = false
+            return valid
+        }
+        if(start.hh == end.hh && start.mm > end.mm) {
+            valid = false
+            return valid
+        }
+        
+        return valid
+    }
+
     var id = $(this).data('id');
     $("#editorg").click(function(){
                 //get form 
@@ -36,35 +65,33 @@ $(document).ready(function(){
                 });
     })
 
-    $("#edit-event").click(function(){
-        // var valid = true;
+    $("#edit-event").click(function(){        
+        if(checkTime($('#start-time-field').val(), $('#end-time-field').val())) {
+            var name = $('#event-name-field').val();
+            var desc = $('#event-desc-field').val();
+            var things = $('#event-items-field').val();
+            var header = $('#event-photo-field').val();
+            var venue = $('#event-venue-field').val();
+            var date = $('#event-date-field').val();
+            var start = $('#start-time-field').val();
+            var end = $('#end-time-field').val();
+            var incentives = $('#event-incentives-field').val();
 
-        var name = $('#event-name-field').val();
-        var desc = $('#event-desc-field').val();
-        var things = $('#event-items-field').val();
-        var header = $('#event-photo-field').val();
-        var venue = $('#event-venue-field').val();
-        var date = $('#event-date-field').val();
-        var start = $('#start-time-field').val();
-        var end = $('#end-time-field').val();
-        var incentives = $('#event-incentives-field').val();
-
-        var updated_event = {
-            event_name: name,
-            header_photo: header,
-            date: date,
-            start_time: start,
-            end_time: end,
-            about_desc: desc,
-            venue: venue,
-            things: things,
-            incentives: incentives
+            var updated_event = {
+                event_name: name,
+                header_photo: header,
+                date: date,
+                start_time: start,
+                end_time: end,
+                about_desc: desc,
+                venue: venue,
+                things: things,
+                incentives: incentives
+            }
         }
-        // valid = checkTime(start, end, valid);
-        // console.log(valid);
-
-        console.log(updated_event);
-
+        else {
+            res.redirect('/error')
+        }
         // $.ajax({
         //     url: '/admin/editevent',
         //     type: 'PUT',
