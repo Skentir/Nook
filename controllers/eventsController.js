@@ -57,7 +57,8 @@ exports.viewevents = (req,res)=>{
                 var event = JSON.parse(JSON.stringify(result));
                 var params = {
                     layout: 'main',
-                    events: event
+                    events: event,
+                    orgId
                 };
                 res.render('ad-eventview', params);
             }
@@ -68,6 +69,7 @@ exports.editevent = (req,res)=> {
     var eventId = req.params.eventId;
     
     EventModel.findById(eventId)
+        .populate('organizer_id','_id')
         .exec(function (err,result) {
             if (err) {
                 res.send(err);

@@ -2,6 +2,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../public/css/explore.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+     <link rel="stylesheet" href="/public/css/sidenav.css">
     <!-- Scripts -->
     <script src="../../scripts/moment.js"></script>
     <script src="../../scripts/bootstrap-datepicker.js"></script>
@@ -9,6 +10,8 @@
    <!-- Datetimepicker for Bootstrap 4-->
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 {{/section}}
+
+{{>sidebar orgId=orgId}}
 
 <section>
     <form id ="event_reg" enctype="multipart/form-data" action= "/admin/ad-eventreg/{{orgId}}" method ="POST">
