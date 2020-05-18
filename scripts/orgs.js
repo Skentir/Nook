@@ -65,7 +65,17 @@ $(document).ready(function(){
                 });
     })
 
-    $("#edit-event").click(function(){        
+    $('#incentivesdet').hide()
+    $('input[type="checkbox"]').click(function() {
+        if($(this).prop("checked") == true) {
+            $('#incentivesdet').show()
+
+        }
+        else {
+            $('#incentivesdet').hide()
+        }
+    })
+    $("#edit-event").click(function(){
         if(checkTime($('#start-time-field').val(), $('#end-time-field').val())) {
             var name = $('#event-name-field').val();
             var desc = $('#event-desc-field').val();
