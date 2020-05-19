@@ -1,5 +1,5 @@
 .ui-autocomplete.ui-menu {
-    z-index: 3001 !important;
+    z-index: 1 !important;
     font-size: 14px !important; 
     border: 1px solid #ced4da !important;
     border-bottom-left-radius: 4px!important;
@@ -8,27 +8,26 @@
 
 .ui-menu .ui-menu-item-wrapper:hover, 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    color: rgb(58, 2, 50);
-    border: #ced4da 1px solid !important;
-    border-radius: 4px !important;
-    padding-left: 2px !important;
-    padding-right: 2px !important;
+   font-weight: bold;
+}
+
+.ui-helper-hidden-accessible{
+    display:none !important;
 }
 
 ul.ui-autocomplete {
-    position: absolute;
+    position: fixed;
     top: 100%;
     left: 0;
-    z-index: 1000;
-    float: left;
-    display: none;
+    padding-left: 2rem;
+    display: block;
     min-width: 160px;
+    max-width: 350px;
     margin: 0 0 10px 25px;
     list-style: none;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-color: rgba(0, 0, 0, 0.2);
-    padding-left: 0;
 }
 
 li.ui-menu-item {
