@@ -83,6 +83,10 @@
     margin-bottom: auto;
 }
 
+.custom-file {
+    z-index: 0;
+}
+
 .cancel-req {
     display: flex;
     align-items: center;

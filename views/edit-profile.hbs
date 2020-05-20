@@ -1,37 +1,12 @@
 {{#section 'head'}}
     <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/redmond/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/redmond/jquery-ui.css">
     <link rel="stylesheet" href="/public/css/styling.css">
     <link rel="stylesheet" href="/public/css/explore.css">
     <link rel="stylesheet" href="/public/css/form.css">
     <link rel="stylesheet" href="/public/css/widgets.css">
-    <!-- jQuery UI -->
-    <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- JS -->
     <script src="/scripts/request.js"></script>
-    <script>
-    $( function() {
-        var availableTags = [
-        "La Salle Computer Society",
-        "SPRINT",
-        "Junior Entrepreneurs Marketing Association",
-        "DLSU Mathematics Circle",
-        "Young Entrepreneurs Society",
-        "DLSU Syntax",
-        "Ang Pahayagang Plaridel",
-        "SDFO Paragons",
-        "ENGLICOM",
-        "DLSU Chorale",
-        "The LaSallian",
-        "Developer Student Club Taft",
-        "DLSU COMET"
-        ];
-        $( "#org-list" ).autocomplete({
-        source: availableTags
-        });
-    });
-    </script>
 {{/section}}
 
 <div class="container">
@@ -143,7 +118,7 @@
                     </header>
                     <!-- Add Request Form -->
                     <div class="modal-body">
-                        <form id ="create-request-form" method='POST' action='/edit-profile/create-request'>                       
+                        <form id ="create-request-form" autocomplete="off" method='POST' action='/edit-profile/create-request'>                       
                             <div class = "form-group ui-widget" id="select-org">
                                 <label for="org-list"> Organization Name</label>
                                 <input class="form-control" id="org-name-field">

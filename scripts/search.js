@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    console.log("here!");
     $("#search-bar").submit(function(event) {
 
         event.preventDefault();
@@ -17,6 +16,30 @@ $(document).ready(function(){
         }).done(function (data) {
             window.location.replace(form_url+'?org_name='+orgName+"&type=1");
             console.log("Hello!");
-         });
+        })
+        .fail(function()  {
+            alert("Sorry. Server unavailable. ");
+        }); 
       });
+
+
+    var availableTags = [];
+    $.ajax({
+    type: "GET",
+    url: "/get-org-list/",
+    }).done(function (data) {
+    for (var i=0; i < data.length; i++)
+        availableTags.push(data[i].org_name)
+    })
+    .fail(function()  {
+        alert("Sorry. Server unavailable. ");
+    });
+
+    $( "#org-name-field" ).autocomplete({
+        source: availableTags
+    });
+
+    $("#search-textbox").autocomplete({
+        source: availableTags
+    })
 })

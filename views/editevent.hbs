@@ -2,6 +2,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../public/css/explore.css">
     <link rel="stylesheet" href="../../public/css/form.css">
+    <link rel="stylesheet" href="/public/css/sidenav.css">
     <!-- Scripts -->
     <script src="../../scripts/moment.js"></script>
     <script src="../../scripts/bootstrap-datepicker.js"></script>
@@ -12,6 +13,9 @@
     <!-- Datetimepicker for Bootstrap 4-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 {{/section}}
+
+
+{{>sidebar orgId=event.organizer_id.0._id}}
 
 <div class="container">
     <!-- Edit Header -->

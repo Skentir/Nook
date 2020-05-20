@@ -1,0 +1,56 @@
+  /* FLOATING SIDEBAR */
+  div.side-navbar ul {
+    clear: both;
+      position: fixed;
+      display: block;
+      list-style-type: none;
+      right: -3.2em;
+      top: 25%;
+      -webkit-animation: slideright 1s forwards;
+      -webkit-animation-delay: 1.5s;
+      animation: slideright 1s forwards;
+      animation-delay: 1.5s; 
+  }
+  
+  @keyframes slideright {
+      100% {
+          right: 0;
+      }
+  }
+  
+  div.side-navbar li {
+    margin-right: 0px;
+    padding: 15px;
+    background-color: rgba(30, 45, 127, 0.75);
+    -webkit-transition: width .5s, background-color .1s;
+    transition: width .5s, background-color .1s;
+  
+  }
+
+  div.side-navbar li:first-of-type {
+    border-top-left-radius: 4px;
+  }
+
+  div.side-navbar li:last-of-type {
+    border-bottom-left-radius: 4px;
+  }
+
+  div.side-navbar li a {
+    font-size: 19px;
+    text-transform: none;
+    text-align: center;
+    text-decoration: none;
+    color: #ebebeb;
+  }
+
+  div.side-navbar svg path:hover {
+    fill:white;
+  }
+
+  div.side-navbar li:hover {
+      background-color: rgba(30, 45, 127, 1);
+      color: #fff;
+  }
+
+  
+  

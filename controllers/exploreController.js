@@ -151,7 +151,7 @@ exports.view = function(req, res) {
 exports.searchOrg = function(req, res) {
     var org_name = req.query.org_name;
     var res_type = req.query.type;
-    console.log("TYPE IS "+res_type)
+    
     var orgList = [];
     OrgModel.find({'org_name': { "$regex": org_name, "$options": "i" }})
     .select('_id org_name org_logo').then(results=>{
@@ -225,8 +225,21 @@ exports.searchOrg = function(req, res) {
                     }
                 }
             })
-        }
-    
+        } else if (!results)
+            res.redirect('/error');
     })
 
+}
+
+exports.getOrgNames = function(req, res) {
+    OrgModel.find({})
+        .select('org_name')
+        .exec(function(err, result){
+            if (err)
+                res.send(err);
+            else if (!result)
+                res.redirect('/error');
+            else
+                res.send(result);
+        });
 }

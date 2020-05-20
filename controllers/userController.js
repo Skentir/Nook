@@ -174,14 +174,44 @@ exports.viewplanner = (req,res)=> {
     } else {
     var userId = req.session.passport.user;
     var fileName = res.locals.photo;
-
+    var eventList = [];
     function dates(event1, event2) {
       return event1.date - event2.date
     }
 
     User.findOne({_id:userId}, function(err, user) {
       user.planner.sort(dates).forEach(function(event) {
-        console.log('event: ' + event.date)
+        // Add to eventList for Grouping
+        eventList.push(event);
+      })
+
+    Event.find({_id: {$in: eventList}})
+      .select('header_photo event_name event_id date')
+      .exec(function(err, event){
+        if (err) res.send(err)
+        else if(!event) {
+          // No event found
+          var params = {
+            layout: 'main',
+            user
+          }
+          res.render('planner', params)
+        } else {
+    
+        var data = eventList;
+        //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
+        // sa second parameter of the function below
+        const result = data.reduce((r, {date, event_name, event_id, header_photo}) => {
+          let dateObj = new Date(date);
+          let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
+          let buff = r
+          if(!r[monthyear]) r[monthyear] = {monthyear, entries: [{date,event_name,event_id, header_photo}] }
+          else r[monthyear].entries.push({date,event_name,event_id, header_photo});
+          return r;
+        }, {})
+        var print = JSON.parse(JSON.stringify(result))
+        res.send(print)
+        }
       })
     })
 
@@ -293,26 +323,36 @@ exports.viewprofile = (req,res, next) => {
 };
 
 exports.addtoplanner = (req, res) => {
+  console.log("Here AP!!")
     var userId = req.session.passport.user;
-    var eventId = mongoose.Types.ObjectId(req.params.id)
+    var eventId = req.params.id
 
-    Event.findOne({_id:eventId}, function(err, docs) {
+    Event.findById(eventId)
+      .exec(function(err, docs) {
       if(err) res.send(err)
+      else if(!docs) res.send("No event found")
       else {
+        console.log("Event Docs is "+ JSON.stringify(docs));
         var date = docs.date
       
         var new_event = {
-          _id:eventId,
+          _id: mongoose.Types.ObjectId(eventId),
           date:date
         }
-        
+        console.log("Event is "+ JSON.stringify(docs));
         User.updateOne(
           {_id: userId},
-          {$addToSet: {planner: new_event}},
+          {$push: {
+            planner: new_event
+            }
+          },
+          { "$upsert": true },
           function(err, result) {
             if(err) res.send(err)
+            else if(!result) res.send("Nothing found")
             else {
-              res.send('add-to-planner')
+              console.log("Done updates")
+              res.send("Successfully Added")
             }
           }
         )

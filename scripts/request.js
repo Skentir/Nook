@@ -5,10 +5,9 @@ $(document).ready(function(){
         if(field.val() == "") {
             valid = false;
         }
-
         return valid;
     }
-    
+
     $(".check").click(function() {
         var $addBtn = $(this);
         var id = $addBtn.data('id');
@@ -19,7 +18,10 @@ $(document).ready(function(){
         }).done(function (data) {
             var string = '#' + id;
             $(string).remove(); 
-        });
+        })
+        .fail(function()  {
+            alert("Sorry. Server unavailable. ");
+        }); 
 
         return false;
     });
@@ -34,7 +36,10 @@ $(document).ready(function(){
         }).done(function (data) {
             var string = '#' + id;
             $(string).remove(); 
-        });
+        })
+        .fail(function()  {
+            alert("Sorry. Server unavailable. ");
+        }); 
 
         return false;
     });
@@ -49,6 +54,9 @@ $(document).ready(function(){
         }).done(function (data) {
             var string = '#request-' + id;
              $(string).remove(); 
+        })
+        .fail(function()  {
+            alert("Sorry. Server unavailable. ");
         });
 
        return false;
@@ -58,15 +66,7 @@ $(document).ready(function(){
         event.preventDefault();
         var org = $('#org-name-field').val();
         var pos = $('#req-position').val();
-        console.log("Client Org: " + org)
-        console.log("Client Pos: "+ pos);
-        var valid = true;
-        /*
-        valid = isValid($("#org-name-field"),valid);
-        valid = isValid($("#req-position"),valid);
-        */
 
-        if(valid) {
             console.log("Req fields valid.")
 
             new_request = {
@@ -78,7 +78,8 @@ $(document).ready(function(){
                 type: "POST",
                 url: "/edit-profile/create-request",  
                 data: new_request,
-            }).done( function (data) {
+            }).done( function (msg) {
+                console.log("message"+msg);
                 console.log("Done creating! Adding to CSS ... ")
                 // Close the modal
                 $('#add-request-modal').modal('toggle');
@@ -102,9 +103,14 @@ $(document).ready(function(){
                  </div>`
                 // Add to list
                 $(string).insertBefore('#request-list a');
+                })
+                .fail(function()  {
+                    alert("Sorry. Server unavailable. ");
                 });
             })
-        }
+            .fail(function()  {
+                alert("Sorry. Server unavailable. ");
+            }); 
         return false;
     })
 })

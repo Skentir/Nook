@@ -7,6 +7,42 @@ const collectionChunks = db.collection('uploads.chunks');
 
 var orgID;
 
+function parseTime(s) {
+  var part = s.match(/(\d+):(\d+)(?: )?(am|pm)?/i);
+  var hh = parseInt(part[1], 10);
+  var mm = parseInt(part[2], 10);
+  var ap = part[3] ? part[3].toUpperCase() : null;
+  if (ap === "AM") {
+      if (hh == 12) {
+          hh = 0;
+      }
+  }
+  if (ap === "PM") {
+      if (hh != 12) {
+          hh += 12;
+      }
+  }
+  return { hh: hh, mm: mm };
+}
+
+function checkTime(s, e) {
+  var valid = true
+
+  var start = parseTime(s)
+  var end = parseTime(e)
+
+  if(start.hh > end.hh) {
+    valid = false
+    return valid
+  }
+  if(start.hh == end.hh && start.mm > end.mm) {
+    valid = false
+    return valid
+  }
+
+  return valid
+}
+
 exports.addevent = (req,res)=>{
     var orgId = req.params.orgId;
     var params = {
@@ -23,28 +59,30 @@ exports.createevent = (req, res) =>{
     else{
         event_photo = req.file.filename;
     }
-    const event = new EventModel({
-        event_name: req.body.event_name,
-        about_desc: req.body.about_event,
-        things: req.body.things, 
-        capacity: req.body.capacity,
-        header_photo: event_photo,
-        venue: req.body.event_venue,
-        date: req.body.event_date,  
-        start_time:req.body.start_time,
-        end_time:req.body.end_time,
-        incentives: req.body.incentives,
-        codes: req.body.coursecodes,
-        organizer_id: req.params.orgId
-    })
-    event.save().then(event =>{
-        res.redirect('/admin/ad-tools');
-    })
+
+    if(checkTime(req.body.start_time, req.body.end_time)) {
+      const event = new EventModel({
+          event_name: req.body.event_name,
+          about_desc: req.body.about_event,
+          things: req.body.things, 
+          capacity: req.body.capacity,
+          header_photo: event_photo,
+          venue: req.body.event_venue,
+          date: req.body.event_date,  
+          start_time:req.body.start_time,
+          end_time:req.body.end_time,
+          incentives: req.body.incentives,
+          codes: req.body.coursecodes,
+          organizer_id: req.params.orgId
+      })
+      event.save().then(event =>{
+          res.redirect('/admin/ad-tools');
+      })
+    }
+    else {
+      res.redirect('/error')
+    }
 }
-
-
-
-
 
 exports.viewevents = (req,res)=>{
     var orgId = req.params.orgId;
@@ -53,11 +91,14 @@ exports.viewevents = (req,res)=>{
         .exec(function(err, result) {
             if (err) {
                 res.send(err);
+            } else if (!result) {
+              res.redirect('/error');
             } else {
                 var event = JSON.parse(JSON.stringify(result));
                 var params = {
                     layout: 'main',
-                    events: event
+                    events: event,
+                    orgId
                 };
                 res.render('ad-eventview', params);
             }
@@ -66,8 +107,9 @@ exports.viewevents = (req,res)=>{
 
 exports.editevent = (req,res)=> {
     var eventId = req.params.eventId;
-    
+
     EventModel.findById(eventId)
+        .populate('organizer_id','_id')
         .exec(function (err,result) {
             if (err) {
                 res.send(err);
@@ -108,7 +150,7 @@ exports.editevent = (req,res)=> {
                         event,
                         image: finalFile,
                     }
-                    res.render('editevent', params);  
+                    res.render('editevent', params);
                   });
                 }
             } 
@@ -223,17 +265,13 @@ exports.editeventdetails = (req, res) =>{
 
       }
       }, (err)=>{
-        if(err){
-
+        if(err) {
           res.send(err);
-        }
-        else{
+        } else{
           res.redirect('/admin/eventlist/'+ orgID);
         }
-      })
-    }
-
-   else{
+      });
+    } else {
     EventModel.findByIdAndUpdate({_id: req.params.eventId}, 
       {
         $set: {
@@ -248,13 +286,10 @@ exports.editeventdetails = (req, res) =>{
             incentives: req.body.edit_event_incentives
       }
       }, (err)=>{
-        if(err){
-
-          res.send(err);
-        }
-        else{
+        if(err) { res.send(err); 
+        } else {
           res.redirect('/admin/eventlist/'+ orgID);
         }
-      })
+      });
     }
 }

@@ -158,41 +158,47 @@ exports.acceptrequest = (req,res) => {
     
     Request.findById(requestId)
     .exec(function (err, result) {
-        new_org = {
-            org_id: result.org_id,
-            position: result.position
-        }
+        if (err) res.send(err)
+        else if (!result)  res.redirect('/error');
+        else {
+            new_org = {
+                org_id: result.org_id,
+                position: result.position
+            }
 
-        var update = {$inc: {no_of_officers: 1}}
+            var update = {$inc: {no_of_officers: 1}}
 
-        if(result.position == "Member" || result.position == "") {
-            update = {$inc: {no_of_members: 1}}
-        }
+            if(result.position == "Member" || result.position == "") {
+                update = {$inc: {no_of_members: 1}}
+            }
 
-        OrgModel.updateOne(
-            {_id:result.org_id},
-            update, 
-            {multi: true}, 
-            function(err, num){
-                if(err) res.send(err)
-                else {
-                    UserModel.updateOne(
-                        {_id: result.user_id},
-                        {$addToSet: {orgs:new_org}},
-                        function(err, result) {
-                            if(err) res.send(err)
-                            else {
-                                var query = {'_id': requestId};
-                
-                                Request.deleteOne(query, function(err, obj) {
-                                    if(err) res.send(err);
-                                    else res.send('member-requests')
-                                })
+            OrgModel.updateOne(
+                {_id:result.org_id},
+                update, 
+                {multi: true}, 
+                function(err, num){
+                    if(err) res.send(err)
+                    else if (!num)  res.redirect('/error');
+                    else {
+                        UserModel.updateOne(
+                            {_id: result.user_id},
+                            {$addToSet: {orgs:new_org}},
+                            function(err, result) {
+                                if(err) res.send(err)
+                                else if (!result)  res.redirect('/error');
+                                else {
+                                    var query = {'_id': requestId};
+                    
+                                    Request.deleteOne(query, function(err, obj) {
+                                        if(err) res.send(err);
+                                        else res.send('member-requests')
+                                    })
+                                }
                             }
-                        }
-                    )
+                        )
                 }
             });
+        }
     });
 }
 
@@ -209,7 +215,7 @@ exports.createrequests = (req,res) => {
             .lean().exec(function(err, result) {
                 if(err) throw err
                 else if (!result) {
-                    res.send(err);
+                    res.redirect('/error');
                 } else {
                     var orgId = result._id
                     new_req = new Request({
@@ -220,11 +226,8 @@ exports.createrequests = (req,res) => {
                     })
         
                     new_req.save().then(req=> {
-                        if(err) res.send(err)
-                        else {
-                            console.log("A request is made!");
-                            res.send("Success")
-                        };
+                        if (err) res.send(err)
+                        else res.send("Success");
                     })
                 }
             });

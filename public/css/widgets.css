@@ -1,16 +1,38 @@
 .ui-autocomplete.ui-menu {
-    z-index: 3001 !important;
-    font-size: 14px;
-    border: 1px solid #ced4da;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    z-index: 1 !important;
+    font-size: 14px !important; 
+    border: 1px solid #ced4da !important;
+    border-bottom-left-radius: 4px!important;
+    border-bottom-right-radius: 4px !important;
 }
 
 .ui-menu .ui-menu-item-wrapper:hover, 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    color: rgb(58, 2, 50);
-    border: #ced4da 1px solid;
-    border-radius: 4px;
-    padding-left: 2px;
-    padding-right: 2px;
+   font-weight: bold;
 }
+
+.ui-helper-hidden-accessible{
+    display:none !important;
+}
+
+ul.ui-autocomplete {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    padding-left: 2rem;
+    display: block;
+    min-width: 160px;
+    max-width: 350px;
+    margin: 0 0 10px 25px;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+li.ui-menu-item {
+    padding:2 0.5em;
+    line-height:2em;
+    font-size: 16px;
+}
+

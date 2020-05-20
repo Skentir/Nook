@@ -8,7 +8,7 @@ const collectionChunks = db.collection('uploads.chunks');
 
 exports.editorg = (req,res)=> {
     var orgId = req.params.orgId;
-    /* TODO: Get req.user.email from session or the id */
+
     OrgModel.findById(orgId)
         .exec(function (err,result) {
             if (err) {
@@ -178,7 +178,7 @@ exports.viewofficers = (req,res)=> {
                             },  function(err) {
                                     callback(null, results);
                                 });
-                    }
+                    } else  res.redirect('/error');
                 });
             }   
    
@@ -319,11 +319,9 @@ exports.editorgdetails = (req, res) => {
 
       }
       }, (err)=>{
-        if(err){
-
+        if (err) {
           res.send(err);
-        }
-        else{
+        } else {
           res.redirect('/admin/ad-tools');
         }
       })
@@ -342,13 +340,8 @@ exports.editorgdetails = (req, res) => {
             ig_url: req.body.edit_ig_url
       }
       }, (err)=>{
-        if(err){
-
-          res.send(err);
-        }
-        else{
-          res.redirect('/admin/ad-tools');
-        }
+        if(err) res.send(err);
+        else res.redirect('/admin/ad-tools');
       })
     }
 }
