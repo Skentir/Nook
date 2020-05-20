@@ -166,7 +166,22 @@ $(document).ready(function(){
             })
         })
       })
+
+      function validateFileType() {
+        var fileName = document.getElementById("reg-photo").value;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+      
+        if (!(extFile === "jpg" || extFile === "jpeg" || extFile === "png")) {
+          alert("Only JPG/JPEG and PNG files are allowed for upload.");
+          document.getElementById("reg-photo").value = "";
+        }  
+    }
     
 
       
 });
+
+$(document).on('change', '.custom-file-input', function (event) {
+    $(this).next('.custom-file-label').html(event.target.files[0].name);
+})
