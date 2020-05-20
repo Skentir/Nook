@@ -193,7 +193,7 @@ exports.viewplanner = (req,res)=> {
     User.findOne({_id:userId}, function(err, user) {
 
     Event.find({_id: {$in: user.planner}})
-      .select('header_photo event_name event_id date')
+      .select('header_photo event_name _id date')
       .exec(function(err, event){
         if (err) res.send(err)
         else if(!event) {
@@ -208,14 +208,14 @@ exports.viewplanner = (req,res)=> {
         var data = event;
         //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
         // sa second parameter of the function below
-        const result = data.reduce((r, {date, event_name, event_id, header_photo}) => {
+        const result = data.reduce((r, {date, event_name, _id, header_photo}) => {
           let dateObj = new Date(date);
           let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
           if(!r[monthyear]) {
-            r[monthyear] = {monthyear, entries: [{date,event_name,event_id, header_photo}] }
+            r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo}] }
           }
           else {
-            r[monthyear].entries.push({date,event_name,event_id, header_photo})
+            r[monthyear].entries.push({date,event_name,_id, header_photo})
           };
           return r;
         }, {})
