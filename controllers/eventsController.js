@@ -1,4 +1,5 @@
 const EventModel = require('../models/Event');
+const OrgModel = require('../models/Org');
 const async = require('async');
 const getDb = require('../config/db').getDb;
 const db = getDb();
@@ -76,7 +77,13 @@ exports.createevent = (req, res) =>{
           organizer_id: req.params.orgId
       })
       event.save().then(event =>{
-          res.redirect('/admin/ad-tools');
+          OrgModel.findByIdAndUpdate({_id: orgId}, {$push:
+          {events: event._id}},(err) =>{
+            if(err){
+              res.redirect("/error");
+            }
+            res.redirect('/admin/ad-tools');
+          })
       })
     }
     else {
