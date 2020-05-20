@@ -175,17 +175,24 @@ exports.viewplanner = (req,res)=> {
     var userId = req.session.passport.user;
     var fileName = res.locals.photo;
     var eventList = [];
-    function dates(event1, event2) {
-      return event1.date - event2.date
+
+    function dates2(event1, event2) {
+      return new Date(event1.date) - new Date(event2.date)
+    }
+    
+    function dates1(event1, event2) {
+      event1.entries.sort(dates2).forEach(function(e){
+        console.log("")
+      });
+      event2.entries.sort(dates2).forEach(function(e){
+        console.log("")
+      });
+      return new Date(event1.monthyear) - new Date(event2.monthyear);
     }
 
     User.findOne({_id:userId}, function(err, user) {
-      user.planner.sort(dates).forEach(function(event) {
-        // Add to eventList for Grouping
-        eventList.push(event);
-      })
 
-    Event.find({_id: {$in: eventList}})
+    Event.find({_id: {$in: user.planner}})
       .select('header_photo event_name event_id date')
       .exec(function(err, event){
         if (err) res.send(err)
@@ -197,19 +204,36 @@ exports.viewplanner = (req,res)=> {
           }
           res.render('planner', params)
         } else {
-    
-        var data = eventList;
+
+        var data = event;
         //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
         // sa second parameter of the function below
         const result = data.reduce((r, {date, event_name, event_id, header_photo}) => {
           let dateObj = new Date(date);
           let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
-          let buff = r
-          if(!r[monthyear]) r[monthyear] = {monthyear, entries: [{date,event_name,event_id, header_photo}] }
-          else r[monthyear].entries.push({date,event_name,event_id, header_photo});
+          if(!r[monthyear]) {
+            r[monthyear] = {monthyear, entries: [{date,event_name,event_id, header_photo}] }
+          }
+          else {
+            r[monthyear].entries.push({date,event_name,event_id, header_photo})
+          };
           return r;
         }, {})
-        var print = JSON.parse(JSON.stringify(result))
+
+        eventList = Object.keys(result).map(i => result[i])
+        
+        eventList.sort(dates1).forEach(function(e) {
+          console.log("")
+        });
+       
+        var print = JSON.parse(JSON.stringify(eventList))
+        /* var params = {
+          layout: 'main'
+          events: eventList
+          user
+
+          res.render('planner',params)
+        }*/
         res.send(print)
         }
       })
