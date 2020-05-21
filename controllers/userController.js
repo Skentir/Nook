@@ -190,54 +190,58 @@ exports.viewplanner = (req,res)=> {
       return new Date(event1.monthyear) - new Date(event2.monthyear);
     }
 
-    User.findOne({_id:userId}, function(err, user) {
-
-    Event.find({_id: {$in: user.planner}})
-      .select('header_photo event_name _id date')
-      .exec(function(err, event){
+    User.findById(userId)
+      .select('planner short_bio first_name last_name photo')
+      .exec(function(err, user) {
         if (err) res.send(err)
-        else if(!event) {
-          // No event found
-          var params = {
-            layout: 'main',
-            user
-          }
-          res.render('planner', params)
-        } else {
+        else if (!user) res.redirect('/error');
+        else {
+          Event.find({_id: {$in: user.planner}})
+          .select('header_photo event_name _id date')
+          .exec(function(err, event){
+            if (err) res.send(err)
+            else if(!event) {
+              // No event found
+              var params = {
+                layout: 'main',
+                user
+              }
+              res.render('planner', params)
+            } else {
+                var data = event;
+                //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
+                // sa second parameter of the function below
+                const result = data.reduce((r, {date, event_name, _id, header_photo}) => {
+                let dateObj = new Date(date);
+                let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
+                if(!r[monthyear]) {
+                  r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo}] }
+                }
+                else {
+                  r[monthyear].entries.push({date,event_name,_id, header_photo})
+                };
+                return r;
+              }, {})
 
-        var data = event;
-        //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
-        // sa second parameter of the function below
-        const result = data.reduce((r, {date, event_name, _id, header_photo}) => {
-          let dateObj = new Date(date);
-          let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
-          if(!r[monthyear]) {
-            r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo}] }
-          }
-          else {
-            r[monthyear].entries.push({date,event_name,_id, header_photo})
-          };
-          return r;
-        }, {})
-
-        eventList = Object.keys(result).map(i => result[i])
-        
-        eventList.sort(dates1).forEach(function(e) {
-          console.log("")
-        });
-       
-        var print = JSON.parse(JSON.stringify(eventList))
-        /* var params = {
-          layout: 'main'
-          events: eventList
-          user
-
-          res.render('planner',params)
-        }*/
-        res.send(print)
+              eventList = Object.keys(result).map(i => result[i])
+              
+              eventList.sort(dates1).forEach(function(e) {
+                console.log("")
+              });
+            
+              var print = JSON.parse(JSON.stringify(eventList))
+              var params = {
+                layout: 'main',
+                events: print,
+                user
+              }
+                //res.render('planner',params)
+              
+              res.send(params)
+              }
+            })
         }
       })
-    })
 
     // User.findById(userId)
     //         .populate('planner','_id event_name header_photo')
