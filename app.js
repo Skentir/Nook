@@ -118,6 +118,22 @@ app.get('/google', passport.authenticate('google', {
 }), (req,res) => {  console.log('Google AuTH'); });
 app.get('/google/callback', passport.authenticate('google'), (req, res) => {
     console.log("Redirecting from Google..");
+    function signinCallback(authResult) {
+        if (authResult['status']['signed_in']) {
+            if (authResult['status']['method'] == 'PROMPT') {
+                console.log(authResult['status']['method']);
+    
+                gapi.client.load('oauth2', 'v2', function () {
+                    gapi.client.oauth2.userinfo.get().execute(function (resp) {
+                        console.log(resp);
+                    })
+                });
+            }
+        } else {
+            console.log('Sign-in state: ' + authResult['error']);
+        }
+    }
+    signinCallback(res);
     res.redirect('/explore');
 });
 app.get('/error', function(req, res) {
