@@ -28,10 +28,6 @@ module.exports = function(passport){
         })
     );
 
-    console.log("client id" + process.env.GOOGLE_CLIENT_ID)
-    console.log("client secret"+ process.env.GOOGLE_CLIENT_SECRET)
-    console.log("callback"+ process.env.GOOGLE_CALLBACK_URL)
-
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret:  process.env.GOOGLE_CLIENT_SECRET,
@@ -39,7 +35,6 @@ module.exports = function(passport){
     },
     (accessToken, refreshToken, profile, done) => {
         process.nextTick(function() {
-            console.log("PROFIEL: "+JSON.stringify(profile))
             User.findOne({ 'email_address' :profile._json.email}, function(err, user) {
                 if (err)
                     return done(err);

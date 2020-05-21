@@ -12,7 +12,7 @@ function initDb(callback) {
         console.warn("Trying to init DB again!");
         return callback(null, _db);
     }
-mongoose.connect('mongodb+srv://testboy:nooktestboy@cluster0-pym8a.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false},connected)
+mongoose.connect(process.env.DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false},connected)
 function connected(err, db) {
         if (err) {
             return callback(err);
