@@ -22,7 +22,15 @@ The current working features are:
 * Viewing the user profile which includes the organizations the user is part of and the events he/she has on their planner.
 * Viewing the user requests.
 * Viewing the organization membership requests.
-
+* Viewing user planner; Filtered by Year, Month, and Day.
+* Add/Delete User Requests and Member Requests (Admin)
+* Update basic user info
+* Update event/s and organization info (Admin)
+### Additional Features ###
+* Dashboard Event Banner Carousell
+* Google Account Sign-In 
+* Auto-Suggest in search fields
+* Mini Sidebar for easier navigation of Admin Tools and overall better user experience
 ## :computer: How to Run ##
 The current submission connects to MongoDB Atlas as the database. Also, some of the app functionalities are missing at this stage, with most of the functionalities being reading from the database.
 
