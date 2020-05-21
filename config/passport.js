@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-
 const User= require('../models/User');
 
 module.exports = function(passport){
@@ -29,10 +28,14 @@ module.exports = function(passport){
         })
     );
 
+    console.log("client id" + process.env.GOOGLE_CLIENT_ID)
+    console.log("client secret"+ process.env.GOOGLE_CLIENT_SECRET)
+    console.log("callback"+ process.env.GOOGLE_CALLBACK_URL)
+
     passport.use(new GoogleStrategy({
-        clientID: "473203977419-av5ghakish7399o9fvv84cq1n8o5e7t1.apps.googleusercontent.com",
-        clientSecret: "yMT9metH87ZqLHKWmj2zNOs3",
-        callbackURL: "/google/callback"
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret:  process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL:  process.env.GOOGLE_CALLBACK_URL
     },
     (accessToken, refreshToken, profile, done) => {
         process.nextTick(function() {

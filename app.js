@@ -12,8 +12,10 @@ const Handlebars = require('handlebars');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-
-
+//Load ennvironment variables
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 // Require for DateTime Formatting
 const moment = require('moment');
 
