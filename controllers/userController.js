@@ -505,6 +505,7 @@ exports.logout = function(req, res, next) {
           return res.redirect('/');
         }
       });
+      req.logout()// Logout from Google
     }
 };
 

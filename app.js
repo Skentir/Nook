@@ -30,7 +30,6 @@ require('dotenv/config');
 
 //Require for user sessions
 const passport = require('passport');
-
 //config
 require('./config/passport')(passport);
 const initDb = require("./config/db").initDb;
@@ -114,9 +113,16 @@ app.engine('hbs', hbs( {
 
 }));
 
+app.get('/google', passport.authenticate('google', {
+    scope: ['profile','email'] // Used to specify the required data
+}), (req,res) => {  console.log('Google AuTH'); });
+app.get('/google/callback', passport.authenticate('google'), (req, res) => {
+    console.log("Redirecting from Google..");
+    res.redirect('/explore');
+});
 app.get('/error', function(req, res) {
     res.render('error')
-})
+});
 
 var requiresAdmin = function() {
     return [

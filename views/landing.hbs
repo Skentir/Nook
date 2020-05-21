@@ -88,7 +88,8 @@
                                 <div class="sign-in-btn-set">
                                     <button type="submit" id="sign-in-btn" class="custombtn thinbtn mt-0" style="justify-content: center;">sign in</button>
                                         <span style="padding: 0px 10px;"> or </span>
-                                    <div class="g-signin2 google-sign-in" data-onsuccess="onSignIn" data-theme="dark"></div>
+                                        <div class="g-signin2 google-sign-in" data-onsuccess="onSignIn" data-theme="dark">
+                                        </div>
                                 </div>
                             </div>
                         </form>
@@ -108,7 +109,7 @@
                     
                             // The ID token you need to pass to your backend:
                             var id_token = googleUser.getAuthResponse().id_token;
-                            console.log("ID Token: " + id_token);
+                            window.location = '/google'
                         }
                         </script>
                     </div>

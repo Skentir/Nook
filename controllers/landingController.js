@@ -3,7 +3,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 exports.login = (req, res, next) => {
-    passport.authenticate('local', {
+    passport.authenticate(['local','google'], {
     successRedirect: '/explore',
     failureRedirect: '/',
     })(req, res, next);
