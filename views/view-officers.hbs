@@ -38,7 +38,11 @@
         {{#if officers}}
         {{#each officers}}
             <div class="officer">
+                {{#if this.isUser}}
+                    <a href="/user-profile">
+                {{else}}
                 <a href="/user-profile/{{this._id}}">
+                {{/if}}
                     <img src="{{this.img}}">
                     <h1>{{this.first_name}} {{this.last_name}}</h1>
                     <p>{{this.orgs.0.position}}</p>

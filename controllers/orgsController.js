@@ -147,6 +147,7 @@ exports.viewofficers = (req,res)=> {
                                                 //No data found
                                                 return callbackEach(err);
                                                 }
+                                                var bool = false;
                                                 //Append Chunks
                                                 var fileData = [];
                                                 for(let i=0; i<chunks.length;i++){
@@ -162,8 +163,12 @@ exports.viewofficers = (req,res)=> {
                                                 var officerj = JSON.parse(JSON.stringify(officer));
             
                                                 //add the image property to json object and assign the image uri
+                                                if (req.user) {
+                                                    if (req.session.passport.user == officer._id)
+                                                        bool = true;       
+                                                }
                                                 officerj.img = finalFile;
-            
+                                                officerj.isUser = bool;
                                                 //push it into list of orgs
                                                 officerList.push(officerj);
                                                 callbackEach(null);
