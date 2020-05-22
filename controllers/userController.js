@@ -196,50 +196,133 @@ exports.viewplanner = (req,res)=> {
         if (err) res.send(err)
         else if (!user) res.redirect('/error');
         else {
-          Event.find({_id: {$in: user.planner}})
-          .select('header_photo event_name _id date')
-          .exec(function(err, event){
-            if (err) res.send(err)
-            else if(!event) {
-              // No event found
-              var params = {
-                layout: 'main',
-                user
-              }
-              res.render('planner', params)
-            } else {
-                var data = event;
-                //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
-                // sa second parameter of the function below
-                const result = data.reduce((r, {date, event_name, _id, header_photo}) => {
-                let dateObj = new Date(date);
-                let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
-                if(!r[monthyear]) {
-                  r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo}] }
+          collection.find({filename: user.photo}).toArray(function(err, docs){
+            if(err){
+              return callbackEach(err);
+            }
+            if(!docs || docs.length === 0){
+              return callbackEach(err);
+            }else{
+              collectionChunks.find({files_id : docs[0]._id}).sort({n: 1})
+              .toArray(function(err, chunks) {
+                if(err){
+                  return res.send(err);
                 }
-                else {
-                  r[monthyear].entries.push({date,event_name,_id, header_photo})
-                };
-                return r;
-              }, {})
+                if(!chunks || chunks.length === 0){
+                  //No data found
+                  return res.send(err);
+                }
+                //Append Chunks
+                var fileData = [];
+                for(let i=0; i<chunks.length;i++)
+                  fileData.push(chunks[i].data.toString('base64'));
+                
+                //Display the chunks using the data URI format
+              fileName = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
+    
+              Event.find({_id: {$in: user.planner}})
+              .select('header_photo event_name _id date')
+              .exec(function(err, event) {
+                if (err) res.send(err)
+                else if(!event) {
+                  // No event found
+                  var params = {
+                    layout: 'main',
+                    user,
+                    image: fileName
+                  }
+                  console.log("NO event");
+                  res.send(params)
+                  //res.render('planner', params)
+                } else {
+                  async.forEach(event, function(result,resultCallback) {
+                    async.waterfall([ 
+                        function(callbackEach) {
+                            callbackEach(null, result);
+                        },
+                        function getImageFilname(event, callbackEach){
+                            collection.find({filename: event.header_photo}).toArray(function(err, docs){
+                                if(err){
+                                return callbackEach(err);
+                                }
+                                if(!docs || docs.length === 0){
+                                return callbackEach(err);
+                                }else{
+                                //Retrieving the chunks from the db
+                                    collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
+                                        if(err){
+                                        return callbackEach(err);
+                                        }
+                                        if(!chunks || chunks.length === 0){
+                                        //No data found
+                                        return callbackEach(err);
+                                        }
+                                        //Append Chunks
+                                        var fileData = [];
+                                        for(let i=0; i<chunks.length;i++){
+                        
+                                        //This is in Binary JSON or BSON format, which is stored
+                                        //in fileData array in base64 endocoded string format
+                                        fileData.push(chunks[i].data.toString('base64'));
+                                        }
+                                        //Display the chunks using the data URI format
+                                        finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
 
-              eventList = Object.keys(result).map(i => result[i])
-              
-              eventList.sort(dates1).forEach(function(e) {
-                console.log("")
-              });
-            
-              var print = JSON.parse(JSON.stringify(eventList))
-              var params = {
-                layout: 'main',
-                events: print,
-                user
-              }
-                //res.render('planner',params)
-              
-              res.send(params)
-              }
-            })
+                                        //create a json object for the org
+                                        var eventj = JSON.parse(JSON.stringify(event));
+
+                                        //add the image property to json object and assign the image uri
+                                        eventj.img = finalFile;
+
+                                        //push it into list of orgs
+                                        eventList.push(eventj);
+                                        callbackEach(null);
+                                    });
+                                }
+                            })
+                            
+                        },
+                            function(callbackEach) {  
+                              //console.log("HERE"+JSON.stringify(event))
+                                resultCallback();         
+                            }
+                    ])
+                }, function(err) { 
+                      //console.log("Event"+JSON.stringify(eventList));
+                      var data = eventList;
+                      //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
+                      // sa second parameter of the function below
+                      const result = data.reduce((r, {date, event_name, _id, header_photo, img}) => {
+                      let dateObj = new Date(date);
+                      let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
+                      if(!r[monthyear])
+                        r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo, img}] }
+                      else
+                        r[monthyear].entries.push({date,event_name,_id, header_photo, img});
+                      return r;
+                    }, {})
+
+                    eventList = Object.keys(result).map(i => result[i])
+                    
+                    eventList.sort(dates1).forEach(function(e) {
+                      console.log("")
+                    });
+                  
+                    var print = JSON.parse(JSON.stringify(eventList))
+                    var params = {
+                      layout: 'main',
+                      events: print,
+                      user,
+                      image: fileName
+                    }
+                      //res.render('planner',params)
+                    res.send(params)
+                })
+                  }//
+                })
+              })//
+            }
+          })
         }
       })
 
