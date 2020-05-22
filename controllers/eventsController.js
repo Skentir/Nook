@@ -69,6 +69,7 @@ exports.createevent = (req, res) =>{
           about_desc: req.body.about_event,
           things: req.body.things, 
           capacity: req.body.capacity,
+          current_cap: req.body.capacity,
           header_photo: event_photo,
           venue: req.body.event_venue,
           date: req.body.event_date,  
