@@ -125,6 +125,10 @@ header h1 {
     font-weight: 300;
 }
 
+.delete-event path:hover {
+    fill:white;
+}
+
 /* MEDIA QUERIES */
 @-ms-viewport {
     width: device-width;
