@@ -22,14 +22,14 @@ const UserSchema = new mongoose.Schema({
     },
     id_number: {
         type: Number,
-        required: true,
+        required: false,
     },
     short_bio: {
         type: String
     },
     year_level:{
         type: String,
-        required: true
+        required: false
     },
     email_address: {
         type: String,
@@ -63,7 +63,10 @@ const UserSchema = new mongoose.Schema({
         position: String,
     },{noId:true}],
 
-    
+    googleId : {
+        type: String,
+        required: false
+    }
 });
 
 
