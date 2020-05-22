@@ -20,15 +20,18 @@ The current working features are:
 * Viewing the list of events per organization.
 * Viewing the list of officers per organization.
 * Viewing the user profile which includes the organizations the user is part of and the events he/she has on their planner.
+* Viewing other user profiles.
 * Viewing the user requests.
 * Viewing the organization membership requests.
 * Viewing user planner; Filtered by Year, Month, and Day.
 * Add/Delete User Requests and Member Requests (Admin)
+* Add/Delete organization events (Admin)
 * Update basic user info
 * Update event/s and organization info (Admin)
 ### Additional Features ###
+* Search an organization
 * Dashboard Event Banner Carousell
-* Google Account Sign-In 
+* Google Account Sign-In and Registration
 * Auto-Suggest in search fields
 * Mini Sidebar for easier navigation of Admin Tools and overall better user experience
 ## :computer: How to Run ##
