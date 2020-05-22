@@ -35,7 +35,7 @@ The current working features are:
 * Auto-Suggest in search fields
 * Mini Sidebar for easier navigation of Admin Tools and overall better user experience
 ## :computer: How to Run ##
-The current submission connects to MongoDB Atlas as the database. Also, some of the app functionalities are missing at this stage, with most of the functionalities being reading from the database.
+The current submission connects to MongoDB Atlas as the database.
 
 Some startup scripts in place to run the server:
 1. Run `npm install` to download the required dependencies
