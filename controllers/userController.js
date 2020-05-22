@@ -174,7 +174,7 @@ exports.viewplanner = (req,res)=> {
     } else {
     var userId = req.session.passport.user;
     var fileName = res.locals.photo;
-    var eventList = [];
+    var eventList = [], userj;
 
     function dates2(event1, event2) {
       return new Date(event1.date) - new Date(event2.date)
@@ -191,7 +191,7 @@ exports.viewplanner = (req,res)=> {
     }
 
     User.findById(userId)
-      .select('planner short_bio first_name last_name photo')
+      .select('planner short_bio first_name last_name photo email_address')
       .exec(function(err, user) {
         if (err) res.send(err)
         else if (!user) res.redirect('/error');
@@ -219,7 +219,8 @@ exports.viewplanner = (req,res)=> {
                 
                 //Display the chunks using the data URI format
               fileName = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-    
+              userj = JSON.parse(JSON.stringify(user));
+
               Event.find({_id: {$in: user.planner}})
               .select('header_photo event_name _id date')
               .exec(function(err, event) {
@@ -228,12 +229,12 @@ exports.viewplanner = (req,res)=> {
                   // No event found
                   var params = {
                     layout: 'main',
-                    user,
+                    user: userj,
                     image: fileName
                   }
                   console.log("NO event");
-                  res.send(params)
-                  //res.render('planner', params)
+                  //res.send(params)
+                  res.render('planner', params)
                 } else {
                   async.forEach(event, function(result,resultCallback) {
                     async.waterfall([ 
@@ -312,13 +313,13 @@ exports.viewplanner = (req,res)=> {
                     var params = {
                       layout: 'main',
                       events: print,
-                      user,
+                      user: userj,
                       image: fileName
                     }
-                      //res.render('planner',params)
-                    res.send(params)
+                    res.render('planner',params)
+                    //res.send(params)
                 })
-                  }//
+                  }
                 })
               })//
             }
