@@ -62,4 +62,5 @@ router.put('/accept-request/:reqId', requestsController.acceptrequest);
 router.post('/editorg/:orgId',upload.single('edit_org_header'), orgsController.editorgdetails);
 router.post('/editevent/:eventId', upload.single('edit_event_photo'), eventsController.editeventdetails);
 router.post('/ad-eventreg/:orgId', upload.single('event_photo'),eventsController.createevent);
+router.delete('/delete-event/:id', eventsController.deleteevent);
 module.exports = router;

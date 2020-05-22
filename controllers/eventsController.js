@@ -1,3 +1,5 @@
+var mongoose = require('mongoose')
+
 const EventModel = require('../models/Event');
 const OrgModel = require('../models/Org');
 const async = require('async');
@@ -299,4 +301,17 @@ exports.editeventdetails = (req, res) =>{
         }
       });
     }
+}
+
+exports.deleteevent = (req, res) => {
+  var eventId = mongoose.Types.ObjectId(req.params. id);
+  console.log('Deleting: ' + eventId);
+
+  EventModel.deleteOne({'_id':eventId}, function(err, obj) {
+    if(err) res.send(err)
+    else {
+      console.log('Event Deleted!')
+      res.send('Done!')
+    }
+  })
 }

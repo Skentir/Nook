@@ -6,6 +6,7 @@
     <script src="../../scripts/moment.js"></script>
     <script src="../../scripts/bootstrap-datepicker.js"></script>
     <script src="../../scripts/landing.js"></script> 
+    <script src="../../scripts/events.js"></script> 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
    <!-- datetimepicker for bootstrap4-->
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -24,12 +25,20 @@
                     <div id="event-list">
                         {{#if events}}
                             {{#each events}}
-                                <div class="row contact-form">
+                                <div class="row contact-form" id="event-{{this._id}}">
                                     <a href="/admin/editevent/{{this._id}}" class="col-8 event-name">
                                         {{this.event_name}}
                                     </a>
                                     <div class="col">
                                         <span class="event-date">{{formatDate this.date}}</span>
+                                    </div>
+                                    <div style="align-self:center">
+                                        <button class="delete-event" style="border:none;background:none" data-id="{{this._id}}">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 3L15.5 4H19V6H5V4H8.5L9.5 3H14.5ZM6 19C6 20.1 6.90002 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z" fill="black" fill-opacity="0.54"/>
+                                            </svg>
+
+                                        </button>
                                     </div>
                                 </div>
                             {{/each}}
