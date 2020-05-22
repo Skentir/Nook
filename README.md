@@ -19,11 +19,11 @@ The current working features are:
 * Viewing the list of organization in the /explore page, along with viewing the specific org by clicking on it.
 * Viewing the list of events per organization.
 * Viewing the list of officers per organization.
-* Viewing the user profile which includes the organizations the user is part of and the events he/she has on their planner.
-* Viewing other user profiles.
+* Viewing the user profile which includes the organizations the user is part of.
+* Viewing user planner; Filtered by Year, Month, and Day.
+* Viewing other user profiles and the orgs they belong to.
 * Viewing the user requests.
 * Viewing the organization membership requests.
-* Viewing user planner; Filtered by Year, Month, and Day.
 * Add/Delete User Requests and Member Requests (Admin)
 * Add/Delete organization events (Admin)
 * Update basic user info
