@@ -14,15 +14,19 @@
             {{else}}
                 <img src="/public/assets/profiles/nook-pic.png">
             {{/if}}
+             <a href="/editprofile">
+            <div class="edit-profile-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6587 3C17.4087 3 17.1487 3.1 16.9587 3.29L15.1287 5.12L18.8787 8.87L20.7087 7.04C21.0987 6.65 21.0987 6.02 20.7087 5.63L18.3687 3.29C18.1687 3.09 17.9187 3 17.6587 3ZM14.0587 9.02L14.9787 9.94L5.91875 19H4.99875V18.08L14.0587 9.02ZM2.99875 17.25L14.0587 6.19L17.8087 9.94L6.74875 21H2.99875V17.25Z" fill="#474747"/>
+                </svg>
+            </div>
+            </a>
             <h1>{{info.first_name}} {{info.last_name}}</h1>
             <p>{{info.short_bio}}</p>
             <h2>{{info.email_address}}</h2>
         </div>
         {{#if isUser}}
         <div class="profile-buttons">
-            <a id="register-btn" class="custombtn thinbtn mt-2" href="/editprofile">
-                Edit Profile
-            </a>
             <form method = 'GET' action ='/logout'>
                 <button class="custombtn thinbtn" id="logout-btn" style="color:white;">Logout</button>
             </form>
@@ -30,14 +34,14 @@
         {{/if}}
     </div>
     <!-- User Organizations -->
-    <div class="box mt-4" style="background-color: #7c3bff1f;">
+    <div class="box mt-4">
         {{#if isUser}}
-        <h1 class="mb-3 ml-2"> My Organizations</h1>
+        <h1 class="page-title"> My Organizations</h1>
         {{else}}
-        <h1 class="mb-3 ml-2"> {{info.first_name}}'s Organizations</h1>
+        <h1 class="page-title"> {{info.first_name}}'s Organizations</h1>
         {{/if}}
         <div class="card-wrapper mt-2">
-            <div  class="card-menu" id="user-organization-list">
+            <div  class="card-menu" style="justify-content: flex-start;" id="user-organization-list">
                 <div class="row">
                    {{#if orgs}}
                    {{#each orgs}}

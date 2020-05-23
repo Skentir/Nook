@@ -41,7 +41,7 @@ exports.editprofile = (req,res,next)=> {
     async.parallel({
           reqs:function gatherRequests(callback) {
             Request.find({user_id:id})
-            .populate('org_id', '_id org_name org_logo').then(results=>{
+            .populate('org_id', '_id org_name org_logo position').then(results=>{
                 if (results) {
                     async.forEach(results, function(result,resultCallback) {
                       async.waterfall([ 
@@ -222,7 +222,7 @@ exports.viewplanner = (req,res)=> {
               userj = JSON.parse(JSON.stringify(user));
 
               Event.find({_id: {$in: user.planner}})
-              .select('header_photo event_name _id date')
+              .select('header_photo event_name _id date venue things')
               .exec(function(err, event) {
                 if (err) res.send(err)
                 else if(!event) {
@@ -293,13 +293,13 @@ exports.viewplanner = (req,res)=> {
                       var data = eventList;
                       //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
                       // sa second parameter of the function below
-                      const result = data.reduce((r, {date, event_name, _id, header_photo, img}) => {
+                      const result = data.reduce((r, {date, event_name, _id, header_photo, img, venue, things}) => {
                       let dateObj = new Date(date);
                       let monthyear = dateObj.toLocaleString("en-us", { month: "long", year: 'numeric' });
                       if(!r[monthyear])
-                        r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo, img}] }
+                        r[monthyear] = {monthyear, entries: [{date,event_name,_id, header_photo, img, venue, things}] }
                       else
-                        r[monthyear].entries.push({date,event_name,_id, header_photo, img});
+                        r[monthyear].entries.push({date,event_name,_id, header_photo, img, venue, things});
                       return r;
                     }, {})
 

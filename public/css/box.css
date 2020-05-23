@@ -16,8 +16,8 @@
      width: 100%;
      box-sizing: border-box;
      padding: auto;
-     background-color: #f4f4f4a8;
-    z-index: 1;
+     background-color: #3333cc;
+     z-index: 2;
     backdrop-filter: saturate(180%) blur(20px); 
  }
 
@@ -64,12 +64,16 @@
     font-family: 'Roboto';
     font-weight: 700 !important;
     font-size: 20px !important;
-    color: #3a3a3a;
+    color: white;
     text-decoration: none;
 }
 
+.topnav svg path {
+    fill:white;
+}
+
 svg path:hover{
-    fill: #3333cc;
+    fill: yellow;
 }
 
 .custom-container {
@@ -169,9 +173,17 @@ svg path:hover{
 }
 
 .fa.fa-search.form-control-feedback {
-    background:#8a898959;
+    background:#5d02f05d;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+}
+
+.page-title {
+    font-family: 'Roboto';
+    font-weight: 700;
+    width: 100%;
+    color: black;
+    font-size: 32px;
 }
 
 @media all and (max-width: 610px) {
