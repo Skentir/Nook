@@ -385,7 +385,7 @@ exports.viewprofile = (req,res, next) => {
                     // User not Found
                     res.redirect('/explore');
                 } else {
-                    collection.find({filename: fileName}).toArray(function(err, docs){
+                    collection.find({filename: result.photo}).toArray(function(err, docs){
                         if(err){
                           return res.send(err);
                         }
