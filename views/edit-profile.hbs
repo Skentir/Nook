@@ -17,17 +17,17 @@
         {{else}}
             <img class="hdr-pic" src="../../public/assets/profiles/nook-pic.png">
         {{/if}}
-        <div>
-            <span class="hdr-text" id="user-name">{{user.first_name}} {{user.last_name}}</span>
+        <di style="font-size: 32px;"v>
+            <span class="page-title" id="user-name">{{user.first_name}} {{user.last_name}}</span>
             /
-            <span class="hdr-text">Edit Profile</span>
+            <span class="page-title">Edit Profile</span>
             <p class="hdr-desc">Setup your Nook user account</p>
         </div>
     </header>
 
     <!-- Form -->
     <form name = "edit_profile" method = "POST" action = '/edit-profile' enctype="multipart/form-data">
-    <div class="inner-box">
+    <div class="inner-box" style="justify-content: center;">
         <div class="left-box">
                 <div class="frm-height contact-form">
                     <div class="form-row">
@@ -79,7 +79,10 @@
                         <div class="row request-item" id="request-{{this._id}}">
                             <span class="col-9 request-org-cell">
                                 <img class="hdr-pic request-org-pic" src="{{this.img}}">
-                                <p class="request-org-name">{{this.org_id.org_name}}</p>
+                                <span>
+                                    <p class="request-org-name">{{this.org_id.org_name}}</p>
+                                    <p class="request-position mb-0">{{this.position}}</p>
+                                </span>
                             </span>
                             <div class="col-3 cancel-req">
                                 <button style="color:red; border:0px; background-color:white" class="cancel" data-id="{{this._id}}">Cancel</button>

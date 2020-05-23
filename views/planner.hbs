@@ -1,7 +1,7 @@
 {{#section 'head'}}
     <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="../../public/css/cards.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
 {{/section}}
 
 <div class="container inner-box">
@@ -12,6 +12,13 @@
             {{else}}
                 <img src="/public/assets/profiles/nook-pic.png">
             {{/if}}
+            <a href="/editprofile">
+            <div class="edit-profile-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6587 3C17.4087 3 17.1487 3.1 16.9587 3.29L15.1287 5.12L18.8787 8.87L20.7087 7.04C21.0987 6.65 21.0987 6.02 20.7087 5.63L18.3687 3.29C18.1687 3.09 17.9187 3 17.6587 3ZM14.0587 9.02L14.9787 9.94L5.91875 19H4.99875V18.08L14.0587 9.02ZM2.99875 17.25L14.0587 6.19L17.8087 9.94L6.74875 21H2.99875V17.25Z" fill="#474747"/>
+                </svg>
+            </div>
+            </a>
             {{#if user}}
             <h1>{{user.first_name}} {{user.last_name}}</h1>
             <p>{{user.short_bio}}</p>
@@ -21,25 +28,35 @@
             {{/if}}
         </div>
     </div>
-    <div class="box mt-4" style="background-color: #7c3bff1f;">
+    <div class="box mt-4">
         <div class="mb-3 ml-2 card-menu" id="user-event-list">
-            <h1 style="width: 100%;"> My Events</h1>
+            <h1 class="page-title"> My Events</h1>
             {{#if events includeZero=true}}
             {{#each events}}
             <div class="month-group">
-                <h5 class="month-label">{{this.monthyear}}</h5>
-                <div class="card-wrapper information">            
+                <h5 class="month-label">⭐️ {{this.monthyear}}</h5>
                 {{#each entries}}
-                <div class="card">
-                    <a href="/viewevent/{{this._id}}">
-                        <img class="card-img-top img-fluid" src="{{this.img}}">
-                        <div class="card-body">
-                            <span>{{this.event_name}}</span>
+                    <div class="card h-card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <a href="/viewevent/{{this._id}}">
+                            <img src={{this.img}} class="card-img">
+                            </a>
                         </div>
-                    </a>
-                </div>
+                        <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.event_name}}</h5>
+                            <p class="card-text">This event will be held at {{this.venue}}.
+                                {{#if this.things includeZero=true}}
+                                Don't forget to bring {{this.things}}.
+                                {{/if}}
+                            </p>
+                            <p class="card-text"><small class="text-muted">Event Date: {{formatDate this.date}}</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 {{/each}}
-                </div>
             </div>
             {{/each}}
             {{else}}

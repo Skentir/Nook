@@ -4,12 +4,16 @@
       position: fixed;
       display: block;
       list-style-type: none;
-      right: -3.2em;
+      right: -8.9em;
       top: 25%;
+  }
+
+  div.side-navbar ul:hover {
+    transition: 0.3s;
       -webkit-animation: slideright 1s forwards;
-      -webkit-animation-delay: 1.5s;
+      -webkit-animation-delay: 1ss;
       animation: slideright 1s forwards;
-      animation-delay: 1.5s; 
+      animation-delay: 1s; 
   }
   
   @keyframes slideright {
@@ -43,6 +47,10 @@
     color: #ebebeb;
   }
 
+  div.side-navbar svg {
+    margin-right: 5px;
+  }
+
   div.side-navbar svg path:hover {
     fill:white;
   }
@@ -52,5 +60,7 @@
       color: #fff;
   }
 
-  
+  .helper {
+    font-size: 16px;
+  }
   

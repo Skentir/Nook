@@ -9,7 +9,7 @@ body {
 
 .box {
     max-width: 760px;
-    padding: 3.5rem 4rem;
+    padding: 0 3.5rem;
     border-radius: 20px;
     margin-bottom: 3rem;
 }
@@ -27,9 +27,12 @@ h1 {
 }
 
 #account-details {
-    min-width: 200px;
-    padding-top: 20px;
-    max-width: 260px;
+    min-width: 250px;
+    padding: 20px;
+    max-width: 300px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    height: max-content;
 }
 
 button {
@@ -45,24 +48,40 @@ button {
     box-shadow: 0 0 6px #888888;
 }
 
+.edit-profile-btn {
+    z-index: 1;
+    background: #d8d3d3;
+    border-radius: 50%;
+    width: fit-content;
+    padding: 5px;
+    margin: 0;
+    position: relative;
+    left: 65%;
+    top: -40px;
+}
+
+.edit-profile-btn:hover {
+    scale: 1.5;
+    background-color: #adabab;
+}
+
 .profile {
     text-align: center;
 }
 
 .profile img {
-    height: 120px;
-    width: 120px;
+    height: 140px;
+    width: 140px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .profile h1 {
-    margin: 10px;
-    margin-top: 20px;
+    margin: 0px 10px;
     margin-bottom: 2px;
     font-weight: 600;
     color: #3a3a3a;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .profile h2 {
@@ -110,8 +129,11 @@ button {
 }
 
 .profile p {
-    font-size: 14px;
+    text-align: left;
+    font-size: 16px;
     color: gray;
+    max-width: 245px;
+    margin: auto;
 }
 
 .profile-buttons {
@@ -144,7 +166,11 @@ button {
     padding-top: 1%;
     display: flex;
     flex-flow: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+.information.planner {
+    justify-content: start;
 }
 
 .edit-profile {
@@ -365,7 +391,23 @@ a:hover {
 }
 
 .month-group {
-    width: 95%;
+    width: 100%;
+    margin-right: auto;
+}
+
+.h-card {
+    margin-left: 20px;
+    border: 1px solid #d6d4d4;
+    padding: 10px;
+    box-shadow: 0px 0px 9px -2px rgba(0, 0, 0, 0.28);
+}
+
+.h-card img:hover {
+    box-shadow: none;
+}
+
+.card-body {
+    padding: 10px;
 }
 
 .month-label {

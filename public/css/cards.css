@@ -26,6 +26,10 @@
     background-color: transparent;
 }
 
+.card.planner {
+    margin: 0;
+}
+
 .card:hover {
     transform: scale(1.1);
 }
