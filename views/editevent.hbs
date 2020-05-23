@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label>Event Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control invalid-field" id="event-name-field" value="{{event.event_name}}" name = "edit_event_name">
+                                <input type="text" class="form-control invalid-field" id="event-name-field" value="{{event.event_name}}" name = "edit_event_name" required>
                             </div>
                         </div>
                         
@@ -59,8 +59,8 @@
                         <div class="form-group">
                             <label>Change Header Picture </label>
                             <div class="custom-file">
-                                <label class="custom-file-label">Choose</label>
-                                <input type="file" class="form-control custom-file-input" id="event-photo-field" name = "edit_event_photo">
+                                <input type="file" class="form-control custom-file-input" id="event-photo-field" name = "edit_event_photo" accept = ".jpg, .jpeg, png" id = "inputGroupFile02" onchange="validateFileType()">
+                                <label class="custom-file-label" for = "inputGroupFile02">Choose</label>
                             </div>
                         </div>
                         <button type="submit" id="edit-event" class="custombtn thinbtn mt-0">save</button>
@@ -70,7 +70,7 @@
                         <div class="form-group">
                             <label>Venue</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="event-venue-field" value="{{event.venue}}" name = "edit_venue">
+                                <input type="text" class="form-control" id="event-venue-field" value="{{event.venue}}" name = "edit_venue" required>
                             </div>
                         </div>
                         
@@ -80,7 +80,7 @@
                                     <label>Date</label>
                                     <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
                                         <input type="text" class="form-control datetimepicker-input" id="event-date-field"
-                                            value="{{event.date}}" name = "edit_event_date">
+                                            value="{{event.date}}" name = "edit_event_date" required>
                                         <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -102,7 +102,7 @@
                                     <label>Start Time</label>
                                     <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
                                         <input type='text' class="form-control datetimepicker-input" id="start-time-field" data-target="#datetimepicker3"
-                                            value="{{event.start_time}}" name = "edit_start_time">
+                                            value="{{event.start_time}}" name = "edit_start_time" required>
                                         <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                         </div>
@@ -121,7 +121,7 @@
                                     <label>End Time</label>
                                     <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
                                         <input type='text' class="form-control datetimepicker-input" id="end-time-field" data-target="#datetimepicker3-2"
-                                            value="{{event.end_time}}" name = "edit_end_time">
+                                            value="{{event.end_time}}" name = "edit_end_time" required>
                                         <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                         </div>

@@ -28,13 +28,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Event Name</label>
-                                        <input type="text" class="invalid-field" id="event-name-field" name = "event_name">
+                                        <input type="text" class="invalid-field" id="event-name-field" name = "event_name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Venue</label>
-                                        <input type="text" class="invalid-field" id="event-venue-field" name="event_venue">
+                                        <input type="text" class="invalid-field" id="event-venue-field" name="event_venue" required>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label>Date</label>
                                         <div class="input-group date", id = 'datetimepicker4' data-target-input ="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="event-date-field" name = "event_date">
+                                            <input type="text" class="form-control datetimepicker-input" id="event-date-field" name = "event_date" required>
                                             <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
@@ -64,7 +64,7 @@
                                     <div class="form-group">
                                         <label>Start Time</label>
                                         <div class='input-group date' id ='datetimepicker3' data-target-input="nearest">
-                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3" name = "start_time">
+                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3" name = "start_time" required>
                                             <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                             </div>
@@ -82,7 +82,7 @@
                                     <div class="form-group">
                                         <label>End Time</label>
                                         <div class='input-group date' id ='datetimepicker3-2' data-target-input="nearest">
-                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2" name = "end_time">
+                                            <input type='text' class="form-control datetimepicker-input" id="event-time-field" data-target="#datetimepicker3-2" name = "end_time" required>
                                             <div class="input-group-append" data-target="#datetimepicker3-2" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                             </div>
@@ -115,7 +115,7 @@
                                     <div class="form-group">
                                         <label>What is the capacity? </label>
                                         <div class='input-group date' id="event-about-field">
-                                            <input type='number' class="form-control" id="event-cap-field" name ="capacity">
+                                            <input type='number' class="form-control" id="event-cap-field" name ="capacity" required>
                                         </div>
                                     </div>
                                 </div>
@@ -142,8 +142,8 @@
                             <div class="form-group">
                                 <label>Add Event Header </label>
                                 <div class="custom-file">
-                                        <label class="custom-file-label">Choose</label>
-                                        <input type="file" class="form-control custom-file-input" id="event-photo-field" name = 'event_photo'>
+                                    <input type="file" class="form-control custom-file-input" id="event-photo-field" name = "event_photo" accept = ".jpg, .jpeg, png" id = "inputGroupFile02" onchange="validateFileType()">
+                                    <label class="custom-file-label" for = "inputGroupFile02">Choose</label>
                                     </div>
                             </div>
                             <div class= "form-row">

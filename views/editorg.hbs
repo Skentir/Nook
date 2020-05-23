@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="../../public/css/explore.css">
     <link rel="stylesheet" href="../../public/css/form.css">
     <link rel="stylesheet" href="/public/css/sidenav.css">
+     <script src="../../scripts/landing.js"></script>
 {{/section}}
 
 {{>sidebar orgId=org._id}}
@@ -48,8 +49,8 @@
                         <div class="form-group">
                             <label>Change Header Picture </label>
                             <div class="custom-file">
-                                    <label class="custom-file-label">Choose</label>
-                                    <input name = "edit_org_header" type="file" class="form-control custom-file-input" id="user-photo-field">
+                                    <input type="file" class="form-control custom-file-input" id="user-photo-field" name = "edit_org_header" accept = ".jpg, .jpeg, png" id = "inputGroupFile02" onchange="validateFileType()">
+                                    <label class="custom-file-label" for = "inputGroupFile02">Choose</label>
                                 </div>
                         </div>
                         <button id = "editorg" type="submit" id="submit-event" class="custombtn thinbtn mt-0">save</button>
