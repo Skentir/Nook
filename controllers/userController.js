@@ -439,7 +439,10 @@ exports.addtoplanner = (req, res) => {
     var userId = req.session.passport.user;
     var eventId = req.params.id
 
-    Event.findById(eventId)
+    Event.updateOne(
+      {_id:eventId},
+      {$inc: {current_cap:-1}},
+      {multi:true})
       .exec(function(err, docs) {
       if(err) res.send(err)
       else if(!docs) res.send("No event found")
