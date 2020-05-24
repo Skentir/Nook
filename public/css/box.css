@@ -192,6 +192,12 @@ body {
     font-size: 32px;
 }
 
+.signup-or {
+    padding: 0px 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
 @media all and (max-width: 610px) {
     #settings {
       display: none;
