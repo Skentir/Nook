@@ -155,7 +155,7 @@ exports.editprofile = (req,res,next)=> {
         }
       }, function (err, results) {
           if (err) {
-            console.log("error")
+            res.send(err)
         } else {
             var params = {
                 layout: 'main',
@@ -232,7 +232,6 @@ exports.viewplanner = (req,res)=> {
                     user: userj,
                     image: fileName
                   }
-                  console.log("NO event");
                   //res.send(params)
                   res.render('planner', params)
                 } else {
@@ -284,12 +283,10 @@ exports.viewplanner = (req,res)=> {
                             
                         },
                             function(callbackEach) {  
-                              //console.log("HERE"+JSON.stringify(event))
                                 resultCallback();         
                             }
                     ])
                 }, function(err) { 
-                      //console.log("Event"+JSON.stringify(eventList));
                       var data = eventList;
                       //Note: if adding the rendering part, pls dont forget to add the 'img' attribute 
                       // sa second parameter of the function below
@@ -435,7 +432,6 @@ exports.viewprofile = (req,res, next) => {
 };
 
 exports.addtoplanner = (req, res) => {
-  console.log("Here AP!!")
     var userId = req.session.passport.user;
     var eventId = req.params.id
 
@@ -447,14 +443,12 @@ exports.addtoplanner = (req, res) => {
         if(err) res.send(err)
         else if(!docs) res.send("No event found")
         else {
-          console.log("Event Docs is "+ JSON.stringify(docs));
           var date = docs.date
         
           var new_event = {
             _id: mongoose.Types.ObjectId(eventId),
             date:date
           }
-          console.log("Event is "+ JSON.stringify(docs));
           User.updateOne(
             {_id: userId},
             {$push: {
@@ -466,7 +460,6 @@ exports.addtoplanner = (req, res) => {
               if(err) res.send(err)
               else if(!result) res.send("Nothing found")
               else {
-                console.log("Done updates")
                 res.send("Successfully Added")
               }
             }
@@ -613,7 +606,6 @@ exports.editprofiledetails = (req, res) =>{
       }
       }, (err)=>{
         if(err){
-          console.log("here");
           res.send(err);
         }
         else{
@@ -634,7 +626,6 @@ exports.editprofiledetails = (req, res) =>{
       }
       }, (err)=>{
         if(err){
-          console.log("here");
           res.send(err);
         }
         else{

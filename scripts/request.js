@@ -46,7 +46,6 @@ $(document).ready(function(){
 
     $(document).on('click', '.cancel', function()
     {
-        console.log("Triggered!");
         var $deleteBtn = $(this);
         var id = $deleteBtn.data('id');
 
@@ -54,7 +53,6 @@ $(document).ready(function(){
             type: "DELETE",
             url: "/cancel-request/" + id,       
         }).done(function (data) {
-            console.log("REmoved")
             var string = '#request-' + id;
              $(string).remove(); 
         })
@@ -70,8 +68,6 @@ $(document).ready(function(){
         var org = $('#org-name-field').val();
         var pos = $('#req-position').val();
 
-            console.log("Req fields valid.")
-
             new_request = {
                 org_name: org,
                 position: pos
@@ -82,8 +78,6 @@ $(document).ready(function(){
                 url: "/edit-profile/create-request",  
                 data: new_request,
             }).done( function (msg) {
-                console.log("message"+msg);
-                console.log("Done creating! Adding to CSS ... ")
                 // Close the modal
                 $('#add-request-modal').modal('toggle');
                 orgName = org.replace(/\s/g, '+')
@@ -93,7 +87,6 @@ $(document).ready(function(){
                     url: "/search-results?org_name="+orgName+"&type=2",  
                     dataType: 'json'
                 }).done( function (data) {
-                console.log("Request assets retrieved!")  
                 var string = 
                 `<div class="row request-item" id="request-`+data._id+`">
                     <span class="col-9 request-org-cell">

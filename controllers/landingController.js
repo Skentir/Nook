@@ -13,7 +13,6 @@ exports.register = (req,res)=> {
     User.findOne({ email_address: req.body.reg_email})
     .then( userr => {
         if(userr) {
-            console.log("user exists");
             res.redirect('/');
         } else if (!userr) {
             res.redirect('/error');
@@ -34,8 +33,6 @@ exports.register = (req,res)=> {
                 password: req.body.reg_pass,
                 photo: user_photo
             });
-  
-            console.log(user.first_name);
   
             bcrypt.genSalt(10, (err, salt) => 
                 bcrypt.hash(user.password, salt, (err, hash) => {

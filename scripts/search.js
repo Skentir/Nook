@@ -8,14 +8,12 @@ $(document).ready(function(){
   
         var orgName = $('#search-textbox').val();
         orgName = orgName.replace(/\s/g, '+')
-        console.log("the name is " + orgName);
 
         $.ajax({
             type: "GET",
             url: form_url+'?org_name='+orgName+"&type=1",
         }).done(function (data) {
             window.location.replace(form_url+'?org_name='+orgName+"&type=1");
-            console.log("Hello!");
         })
         .fail(function()  {
             alert("Sorry. Server unavailable. ");

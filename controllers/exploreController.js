@@ -135,7 +135,8 @@ exports.view = function(req, res) {
             }   
        }, function (err, results) {
            if (err) {
-             console.log("error")
+            //  console.log("error")
+            res.send(err)
          } else {
              var params = {
                 layout: 'main',

@@ -51,15 +51,15 @@ $(document).ready(function(){
                     processData:false,
                     contentType: false,
                     error: function(jXhr, status){
-                        console.log('error: '+status);  
-                        console.log(formData);
+                        // console.log('error: '+status);  
+                        // console.log(formData);
                         
                     },
                     success: function(data){
-                        console.log('upload successful: '+data);
-                        for (var value of formData.values()) {
-                            console.log(value); 
-                         }
+                        // console.log('upload successful: '+data);
+                        // for (var value of formData.values()) {
+                        //     console.log(value); 
+                        //  }
                          window.location.assign('/ad-tools');
                     }
                 });

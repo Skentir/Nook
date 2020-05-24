@@ -142,12 +142,10 @@ exports.viewrequests = (req,res)=> {
 exports.cancelrequest = (req,res)=> {
     var requestId =  mongoose.Types.ObjectId(req.params.reqId);
     var query = {'_id': requestId};
-    console.log("Cancelling: " + requestId);
 
     Request.deleteOne(query, function(err, obj) {
         if(err) res.send(err);
         else {
-            console.log("Request Deleted!")
             res.send("Done!");
         };
     })
@@ -203,13 +201,10 @@ exports.acceptrequest = (req,res) => {
 }
 
 exports.createrequests = (req,res) => {
-    console.log("Here!");
         var orgName = req.body.org_name
         var pos = req.body.position
         var user = req.session.passport.user
         var userId = mongoose.Types.ObjectId(user)
-        console.log("Org name retrieved: " + orgName);
-        console.log("Position retrieved: " + pos);
 
         OrgModel.findOne({org_name:orgName})
             .lean().exec(function(err, result) {
