@@ -32,7 +32,7 @@ body {
 
 .modal-content {
     border-color: transparent;
-    border-radius: 27px;
+    border-radius: 6px;
 }
 
 .modal-box {
@@ -101,7 +101,7 @@ h5 {
 }
 
 #sign-in-modal input {
-    margin-right: 14%;
+    margin-right: 10%;
     width: 72%;
 }
 
@@ -125,7 +125,7 @@ h5 {
 }
 
 #sign-in-modal .input-group-prepend {
-    margin-left: 14%;
+    margin-left: 10%;
     z-index: 1;
 }
 

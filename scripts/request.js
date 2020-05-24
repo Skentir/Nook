@@ -44,7 +44,9 @@ $(document).ready(function(){
         return false;
     });
 
-    $(".cancel").click(function() {
+    $(document).on('click', '.cancel', function()
+    {
+        console.log("Triggered!");
         var $deleteBtn = $(this);
         var id = $deleteBtn.data('id');
 
@@ -52,6 +54,7 @@ $(document).ready(function(){
             type: "DELETE",
             url: "/cancel-request/" + id,       
         }).done(function (data) {
+            console.log("REmoved")
             var string = '#request-' + id;
              $(string).remove(); 
         })
@@ -95,17 +98,20 @@ $(document).ready(function(){
                 `<div class="row request-item" id="request-`+data._id+`">
                     <span class="col-9 request-org-cell">
                         <img class="hdr-pic request-org-pic" src=`+data.img+`>
-                        <p class="request-org-name">`+data.org_name+`</p>
+                        <span>
+                            <p class="request-org-name">`+data.org_name+`</p>
+                            <p class="request-position mb-0">`+pos+`</p>
+                        </span>
                     </span>
                     <div class="col-3 cancel-req">
-                        <button style="color:red; border:0px; background-color:white" class="cancel" data-id="{{this._id}}">Cancel</button>
+                        <button style="color:red; border:0px; background-color:white" class="cancel" data-id=`+data._id+`>Cancel</button>
                     </div>
                  </div>`
                 // Add to list
                 $(string).insertBefore('#request-list a');
                 })
                 .fail(function()  {
-                    alert("Sorry. Server unavailable. ");
+                    alert("Sorry. The org does not exist. ");
                 });
             })
             .fail(function()  {

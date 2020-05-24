@@ -62,6 +62,10 @@
     margin:8px 0 ;
 }
 
+.request-item:hover {
+    transform: scale(1.05);
+}
+
 .request-org-cell {
     display: flex;
 } 

@@ -1,6 +1,7 @@
 .ui-autocomplete.ui-menu {
     z-index: 3000 !important;
     font-size: 14px !important; 
+    font-family: 'Open Sans', sans-serif;
     border: 1px solid #ced4da !important;
     border-bottom-left-radius: 4px!important;
     border-bottom-right-radius: 4px !important;
@@ -8,8 +9,8 @@
 
 .ui-menu .ui-menu-item-wrapper:hover, 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-   font-weight: bold;
-   color: black;
+   font-weight: bolder;
+   color: rgb(34, 34, 34);
 }
 
 .ui-helper-hidden-accessible{
