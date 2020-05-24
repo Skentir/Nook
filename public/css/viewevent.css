@@ -115,6 +115,8 @@ header.container {
 }
 
 .left-deet {
+    max-width: 695px;
+    text-align: left;
     justify-content: flex-start;
 }
 
@@ -139,6 +141,7 @@ header.container {
 }
 
 #about, #why, .color {
+    min-width: 450px;
     max-width: 500px;
     height: fit-content;
     border-radius: 5px;

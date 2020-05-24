@@ -68,7 +68,7 @@ header a:hover {
 
 .contact-form .form-group label { 
     font-weight:600;
-    font-size:12px;
+    font-size:14px;
     margin-bottom:8px;
     color:#3e332e
 }
@@ -80,6 +80,7 @@ header a:hover {
     box-sizing:border-box;
     border-radius:4px;
     padding-left: 10px;
+    color: #3a3a3ac7;
 }
 
 .contact-form .form-group textarea {

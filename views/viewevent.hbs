@@ -46,7 +46,11 @@
             <div class = "color">
                 <h5> About</h5>
                 <span class="sub-desc" id="event-desc">
+                {{#if event.about_desc includeZero=true}}
                     {{event.about_desc}}
+                {{else}}
+                    Dang! The organizer doesn't have a description of the event. Try contacting {{event.organizer_id.0.org_name}} for further details.
+                {{/if}}
                 </span>
             </div>
             <div class="event-info mt-3 mb-3 organizer">
