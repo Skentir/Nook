@@ -58,7 +58,7 @@ const EventSchema = mongoose.Schema({
 
     things: {
         type: String,
-        required: true
+        required: false
     },
 
     codes:{
