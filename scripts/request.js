@@ -63,11 +63,31 @@ $(document).ready(function(){
        return false;
     });
 
+    var availableTags = [];
+    $.ajax({
+    type: "GET",
+    url: "/get-org-list/",
+    }).done(function (data) {
+    for (var i=0; i < data.length; i++)
+        availableTags.push(data[i].org_name)
+    })
+    .fail(function()  {
+        alert("Sorry. Server unavailable. ");
+    });
+
     $("#create-request-form").submit(function() {
         event.preventDefault();
         var org = $('#org-name-field').val();
         var pos = $('#req-position').val();
 
+        var isOrg = false;
+        for(var i = 0; i < availableTags.length; i++)
+            if(org == availableTags[i]) {
+                isOrg = true;
+                break;
+            }
+
+        if(isOrg) {
             new_request = {
                 org_name: org,
                 position: pos
@@ -110,6 +130,11 @@ $(document).ready(function(){
             .fail(function()  {
                 alert("Sorry. Server unavailable. ");
             }); 
+        }
+        else {
+            alert("Sorry, org is not found.");
+        }
+
         return false;
     })
 })
