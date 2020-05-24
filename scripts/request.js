@@ -111,7 +111,7 @@ $(document).ready(function(){
                 $(string).insertBefore('#request-list a');
                 })
                 .fail(function()  {
-                    alert("Sorry. Server unavailable. ");
+                    alert("Sorry. The org does not exist. ");
                 });
             })
             .fail(function()  {
