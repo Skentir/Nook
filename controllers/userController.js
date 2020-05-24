@@ -439,36 +439,39 @@ exports.addtoplanner = (req, res) => {
     var userId = req.session.passport.user;
     var eventId = req.params.id
 
-    Event.findById(eventId)
-      .exec(function(err, docs) {
-      if(err) res.send(err)
-      else if(!docs) res.send("No event found")
-      else {
-        console.log("Event Docs is "+ JSON.stringify(docs));
-        var date = docs.date
-      
-        var new_event = {
-          _id: mongoose.Types.ObjectId(eventId),
-          date:date
-        }
-        console.log("Event is "+ JSON.stringify(docs));
-        User.updateOne(
-          {_id: userId},
-          {$push: {
-            planner: new_event
-            }
-          },
-          { "$upsert": true },
-          function(err, result) {
-            if(err) res.send(err)
-            else if(!result) res.send("Nothing found")
-            else {
-              console.log("Done updates")
-              res.send("Successfully Added")
-            }
+    Event.updateOne(
+      {_id:eventId},
+      {$inc:{current_cap:-1}},
+      {multi:true},
+      function(err, docs) {
+        if(err) res.send(err)
+        else if(!docs) res.send("No event found")
+        else {
+          console.log("Event Docs is "+ JSON.stringify(docs));
+          var date = docs.date
+        
+          var new_event = {
+            _id: mongoose.Types.ObjectId(eventId),
+            date:date
           }
-        )
-      }
+          console.log("Event is "+ JSON.stringify(docs));
+          User.updateOne(
+            {_id: userId},
+            {$push: {
+              planner: new_event
+              }
+            },
+            { "$upsert": true },
+            function(err, result) {
+              if(err) res.send(err)
+              else if(!result) res.send("Nothing found")
+              else {
+                console.log("Done updates")
+                res.send("Successfully Added")
+              }
+            }
+          )
+        }
     })
 }
 
