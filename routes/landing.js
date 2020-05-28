@@ -83,7 +83,8 @@ router.get('/',(req,res) => {
         var params = {
           layout: 'simple',
           result,
-          org_list: array
+          org_list: array,
+          clientID: process.env.GOOGLE_CLIENT_ID
         };
         res.render('landing', params); 
       }
