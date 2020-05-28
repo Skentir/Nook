@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/public/css/widgets.css">
     <script src="../../scripts/landing.js"></script> 
     <!-- Google Sign-In -->
-    <!--<meta name="google-signin-client_id" content="473203977419-114n43ik4g8rcjvfech0ckgddv0250c3.apps.googleusercontent.com">-->
+    <meta name="google-signin-client_id" content="{{clientID}}">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 {{/section}}
 
@@ -98,10 +98,10 @@
                     <div style="width: 100%;">
                         <script>
                         function onSignIn(googleUser) {
-                            var profile = googleUser.getBasicProfile();
-                            var id_token=profile.id_token;
+                            window.location = '/google';
+                            /*var profile = googleUser.getBasicProfile();
+                            var id_token=profile.id_token;*/
                             googleUser.disconnect()
-                            window.location = '/google'
                         }
                         </script>
                     </div>
