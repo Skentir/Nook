@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(cookieParser("session"));
 app.use(require("express-session")({    
-    secret:"session",    
+    secret: process.env.SESSION_SECRET,    
     resave: true,    
     saveUninitialized: true,
     cookie: {
@@ -155,7 +155,7 @@ var requiresAdmin = function() {
   };
 
 //listen to port
-const port = 3000;
+const port = process.env.PORT || 3000;
 initDb(function (err) {
     app.listen(port, function (err) {
         if (err) {
