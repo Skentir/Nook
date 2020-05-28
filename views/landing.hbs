@@ -98,10 +98,10 @@
                     <div style="width: 100%;">
                         <script>
                         function onSignIn(googleUser) {
-                            window.location = '/google';
-                            /*var profile = googleUser.getBasicProfile();
-                            var id_token=profile.id_token;*/
+                            var profile = googleUser.getBasicProfile();
+                            var id_token=profile.id_token;
                             googleUser.disconnect()
+                            window.location = '/google';
                         }
                         </script>
                     </div>
