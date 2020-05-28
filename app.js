@@ -14,6 +14,8 @@ const bodyParser = require('body-parser');
 
 //Load ennvironment variables
 if (process.env.NODE_ENV !== 'production') {
+    //Require dotenv for DB connection
+    require('dotenv/config');
     require('dotenv').config();
 }
 // Require for DateTime Formatting
@@ -26,9 +28,6 @@ mongoose.set('debug', true);
 
 //Require path for file
 const path = require('path');
-
-//Require dotenv for DB connection
-require('dotenv/config');
 
 //Require for user sessions
 const passport = require('passport');
