@@ -39,7 +39,7 @@ li.ui-menu-item {
 }
 
 .google-button {
-    height: 40px;
+    height: 38px;
     border: 1px solid blue;
     background: white;
     color: #737373;
@@ -70,7 +70,7 @@ li.ui-menu-item {
     vertical-align: middle;
     background: #3e74ec;
     color: white;
-    padding: 9px 24px;
+    padding: 8px 24px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     font-size: 14px;
