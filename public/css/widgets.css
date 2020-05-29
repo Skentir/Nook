@@ -38,3 +38,42 @@ li.ui-menu-item {
     font-size: 16px;
 }
 
+.google-button {
+    height: 40px;
+    border: 1px solid blue;
+    background: white;
+    color: #737373;
+    border-radius: 5px;
+    white-space: nowrap;
+    box-shadow: 1px 1px 0px 1px rgba(0,0,0,0.05);
+    transition-property: background-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    padding: 0;
+  }
+      
+  .google-button__icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 8px 3px 8px 8px;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+  }
+  
+  .google-button__icon--plus {
+    width: 27px;
+  }
+  
+  .google-button__text {
+    display: inline-block;
+    vertical-align: middle;
+    background: #3e74ec;
+    color: white;
+    padding: 9px 24px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Roboto',arial,sans-serif;
+  }
