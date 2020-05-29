@@ -163,7 +163,6 @@ exports.editprofile = (req,res,next)=> {
                 user: userj
               }
             res.render('edit-profile',params);
-            //res.send(params);
         }
       });
   }
@@ -314,60 +313,14 @@ exports.viewplanner = (req,res)=> {
                       image: fileName
                     }
                     res.render('planner',params)
-                    //res.send(params)
                 })
                   }
                 })
-              })//
+              })
             }
           })
         }
       })
-
-    // User.findById(userId)
-    //         .populate('planner','_id event_name header_photo')
-    //         .exec( function(err,result) { 
-    //             if (err) { res.send(err)
-    //             } else  { 
-    //                 collection.find({filename: fileName}).toArray(function(err, docs){
-    //                 if(err){
-    //                   return res.send(err);
-    //                 }
-    //                 if(!docs || docs.length === 0){
-    //                   return res.send(err);
-    //                 }else{
-    //                   //Retrieving the chunks from the db
-                      
-    //                   collectionChunks.find({files_id : docs[0]._id}).sort({n: 1}).toArray(function(err, chunks){
-    //                     if(err){
-    //                       return res.send(err);
-    //                     }
-    //                     if(!chunks || chunks.length === 0){
-    //                       //No data found
-    //                       return res.send(err);
-    //                     }
-    //                     //Append Chunks
-    //                     var fileData = [];
-    //                     for(let i=0; i<chunks.length;i++){
-            
-    //                       //This is in Binary JSON or BSON format, which is stored
-    //                       //in fileData array in base64 endocoded string format
-    //                       fileData.push(chunks[i].data.toString('base64'));
-    //                     }
-    //                     //Display the chunks using the data URI format
-    //                     var finalFile = 'data:' + docs[0].contentType + ';base64,' + fileData.join('');
-    //                     var user = JSON.parse(JSON.stringify(result));
-    //                     var params = {
-    //                         layout: 'main',
-    //                         info:user,
-    //                         image: finalFile
-    //                     }
-    //                     res.render('planner', params);  
-    //                   });
-    //                 }
-    //             } 
-    //             )}                                             
-    //         });
     }
 };
 
@@ -581,7 +534,7 @@ exports.renderUser = (req, res) => {
 
 exports.logout = function(req, res, next) {
     if (req.session) {
-      // delete session object
+      // Delete session object
       req.session.destroy(function(err) {
         if(err) {
           return next(err);
@@ -589,7 +542,8 @@ exports.logout = function(req, res, next) {
           return res.redirect('/');
         }
       });
-      req.logout()// Logout from Google
+      // Logout from Google
+      req.logout();
     }
 };
 
